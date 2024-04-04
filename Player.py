@@ -3,8 +3,8 @@ import pygame
 
 class PlayerClass:
     colour = (255, 255, 255)
-    width = 20
-    height = 20
+    width = 40
+    height = 40
     xmove = 0
     ymove = 0
     movespeed = 1

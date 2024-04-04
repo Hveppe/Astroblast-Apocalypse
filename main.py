@@ -8,6 +8,9 @@ pygame.init()
 screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info().current_h
 display = pygame.display.set_mode((screenwith, screenheight))
 
+# laver lister til classer der skal havde flere af gangen på skærmen
+Lasershot = []
+
 # laver player
 player = PlayerClass(screen=display, xvalue=10, yvalue=10)
 
@@ -31,6 +34,7 @@ while gamerunning:
             if event.key == pygame.K_a:
                 player.xmove -= player.movespeed
 
+        # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
                 player.ymove += player.movespeed
@@ -45,8 +49,12 @@ while gamerunning:
     display.fill((0, 0, 0))
 
     # Tegner player
-    player.update()
     player.draw()
+    player.update()
+
+    for lasershot in Lasershot:
+        lasershot.draw()
+        lasershot.update()
 
     # Updater display
     pygame.display.flip()
