@@ -1,6 +1,11 @@
-from Player import *
+# importer fra andre python filer
+from Player import PlayerClass
+from Shot_laser import ShotLaser
+
+# importer libaries
 import time
 import pygame
+import random
 
 pygame.init()
 
@@ -33,6 +38,10 @@ while gamerunning:
                 player.xmove += player.movespeed
             if event.key == pygame.K_a:
                 player.xmove -= player.movespeed
+            if event.key == pygame.K_SPACE:
+                Lasershot.append(ShotLaser(screen=display, xvalue=player.x+player.width/2,
+                                           yvalue=player.y+player.height/2,
+                                           speedx=player.xmove, speedy=player.ymove))
 
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:

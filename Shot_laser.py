@@ -13,6 +13,9 @@ class ShotLaser:
         self.speedx = speedx*2
         self.speedy = speedy*2
 
+        if self.speedx == 0 and self.speedy == 0:
+            self.speedy = -1
+
     def update(self):
         self.xvalue += self.speedx
         self.yvalue += self.speedy
