@@ -3,9 +3,8 @@ from Player import PlayerClass
 from Shot_laser import ShotLaser
 
 # importer libaries
-import time
-import pygame
 import random
+import pygame
 
 pygame.init()
 
@@ -64,6 +63,10 @@ while gamerunning:
     for lasershot in Lasershot:
         lasershot.draw()
         lasershot.update()
+
+        # fjerner laserne når de rammer kanterne af skærmen
+        if lasershot.hitwall is True:
+            Lasershot.remove(lasershot)
 
     # Updater display
     pygame.display.flip()
