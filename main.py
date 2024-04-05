@@ -19,6 +19,7 @@ pygame.display.set_caption("GAME")
 lasersound = pygame.mixer.Sound('sound/laser-gun-81720.wav')
 mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
 enemydeadsound = pygame.mixer.Sound('sound/big explosion.wav')
+gameoversound = pygame.mixer.Sound('sound/game-over-160612.wav')
 
 
 def collisionchecker(firstobject, seconobject):
@@ -217,6 +218,7 @@ while gamerunning:
 
     if lives <= 0:
         gameover = True
+        gameoversound.play()
 
         while gameover:
             clock.tick(60)
