@@ -86,7 +86,7 @@ while gamerunning:
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
                                             yvalue=player.y + player.height / 2, ))
 
-            # controls af player move
+            # Bevægelse af player
             if event.key == pygame.K_w:
                 player.ymove -= player.movespeed
             if event.key == pygame.K_s:
