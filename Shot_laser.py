@@ -2,7 +2,7 @@ import pygame
 
 
 class ShotLaser:
-    color = (255, 0, 0)
+    color = (0, 0, 255)
     width = 10
     height = 10
 
