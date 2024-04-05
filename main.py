@@ -204,8 +204,11 @@ while gamerunning:
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
 
-            gameovertext = Fontbig.render('GAME OVER', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 100))
+            gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
+            display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 200))
+
+            gameovertext = Font.render(f'WAVE: {wave}', True, (255, 255, 255))
+            display.blit(gameovertext, (screenwith/2 - 50, screenheight / 2 - 100))
 
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 100, screenheight / 2))
