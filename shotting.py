@@ -39,3 +39,25 @@ class ShotLaser:
 
     def draw(self):
         pygame.draw.rect(self.screen, self.color, pygame.Rect(self.x, self.y, self.width, self.height))
+
+
+class LayMine:
+    color = (100, 100, 100)
+    speedx = 0
+    speedy = 0
+    width = 10
+    height = 10
+
+    def __init__(self, screen, xvalue, yvalue):
+        self.screen = screen
+        self.x = xvalue
+        self.y = yvalue
+
+        self.screenwidth = self.screen.get_width()
+        self.screenheight = self.screen.get_height()
+
+        self.hitwall = False
+
+    def draw(self):
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), 5)
+

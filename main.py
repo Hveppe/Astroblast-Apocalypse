@@ -1,6 +1,6 @@
 # importer fra andre python filer
 from Player import PlayerClass
-from Shot_laser import ShotLaser
+from shotting import ShotLaser, LayMine
 from Enemy import EnemyClass
 
 # importer libaries
@@ -26,6 +26,7 @@ def collisionchecker(firstobject, seconobject):
 
 # laver lister til classer der skal havde flere af gangen på skærmen
 Lasershot = []
+Mineshot = []
 Fjender = []
 
 # laver player
@@ -36,6 +37,9 @@ lastmove = 'w'
 antalfjender = 2
 wave = 1
 lives = 5
+
+# Antal miner til rådighed
+ArsenalMines = 5
 
 clock = pygame.time.Clock()
 
@@ -76,7 +80,13 @@ while gamerunning:
                 lastmove = 'd'
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
                                            yvalue=player.y + player.height / 2, last_move=lastmove))
+            if event.key == pygame.K_SPACE:
+                if ArsenalMines > 0:
+                    ArsenalMines -= 1
+                    Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
+                                            yvalue=player.y + player.height / 2, ))
 
+            # controls af player move
             if event.key == pygame.K_w:
                 player.ymove -= player.movespeed
             if event.key == pygame.K_s:
@@ -112,6 +122,12 @@ while gamerunning:
         if lasershot.hitwall is True:
             Lasershot.remove(lasershot)
 
+    for Mine in Mineshot:
+        Mine.draw()
+
+        if Mine.hitwall is True:
+            Mineshot.remove(Mine)
+
     for enemy in Fjender:
         enemy.draw()
         enemy.update()
@@ -126,7 +142,20 @@ while gamerunning:
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
-                Fjender.remove(enemy)
+
+                try:
+                    Fjender.remove(enemy)
+                except ValueError:
+                    pass
+
+        for Mine in Mineshot:
+            if collisionchecker(enemy, Mine):
+                Mineshot.remove(Mine)
+
+                try:
+                    Fjender.remove(enemy)
+                except ValueError:
+                    pass
 
     if len(Fjender) == 0:
         wave += 1
