@@ -35,7 +35,7 @@ gamerunning = True
 lastmove = 'w'
 antalfjender = 2
 points = 0
-lives = 2
+lives = 5
 
 clock = pygame.time.Clock()
 
@@ -43,7 +43,8 @@ Font = pygame.font.Font(None, 36)
 
 for i in range(antalfjender):
     enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
-                       yvalue=random.randint(0, screenheight - 150), speedx=10, speedy=10)
+                       yvalue=random.randint(0, screenheight - 150), speedx=random.randint(1, 10),
+                       speedy=random.randint(1, 10))
     Fjender.append(enemy)
 
 while gamerunning:
@@ -107,6 +108,7 @@ while gamerunning:
 
     for enemy in Fjender:
         enemy.draw()
+        enemy.update()
 
         if collisionchecker(player, enemy):
             Fjender.remove(enemy)
@@ -114,7 +116,6 @@ while gamerunning:
 
             if lives <= 0:
                 gamerunning = False
-
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -127,7 +128,8 @@ while gamerunning:
         antalfjender += 2
         for i in range(antalfjender):
             new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
-                                   yvalue=random.randint(0, screenheight - 150), speedx=10, speedy=10)
+                                   yvalue=random.randint(0, screenheight - 150), speedx=random.randint(1, 10),
+                                   speedy=random.randint(1, 10))
             Fjender.append(new_enemy)
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
