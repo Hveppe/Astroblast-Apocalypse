@@ -59,14 +59,23 @@ while gamerunning:
         # controls til PlayerClass
         if event.type == pygame.KEYDOWN:
 
+            # Kode til at kontroler våben
             if event.key == pygame.K_UP:
                 lastmove = 'w'
+                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                           yvalue=player.y + player.height / 2, last_move=lastmove))
             if event.key == pygame.K_DOWN:
                 lastmove = 's'
+                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                           yvalue=player.y + player.height / 2, last_move=lastmove))
             if event.key == pygame.K_LEFT:
                 lastmove = 'a'
+                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                           yvalue=player.y + player.height / 2, last_move=lastmove))
             if event.key == pygame.K_RIGHT:
                 lastmove = 'd'
+                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                           yvalue=player.y + player.height / 2, last_move=lastmove))
 
             if event.key == pygame.K_w:
                 player.ymove -= player.movespeed
@@ -76,9 +85,6 @@ while gamerunning:
                 player.xmove += player.movespeed
             if event.key == pygame.K_a:
                 player.xmove -= player.movespeed
-            if event.key == pygame.K_SPACE:
-                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                           yvalue=player.y + player.height / 2, last_move=lastmove))
 
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
@@ -122,7 +128,6 @@ while gamerunning:
                 Lasershot.remove(lasershot)
                 Fjender.remove(enemy)
                 points += 1
-                print(points)
 
     if len(Fjender) == 0:
         antalfjender += 2

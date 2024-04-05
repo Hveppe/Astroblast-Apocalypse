@@ -5,13 +5,13 @@ class ShotLaser:
     color = (0, 0, 255)
     width = 10
     height = 10
+    speedx = 0
+    speedy = 0
 
     def __init__(self, screen, xvalue, yvalue, last_move):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
-        self.speedx = 0
-        self.speedy = 0
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()
@@ -21,13 +21,13 @@ class ShotLaser:
         self.last_move = last_move
 
         if self.last_move == 'w':
-            self.speedy -= 10
+            self.speedy -= 15
         if self.last_move == 's':
-            self.speedy += 10
+            self.speedy += 15
         if self.last_move == 'a':
-            self.speedx -= 10
+            self.speedx -= 15
         if self.last_move == 'd':
-            self.speedx += 10
+            self.speedx += 15
 
     def update(self):
         self.x += self.speedx
