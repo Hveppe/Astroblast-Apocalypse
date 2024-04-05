@@ -34,7 +34,7 @@ player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight
 gamerunning = True
 lastmove = 'w'
 antalfjender = 2
-points = 0
+wave = 1
 lives = 5
 
 clock = pygame.time.Clock()
@@ -127,9 +127,9 @@ while gamerunning:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 Fjender.remove(enemy)
-                points += 1
 
     if len(Fjender) == 0:
+        wave += 1
         antalfjender += 2
         for i in range(antalfjender):
             new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
@@ -140,7 +140,7 @@ while gamerunning:
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (screenwith-160, 10))
 
-    pointstext = Font.render(f'Points: {points}', True, (255, 255, 255))
+    pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
     display.blit(pointstext, (10, 10))
 
     # Updater display
