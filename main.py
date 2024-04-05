@@ -163,7 +163,7 @@ while gamerunning:
         antalfjender += 2
         for i in range(antalfjender):
             new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
-                                   yvalue=random.randint(0, screenheight - 150), speedx=random.randint(1, 10),
+                                   yvalue=random.randint(0, screenheight - 10), speedx=random.randint(1, 10),
                                    speedy=random.randint(1, 10))
             Fjender.append(new_enemy)
 
