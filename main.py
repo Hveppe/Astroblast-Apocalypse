@@ -16,7 +16,7 @@ display = pygame.display.set_mode((screenwith, screenheight))
 Lasershot = []
 
 # laver player
-player = PlayerClass(screen=display, xvalue=10, yvalue=10)
+player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100)
 
 gamerunning = True
 lastmove = 'w'
