@@ -8,6 +8,7 @@ import random
 import pygame
 
 pygame.init()
+pygame.font.init()
 
 # opsætting af skærm
 screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info().current_h
@@ -34,8 +35,11 @@ gamerunning = True
 lastmove = 'w'
 antalfjender = 2
 points = 0
+lives = 2
 
 clock = pygame.time.Clock()
+
+Font = pygame.font.Font(None, 36)
 
 for i in range(antalfjender):
     enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
@@ -74,6 +78,7 @@ while gamerunning:
             if event.key == pygame.K_SPACE:
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
                                            yvalue=player.y + player.height / 2, last_move=lastmove))
+
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
@@ -103,6 +108,14 @@ while gamerunning:
     for enemy in Fjender:
         enemy.draw()
 
+        if collisionchecker(player, enemy):
+            Fjender.remove(enemy)
+            lives -= 1
+
+            if lives <= 0:
+                gamerunning = False
+
+
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
@@ -116,6 +129,12 @@ while gamerunning:
             new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
                                    yvalue=random.randint(0, screenheight - 150), speedx=10, speedy=10)
             Fjender.append(new_enemy)
+
+    livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
+    display.blit(livestext, (screenwith-160, 10))
+
+    pointstext = Font.render(f'Points: {points}', True, (255, 255, 255))
+    display.blit(pointstext, (10, 10))
 
     # Updater display
     pygame.display.flip()
