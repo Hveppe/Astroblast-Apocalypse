@@ -10,9 +10,10 @@ import pygame
 pygame.init()
 pygame.font.init()
 
-# opsætting af skærm
+# opsætting af skærm og angiver et navn til programet
 screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info().current_h
 display = pygame.display.set_mode((screenwith, screenheight))
+pygame.display.set_caption("GAME")
 
 
 def collisionchecker(firstobject, seconobject):
@@ -23,6 +24,9 @@ def collisionchecker(firstobject, seconobject):
         return True
     return False
 
+
+# Laver mousecursor usynlig
+pygame.mouse.set_visible(False)
 
 # laver lister til classer der skal havde flere af gangen på skærmen
 Lasershot = []
@@ -38,6 +42,7 @@ antalfjender = 2
 wave = 1
 lives = 5
 minepoint = 0
+fjende_spawn = False
 
 # Antal miner til rådighed
 ArsenalMines = 5
@@ -49,10 +54,18 @@ Font = pygame.font.Font(None, 36)
 Fontbig = pygame.font.Font(None, 100)
 
 for i in range(antalfjender):
-    enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
-                       yvalue=random.randint(0, screenheight - 150), speedx=random.randint(1, 10),
-                       speedy=random.randint(1, 10))
-    Fjender.append(enemy)
+    fjende_spawn = True
+    while fjende_spawn:
+        enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
+                           yvalue=random.randint(0, screenheight - 150), speedx=random.randint(1, 10),
+                           speedy=random.randint(1, 10))
+        if collisionchecker(enemy, player):
+            enemy.x = random.randint(0, screenwith - 10)
+            enemy.y = random.randint(0, screenheight - 150)
+        else:
+            Fjender.append(enemy)
+            fjende_spawn = False
+
 
 while gamerunning:
     clock.tick(60)
@@ -162,10 +175,17 @@ while gamerunning:
         wave += 1
         antalfjender += 2
         for i in range(antalfjender):
-            new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
-                                   yvalue=random.randint(0, screenheight - 10), speedx=random.randint(1, 10),
-                                   speedy=random.randint(1, 10))
-            Fjender.append(new_enemy)
+            fjende_spawn = True
+            while fjende_spawn:
+                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
+                                       yvalue=random.randint(0, screenheight - 10), speedx=random.randint(1, 10),
+                                       speedy=random.randint(1, 10))
+                if collisionchecker(new_enemy, player):
+                    new_enemy.x = random.randint(0, screenwith - 10)
+                    new_enemy.y = random.randint(0, screenheight - 150)
+                else:
+                    Fjender.append(new_enemy)
+                    fjende_spawn = False
 
     if minepoint > 10:
         ArsenalMines += 1
@@ -175,10 +195,10 @@ while gamerunning:
     display.blit(livestext, (screenwith-160, 10))
 
     pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
-    display.blit(pointstext, (10, 10))
+    display.blit(pointstext, (screenwith-160, 50))
 
     minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
-    display.blit(minetext, (10, 50))
+    display.blit(minetext, (10, 10))
 
     # Updater display
     pygame.display.flip()
