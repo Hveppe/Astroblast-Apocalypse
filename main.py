@@ -6,7 +6,6 @@ from Enemy import EnemyClass
 # importer libaries
 import random
 import pygame
-import time
 
 pygame.init()
 pygame.font.init()
@@ -38,6 +37,7 @@ lastmove = 'w'
 antalfjender = 2
 wave = 1
 lives = 5
+minepoint = 0
 
 # Antal miner til rådighed
 ArsenalMines = 5
@@ -142,6 +142,7 @@ while gamerunning:
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
+                minepoint += 1
 
                 try:
                     Fjender.remove(enemy)
@@ -166,11 +167,18 @@ while gamerunning:
                                    speedy=random.randint(1, 10))
             Fjender.append(new_enemy)
 
+    if minepoint > 10:
+        ArsenalMines += 1
+        minepoint = 0
+
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (screenwith-160, 10))
 
     pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
     display.blit(pointstext, (10, 10))
+
+    minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
+    display.blit(minetext, (10, 50))
 
     # Updater display
     pygame.display.flip()
