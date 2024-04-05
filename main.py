@@ -15,6 +15,11 @@ screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info(
 display = pygame.display.set_mode((screenwith, screenheight))
 pygame.display.set_caption("GAME")
 
+# lyde til spillet
+lasersound = pygame.mixer.Sound('sound/laser-gun-81720.wav')
+mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
+enemydeadsound = pygame.mixer.Sound('sound/big explosion.wav')
+
 
 def collisionchecker(firstobject, seconobject):
     if (firstobject.x + firstobject.width > seconobject.x and
@@ -84,23 +89,28 @@ while gamerunning:
                 lastmove = 'w'
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
                                            yvalue=player.y + player.height / 2, last_move=lastmove))
+                lasersound.play()
             if event.key == pygame.K_DOWN:
                 lastmove = 's'
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
                                            yvalue=player.y + player.height / 2, last_move=lastmove))
+                lasersound.play()
             if event.key == pygame.K_LEFT:
                 lastmove = 'a'
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
                                            yvalue=player.y + player.height / 2, last_move=lastmove))
+                lasersound.play()
             if event.key == pygame.K_RIGHT:
                 lastmove = 'd'
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
                                            yvalue=player.y + player.height / 2, last_move=lastmove))
+                lasersound.play()
             if event.key == pygame.K_SPACE:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
                                             yvalue=player.y + player.height / 2, ))
+                    mineplacesound.play()
 
             # Bevægelse af player
             if event.key == pygame.K_w:
@@ -159,6 +169,7 @@ while gamerunning:
 
                 try:
                     Fjender.remove(enemy)
+                    enemydeadsound.play()
                 except ValueError:
                     pass
 
@@ -168,6 +179,7 @@ while gamerunning:
 
                 try:
                     Fjender.remove(enemy)
+                    enemydeadsound.play()
                 except ValueError:
                     pass
 

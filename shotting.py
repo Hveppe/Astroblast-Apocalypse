@@ -60,4 +60,3 @@ class LayMine:
 
     def draw(self):
         pygame.draw.circle(self.screen, self.color, (self.x, self.y), 5)
-
