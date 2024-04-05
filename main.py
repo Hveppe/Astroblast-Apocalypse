@@ -43,7 +43,9 @@ ArsenalMines = 5
 
 clock = pygame.time.Clock()
 
+# Fonts til text
 Font = pygame.font.Font(None, 36)
+Fontbig = pygame.font.Font(None, 100)
 
 for i in range(antalfjender):
     enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
@@ -136,9 +138,6 @@ while gamerunning:
             Fjender.remove(enemy)
             lives -= 1
 
-            if lives <= 0:
-                gamerunning = False
-
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
@@ -174,3 +173,39 @@ while gamerunning:
 
     # Updater display
     pygame.display.flip()
+
+    if lives <= 0:
+        gameover = True
+
+        TODO: 'Færdigør gameover'
+        while gameover:
+            clock.tick(60)
+
+            # Farver baggrund
+            display.fill((0, 0, 0))
+
+            lives = 5
+            antalfjender = 0
+            wave = 1
+
+            Lasershot = []
+            Mineshot = []
+            Fjender = []
+
+            player.xmove = 0
+            player.ymove = 0
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                    gameover = False
+                if event.type == pygame.QUIT:
+                    gamerunning = False
+                    gameover = False
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    gamerunning = False
+                    gameover = False
+
+        gameovertext = Font.render('Game Over', True, (255, 255, 255))
+        display.blit(gameovertext, (screenwith/2, screenheight / 2))
+
+        pygame.display.flip()
