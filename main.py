@@ -192,13 +192,13 @@ while gamerunning:
         minepoint = 0
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
-    display.blit(livestext, (screenwith-160, 10))
+    display.blit(livestext, (10, 50))
 
     pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
-    display.blit(pointstext, (screenwith-160, 50))
+    display.blit(pointstext, (10, 10))
 
     minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
-    display.blit(minetext, (10, 10))
+    display.blit(minetext, (screenwith-160, 10))
 
     # Updater display
     pygame.display.flip()
@@ -239,6 +239,6 @@ while gamerunning:
             display.blit(gameovertext, (screenwith/2 - 50, screenheight / 2 - 100))
 
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - 100, screenheight / 2))
+            display.blit(gameovertext, (screenwith/2 - 110, screenheight / 2))
 
             pygame.display.flip()
