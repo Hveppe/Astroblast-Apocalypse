@@ -6,6 +6,7 @@ from Enemy import EnemyClass
 # importer libaries
 import random
 import pygame
+import time
 
 pygame.init()
 pygame.font.init()
@@ -177,35 +178,36 @@ while gamerunning:
     if lives <= 0:
         gameover = True
 
-        TODO: 'Færdigør gameover'
         while gameover:
             clock.tick(60)
 
             # Farver baggrund
             display.fill((0, 0, 0))
-
-            lives = 5
-            antalfjender = 0
-            wave = 1
-
-            Lasershot = []
-            Mineshot = []
-            Fjender = []
-
-            player.xmove = 0
-            player.ymove = 0
-
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-                    gameover = False
                 if event.type == pygame.QUIT:
                     gamerunning = False
                     gameover = False
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    gamerunning = False
-                    gameover = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        gamerunning = False
+                        gameover = False
+                    elif event.key == pygame.K_r:
+                        gameover = False
+                        Lasershot.clear()
+                        Mineshot.clear()
+                        Fjender.clear()
+                        player.xmove = 0
+                        player.ymove = 0
+                        lives = 5
+                        antalfjender = 0
+                        wave = 1
+                        player.x = screenwith / 2 - 20
+                        player.y = screenheight - 100
 
-        gameovertext = Font.render('Game Over', True, (255, 255, 255))
-        display.blit(gameovertext, (screenwith/2, screenheight / 2))
+            gameovertext = Fontbig.render('GAME OVER', True, (255, 255, 255))
+            display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 100))
 
-        pygame.display.flip()
+            gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
+            display.blit(gameovertext, (screenwith/2 - 100, screenheight / 2))
+
+            pygame.display.flip()
