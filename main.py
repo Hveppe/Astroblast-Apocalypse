@@ -22,6 +22,7 @@ def collisionchecker(firstobject, seconobject):
         return True
     return False
 
+
 # laver lister til classer der skal havde flere af gangen på skærmen
 Lasershot = []
 Fjender = []
@@ -31,13 +32,15 @@ player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight
 
 gamerunning = True
 lastmove = 'w'
-antalfjender = 10
+antalfjender = 2
+points = 0
 
 clock = pygame.time.Clock()
 
 for i in range(antalfjender):
-    Fjender.append(EnemyClass(screen=display, xvalue=random.randint(0, screenwith-10),
-                              yvalue=random.randint(0, screenheight-150), speedx=10, speedy=10))
+    enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
+                       yvalue=random.randint(0, screenheight - 150), speedx=10, speedy=10)
+    Fjender.append(enemy)
 
 while gamerunning:
     clock.tick(60)
@@ -62,20 +65,15 @@ while gamerunning:
 
             if event.key == pygame.K_w:
                 player.ymove -= player.movespeed
-                lastmove = 'w'
             if event.key == pygame.K_s:
                 player.ymove += player.movespeed
-                lastmove = 's'
             if event.key == pygame.K_d:
                 player.xmove += player.movespeed
-                lastmove = 'd'
             if event.key == pygame.K_a:
                 player.xmove -= player.movespeed
-                lastmove = 'a'
             if event.key == pygame.K_SPACE:
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                           yvalue=player.y + player.height / 2,
-                                           speedx=player.xmove, speedy=player.ymove, last_move=lastmove))
+                                           yvalue=player.y + player.height / 2, last_move=lastmove))
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
@@ -102,13 +100,22 @@ while gamerunning:
         if lasershot.hitwall is True:
             Lasershot.remove(lasershot)
 
-    for EnemyClass in Fjender:
-        EnemyClass.draw()
+    for enemy in Fjender:
+        enemy.draw()
 
         for lasershot in Lasershot:
-            if collisionchecker(EnemyClass, lasershot):
+            if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
-                Fjender.remove(EnemyClass)
+                Fjender.remove(enemy)
+                points += 1
+                print(points)
+
+    if len(Fjender) == 0:
+        antalfjender += 2
+        for i in range(antalfjender):
+            new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
+                                   yvalue=random.randint(0, screenheight - 150), speedx=10, speedy=10)
+            Fjender.append(new_enemy)
 
     # Updater display
     pygame.display.flip()
