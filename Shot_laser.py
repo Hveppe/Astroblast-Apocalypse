@@ -6,7 +6,7 @@ class ShotLaser:
     width = 10
     height = 10
 
-    def __init__(self, screen, xvalue, yvalue, speedx, speedy):
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, last_move):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
@@ -18,8 +18,17 @@ class ShotLaser:
 
         self.hitwall = False
 
-        if self.speedx == 0 and self.speedy == 0:
-            self.speedy = -1
+        self.last_move = last_move
+
+        if self.speedx == 0 and speedy == 0:
+            if self.last_move == 'w':
+                self.speedy -= 10
+            if self.last_move == 's':
+                self.speedy += 10
+            if self.last_move == 'a':
+                self.speedx -= 10
+            if self.last_move == 'd':
+                self.speedx += 10
 
     def update(self):
         self.x += self.speedx

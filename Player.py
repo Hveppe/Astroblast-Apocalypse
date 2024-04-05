@@ -7,7 +7,7 @@ class PlayerClass:
     height = 40
     xmove = 0
     ymove = 0
-    movespeed = 1
+    movespeed = 10
 
     def __init__(self, screen, xvalue, yvalue):
         self.screen = screen

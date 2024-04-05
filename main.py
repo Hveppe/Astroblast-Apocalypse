@@ -19,8 +19,13 @@ Lasershot = []
 player = PlayerClass(screen=display, xvalue=10, yvalue=10)
 
 gamerunning = True
+lastmove = 'w'
+
+clock = pygame.time.Clock()
 
 while gamerunning:
+    clock.tick(60)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gamerunning = False
@@ -29,19 +34,23 @@ while gamerunning:
 
         # controls til PlayerClass
         if event.type == pygame.KEYDOWN:
+
             if event.key == pygame.K_w:
                 player.ymove -= player.movespeed
+                lastmove = 'w'
             if event.key == pygame.K_s:
                 player.ymove += player.movespeed
+                lastmove = 's'
             if event.key == pygame.K_d:
                 player.xmove += player.movespeed
+                lastmove = 'd'
             if event.key == pygame.K_a:
                 player.xmove -= player.movespeed
+                lastmove = 'a'
             if event.key == pygame.K_SPACE:
-                Lasershot.append(ShotLaser(screen=display, xvalue=player.x+player.width/2,
-                                           yvalue=player.y+player.height/2,
-                                           speedx=player.xmove, speedy=player.ymove))
-
+                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                           yvalue=player.y + player.height / 2,
+                                           speedx=player.xmove, speedy=player.ymove, last_move=lastmove))
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
