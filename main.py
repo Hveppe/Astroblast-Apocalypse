@@ -16,6 +16,9 @@ screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info(
 display = pygame.display.set_mode((screenwith, screenheight))
 pygame.display.set_caption("GAME")
 
+gameimagepng = pygame.image.load('Image/gameimage.png').convert()
+pygame.display.set_icon(gameimagepng)
+
 # lyde til spillet
 lasersound = pygame.mixer.Sound('sound/laser-gun-81720.wav')
 mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
