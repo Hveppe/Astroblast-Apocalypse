@@ -2,12 +2,14 @@
 from Player import PlayerClass
 from shotting import ShotLaser, LayMine
 from Enemy import EnemyClass, HeavyEnemyClass
+from objekts import AstroidClass
 
 # importer libaries
 import random
 import pygame
 import shelve
 
+# starter pygame og pygame font
 pygame.init()
 pygame.font.init()
 
@@ -43,6 +45,7 @@ Lasershot = []
 Mineshot = []
 Fjender = []
 HeavyFjender = []
+Astroids = []
 
 # laver player
 player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100)
@@ -237,6 +240,21 @@ while gamerunning:
                 else:
                     enemy.lives -= 1
 
+    for astriod in Astroids:
+        astriod.draw()
+        astriod.move()
+
+        if collisionchecker(player, astriod):
+            lives = 0
+
+        for enemy in Fjender:
+            if collisionchecker(enemy, astriod):
+                Fjender.remove(enemy)
+
+        for enemy in HeavyFjender:
+            if collisionchecker(enemy, astriod):
+                HeavyFjender.remove(enemy)
+
     if len(Fjender) == 0 and len(HeavyFjender) == 0:
         wave += 1
 
@@ -285,6 +303,29 @@ while gamerunning:
     minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
     display.blit(minetext, (screenwith-160, 10))
 
+    makeastroid = random.randint(1, 10000)
+
+    if makeastroid < 10:
+        direction = random.randint(1, 4)
+        if direction == 1:
+            xastriond = random.randrange(1, screenwith)
+            yastriond = -random.randrange(100, 200)
+        elif direction == 2:
+            xastriond = -random.randrange(100, 200)
+            yastriond = random.randrange(1, screenheight)
+        elif direction == 3:
+            xastriond = random.randrange(1, screenwith)
+            yastriond = random.randrange(screenheight+100, screenheight+200)
+        elif direction == 4:
+            xastriond = random.randrange(screenwith+100, screenwith+200)
+            yastriond = random.randrange(1, screenheight)
+        else:
+            xastriond = 0
+            yastriond = 0
+
+        Astroids.append(AstroidClass(screen=display, xvalue=xastriond, yvalue=yastriond, speed=random.randint(20, 60),
+                                     radius=50, direction=direction))
+
     # Updater display
     pygame.display.flip()
 
@@ -314,6 +355,7 @@ while gamerunning:
                         Lasershot.clear()
                         Mineshot.clear()
                         Fjender.clear()
+                        Astroids.clear()
                         player.xmove = 0
                         player.ymove = 0
                         lives = 5
