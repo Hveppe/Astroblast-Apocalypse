@@ -273,7 +273,7 @@ while gamerunning:
             fjende_spawn = True
             while fjende_spawn:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
-                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
+                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 5),
                                        speedy=random.randint(1, 10))
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
