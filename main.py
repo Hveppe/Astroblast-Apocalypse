@@ -54,7 +54,11 @@ fjende_spawn = False
 
 # laver shelve til at gemme highscore
 d = shelve.open('highscore')
-highscore = d['highscore']
+
+try:
+    highscore = d['highscore']
+except ValueError or TypeError:
+    highscore = 0
 
 # Antal miner til rådighed
 ArsenalMines = 5
