@@ -257,7 +257,7 @@ while gamerunning:
                 HeavyFjender.remove(enemy)
                 enemydeadsound.play()
 
-        if astriod.x > 1000 or astriod.x < -1000 or astriod.y > 1000 or astriod.y < -1000:
+        if astriod.x > 5000 or astriod.x < -5000 or astriod.y > 5000 or astriod.y < -5000:
             Astroids.remove(astriod)
 
     if len(Fjender) == 0 and len(HeavyFjender) == 0:
@@ -328,7 +328,7 @@ while gamerunning:
             xastriond = 0
             yastriond = 0
 
-        Astroids.append(AstroidClass(screen=display, xvalue=xastriond, yvalue=yastriond, speed=random.randint(20, 60),
+        Astroids.append(AstroidClass(screen=display, xvalue=xastriond, yvalue=yastriond, speed=5,
                                      radius=50, direction=direction))
 
     # Updater display
@@ -366,6 +366,7 @@ while gamerunning:
                         lives = 5
                         antalfjender = 0
                         wave = 1
+                        antalfjenderheavy = 0
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
 
