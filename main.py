@@ -8,6 +8,7 @@ from objekts import AstroidClass
 import random
 import pygame
 import shelve
+import math
 
 # starter pygame og pygame font
 pygame.init()
@@ -35,6 +36,18 @@ def collisionchecker(firstobject, seconobject):
             firstobject.y < seconobject.y + seconobject.height):
         return True
     return False
+
+
+def collisionchecker_ci_sq(square, circle):
+    closest_x = max(square.x, min(circle.x, square.x + square.width))
+    closest_y = max(square.y, min(circle.y, square.y + square.width))
+
+    distance = math.sqrt((circle.x - closest_x) ** 2 + (circle.y - closest_y) ** 2)
+
+    if distance <= circle.radius:
+        return True
+    else:
+        return False
 
 
 # Laver mousecursor usynlig
@@ -195,7 +208,7 @@ while gamerunning:
                     pass
 
         for Mine in Mineshot:
-            if collisionchecker(enemy, Mine):
+            if collisionchecker_ci_sq(enemy, Mine):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
 
@@ -228,7 +241,7 @@ while gamerunning:
                     enemy.lives -= 1
 
         for Mine in Mineshot:
-            if collisionchecker(enemy, Mine):
+            if collisionchecker_ci_sq(enemy, Mine):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
 
@@ -248,12 +261,12 @@ while gamerunning:
             lives = 0
 
         for enemy in Fjender:
-            if collisionchecker(enemy, astriod):
+            if collisionchecker_ci_sq(enemy, astriod):
                 Fjender.remove(enemy)
                 enemydeadsound.play()
 
         for enemy in HeavyFjender:
-            if collisionchecker(enemy, astriod):
+            if collisionchecker_ci_sq(enemy, astriod):
                 HeavyFjender.remove(enemy)
                 enemydeadsound.play()
 
