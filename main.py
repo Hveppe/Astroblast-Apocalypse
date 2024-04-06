@@ -1,7 +1,7 @@
 # importer fra andre python filer
 from Player import PlayerClass
 from shotting import ShotLaser, LayMine
-from Enemy import EnemyClass
+from Enemy import EnemyClass, HeavyEnemyClass
 
 # importer libaries
 import random
@@ -39,6 +39,7 @@ pygame.mouse.set_visible(False)
 Lasershot = []
 Mineshot = []
 Fjender = []
+HeavyFjender = []
 
 # laver player
 player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100)
@@ -47,7 +48,9 @@ player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight
 gamerunning = True
 lastmove = 'w'
 antalfjender = 2
+antalfjenderheavy = 0
 wave = 1
+waveheavyspawn = 5
 lives = 5
 minepoint = 0
 fjende_spawn = False
@@ -195,9 +198,52 @@ while gamerunning:
                 except ValueError:
                     pass
 
-    if len(Fjender) == 0:
+    for enemy in HeavyFjender:
+        enemy.draw()
+        enemy.update()
+
+        if collisionchecker(player, enemy):
+            HeavyFjender.remove(enemy)
+            enemydeadsound.play()
+            lives -= 3
+
+        for lasershot in Lasershot:
+            if collisionchecker(enemy, lasershot):
+                Lasershot.remove(lasershot)
+                enemydeadsound.play()
+
+                if enemy.dead:
+                    minepoint += 3
+                    try:
+                        HeavyFjender.remove(enemy)
+                    except ValueError:
+                        pass
+                else:
+                    enemy.lives -= 1
+
+        for Mine in Mineshot:
+            if collisionchecker(enemy, Mine):
+                Mineshot.remove(Mine)
+                enemydeadsound.play()
+
+                if enemy.dead:
+                    try:
+                        HeavyFjender.remove(enemy)
+                    except ValueError:
+                        pass
+                else:
+                    enemy.lives -= 1
+
+    if len(Fjender) == 0 and len(HeavyFjender) == 0:
         wave += 1
-        antalfjender += 2
+
+        if wave >= waveheavyspawn:
+            antalfjenderheavy += 1
+            antalfjender += 1
+            waveheavyspawn += 5
+        else:
+            antalfjender += 2
+
         for i in range(antalfjender):
             fjende_spawn = True
             while fjende_spawn:
@@ -210,6 +256,19 @@ while gamerunning:
                 else:
                     Fjender.append(new_enemy)
                     fjende_spawn = False
+
+        for n in range(antalfjenderheavy):
+            heavyfjendespawn = True
+            while heavyfjendespawn:
+                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-10),
+                                            yvalue=random.randint(0, screenheight-10), speedx=random.randint(1, 5),
+                                            speedy=random.randint(1, 5))
+                if collisionchecker(new_heavy, player):
+                    new_heavy.x = random.randint(0, screenwith-10)
+                    new_heavy.y = random.randint(0, screenheight-10)
+                else:
+                    HeavyFjender.append(new_heavy)
+                    heavyfjendespawn = False
 
     if minepoint > 10:
         ArsenalMines += 1
