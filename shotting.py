@@ -47,6 +47,7 @@ class LayMine:
     speedy = 0
     width = 10
     height = 10
+    radius = 5
 
     def __init__(self, screen, xvalue, yvalue):
         self.screen = screen
@@ -59,4 +60,4 @@ class LayMine:
         self.hitwall = False
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x, self.y), 5)
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
