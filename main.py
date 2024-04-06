@@ -250,10 +250,15 @@ while gamerunning:
         for enemy in Fjender:
             if collisionchecker(enemy, astriod):
                 Fjender.remove(enemy)
+                enemydeadsound.play()
 
         for enemy in HeavyFjender:
             if collisionchecker(enemy, astriod):
                 HeavyFjender.remove(enemy)
+                enemydeadsound.play()
+
+        if astriod.x > 1000 or astriod.x < -1000 or astriod.y > 1000 or astriod.y < -1000:
+            Astroids.remove(astriod)
 
     if len(Fjender) == 0 and len(HeavyFjender) == 0:
         wave += 1
