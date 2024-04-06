@@ -242,7 +242,6 @@ while gamerunning:
 
         if wave >= waveheavyspawn:
             antalfjenderheavy += 1
-            antalfjender += 1
             waveheavyspawn += 5
         else:
             antalfjender += 2
