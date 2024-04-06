@@ -161,26 +161,27 @@ while gamerunning:
 
         if collisionchecker(player, enemy):
             Fjender.remove(enemy)
+            enemydeadsound.play()
             lives -= 1
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 minepoint += 1
+                enemydeadsound.play()
 
                 try:
                     Fjender.remove(enemy)
-                    enemydeadsound.play()
                 except ValueError:
                     pass
 
         for Mine in Mineshot:
             if collisionchecker(enemy, Mine):
                 Mineshot.remove(Mine)
+                enemydeadsound.play()
 
                 try:
                     Fjender.remove(enemy)
-                    enemydeadsound.play()
                 except ValueError:
                     pass
 
