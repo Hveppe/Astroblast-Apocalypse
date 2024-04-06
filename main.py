@@ -247,8 +247,8 @@ while gamerunning:
         for i in range(antalfjender):
             fjende_spawn = True
             while fjende_spawn:
-                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
-                                       yvalue=random.randint(0, screenheight - 10), speedx=random.randint(1, 10),
+                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
+                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
                                        speedy=random.randint(1, 10))
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
@@ -260,8 +260,8 @@ while gamerunning:
         for n in range(antalfjenderheavy):
             heavyfjendespawn = True
             while heavyfjendespawn:
-                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-10),
-                                            yvalue=random.randint(0, screenheight-10), speedx=random.randint(1, 5),
+                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-40),
+                                            yvalue=random.randint(0, screenheight-40), speedx=random.randint(1, 5),
                                             speedy=random.randint(1, 5))
                 if collisionchecker(new_heavy, player):
                     new_heavy.x = random.randint(0, screenwith-10)
