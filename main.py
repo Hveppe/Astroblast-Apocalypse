@@ -6,6 +6,7 @@ from Enemy import EnemyClass
 # importer libaries
 import random
 import pygame
+import shelve
 
 pygame.init()
 pygame.font.init()
@@ -42,6 +43,7 @@ Fjender = []
 # laver player
 player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100)
 
+# variabler
 gamerunning = True
 lastmove = 'w'
 antalfjender = 2
@@ -49,6 +51,10 @@ wave = 1
 lives = 5
 minepoint = 0
 fjende_spawn = False
+
+# laver shelve til at gemme highscore
+d = shelve.open('highscore')
+highscore = d['highscore']
 
 # Antal miner til rådighed
 ArsenalMines = 5
@@ -221,6 +227,10 @@ while gamerunning:
         gameover = True
         gameoversound.play()
 
+        if highscore < wave:
+            highscore = wave
+            d['highscore'] = wave
+
         while gameover:
             clock.tick(60)
 
@@ -255,5 +265,8 @@ while gamerunning:
 
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 110, screenheight / 2))
+
+            gameovertext = Font.render(f'HIGHSCORE: {highscore}', True, (255, 255, 255))
+            display.blit(gameovertext, (screenwith/2 - 110, 20))
 
             pygame.display.flip()
