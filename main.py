@@ -38,17 +38,20 @@ def collisionchecker(firstobject, seconobject):
     return False
 
 
-def collisionchecker_ci_sq(square, circle):
+def collisionchecker_circle_square(circle, square):
+    # Finder afstanden mellem det tæteste punkt mellem square og circle
     closest_x = max(square.x, min(circle.x, square.x + square.width))
-    closest_y = max(square.y, min(circle.y, square.y + square.width))
+    closest_y = max(square.y, min(circle.y, square.y + square.height))
 
     distance = math.sqrt((circle.x - closest_x) ** 2 + (circle.y - closest_y) ** 2)
 
+    # Checker om distancen er mindre eller det samme som radius
     if distance <= circle.radius:
         return True
-    else:
-        return False
+    return False
 
+
+thing = False
 
 # Laver mousecursor usynlig
 pygame.mouse.set_visible(False)
@@ -208,7 +211,7 @@ while gamerunning:
                     pass
 
         for Mine in Mineshot:
-            if collisionchecker_ci_sq(enemy, Mine):
+            if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
 
@@ -241,7 +244,7 @@ while gamerunning:
                     enemy.lives -= 1
 
         for Mine in Mineshot:
-            if collisionchecker_ci_sq(enemy, Mine):
+            if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
 
@@ -261,12 +264,12 @@ while gamerunning:
             lives = 0
 
         for enemy in Fjender:
-            if collisionchecker_ci_sq(enemy, astriod):
+            if collisionchecker_circle_square(astriod, enemy):
                 Fjender.remove(enemy)
                 enemydeadsound.play()
 
         for enemy in HeavyFjender:
-            if collisionchecker_ci_sq(enemy, astriod):
+            if collisionchecker_circle_square(astriod, enemy):
                 HeavyFjender.remove(enemy)
                 enemydeadsound.play()
 
@@ -321,7 +324,7 @@ while gamerunning:
     minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
     display.blit(minetext, (screenwith-160, 10))
 
-    makeastroid = random.randint(1, 10000)
+    makeastroid = random.randint(1, 100000)
 
     if makeastroid < 10:
         direction = random.randint(1, 4)
