@@ -187,7 +187,7 @@ while gamerunning:
                                 pause = False
 
                     pausetext = Fontbig.render('PAUSED', True, (255, 255, 255))
-                    display.blit(pausetext, (screenwith/2-100, screenheight/2))
+                    display.blit(pausetext, (screenwith/2-120, screenheight/2-20))
 
                     pygame.display.flip()
 
