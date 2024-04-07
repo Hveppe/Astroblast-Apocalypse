@@ -169,6 +169,28 @@ while gamerunning:
             if event.key == pygame.K_a:
                 player.xmove += player.movespeed
 
+    # pause spil
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_p:
+                pause = True
+                while pause is True:
+
+                    for eventpause in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            pause = False
+                            gamerunning = False
+                        if eventpause.type == pygame.KEYDOWN:
+                            if eventpause.key == pygame.K_ESCAPE:
+                                pause = False
+                                gamerunning = False
+                            if eventpause.key == pygame.K_p:
+                                pause = False
+
+                    pausetext = Fontbig.render('PAUSED', True, (255, 255, 255))
+                    display.blit(pausetext, (screenwith/2-100, screenheight/2))
+
+                    pygame.display.flip()
+
     # Farver baggrund
     display.fill((0, 0, 0))
 
@@ -395,7 +417,7 @@ while gamerunning:
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 110, screenheight / 2))
 
-            gameovertext = Font.render(f'HIGHSCORE: {highscore}', True, (255, 255, 255))
+            gameovertext = Font.render(f'HIGHSCORE: wave {highscore}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 110, 20))
 
             pygame.display.flip()
