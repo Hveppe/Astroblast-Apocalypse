@@ -338,7 +338,7 @@ while gamerunning:
                     HeavyFjender.append(new_heavy)
                     heavyfjendespawn = False
 
-    if minepoint > 10:
+    if minepoint > 50:
         ArsenalMines += 1
         minepoint = 0
 
@@ -418,7 +418,7 @@ while gamerunning:
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 200))
 
-            gameovertext = Font.render(f'WAVE: {wave}', True, (255, 255, 255))
+            gameovertext = Font.render(f'WAVE: {wave-1}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 50, screenheight / 2 - 100))
 
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
