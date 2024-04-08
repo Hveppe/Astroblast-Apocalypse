@@ -376,9 +376,9 @@ while gamerunning:
         gameover = True
         gameoversound.play()
 
-        if highscore < wave:
-            highscore = wave
-            d['highscore'] = wave
+        if highscore < wave-1:
+            highscore = wave-1
+            d['highscore'] = wave-1
 
         while gameover:
             clock.tick(60)
@@ -404,6 +404,7 @@ while gamerunning:
                         lives = 5
                         antalfjender = 0
                         wave = 1
+                        waveheavyspawn = 5
                         antalfjenderheavy = 0
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
