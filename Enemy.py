@@ -6,12 +6,13 @@ class EnemyClass:
     height = 30
     colour = (255, 0, 0)
 
-    def __init__(self, screen, xvalue, yvalue, speedx, speedy):
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, colour):
         self.x = xvalue
         self.y = yvalue
         self.speedx = speedx
         self.speedy = speedy
         self.screen = screen
+        self.colour = colour
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()

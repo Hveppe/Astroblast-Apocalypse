@@ -60,6 +60,7 @@ pygame.mouse.set_visible(False)
 Lasershot = []
 Mineshot = []
 Fjender = []
+MineswepperFjender = []
 HeavyFjender = []
 Astroids = []
 
@@ -71,8 +72,10 @@ gamerunning = True
 lastmove = 'w'
 antalfjender = 2
 antalfjenderheavy = 0
+antalfjendermineswpper = 0
 wave = 1
 waveheavyspawn = 5
+wavemineswepperspawn = 5
 lives = 5
 wavelives = 4
 minepoint = 0
@@ -100,7 +103,7 @@ for i in range(antalfjender):
     while fjende_spawn:
         enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
                            yvalue=random.randint(0, screenheight - 150), speedx=random.randint(1, 10),
-                           speedy=random.randint(1, 10))
+                           speedy=random.randint(1, 10), colour=(255, 0, 0))
         if collisionchecker(enemy, player):
             enemy.x = random.randint(0, screenwith - 10)
             enemy.y = random.randint(0, screenheight - 150)
@@ -279,6 +282,28 @@ while gamerunning:
                 else:
                     enemy.lives -= 1
 
+    for enemy in MineswepperFjender:
+        enemy.draw()
+        enemy.update()
+
+        if collisionchecker(player, enemy):
+            MineswepperFjender.remove(enemy)
+            enemydeadsound.play()
+
+        for lasershot in Lasershot:
+            if collisionchecker(enemy, lasershot):
+                Lasershot.remove(lasershot)
+                enemydeadsound.play()
+
+                try:
+                    MineswepperFjender.remove(enemy)
+                except ValueError:
+                    pass
+
+        for Mine in Mineshot:
+            if collisionchecker_circle_square(Mine, enemy):
+                Mineshot.remove(Mine)
+
     for astriod in Astroids:
         astriod.draw()
         astriod.move()
@@ -296,10 +321,15 @@ while gamerunning:
                 HeavyFjender.remove(enemy)
                 enemydeadsound.play()
 
+        for enemy in MineswepperFjender:
+            if collisionchecker_circle_square(astriod, enemy):
+                MineswepperFjender.remove(enemy)
+                enemydeadsound.play()
+
         if astriod.x > 5000 or astriod.x < -5000 or astriod.y > 5000 or astriod.y < -5000:
             Astroids.remove(astriod)
 
-    if len(Fjender) == 0 and len(HeavyFjender) == 0:
+    if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0:
         wave += 1
 
         if wave >= wavelives:
@@ -312,12 +342,16 @@ while gamerunning:
         else:
             antalfjender += 2
 
+        if wave >= wavemineswepperspawn:
+            antalfjendermineswpper += 1
+            wavemineswepperspawn += 5
+
         for i in range(antalfjender):
             fjende_spawn = True
             while fjende_spawn:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
                                        yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 5),
-                                       speedy=random.randint(1, 10))
+                                       speedy=random.randint(1, 10), colour=(255, 0, 0))
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
                     new_enemy.y = random.randint(0, screenheight - 150)
@@ -337,6 +371,19 @@ while gamerunning:
                 else:
                     HeavyFjender.append(new_heavy)
                     heavyfjendespawn = False
+
+        for William in range(antalfjendermineswpper):
+            mineswpperspawn = True
+            while mineswpperspawn:
+                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
+                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 5),
+                                       speedy=random.randint(1, 10), colour=(0, 255, 0))
+                if collisionchecker(new_enemy, player):
+                    new_enemy.x = random.randint(0, screenwith - 10)
+                    new_enemy.y = random.randint(0, screenheight - 150)
+                else:
+                    MineswepperFjender.append(new_enemy)
+                    mineswpperspawn = False
 
     if minepoint > 50:
         ArsenalMines += 1
