@@ -77,7 +77,7 @@ antalfjenderheavy = 0
 antalfjendermineswpper = 0
 wave = 1
 waveheavyspawn = 5
-wavemineswepperspawn = 5
+wavemineswepperspawn = 6
 lives = 5
 wavelives = 4
 minepoint = 0
@@ -360,7 +360,7 @@ while gamerunning:
 
         if wave >= wavemineswepperspawn:
             antalfjendermineswpper += 1
-            wavemineswepperspawn += 5
+            wavemineswepperspawn += 4
 
         for i in range(antalfjender):
             fjende_spawn = True
@@ -388,7 +388,7 @@ while gamerunning:
                     HeavyFjender.append(new_heavy)
                     heavyfjendespawn = False
 
-        for William in range(antalfjendermineswpper):
+        for m in range(antalfjendermineswpper):
             mineswpperspawn = True
             while mineswpperspawn:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
@@ -487,7 +487,7 @@ while gamerunning:
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 110, screenheight / 2))
 
-            gameovertext = Font.render(f'HIGHSCORE: wave {highscore}', True, (255, 255, 255))
+            gameovertext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 110, 20))
 
             pygame.display.flip()
