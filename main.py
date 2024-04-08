@@ -1,4 +1,6 @@
 # importer fra andre python filer
+import time
+
 from Player import PlayerClass
 from shotting import ShotLaser, LayMine
 from Enemy import EnemyClass, HeavyEnemyClass
@@ -81,6 +83,10 @@ wavelives = 4
 minepoint = 0
 fjende_spawn = False
 
+# delay til laser
+delaylaser = 0.2
+last_time_shot = 0
+
 # laver shelve til at gemme highscore
 d = shelve.open('highscore')
 
@@ -92,6 +98,7 @@ except ValueError or TypeError:
 # Antal miner til rådighed
 ArsenalMines = 5
 
+# Opsætter clock
 clock = pygame.time.Clock()
 
 # Fonts til text
@@ -125,26 +132,35 @@ while gamerunning:
         if event.type == pygame.KEYDOWN:
 
             # Kode til at kontroler våben
+            current = time.time()
             if event.key == pygame.K_UP:
-                lastmove = 'w'
-                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                           yvalue=player.y + player.height / 2, last_move=lastmove))
-                lasersound.play()
+                if current - last_time_shot >= delaylaser:
+                    lastmove = 'w'
+                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                               yvalue=player.y + player.height / 2, last_move=lastmove))
+                    lasersound.play()
+                    last_time_shot = current
             if event.key == pygame.K_DOWN:
-                lastmove = 's'
-                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                           yvalue=player.y + player.height / 2, last_move=lastmove))
-                lasersound.play()
+                if current - last_time_shot >= delaylaser:
+                    lastmove = 's'
+                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                               yvalue=player.y + player.height / 2, last_move=lastmove))
+                    lasersound.play()
+                    last_time_shot = current
             if event.key == pygame.K_LEFT:
-                lastmove = 'a'
-                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                           yvalue=player.y + player.height / 2, last_move=lastmove))
-                lasersound.play()
+                if current - last_time_shot >= delaylaser:
+                    lastmove = 'a'
+                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                               yvalue=player.y + player.height / 2, last_move=lastmove))
+                    lasersound.play()
+                    last_time_shot = current
             if event.key == pygame.K_RIGHT:
-                lastmove = 'd'
-                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                           yvalue=player.y + player.height / 2, last_move=lastmove))
-                lasersound.play()
+                if current - last_time_shot >= delaylaser:
+                    lastmove = 'd'
+                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                               yvalue=player.y + player.height / 2, last_move=lastmove))
+                    lasersound.play()
+                    last_time_shot = current
             if event.key == pygame.K_SPACE:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
