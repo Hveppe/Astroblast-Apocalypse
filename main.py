@@ -74,6 +74,7 @@ antalfjenderheavy = 0
 wave = 1
 waveheavyspawn = 5
 lives = 5
+wavelives = 4
 minepoint = 0
 fjende_spawn = False
 
@@ -301,6 +302,10 @@ while gamerunning:
     if len(Fjender) == 0 and len(HeavyFjender) == 0:
         wave += 1
 
+        if wave >= wavelives:
+            lives += 1
+            wavelives += 4
+
         if wave >= waveheavyspawn:
             antalfjenderheavy += 1
             waveheavyspawn += 5
@@ -408,6 +413,7 @@ while gamerunning:
                         antalfjenderheavy = 0
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
+                        ArsenalMines = 5
 
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 200))
