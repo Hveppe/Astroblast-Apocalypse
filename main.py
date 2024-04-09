@@ -53,17 +53,30 @@ def collisionchecker_circle_square(circle, square):
     return False
 
 
+def collisionchecker_circle(circle1, circle2):
+    distance = ((circle2.x - circle1.x) ** 2 + (circle2.y - circle1.y) ** 2) ** 0.5
+
+    if distance <= (circle1.radius + circle2.radius):
+        return True
+    else:
+        return False
+
+
 thing = False
 
 # Laver mousecursor usynlig
 pygame.mouse.set_visible(False)
 
 # laver lister til classer der skal havde flere af gangen på skærmen
+# Våben
 Lasershot = []
 Mineshot = []
+# Fjender
 Fjender = []
 MineswepperFjender = []
 HeavyFjender = []
+HommingFjender = []
+# objekter
 Astroids = []
 
 # laver player
@@ -75,15 +88,18 @@ lastmove = 'w'
 antalfjender = 2
 antalfjenderheavy = 0
 antalfjendermineswpper = 0
+antalfjenderhomming = 0
 wave = 1
 waveheavyspawn = 5
 wavemineswepperspawn = 6
+wavehommingspawn = 7
 lives = 5
 wavelives = 4
 minepoint = 0
 fjende_spawn = False
 waveheavyspawnadd = 5
 wavemineswepperspawnadd = 4
+wavehommingspawnadd = 4
 changeinrate = 10
 
 # delay til laser
@@ -312,6 +328,7 @@ while gamerunning:
         if collisionchecker(player, enemy):
             MineswepperFjender.remove(enemy)
             enemydeadsound.play()
+            lives -= 1
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -326,6 +343,35 @@ while gamerunning:
         for Mine in Mineshot:
             if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
+
+    for enemy in HommingFjender:
+        enemy.update(player=player)
+        enemy.draw()
+
+        if collisionchecker_circle_square(enemy, player):
+            HommingFjender.remove(enemy)
+            lives -= 1
+            enemydeadsound.play()
+
+        for lasershot in Lasershot:
+            if collisionchecker_circle_square(enemy, player):
+                Lasershot.remove(lasershot)
+                enemydeadsound.play()
+
+                try:
+                    HommingFjender.remove(enemy)
+                except ValueError:
+                    pass
+
+        for Mine in Mineshot:
+            if collisionchecker_circle(Mine, enemy):
+                Mineshot.remove(Mine)
+                enemydeadsound.play()
+
+                try:
+                    HommingFjender
+                except ValueError:
+                    pass
 
     for astriod in Astroids:
         astriod.draw()
@@ -349,10 +395,15 @@ while gamerunning:
                 MineswepperFjender.remove(enemy)
                 enemydeadsound.play()
 
+        for enemy in HommingFjender:
+            if collisionchecker_circle(astriod, enemy):
+                HommingFjender.remove(enemy)
+                enemydeadsound.play()
+
         if astriod.x > 5000 or astriod.x < -5000 or astriod.y > 5000 or astriod.y < -5000:
             Astroids.remove(astriod)
 
-    if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0:
+    if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0 and len(HommingFjender) == 0:
         wave += 1
 
         if wave >= wavelives:
@@ -369,6 +420,11 @@ while gamerunning:
         if wave >= wavemineswepperspawn:
             antalfjendermineswpper += 1
             wavemineswepperspawn += wavemineswepperspawnadd
+
+        if wave >= wavehommingspawn:
+            antalfjenderhomming += 2
+            antalfjender -= 2
+            wavehommingspawn += wavehommingspawnadd
 
         if wave == changeinrate and waveheavyspawn > 1:
             waveheavyspawnadd -= 1
@@ -404,14 +460,27 @@ while gamerunning:
             mineswpperspawn = True
             while mineswpperspawn:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
-                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 5),
+                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
                                        speedy=random.randint(1, 10), colour=(0, 255, 0))
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
-                    new_enemy.y = random.randint(0, screenheight - 150)
+                    new_enemy.y = random.randint(0, screenheight - 30)
                 else:
                     MineswepperFjender.append(new_enemy)
                     mineswpperspawn = False
+
+        for h in range(antalfjenderhomming):
+            hommingspawn = True
+            while hommingspawn:
+                new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith-10),
+                                              yvalue=random.randint(0, screenheight-10), speedx=random.randint(5, 10),
+                                              speedy=random.randint(5, 10), color=(255, 0, 0), radius=10)
+                if collisionchecker_circle_square(new_enemy, player):
+                    new_enemy.x = random.randint(0, screenwith-10)
+                    new_enemy.y = random.randint(0, screenheight-10)
+                else:
+                    HommingFjender.append(new_enemy)
+                    hommingspawn = False
 
     if minepoint > 50:
         ArsenalMines += 1

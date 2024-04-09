@@ -66,9 +66,6 @@ class HeavyEnemyClass:
 
 
 class HommingEnemyClass:
-    width = 10
-    height = 10
-
     def __init__(self, screen, xvalue, yvalue, speedx, speedy, radius, color):
         self.screen = screen
         self.x = xvalue
