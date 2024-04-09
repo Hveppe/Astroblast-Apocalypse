@@ -355,6 +355,7 @@ while gamerunning:
         if wave >= waveheavyspawn:
             antalfjenderheavy += 1
             waveheavyspawn += 5
+            antalfjender -= 1
         else:
             antalfjender += 2
 
@@ -463,20 +464,33 @@ while gamerunning:
                         gameover = False
                     elif event.key == pygame.K_r:
                         gameover = False
+
+                        # Clear lister
                         Lasershot.clear()
                         Mineshot.clear()
                         Fjender.clear()
+                        HeavyFjender.clear()
+                        MineswepperFjender.clear()
                         Astroids.clear()
+
+                        # Reset af player
                         player.xmove = 0
                         player.ymove = 0
+                        ArsenalMines = 5
                         lives = 5
-                        antalfjender = 0
                         wave = 1
-                        waveheavyspawn = 5
-                        antalfjenderheavy = 0
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
-                        ArsenalMines = 5
+
+                        # reset af fjender
+                        antalfjender = 0
+                        waveheavyspawn = 5
+                        antalfjenderheavy = 0
+                        wavemineswepperspawn = 6
+                        antalfjendermineswpper = 0
+
+
+
 
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 200))
