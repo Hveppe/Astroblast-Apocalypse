@@ -4,7 +4,6 @@ import pygame
 class EnemyClass:
     width = 30
     height = 30
-    colour = (255, 0, 0)
 
     def __init__(self, screen, xvalue, yvalue, speedx, speedy, colour):
         self.x = xvalue
