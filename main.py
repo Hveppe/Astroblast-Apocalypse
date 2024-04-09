@@ -55,17 +55,21 @@ antalfjender = 2
 antalfjenderheavy = 0
 antalfjendermineswpper = 0
 antalfjenderhomming = 0
+
 wave = 1
 waveheavyspawn = 5
 wavemineswepperspawn = 6
 wavehommingspawn = 7
+
 lives = 5
 wavelives = 4
 minepoint = 0
 fjende_spawn = False
+
 waveheavyspawnadd = 5
 wavemineswepperspawnadd = 4
 wavehommingspawnadd = 4
+
 changeinrate = 10
 
 # delay til laser
@@ -85,7 +89,7 @@ try:
 except ValueError or TypeError:
     highscore = 0
 
-# Antal miner til rådighed
+# Antal våben til rådighed
 ArsenalMines = 5
 
 # Opsætter clock
@@ -133,11 +137,13 @@ while gamerunning:
             if event.key == pygame.K_RIGHT:
                 lastmove = 'd'
                 shotting = True
+
+            # controls til mine
             if event.key == pygame.K_SPACE:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
-                                            yvalue=player.y + player.height / 2, ))
+                                            yvalue=player.y + player.height / 2))
                     mineplacesound.play()
 
             # Bevægelse af player
