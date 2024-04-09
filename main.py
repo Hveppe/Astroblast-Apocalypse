@@ -89,6 +89,7 @@ changeinrate = 10
 # delay til laser
 delaylaser = 0.2
 last_time_shot = 0
+shotting = False
 
 # giving time of start
 startgametime = time.time()
@@ -128,7 +129,7 @@ for i in range(antalfjender):
 
 while gamerunning:
     clock.tick(60)
-
+    current = time.time()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gamerunning = False
@@ -137,37 +138,19 @@ while gamerunning:
 
         # controls til PlayerClass
         if event.type == pygame.KEYDOWN:
-
             # Kode til at kontroler våben
-            current = time.time()
             if event.key == pygame.K_UP:
-                if current - last_time_shot >= delaylaser:
-                    lastmove = 'w'
-                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                               yvalue=player.y + player.height / 2, last_move=lastmove))
-                    lasersound.play()
-                    last_time_shot = current
+                lastmove = 'w'
+                shotting = True
             if event.key == pygame.K_DOWN:
-                if current - last_time_shot >= delaylaser:
-                    lastmove = 's'
-                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                               yvalue=player.y + player.height / 2, last_move=lastmove))
-                    lasersound.play()
-                    last_time_shot = current
+                lastmove = 's'
+                shotting = True
             if event.key == pygame.K_LEFT:
-                if current - last_time_shot >= delaylaser:
-                    lastmove = 'a'
-                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                               yvalue=player.y + player.height / 2, last_move=lastmove))
-                    lasersound.play()
-                    last_time_shot = current
+                lastmove = 'a'
+                shotting = True
             if event.key == pygame.K_RIGHT:
-                if current - last_time_shot >= delaylaser:
-                    lastmove = 'd'
-                    Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
-                                               yvalue=player.y + player.height / 2, last_move=lastmove))
-                    lasersound.play()
-                    last_time_shot = current
+                lastmove = 'd'
+                shotting = True
             if event.key == pygame.K_SPACE:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
@@ -196,6 +179,16 @@ while gamerunning:
             if event.key == pygame.K_a:
                 player.xmove += player.movespeed
 
+            # modvirker våben
+            if event.key == pygame.K_UP:
+                shotting = False
+            if event.key == pygame.K_DOWN:
+                shotting = False
+            if event.key == pygame.K_LEFT:
+                shotting = False
+            if event.key == pygame.K_RIGHT:
+                shotting = False
+
     # pause spil
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
@@ -217,6 +210,13 @@ while gamerunning:
                     display.blit(pausetext, (screenwith/2-120, screenheight/2-20))
 
                     pygame.display.flip()
+
+    if shotting is True:
+        if current - last_time_shot >= delaylaser:
+            Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2,
+                                       yvalue=player.y + player.height / 2, last_move=lastmove))
+            lasersound.play()
+            last_time_shot = current
 
     # Farver baggrund
     display.fill((0, 0, 0))
