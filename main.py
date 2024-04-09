@@ -92,6 +92,7 @@ last_time_shot = 0
 
 # giving time of start
 startgametime = time.time()
+timer = time.time()-startgametime
 
 # laver shelve til at gemme highscore
 d = shelve.open('highscore')
