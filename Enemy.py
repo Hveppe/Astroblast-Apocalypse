@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 class EnemyClass:
@@ -62,3 +63,33 @@ class HeavyEnemyClass:
 
     def draw(self):
         pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height))
+
+
+class HommingEnemyClass:
+    width = 10
+    height = 10
+
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, radius, color):
+        self.screen = screen
+        self.x = xvalue
+        self.y = yvalue
+        self.speedx = speedx
+        self.speedy = speedy
+        self.radius = radius
+        self.color = color
+
+    def update(self, player):
+        distancex = player.x - self.x
+        distancey = player.y - self.y
+
+        distance = math.sqrt(distancex ** 2 + distancey ** 2)
+
+        if distance > 0:
+            distancex /= distance
+            distancey /= distance
+
+        self.x += distancex * self.speedx
+        self.y += distancey * self.speedy
+
+    def draw(self):
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
