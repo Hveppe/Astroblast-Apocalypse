@@ -87,7 +87,7 @@ wavemineswepperspawnadd = 4
 changeinrate = 10
 
 # delay til laser
-delaylaser = 0.2
+delaylaser = 0.3
 last_time_shot = 0
 shotting = False
 
