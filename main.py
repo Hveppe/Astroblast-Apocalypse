@@ -90,6 +90,9 @@ changeinrate = 10
 delaylaser = 0.2
 last_time_shot = 0
 
+# giving time of start
+startgametime = time.time()
+
 # laver shelve til at gemme highscore
 d = shelve.open('highscore')
 
@@ -414,13 +417,16 @@ while gamerunning:
         minepoint = 0
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
-    display.blit(livestext, (10, 50))
+    display.blit(livestext, (10, 90))
 
     pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
-    display.blit(pointstext, (10, 10))
+    display.blit(pointstext, (10, 50))
 
     minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
     display.blit(minetext, (screenwith-160, 10))
+
+    timerext = Font.render(f'Timer: {round(time.time()-startgametime, 2)}', True, (255, 255, 255))
+    display.blit(timerext, (10, 10))
 
     makeastroid = random.randint(1, 100000)
 
@@ -495,6 +501,9 @@ while gamerunning:
                         antalfjenderheavy = 0
                         wavemineswepperspawn = 6
                         antalfjendermineswpper = 0
+
+                        # reset timer
+                        startgametime = time.time()
 
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 200))
