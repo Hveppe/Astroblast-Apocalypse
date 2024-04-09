@@ -557,6 +557,7 @@ while gamerunning:
                         Fjender.clear()
                         HeavyFjender.clear()
                         MineswepperFjender.clear()
+                        HommingFjender.clear()
                         Astroids.clear()
 
                         # Reset af player
@@ -572,8 +573,10 @@ while gamerunning:
                         # reset af fjender
                         antalfjender = 0
                         waveheavyspawn = 5
-                        antalfjenderheavy = 0
                         wavemineswepperspawn = 6
+                        wavehommingspawn = 7
+                        antalfjenderheavy = 0
+                        antalfjenderhomming = 0
                         antalfjendermineswpper = 0
 
                         # reset timer
