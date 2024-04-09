@@ -337,6 +337,7 @@ while gamerunning:
 
                 try:
                     MineswepperFjender.remove(enemy)
+                    minepoint += 1
                 except ValueError:
                     pass
 
@@ -354,12 +355,13 @@ while gamerunning:
             enemydeadsound.play()
 
         for lasershot in Lasershot:
-            if collisionchecker_circle_square(enemy, player):
+            if collisionchecker_circle_square(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 enemydeadsound.play()
 
                 try:
                     HommingFjender.remove(enemy)
+                    minepoint += 1
                 except ValueError:
                     pass
 
