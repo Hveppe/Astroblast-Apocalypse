@@ -425,7 +425,10 @@ while gamerunning:
     minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
     display.blit(minetext, (screenwith-160, 10))
 
-    timerext = Font.render(f'Timer: {round(time.time()-startgametime, 2)}', True, (255, 255, 255))
+    if lives > 0:
+        timer = time.time()-startgametime
+
+    timerext = Font.render(f'Timer: {round(timer, 2)}', True, (255, 255, 255))
     display.blit(timerext, (10, 10))
 
     makeastroid = random.randint(1, 100000)
@@ -510,6 +513,9 @@ while gamerunning:
 
             gameovertext = Font.render(f'WAVE: {wave-1}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 50, screenheight / 2 - 100))
+
+            gameovertext = Font.render(f'TIME: {round(timer, 2)}', True, (255, 255, 255))
+            display.blit(gameovertext, (screenwith / 2 - 60, screenheight / 2 - 60))
 
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 110, screenheight / 2))
