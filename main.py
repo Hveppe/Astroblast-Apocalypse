@@ -82,6 +82,9 @@ lives = 5
 wavelives = 4
 minepoint = 0
 fjende_spawn = False
+waveheavyspawnadd = 5
+wavemineswepperspawnadd = 4
+changeinrate = 10
 
 # delay til laser
 delaylaser = 0.2
@@ -354,14 +357,18 @@ while gamerunning:
 
         if wave >= waveheavyspawn:
             antalfjenderheavy += 1
-            waveheavyspawn += 5
+            waveheavyspawn += waveheavyspawnadd
             antalfjender -= 1
         else:
             antalfjender += 2
 
         if wave >= wavemineswepperspawn:
             antalfjendermineswpper += 1
-            wavemineswepperspawn += 4
+            wavemineswepperspawn += wavemineswepperspawnadd
+
+        if wave == changeinrate and waveheavyspawn > 1:
+            waveheavyspawnadd -= 1
+            changeinrate += 10
 
         for i in range(antalfjender):
             fjende_spawn = True
@@ -488,9 +495,6 @@ while gamerunning:
                         antalfjenderheavy = 0
                         wavemineswepperspawn = 6
                         antalfjendermineswpper = 0
-
-
-
 
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 200))
