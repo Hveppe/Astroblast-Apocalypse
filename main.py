@@ -495,6 +495,7 @@ while gamerunning:
                         player.ymove = 0
                         ArsenalMines = 5
                         lives = 5
+                        wavelives = 4
                         wave = 1
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
