@@ -3,7 +3,7 @@ import time
 
 from Player import PlayerClass
 from shotting import ShotLaser, LayMine
-from Enemy import EnemyClass, HeavyEnemyClass
+from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
 from objekts import AstroidClass
 
 # importer libaries
@@ -116,12 +116,12 @@ Fontbig = pygame.font.Font(None, 100)
 for i in range(antalfjender):
     fjende_spawn = True
     while fjende_spawn:
-        enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 10),
-                           yvalue=random.randint(0, screenheight - 150), speedx=random.randint(1, 10),
+        enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 300),
+                           yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
                            speedy=random.randint(1, 10), colour=(255, 0, 0))
         if collisionchecker(enemy, player):
-            enemy.x = random.randint(0, screenwith - 10)
-            enemy.y = random.randint(0, screenheight - 150)
+            enemy.xvalue = random.randint(0, screenwith - 10)
+            enemy.yvalue = random.randint(0, screenheight - 150)
         else:
             Fjender.append(enemy)
             fjende_spawn = False
