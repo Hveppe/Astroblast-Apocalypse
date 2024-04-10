@@ -21,7 +21,7 @@ pygame.font.init()
 # opsætting af skærm og angiver et navn til programet
 screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info().current_h
 display = pygame.display.set_mode((screenwith, screenheight))
-pygame.display.set_caption("GAME")
+pygame.display.set_caption("Astroblast Apocalypse")
 
 gameimagepng = pygame.image.load('Image/gameimage.png').convert()
 pygame.display.set_icon(gameimagepng)
