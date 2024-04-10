@@ -1,3 +1,5 @@
+# Spillet er lavet af Hveppe
+
 # importer fra andre python filer
 import time
 
