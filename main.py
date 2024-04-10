@@ -447,8 +447,8 @@ while gamerunning:
             hommingspawn = True
             while hommingspawn:
                 new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith-10),
-                                              yvalue=random.randint(0, screenheight-10), speedx=random.randint(5, 10),
-                                              speedy=random.randint(5, 10), color=(255, 0, 0), radius=10)
+                                              yvalue=random.randint(0, screenheight-10), speedx=10,
+                                              speedy=10, color=(255, 0, 0), radius=10)
                 if collisionchecker_circle_square(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith-10)
                     new_enemy.y = random.randint(0, screenheight-10)
