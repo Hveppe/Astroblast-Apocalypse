@@ -376,6 +376,15 @@ while gamerunning:
                 HommingFjender.remove(enemy)
                 enemydeadsound.play()
 
+        for lasershot in Lasershot:
+            if collisionchecker_circle_square(astriod, lasershot):
+                Lasershot.remove(lasershot)
+
+        for Mine in Mineshot:
+            if collisionchecker_circle(Mine, astriod):
+                Mineshot.remove(Mine)
+                enemydeadsound.play()
+
         if astriod.x > 5000 or astriod.x < -5000 or astriod.y > 5000 or astriod.y < -5000:
             Astroids.remove(astriod)
 
