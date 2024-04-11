@@ -26,6 +26,12 @@ pygame.display.set_caption("Astroblast Apocalypse")
 gameimagepng = pygame.image.load('Image/gameimage.png').convert()
 pygame.display.set_icon(gameimagepng)
 
+# baggrunds music
+pygame.mixer.music.load('sound/backgroundmusic-200697.wav')
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
+
+
 # lyde til spillet
 lasersound = pygame.mixer.Sound('sound/laser-gun-81720.wav')
 mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
