@@ -12,7 +12,6 @@ from collisioncheck_functioner import collisionchecker, collisionchecker_circle,
 # importer libaries
 import random
 import pygame
-import shelve
 
 # starter pygame og pygame font
 pygame.init()
@@ -89,11 +88,10 @@ shotting = False
 startgametime = time.time()
 timer = time.time()-startgametime
 
-# laver shelve til at gemme highscore
-d = shelve.open('highscore')
-
+# henter gemte highscore
 try:
-    highscore = d['highscore']
+    with open('textfiler/highscore.txt', 'r') as file:
+        highscore = int(file.read())
 except ValueError or TypeError:
     highscore = 0
 
@@ -524,7 +522,8 @@ while gamerunning:
 
         if highscore < wave-1:
             highscore = wave-1
-            d['highscore'] = wave-1
+            with open('textfiler/highscore.txt', 'w') as file:
+                file.write(str(highscore))
 
         while gameover:
             clock.tick(60)
@@ -560,6 +559,7 @@ while gamerunning:
                         wave = 1
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
+                        shotting = False
 
                         # reset af fjender
                         antalfjender = 0
