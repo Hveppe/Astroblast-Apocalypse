@@ -104,6 +104,7 @@ clock = pygame.time.Clock()
 Font = pygame.font.Font(None, 36)
 Fontbig = pygame.font.Font(None, 100)
 Fontmainmenu = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
+Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, italic=False)
 
 for i in range(antalfjender):
     fjende_spawn = True
@@ -129,16 +130,28 @@ while gamerunning:
             if event.type == pygame.QUIT:
                 gamerunning = False
                 mainmenu = False
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                gamerunning = False
-                mainmenu = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    gamerunning = False
+                    mainmenu = False
+                if event.key == pygame.K_SPACE:
+                    mainmenu = False
 
         display.fill((0, 0, 0))
 
+        # displayer title
         mainmenutext = Fontmainmenu.render('Astroblast', True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 100))
         mainmenutext = Fontmainmenu.render('Apocalypse', True, (255, 255, 255))
-        display.blit(mainmenutext, (screenwith / 2 - mainmenutext.get_width() / 2, 190))
+        display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, 190))
+
+        # laver tekst under display
+        mainmenutext = Fontmainmenu_lowertekst.render('Press space to begin game', True, (255, 255, 255))
+        display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, screenheight/2))
+
+        # displayer highscore
+        mainmenutext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
+        display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 20))
 
         pygame.display.flip()
 
@@ -562,6 +575,7 @@ while gamerunning:
                         gameover = False
                     elif event.key == pygame.K_r:
                         gameover = False
+                        mainmenu = True
 
                         # Clear lister
                         Lasershot.clear()
@@ -608,6 +622,6 @@ while gamerunning:
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2))
 
             gameovertext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2 - 110, 20))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, 20))
 
             pygame.display.flip()
