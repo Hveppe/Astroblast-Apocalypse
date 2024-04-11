@@ -351,7 +351,7 @@ while gamerunning:
                 enemydeadsound.play()
 
                 try:
-                    HommingFjender
+                    HommingFjender.remove(enemy)
                 except ValueError:
                     pass
 
