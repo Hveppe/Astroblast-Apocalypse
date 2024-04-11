@@ -56,7 +56,6 @@ Astroids = []
 player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100)
 
 # variabler
-gamerunning = True
 lastmove = 'w'
 antalfjender = 2
 antalfjenderheavy = 0
@@ -104,6 +103,7 @@ clock = pygame.time.Clock()
 # Fonts til text
 Font = pygame.font.Font(None, 36)
 Fontbig = pygame.font.Font(None, 100)
+Fontmainmenu = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
 
 for i in range(antalfjender):
     fjende_spawn = True
@@ -118,8 +118,30 @@ for i in range(antalfjender):
             Fjender.append(enemy)
             fjende_spawn = False
 
+gamerunning = True
+mainmenu = True
 
 while gamerunning:
+    # starter main menu loop
+    while mainmenu:
+        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gamerunning = False
+                mainmenu = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                gamerunning = False
+                mainmenu = False
+
+        display.fill((0, 0, 0))
+
+        mainmenutext = Fontmainmenu.render('Astroblast', True, (255, 255, 255))
+        display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 100))
+        mainmenutext = Fontmainmenu.render('Apocalypse', True, (255, 255, 255))
+        display.blit(mainmenutext, (screenwith / 2 - mainmenutext.get_width() / 2, 190))
+
+        pygame.display.flip()
+
     clock.tick(60)
     current = time.time()
     for event in pygame.event.get():
@@ -574,18 +596,18 @@ while gamerunning:
                         startgametime = time.time()
 
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - 200, screenheight / 2 - 200))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 200))
 
             gameovertext = Font.render(f'WAVE: {wave-1}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - 50, screenheight / 2 - 100))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 100))
 
             gameovertext = Font.render(f'TIME: {round(timer, 2)}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith / 2 - 60, screenheight / 2 - 60))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 60))
 
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - 110, screenheight / 2))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2))
 
             gameovertext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - 110, 20))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2 - 110, 20))
 
             pygame.display.flip()
