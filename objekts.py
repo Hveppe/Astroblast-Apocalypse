@@ -3,6 +3,17 @@
 import pygame
 
 
+class Picture:
+    def __init__(self, screen, x, y, image):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.screen = screen
+
+    def draw(self):
+        self.screen.blit(self.image, self.rect.center)
+
+
 class AstroidClass:
     color = (187, 188, 188)
 

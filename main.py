@@ -6,7 +6,7 @@ import time
 from Player import PlayerClass
 from shotting import ShotLaser, LayMine
 from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
-from objekts import AstroidClass
+from objekts import AstroidClass, Picture
 from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
 
 # importer libaries
@@ -24,6 +24,11 @@ pygame.display.set_caption("Astroblast Apocalypse")
 
 gameimagepng = pygame.image.load('Image/gameimage.png').convert()
 pygame.display.set_icon(gameimagepng)
+
+# baggrund
+baggrund = pygame.image.load('Image/baggrund.jpg')
+baggrund = pygame.transform.scale(baggrund, (screenwith, screenheight))
+baggrund = Picture(screen=display, x=0, y=0, image=baggrund)
 
 # baggrunds music
 pygame.mixer.music.load('sound/backgroundmusic-200697.wav')
@@ -137,6 +142,7 @@ while gamerunning:
                     mainmenu = False
 
         display.fill((0, 0, 0))
+        baggrund.draw()
 
         # displayer title
         mainmenutext = Fontbig.render('Astroblast', True, (255, 255, 255))
@@ -248,6 +254,7 @@ while gamerunning:
 
     # Farver baggrund
     display.fill((0, 0, 0))
+    baggrund.draw()
 
     # Tegner player
     player.draw()
@@ -564,6 +571,7 @@ while gamerunning:
 
             # Farver baggrund
             display.fill((0, 0, 0))
+            baggrund.draw()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     gamerunning = False
