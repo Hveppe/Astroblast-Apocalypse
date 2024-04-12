@@ -5,8 +5,8 @@ import math
 
 
 class PlayerClass:
-    width = 62
-    height = 64.4
+    width = 60
+    height = 60
     xmove = 0
     ymove = 0
     movespeed = 10
@@ -19,7 +19,7 @@ class PlayerClass:
         self.xold = xvalue
         self.yold = yvalue
 
-        picture = pygame.transform.scale(picture, (self.width, self.height))
+        picture = pygame.transform.scale(picture, (int(self.width), int(self.height)))
         self.picture = picture
 
         self.screenwidth = self.screen.get_width()
@@ -33,19 +33,22 @@ class PlayerClass:
 
         if self.x+self.width > self.screenwidth:
             self.x = self.screenwidth - self.width
+
         if self.y+self.height > self.screenheight:
             self.y = self.screenheight - self.height
+
         if self.x < 0:
             self.x = 0
+
         if self.y < 0:
             self.y = 0
 
     def draw(self):
         if self.xmove == 0 and self.ymove == 0:
             stillpicture = self.picture.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
-            self.screen.blit(self.picture, stillpicture.center)
+            self.screen.blit(self.picture, stillpicture.topleft)
         else:
             angleofmovement = math.degrees(math.atan2(-(self.yold - self.y), self.xold - self.x)) + 90
             rotated_image = pygame.transform.rotate(self.picture, angleofmovement)
             rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
-            self.screen.blit(rotated_image, rotated_rect.center)
+            self.screen.blit(rotated_image, rotated_rect.topleft)

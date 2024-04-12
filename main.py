@@ -58,7 +58,7 @@ HommingFjender = []
 Astroids = []
 
 # laver player
-player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100,
+player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
                      picture=pygame.image.load('Image/Rumskibplayer.png'))
 
 # variabler
@@ -623,13 +623,13 @@ while gamerunning:
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 200))
 
             gameovertext = Font.render(f'WAVE: {wave-1}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 100))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 80))
 
             gameovertext = Font.render(f'TIME: {round(timer, 2)}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 60))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 30))
 
             gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2))
+            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 + 30))
 
             gameovertext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, 20))
