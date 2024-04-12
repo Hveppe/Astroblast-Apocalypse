@@ -259,10 +259,6 @@ while gamerunning:
     display.fill((0, 0, 0))
     baggrund.draw()
 
-    # Tegner player
-    player.draw()
-    player.update()
-
     for lasershot in Lasershot:
         lasershot.draw()
         lasershot.update()
@@ -518,6 +514,10 @@ while gamerunning:
     if minepoint > 50:
         ArsenalMines += 1
         minepoint = 0
+
+    # Tegner player
+    player.draw()
+    player.update()
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (10, 90))
