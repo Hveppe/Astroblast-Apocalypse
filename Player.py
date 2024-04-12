@@ -5,8 +5,8 @@ import math
 
 
 class PlayerClass:
-    width = 40
-    height = 40
+    width = 62
+    height = 64.4
     xmove = 0
     ymove = 0
     movespeed = 10
