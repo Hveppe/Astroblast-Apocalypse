@@ -1,7 +1,6 @@
 # Spillet er lavet af Hveppe
 
 import pygame
-import math
 
 
 class ShotLaser:
