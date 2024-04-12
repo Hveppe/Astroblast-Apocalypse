@@ -23,13 +23,13 @@ class ShotLaser:
 
         self.last_move = last_move
 
-        if self.last_move == 'w':
+        if self.last_move == 'up':
             self.speedy -= 15
-        if self.last_move == 's':
+        if self.last_move == 'down':
             self.speedy += 15
-        if self.last_move == 'a':
+        if self.last_move == 'left':
             self.speedx -= 15
-        if self.last_move == 'd':
+        if self.last_move == 'right':
             self.speedx += 15
 
     def update(self):
