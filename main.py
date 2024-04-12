@@ -101,9 +101,8 @@ ArsenalMines = 5
 clock = pygame.time.Clock()
 
 # Fonts til text
-Font = pygame.font.Font(None, 36)
-Fontbig = pygame.font.Font(None, 100)
-Fontmainmenu = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
+Font = pygame.font.SysFont('Comic Sans MS', 36, bold=False, italic=False)
+Fontbig = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
 Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, italic=False)
 
 for i in range(antalfjender):
@@ -140,9 +139,9 @@ while gamerunning:
         display.fill((0, 0, 0))
 
         # displayer title
-        mainmenutext = Fontmainmenu.render('Astroblast', True, (255, 255, 255))
+        mainmenutext = Fontbig.render('Astroblast', True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 100))
-        mainmenutext = Fontmainmenu.render('Apocalypse', True, (255, 255, 255))
+        mainmenutext = Fontbig.render('Apocalypse', True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, 190))
 
         # laver tekst under display
