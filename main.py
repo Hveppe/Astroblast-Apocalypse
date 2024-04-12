@@ -58,7 +58,8 @@ HommingFjender = []
 Astroids = []
 
 # laver player
-player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100, picture=pygame.image.load('Image/Rumskibplayer.png'))
+player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100,
+                     picture=pygame.image.load('Image/Rumskibplayer.png'))
 
 # variabler
 lastmove = 'w'
@@ -187,7 +188,7 @@ while gamerunning:
                     shotting = True
 
             # controls til mine
-            if event.key == pygame.K_m:
+            if event.key == pygame.K_SPACE:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
