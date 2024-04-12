@@ -4,17 +4,18 @@ import pygame
 
 
 class PlayerClass:
-    colour = (255, 255, 255)
     width = 40
     height = 40
     xmove = 0
     ymove = 0
     movespeed = 10
 
-    def __init__(self, screen, xvalue, yvalue):
+    def __init__(self, screen, xvalue, yvalue, picture):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
+
+        self.picture = pygame.transform.scale(picture, (self.width, self.height))
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()
@@ -33,4 +34,4 @@ class PlayerClass:
             self.y = 0
 
     def draw(self):
-        pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height))
+        self.screen.blit(self.picture, (self.x, self.y))

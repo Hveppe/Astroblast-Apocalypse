@@ -58,7 +58,7 @@ HommingFjender = []
 Astroids = []
 
 # laver player
-player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100)
+player = PlayerClass(screen=display, xvalue=screenwith/2-20, yvalue=screenheight-100, picture=pygame.image.load('Image/Rumskibplayer.png'))
 
 # variabler
 lastmove = 'w'
