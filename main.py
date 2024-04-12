@@ -171,21 +171,23 @@ while gamerunning:
         # controls til PlayerClass
         if event.type == pygame.KEYDOWN:
             # Kode til at kontroler våben
-            if event.key == pygame.K_UP:
-                lastmove = 'w'
-                shotting = True
-            if event.key == pygame.K_DOWN:
-                lastmove = 's'
-                shotting = True
-            if event.key == pygame.K_LEFT:
-                lastmove = 'a'
-                shotting = True
-            if event.key == pygame.K_RIGHT:
-                lastmove = 'd'
-                shotting = True
+            if event.type == pygame.KEYDOWN:
+                # Kode til at kontroler våben
+                if event.key == pygame.K_UP:
+                    lastmove = 'up'
+                    shotting = True
+                if event.key == pygame.K_DOWN:
+                    lastmove = 'down'
+                    shotting = True
+                if event.key == pygame.K_LEFT:
+                    lastmove = 'left'
+                    shotting = True
+                if event.key == pygame.K_RIGHT:
+                    lastmove = 'right'
+                    shotting = True
 
             # controls til mine
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_m:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
@@ -195,11 +197,11 @@ while gamerunning:
             # Bevægelse af player
             if event.key == pygame.K_w:
                 player.ymove -= player.movespeed
-            if event.key == pygame.K_s:
+            elif event.key == pygame.K_s:
                 player.ymove += player.movespeed
-            if event.key == pygame.K_d:
+            elif event.key == pygame.K_d:
                 player.xmove += player.movespeed
-            if event.key == pygame.K_a:
+            elif event.key == pygame.K_a:
                 player.xmove -= player.movespeed
 
         # Bruges til at modvirker controls
