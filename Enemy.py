@@ -82,16 +82,25 @@ class HeavyEnemyClass:
 
 
 class HommingEnemyClass:
-    def __init__(self, screen, xvalue, yvalue, speedx, speedy, radius, color):
+    width = 50
+    height = 50
+
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, color, picture):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
+        self.xold = xvalue
+        self.yold = yvalue
         self.speedx = speedx
         self.speedy = speedy
-        self.radius = radius
         self.color = color
 
+        picture = pygame.transform.scale(picture, (self.width, self.height))
+        self.picture = picture
+
     def update(self, player):
+        self.xold = self.x
+        self.yold = self.y
         distancex = player.x - self.x
         distancey = player.y - self.y
 
@@ -105,4 +114,10 @@ class HommingEnemyClass:
         self.y += distancey * self.speedy
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
+        angleofmovement = math.degrees(math.atan2(-(self.yold - self.y), self.xold - self.x)) + 90
+        rotated_image = pygame.transform.rotate(self.picture, angleofmovement)
+        rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
+        self.screen.blit(rotated_image, rotated_rect.topleft)
+
+    def draw_debug(self):
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)

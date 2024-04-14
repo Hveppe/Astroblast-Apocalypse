@@ -373,13 +373,13 @@ while gamerunning:
         enemy.update(player=player)
         enemy.draw()
 
-        if collisionchecker_circle_square(enemy, player):
+        if collisionchecker(enemy, player):
             HommingFjender.remove(enemy)
             lives -= 1
             enemydeadsound.play()
 
         for lasershot in Lasershot:
-            if collisionchecker_circle_square(enemy, lasershot):
+            if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 enemydeadsound.play()
 
@@ -390,7 +390,7 @@ while gamerunning:
                     pass
 
         for Mine in Mineshot:
-            if collisionchecker_circle(Mine, enemy):
+            if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
 
@@ -422,7 +422,7 @@ while gamerunning:
                 enemydeadsound.play()
 
         for enemy in HommingFjender:
-            if collisionchecker_circle(astriod, enemy):
+            if collisionchecker_circle_square(astriod, enemy):
                 HommingFjender.remove(enemy)
                 enemydeadsound.play()
 
@@ -512,8 +512,9 @@ while gamerunning:
             while hommingspawn:
                 new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith-10),
                                               yvalue=random.randint(0, screenheight-10), speedx=5,
-                                              speedy=5, color=(255, 0, 0), radius=20)
-                if collisionchecker_circle_square(new_enemy, player):
+                                              speedy=5, color=(255, 0, 0),
+                                              picture=pygame.image.load('Image/Fjender/HommingFjendeImage.png'))
+                if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith-10)
                     new_enemy.y = random.randint(0, screenheight-10)
                 else:
@@ -538,6 +539,9 @@ while gamerunning:
             enemy.draw_debug()
 
         for enemy in HeavyFjender:
+            enemy.draw_debug()
+
+        for enemy in HommingFjender:
             enemy.draw_debug()
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
