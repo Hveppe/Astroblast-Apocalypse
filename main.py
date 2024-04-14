@@ -117,7 +117,8 @@ for i in range(antalfjender):
     while fjende_spawn:
         enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 300),
                            yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
-                           speedy=random.randint(1, 10), colour=(255, 0, 0))
+                           speedy=random.randint(1, 10), colour=(255, 0, 0),
+                           picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png'))
         if collisionchecker(enemy, player):
             enemy.xvalue = random.randint(0, screenwith - 10)
             enemy.yvalue = random.randint(0, screenheight - 150)
@@ -469,7 +470,8 @@ while gamerunning:
             while fjende_spawn:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
                                        yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 5),
-                                       speedy=random.randint(1, 10), colour=(255, 0, 0))
+                                       speedy=random.randint(1, 10), colour=(255, 0, 0),
+                                       picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png'))
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
                     new_enemy.y = random.randint(0, screenheight - 150)
@@ -495,7 +497,8 @@ while gamerunning:
             while mineswpperspawn:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
                                        yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
-                                       speedy=random.randint(1, 10), colour=(0, 255, 0))
+                                       speedy=random.randint(1, 10), colour=(0, 255, 0),
+                                       picture=pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'))
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
                     new_enemy.y = random.randint(0, screenheight - 30)
@@ -524,8 +527,14 @@ while gamerunning:
     player.draw()
     player.update()
 
-    if debug == True:
+    if debug is True:
         player.draw_debug()
+
+        for enemy in Fjender:
+            enemy.draw_debug()
+
+        for enemy in MineswepperFjender:
+            enemy.draw_debug()
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (10, 90))

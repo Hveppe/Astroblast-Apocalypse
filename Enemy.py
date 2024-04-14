@@ -5,16 +5,19 @@ import math
 
 
 class EnemyClass:
-    width = 30
-    height = 30
+    width = 40
+    height = 40
 
-    def __init__(self, screen, xvalue, yvalue, speedx, speedy, colour):
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, colour, picture):
         self.x = xvalue
         self.y = yvalue
         self.speedx = speedx
         self.speedy = speedy
         self.screen = screen
         self.colour = colour
+
+        picture = pygame.transform.scale(picture, (self.width, self.height))
+        self.picture = picture
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()
@@ -30,7 +33,11 @@ class EnemyClass:
             self.speedy = -self.speedy
 
     def draw(self):
-        pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height))
+        picture_rect = self.picture.get_rect(topleft=(self.x, self.y))
+        self.screen.blit(self.picture, picture_rect.topleft)
+
+    def draw_debug(self):
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
 
 
 class HeavyEnemyClass:
