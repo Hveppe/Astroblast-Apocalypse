@@ -67,6 +67,7 @@ antalfjender = 2
 antalfjenderheavy = 0
 antalfjendermineswpper = 0
 antalfjenderhomming = 0
+debug = False
 
 wave = 1
 waveheavyspawn = 5
@@ -198,12 +199,14 @@ while gamerunning:
             # Bevægelse af player
             if event.key == pygame.K_w:
                 player.ymove -= player.movespeed
-            elif event.key == pygame.K_s:
+            if event.key == pygame.K_s:
                 player.ymove += player.movespeed
-            elif event.key == pygame.K_d:
+            if event.key == pygame.K_d:
                 player.xmove += player.movespeed
-            elif event.key == pygame.K_a:
+            if event.key == pygame.K_a:
                 player.xmove -= player.movespeed
+            if event.key == pygame.K_h:
+                debug = True
 
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
@@ -215,6 +218,8 @@ while gamerunning:
                 player.xmove -= player.movespeed
             if event.key == pygame.K_a:
                 player.xmove += player.movespeed
+            if event.key == pygame.K_h:
+                debug = False
 
             # modvirker våben
             if event.key == pygame.K_UP:
@@ -518,6 +523,9 @@ while gamerunning:
     # Tegner player
     player.draw()
     player.update()
+
+    if debug == True:
+        player.draw_debug()
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (10, 90))
