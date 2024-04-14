@@ -41,18 +41,21 @@ class EnemyClass:
 
 
 class HeavyEnemyClass:
-    width = 40
-    height = 40
+    width = 60
+    height = 60
     lives = 3
     dead = False
     colour = (139, 0, 0)
 
-    def __init__(self, screen, xvalue, yvalue, speedx, speedy):
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, picture):
         self.x = xvalue
         self.y = yvalue
         self.speedx = speedx
         self.speedy = speedy
         self.screen = screen
+
+        picture = pygame.transform.scale(picture, (self.width, self.height))
+        self.picture = picture
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()
@@ -71,7 +74,11 @@ class HeavyEnemyClass:
             self.dead = True
 
     def draw(self):
-        pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height))
+        picture_rect = self.picture.get_rect(topleft=(self.x, self.y))
+        self.screen.blit(self.picture, picture_rect.topleft)
+
+    def draw_debug(self):
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
 
 
 class HommingEnemyClass:

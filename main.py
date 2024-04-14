@@ -484,7 +484,8 @@ while gamerunning:
             while heavyfjendespawn:
                 new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-40),
                                             yvalue=random.randint(0, screenheight-40), speedx=random.randint(1, 5),
-                                            speedy=random.randint(1, 5))
+                                            speedy=random.randint(1, 5),
+                                            picture=pygame.image.load('Image/Fjender/Heavyfjendeimage.png'))
                 if collisionchecker(new_heavy, player):
                     new_heavy.x = random.randint(0, screenwith-10)
                     new_heavy.y = random.randint(0, screenheight-10)
@@ -534,6 +535,9 @@ while gamerunning:
             enemy.draw_debug()
 
         for enemy in MineswepperFjender:
+            enemy.draw_debug()
+
+        for enemy in HeavyFjender:
             enemy.draw_debug()
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
