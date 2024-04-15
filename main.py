@@ -115,8 +115,8 @@ Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, i
 for i in range(antalfjender):
     fjende_spawn = True
     while fjende_spawn:
-        enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 300),
-                           yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
+        enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
+                           yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 10),
                            speedy=random.randint(1, 10), colour=(255, 0, 0),
                            picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png'))
         if collisionchecker(enemy, player):
@@ -468,8 +468,8 @@ while gamerunning:
         for i in range(antalfjender):
             fjende_spawn = True
             while fjende_spawn:
-                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
-                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 5),
+                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
+                                       yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 5),
                                        speedy=random.randint(1, 10), colour=(255, 0, 0),
                                        picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png'))
                 if collisionchecker(new_enemy, player):
@@ -482,8 +482,8 @@ while gamerunning:
         for n in range(antalfjenderheavy):
             heavyfjendespawn = True
             while heavyfjendespawn:
-                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-40),
-                                            yvalue=random.randint(0, screenheight-40), speedx=random.randint(1, 5),
+                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-60),
+                                            yvalue=random.randint(0, screenheight-60), speedx=random.randint(1, 5),
                                             speedy=random.randint(1, 5),
                                             picture=pygame.image.load('Image/Fjender/Heavyfjendeimage.png'))
                 if collisionchecker(new_heavy, player):
@@ -496,8 +496,8 @@ while gamerunning:
         for m in range(antalfjendermineswpper):
             mineswpperspawn = True
             while mineswpperspawn:
-                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 30),
-                                       yvalue=random.randint(0, screenheight - 30), speedx=random.randint(1, 10),
+                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
+                                       yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 10),
                                        speedy=random.randint(1, 10), colour=(0, 255, 0),
                                        picture=pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'))
                 if collisionchecker(new_enemy, player):
@@ -510,8 +510,8 @@ while gamerunning:
         for h in range(antalfjenderhomming):
             hommingspawn = True
             while hommingspawn:
-                new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith-10),
-                                              yvalue=random.randint(0, screenheight-10), speedx=5,
+                new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith-50),
+                                              yvalue=random.randint(0, screenheight-50), speedx=5,
                                               speedy=5, color=(255, 0, 0),
                                               picture=pygame.image.load('Image/Fjender/HommingFjendeImage.png'))
                 if collisionchecker(new_enemy, player):
