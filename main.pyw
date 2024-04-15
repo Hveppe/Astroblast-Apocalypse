@@ -11,7 +11,6 @@ from collisioncheck_functioner import collisionchecker, collisionchecker_circle,
 import random
 import pygame
 import time
-import ctypes
 
 # starter pygame og pygame font
 pygame.init()
