@@ -1,8 +1,6 @@
 # Spillet er lavet af Hveppe
 
 # importer fra andre python filer
-import time
-
 from Player import PlayerClass
 from shotting import ShotLaser, LayMine
 from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
@@ -12,6 +10,8 @@ from collisioncheck_functioner import collisionchecker, collisionchecker_circle,
 # importer libaries
 import random
 import pygame
+import time
+import ctypes
 
 # starter pygame og pygame font
 pygame.init()
