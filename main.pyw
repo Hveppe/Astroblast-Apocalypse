@@ -21,7 +21,7 @@ screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info(
 display = pygame.display.set_mode((screenwith, screenheight))
 pygame.display.set_caption("Astroblast Apocalypse")
 
-gameimagepng = pygame.image.load('Image/Icon/gameimageversion1.png').convert()
+gameimagepng = pygame.image.load('Image/Icon/gameimageversion2.png').convert()
 pygame.display.set_icon(gameimagepng)
 
 # baggrund
