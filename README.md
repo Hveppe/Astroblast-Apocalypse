@@ -1,3 +1,1 @@
-Astroblast Apocalypse
-
-Er et spil lavet med pygame
+For at spille skal man launch main.pyw filen
