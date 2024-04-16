@@ -10,7 +10,6 @@ class PlayerClass:
     xmove = 0
     ymove = 0
     movespeed = 10
-    last_angle = 0
 
     def __init__(self, screen, xvalue, yvalue, picture):
         self.screen = screen
@@ -18,6 +17,7 @@ class PlayerClass:
         self.y = yvalue
         self.xold = xvalue
         self.yold = yvalue
+        self.last_angle = 0
 
         picture = pygame.transform.scale(picture, (int(self.width), int(self.height)))
         self.picture = picture
@@ -45,13 +45,15 @@ class PlayerClass:
 
     def draw(self):
         if self.xmove == 0 and self.ymove == 0:
-            stillpicture = self.picture.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
-            self.screen.blit(self.picture, stillpicture.topleft)
+            rotated_image = pygame.transform.rotate(self.picture, self.last_angle)
+            rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
+            self.screen.blit(rotated_image, rotated_rect.topleft)
         else:
             angleofmovement = math.degrees(math.atan2(-(self.yold - self.y), self.xold - self.x)) + 90
             rotated_image = pygame.transform.rotate(self.picture, angleofmovement)
             rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
             self.screen.blit(rotated_image, rotated_rect.topleft)
+            self.last_angle = angleofmovement
 
     def draw_debug(self):
         pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
