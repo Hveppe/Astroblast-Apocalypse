@@ -170,6 +170,11 @@ while gamerunning:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             gamerunning = False
 
+            if highscore < wave - 1:
+                highscore = wave - 1
+                with open('textfiler/highscore.txt', 'w') as file:
+                    file.write(str(highscore))
+
         # controls til PlayerClass
         if event.type == pygame.KEYDOWN:
             # Kode til at kontroler våben
