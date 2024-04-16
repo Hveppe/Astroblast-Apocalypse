@@ -192,8 +192,8 @@ while gamerunning:
             if event.key == pygame.K_SPACE:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
-                    Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width,
-                                            yvalue=player.y + player.height-5))
+                    Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width/2,
+                                            yvalue=player.y + player.height/2))
                     mineplacesound.play()
 
             # Bevægelse af player
