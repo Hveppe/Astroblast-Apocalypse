@@ -222,14 +222,14 @@ while gamerunning:
                 debug = False
 
             # modvirker våben
-            if event.key == pygame.K_UP:
-                shotting = False
-            if event.key == pygame.K_DOWN:
-                shotting = False
-            if event.key == pygame.K_LEFT:
-                shotting = False
-            if event.key == pygame.K_RIGHT:
-                shotting = False
+            if (event.key == pygame.K_UP or event.key == pygame.K_DOWN or pygame.K_LEFT or
+                    pygame.K_RIGHT):
+                if event.type == pygame.KEYDOWN:
+                    if (event.key == pygame.K_UP or event.key == pygame.K_DOWN or event.key == pygame.K_LEFT or
+                            event.key == pygame.K_RIGHT):
+                        shotting = True
+                    else:
+                        shotting = False
 
     # pause spil
         if event.type == pygame.KEYDOWN:
