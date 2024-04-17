@@ -169,7 +169,11 @@ while gamerunning:
                         display.fill((0, 0, 0))
                         baggrund.draw()
 
-                        # displayer ting og sager
+                        # ---------------------------------objects info------------------------------------------------
+                        # Overskrift til objekter
+                        tekst = Font.render('Types of objects', True, (255, 255, 255))
+                        display.blit(tekst, (100, 20))
+
                         # Player
                         picture = pygame.transform.scale(pygame.image.load('Image/Rumskibplayer.png'),
                                                          (70, 70))
@@ -219,6 +223,8 @@ while gamerunning:
                         tekst = Font.render('Heavy Enemy', True, (255, 255, 255))
                         display.blit(tekst, (120 + picture_rect.width, 500 + picture_rect.height/2 -
                                              tekst.get_height()/2))
+
+                        # --------------------------------Controls------------------------------------------------------
 
                         pygame.display.flip()
 
