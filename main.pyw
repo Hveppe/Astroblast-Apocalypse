@@ -131,6 +131,7 @@ mainmenu = True
 
 while gamerunning:
     # starter main menu loop
+    # -------------------------------------Main Menu-------------------------------------------------------------------
     while mainmenu:
         clock.tick(60)
         for event in pygame.event.get():
@@ -147,6 +148,7 @@ while gamerunning:
                     infoscreen = True
 
                     # starter loop for info skærm
+                    # -------------------------------------Info Screen--------------------------------------------------
                     while infoscreen is True:
                         clock.tick(60)
                         for eventinfo in pygame.event.get():
