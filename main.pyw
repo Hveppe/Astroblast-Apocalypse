@@ -161,6 +161,8 @@ while gamerunning:
                                     gamerunning = False
                                     infoscreen = False
                                     mainmenu = False
+                                if eventinfo.key == pygame.K_i:
+                                    infoscreen = False
 
                         display.fill((0, 0, 0))
                         baggrund.draw()
@@ -172,11 +174,19 @@ while gamerunning:
                         picture_rect = picture.get_rect(topleft=(100, 100))
                         display.blit(picture, picture_rect.topleft)
 
+                        tekst = Font.render('Players Spaceship', True, (255, 255, 255))
+                        display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height/2 -
+                                             tekst.get_height()/2))
+
                         # Normal fjende
                         picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png'),
                                                          (70, 70))
                         picture_rect = picture.get_rect(topleft=(100, 200))
                         display.blit(picture, picture_rect.topleft)
+
+                        tekst = Font.render('Normal Enemy', True, (255, 255, 255))
+                        display.blit(tekst, (120 + picture_rect.width, 200 + picture_rect.height/2 -
+                                             tekst.get_height()/2))
 
                         # Mineswepper fjende
                         picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'),
@@ -184,17 +194,29 @@ while gamerunning:
                         picture_rect = picture.get_rect(topleft=(100, 300))
                         display.blit(picture, picture_rect.topleft)
 
+                        tekst = Font.render('Mineswpper Enemy', True, (255, 255, 255))
+                        display.blit(tekst, (120 + picture_rect.width, 300 + picture_rect.height/2 -
+                                             tekst.get_height()/2))
+
                         # Homming fjender
                         picture = pygame.transform.scale(pygame.image.load('Image/Fjender/HommingFjendeImage.png'),
                                                          (70, 70))
                         picture_rect = picture.get_rect(topleft=(100, 400))
                         display.blit(picture, picture_rect.topleft)
 
+                        tekst = Font.render('Homming Enemy', True, (255, 255, 255))
+                        display.blit(tekst, (120 + picture_rect.width, 400 + picture_rect.height/2 -
+                                             tekst.get_height()/2))
+
                         # Heavy fjender
                         picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Heavyfjendeimage.png'),
                                                          (70, 70))
                         picture_rect = picture.get_rect(topleft=(100, 500))
                         display.blit(picture, picture_rect.topleft)
+
+                        tekst = Font.render('Heavy Enemy', True, (255, 255, 255))
+                        display.blit(tekst, (120 + picture_rect.width, 500 + picture_rect.height/2 -
+                                             tekst.get_height()/2))
 
                         pygame.display.flip()
 
