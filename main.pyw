@@ -669,6 +669,7 @@ while gamerunning:
     # Updater display
     pygame.display.flip()
 
+    # -------------------------------------Game Over-------------------------------------------------------------------
     if lives <= 0:
         gameover = True
         gameoversound.play()
