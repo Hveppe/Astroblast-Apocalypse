@@ -133,13 +133,10 @@ while gamerunning:
     while mainmenu:
         clock.tick(60)
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
                 gamerunning = False
                 mainmenu = False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    gamerunning = False
-                    mainmenu = False
                 if event.key == pygame.K_SPACE:
                     mainmenu = False
 
@@ -165,9 +162,7 @@ while gamerunning:
     clock.tick(60)
     current = time.time()
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            gamerunning = False
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
             gamerunning = False
 
             if highscore < wave - 1:
@@ -604,14 +599,11 @@ while gamerunning:
             display.fill((0, 0, 0))
             baggrund.draw()
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
                     gamerunning = False
                     gameover = False
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        gamerunning = False
-                        gameover = False
-                    elif event.key == pygame.K_r:
+                    if event.key == pygame.K_r:
                         gameover = False
                         mainmenu = True
 
