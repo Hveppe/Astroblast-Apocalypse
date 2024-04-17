@@ -224,7 +224,9 @@ while gamerunning:
                         display.blit(tekst, (120 + picture_rect.width, 500 + picture_rect.height/2 -
                                              tekst.get_height()/2))
 
-                        # --------------------------------Controls------------------------------------------------------
+                        # ----------------------------Info om Controls--------------------------------------------------
+                        # Overskrift
+                        tekst = Font.render('Controls', True, (255, 255, 255))
 
                         pygame.display.flip()
 
@@ -305,13 +307,17 @@ while gamerunning:
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
-                player.ymove += player.movespeed
+                if player.ymove != 0:
+                    player.ymove += player.movespeed
             if event.key == pygame.K_s:
-                player.ymove -= player.movespeed
+                if player.ymove != 0:
+                    player.ymove -= player.movespeed
             if event.key == pygame.K_d:
-                player.xmove -= player.movespeed
+                if player.xmove != 0:
+                    player.xmove -= player.movespeed
             if event.key == pygame.K_a:
-                player.xmove += player.movespeed
+                if player.xmove != 0:
+                    player.xmove += player.movespeed
             if event.key == pygame.K_h:
                 debug = False
 
@@ -340,6 +346,8 @@ while gamerunning:
                                 gamerunning = False
                             if eventpause.key == pygame.K_p:
                                 pause = False
+                                player.xmove = 0
+                                player.ymove = 0
 
                     pausetext = Fontbig.render('PAUSED', True, (255, 255, 255))
                     display.blit(pausetext, (screenwith/2-120, screenheight/2-20))
