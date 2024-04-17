@@ -180,7 +180,7 @@ while gamerunning:
                         picture_rect = picture.get_rect(topleft=(100, 100))
                         display.blit(picture, picture_rect.topleft)
 
-                        tekst = Font.render('Players Spaceship', True, (255, 255, 255))
+                        tekst = Font.render('Player Spaceship', True, (255, 255, 255))
                         display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height/2 -
                                              tekst.get_height()/2))
 
@@ -226,7 +226,21 @@ while gamerunning:
 
                         # ----------------------------Info om Controls--------------------------------------------------
                         # Overskrift
-                        tekst = Font.render('Controls', True, (255, 255, 255))
+                        controltekst = Font.render('Controls', True, (255, 255, 255))
+                        display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
+
+                        # Displayer controls
+                        tekst = Font.render('Movement: W, A, S, D', True, (255, 255, 255))
+                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 100))
+
+                        tekst = Font.render('Shot Laser: ARROWS', True, (255, 255, 255))
+                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 200))
+
+                        tekst = Font.render('Place Mine: SPACE', True, (255, 255, 255))
+                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 300))
+
+                        tekst = Font.render('Show Hitboxes: H', True, (255, 255, 255))
+                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 400))
 
                         pygame.display.flip()
 
