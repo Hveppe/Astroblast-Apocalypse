@@ -257,8 +257,13 @@ while gamerunning:
         display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, 190))
 
         # laver tekst under display
-        mainmenutext = Fontmainmenu_lowertekst.render('Press space to begin game', True, (255, 255, 255))
-        display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, screenheight/2))
+        mainmenutext = Fontmainmenu_lowertekst.render('Press space to begin', True, (255, 255, 255))
+        display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, screenheight/2))
+
+        mainmenutext = Fontmainmenu_lowertekst.render('Press I to see controls and other information',
+                                                      True, (255, 255, 255))
+        display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, screenheight/2
+                                    + mainmenutext.get_height()))
 
         # displayer highscore
         mainmenutext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
