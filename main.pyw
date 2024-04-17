@@ -322,7 +322,7 @@ while gamerunning:
         if collisionchecker(player, enemy):
             HeavyFjender.remove(enemy)
             enemydeadsound.play()
-            lives -= 3
+            lives -= enemy.lives
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
