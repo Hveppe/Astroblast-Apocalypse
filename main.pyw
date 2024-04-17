@@ -133,11 +133,15 @@ while gamerunning:
     while mainmenu:
         clock.tick(60)
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
+            if event.type == pygame.QUIT:
                 gamerunning = False
                 mainmenu = False
-            if event.type == pygame.KEYDOWN or event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                mainmenu = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    gamerunning = False
+                    mainmenu = False
+                if event.key == pygame.K_SPACE:
+                    mainmenu = False
 
                 # reset timer
                 startgametime = time.time()
@@ -164,7 +168,9 @@ while gamerunning:
     clock.tick(60)
     current = time.time()
     for event in pygame.event.get():
-        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
+        if event.type == pygame.QUIT:
+            gamerunning = False
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             gamerunning = False
 
             if highscore < wave - 1:
