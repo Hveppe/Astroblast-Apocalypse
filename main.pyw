@@ -136,9 +136,11 @@ while gamerunning:
             if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
                 gamerunning = False
                 mainmenu = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    mainmenu = False
+            if event.type == pygame.KEYDOWN or event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                mainmenu = False
+
+                # reset timer
+                startgametime = time.time()
 
         display.fill((0, 0, 0))
         baggrund.draw()
@@ -602,42 +604,38 @@ while gamerunning:
                 if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and pygame.K_ESCAPE:
                     gamerunning = False
                     gameover = False
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_r:
-                        gameover = False
-                        mainmenu = True
+                if event.type == pygame.KEYDOWN or event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                    gameover = False
+                    mainmenu = True
 
-                        # Clear lister
-                        Lasershot.clear()
-                        Mineshot.clear()
-                        Fjender.clear()
-                        HeavyFjender.clear()
-                        MineswepperFjender.clear()
-                        HommingFjender.clear()
-                        Astroids.clear()
+                    # Clear lister
+                    Lasershot.clear()
+                    Mineshot.clear()
+                    Fjender.clear()
+                    HeavyFjender.clear()
+                    MineswepperFjender.clear()
+                    HommingFjender.clear()
+                    Astroids.clear()
 
-                        # Reset af player
-                        player.xmove = 0
-                        player.ymove = 0
-                        ArsenalMines = 5
-                        lives = 5
-                        wavelives = 4
-                        wave = 1
-                        player.x = screenwith / 2 - 20
-                        player.y = screenheight - 100
-                        shotting = False
+                    # Reset af player
+                    player.xmove = 0
+                    player.ymove = 0
+                    ArsenalMines = 5
+                    lives = 5
+                    wavelives = 4
+                    wave = 1
+                    player.x = screenwith / 2 - 20
+                    player.y = screenheight - 100
+                    shotting = False
 
-                        # reset af fjender
-                        antalfjender = 0
-                        waveheavyspawn = 5
-                        wavemineswepperspawn = 6
-                        wavehommingspawn = 7
-                        antalfjenderheavy = 0
-                        antalfjenderhomming = 0
-                        antalfjendermineswpper = 0
-
-                        # reset timer
-                        startgametime = time.time()
+                    # reset af fjender
+                    antalfjender = 0
+                    waveheavyspawn = 5
+                    wavemineswepperspawn = 6
+                    wavehommingspawn = 7
+                    antalfjenderheavy = 0
+                    antalfjenderhomming = 0
+                    antalfjendermineswpper = 0
 
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 200))
