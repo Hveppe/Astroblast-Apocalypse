@@ -307,17 +307,13 @@ while gamerunning:
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_w:
-                if player.ymove != 0:
-                    player.ymove += player.movespeed
+                player.ymove += player.movespeed
             if event.key == pygame.K_s:
-                if player.ymove != 0:
-                    player.ymove -= player.movespeed
+                player.ymove -= player.movespeed
             if event.key == pygame.K_d:
-                if player.xmove != 0:
-                    player.xmove -= player.movespeed
+                player.xmove -= player.movespeed
             if event.key == pygame.K_a:
-                if player.xmove != 0:
-                    player.xmove += player.movespeed
+                player.xmove += player.movespeed
             if event.key == pygame.K_h:
                 debug = False
 
@@ -350,7 +346,8 @@ while gamerunning:
                                 player.ymove = 0
 
                     pausetext = Fontbig.render('PAUSED', True, (255, 255, 255))
-                    display.blit(pausetext, (screenwith/2-120, screenheight/2-20))
+                    display.blit(pausetext, (screenwith/2-pausetext.get_width()/2, screenheight/2
+                                             - pausetext.get_height()/2))
 
                     pygame.display.flip()
 
