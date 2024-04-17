@@ -125,6 +125,7 @@ for i in range(antalfjender):
             Fjender.append(enemy)
             fjende_spawn = False
 
+# variabler for loop
 gamerunning = True
 mainmenu = True
 
@@ -142,8 +143,62 @@ while gamerunning:
                     mainmenu = False
                 if event.key == pygame.K_SPACE:
                     mainmenu = False
+                if event.key == pygame.K_i:
+                    infoscreen = True
 
-                # reset timer
+                    # starter loop for info skærm
+                    while infoscreen is True:
+                        clock.tick(60)
+                        for eventinfo in pygame.event.get():
+                            if eventinfo.type == pygame.QUIT:
+                                pause = False
+                                gamerunning = False
+                                infoscreen = False
+                                mainmenu = False
+                            if eventinfo.type == pygame.KEYDOWN:
+                                if eventinfo.key == pygame.K_ESCAPE:
+                                    pause = False
+                                    gamerunning = False
+                                    infoscreen = False
+                                    mainmenu = False
+
+                        display.fill((0, 0, 0))
+                        baggrund.draw()
+
+                        # displayer ting og sager
+                        # Player
+                        picture = pygame.transform.scale(pygame.image.load('Image/Rumskibplayer.png'),
+                                                         (70, 70))
+                        picture_rect = picture.get_rect(topleft=(100, 100))
+                        display.blit(picture, picture_rect.topleft)
+
+                        # Normal fjende
+                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png'),
+                                                         (70, 70))
+                        picture_rect = picture.get_rect(topleft=(100, 200))
+                        display.blit(picture, picture_rect.topleft)
+
+                        # Mineswepper fjende
+                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'),
+                                                         (70, 70))
+                        picture_rect = picture.get_rect(topleft=(100, 300))
+                        display.blit(picture, picture_rect.topleft)
+
+                        # Homming fjender
+                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/HommingFjendeImage.png'),
+                                                         (70, 70))
+                        picture_rect = picture.get_rect(topleft=(100, 400))
+                        display.blit(picture, picture_rect.topleft)
+
+                        # Heavy fjender
+                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Heavyfjendeimage.png'),
+                                                         (70, 70))
+                        picture_rect = picture.get_rect(topleft=(100, 500))
+                        display.blit(picture, picture_rect.topleft)
+
+                        pygame.display.flip()
+
+                # reset/start timer
                 startgametime = time.time()
 
         display.fill((0, 0, 0))
