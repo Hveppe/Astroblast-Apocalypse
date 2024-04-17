@@ -242,6 +242,7 @@ while gamerunning:
 
         pygame.display.flip()
 
+    # -------------------------------------Main Game-------------------------------------------------------------------
     clock.tick(60)
     current = time.time()
     for event in pygame.event.get():
