@@ -204,7 +204,7 @@ while gamerunning:
                         picture_rect = picture.get_rect(topleft=(100, 400))
                         display.blit(picture, picture_rect.topleft)
 
-                        tekst = Font.render('Homming Enemy', True, (255, 255, 255))
+                        tekst = Font.render('Homing Enemy', True, (255, 255, 255))
                         display.blit(tekst, (120 + picture_rect.width, 400 + picture_rect.height/2 -
                                              tekst.get_height()/2))
 
