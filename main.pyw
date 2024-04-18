@@ -798,9 +798,6 @@ while gamerunning:
             gameovertext = Font.render(f'TIME: {round(timer, 2)}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 30))
 
-            gameovertext = Font.render('Tryk R for at starte igen', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 + 30))
-
             gameovertext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, 20))
 
