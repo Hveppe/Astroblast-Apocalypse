@@ -126,10 +126,14 @@ for i in range(antalfjender):
 startspil_knap = Button(screen=display, tekst="START", size=(400, 100),
                         image=pygame.image.load('Image/Buttons/Simpel_button.png'))
 
+infospil_knap = Button(screen=display, tekst="INFORMATION", size=(400, 100),
+                       image=pygame.image.load('Image/Buttons/Simpel_button.png'))
+
 
 # variabler for loop
 gamerunning = True
 mainmenu = True
+infoscreen = False
 
 while gamerunning:
     # starter main menu loop
@@ -146,108 +150,108 @@ while gamerunning:
                     mainmenu = False
                 if event.key == pygame.K_SPACE:
                     mainmenu = False
+
+                    # reset/start timer
+                    startgametime = time.time()
                 if event.key == pygame.K_i:
                     infoscreen = True
 
-                    # starter loop for info skærm
-                    # -------------------------------------Info Screen--------------------------------------------------
-                    while infoscreen is True:
-                        clock.tick(60)
-                        for eventinfo in pygame.event.get():
-                            if eventinfo.type == pygame.QUIT:
-                                pause = False
-                                gamerunning = False
-                                infoscreen = False
-                                mainmenu = False
-                            if eventinfo.type == pygame.KEYDOWN:
-                                if eventinfo.key == pygame.K_ESCAPE:
-                                    pause = False
-                                    gamerunning = False
-                                    infoscreen = False
-                                    mainmenu = False
-                                if eventinfo.key == pygame.K_i:
-                                    infoscreen = False
+            # starter loop for info skærm
+            # -------------------------------------Info Screen--------------------------------------------------
+            while infoscreen is True:
+                clock.tick(60)
+                for eventinfo in pygame.event.get():
+                    if eventinfo.type == pygame.QUIT:
+                        pause = False
+                        gamerunning = False
+                        infoscreen = False
+                        mainmenu = False
+                    if eventinfo.type == pygame.KEYDOWN:
+                        if eventinfo.key == pygame.K_ESCAPE:
+                            pause = False
+                            gamerunning = False
+                            infoscreen = False
+                            mainmenu = False
+                        if eventinfo.key == pygame.K_i:
+                            infoscreen = False
 
-                        display.fill((0, 0, 0))
-                        baggrund.draw()
+                display.fill((0, 0, 0))
+                baggrund.draw()
 
-                        # ---------------------------------objects info------------------------------------------------
-                        # Overskrift til objekter
-                        tekst = Font.render('Types of objects', True, (255, 255, 255))
-                        display.blit(tekst, (100, 20))
+                # ---------------------------------objects info------------------------------------------------
+                # Overskrift til objekter
+                tekst = Font.render('Types of objects', True, (255, 255, 255))
+                display.blit(tekst, (100, 20))
 
-                        # Player
-                        picture = pygame.transform.scale(pygame.image.load('Image/Rumskibplayer.png'),
-                                                         (70, 70))
-                        picture_rect = picture.get_rect(topleft=(100, 100))
-                        display.blit(picture, picture_rect.topleft)
+                # Player
+                picture = pygame.transform.scale(pygame.image.load('Image/Rumskibplayer.png'),
+                                                 (70, 70))
+                picture_rect = picture.get_rect(topleft=(100, 100))
+                display.blit(picture, picture_rect.topleft)
 
-                        tekst = Font.render('Player Spaceship', True, (255, 255, 255))
-                        display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height/2 -
-                                             tekst.get_height()/2))
+                tekst = Font.render('Player Spaceship', True, (255, 255, 255))
+                display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height/2 -
+                                     tekst.get_height()/2))
 
-                        # Normal fjende
-                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png'),
-                                                         (70, 70))
-                        picture_rect = picture.get_rect(topleft=(100, 200))
-                        display.blit(picture, picture_rect.topleft)
+                # Normal fjende
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png'),
+                                                 (70, 70))
+                picture_rect = picture.get_rect(topleft=(100, 200))
+                display.blit(picture, picture_rect.topleft)
 
-                        tekst = Font.render('Normal Enemy', True, (255, 255, 255))
-                        display.blit(tekst, (120 + picture_rect.width, 200 + picture_rect.height/2 -
-                                             tekst.get_height()/2))
+                tekst = Font.render('Normal Enemy', True, (255, 255, 255))
+                display.blit(tekst, (120 + picture_rect.width, 200 + picture_rect.height/2 -
+                                     tekst.get_height()/2))
 
-                        # Mineswepper fjende
-                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'),
-                                                         (70, 70))
-                        picture_rect = picture.get_rect(topleft=(100, 300))
-                        display.blit(picture, picture_rect.topleft)
+                # Mineswepper fjende
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'),
+                                                 (70, 70))
+                picture_rect = picture.get_rect(topleft=(100, 300))
+                display.blit(picture, picture_rect.topleft)
 
-                        tekst = Font.render('Mineswpper Enemy', True, (255, 255, 255))
-                        display.blit(tekst, (120 + picture_rect.width, 300 + picture_rect.height/2 -
-                                             tekst.get_height()/2))
+                tekst = Font.render('Mineswpper Enemy', True, (255, 255, 255))
+                display.blit(tekst, (120 + picture_rect.width, 300 + picture_rect.height/2 -
+                                     tekst.get_height()/2))
 
-                        # Homming fjender
-                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/HommingFjendeImage.png'),
-                                                         (70, 70))
-                        picture_rect = picture.get_rect(topleft=(100, 400))
-                        display.blit(picture, picture_rect.topleft)
+                # Homming fjender
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/HommingFjendeImage.png'),
+                                                 (70, 70))
+                picture_rect = picture.get_rect(topleft=(100, 400))
+                display.blit(picture, picture_rect.topleft)
 
-                        tekst = Font.render('Homing Enemy', True, (255, 255, 255))
-                        display.blit(tekst, (120 + picture_rect.width, 400 + picture_rect.height/2 -
-                                             tekst.get_height()/2))
+                tekst = Font.render('Homing Enemy', True, (255, 255, 255))
+                display.blit(tekst, (120 + picture_rect.width, 400 + picture_rect.height/2 -
+                                     tekst.get_height()/2))
 
-                        # Heavy fjender
-                        picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Heavyfjendeimage.png'),
-                                                         (70, 70))
-                        picture_rect = picture.get_rect(topleft=(100, 500))
-                        display.blit(picture, picture_rect.topleft)
+                # Heavy fjender
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Heavyfjendeimage.png'),
+                                                 (70, 70))
+                picture_rect = picture.get_rect(topleft=(100, 500))
+                display.blit(picture, picture_rect.topleft)
 
-                        tekst = Font.render('Heavy Enemy', True, (255, 255, 255))
-                        display.blit(tekst, (120 + picture_rect.width, 500 + picture_rect.height/2 -
-                                             tekst.get_height()/2))
+                tekst = Font.render('Heavy Enemy', True, (255, 255, 255))
+                display.blit(tekst, (120 + picture_rect.width, 500 + picture_rect.height/2 -
+                                     tekst.get_height()/2))
 
-                        # ----------------------------Info om Controls--------------------------------------------------
-                        # Overskrift
-                        controltekst = Font.render('Controls', True, (255, 255, 255))
-                        display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
+                # ----------------------------Info om Controls--------------------------------------------------
+                # Overskrift
+                controltekst = Font.render('Controls', True, (255, 255, 255))
+                display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
 
-                        # Displayer controls
-                        tekst = Font.render('Movement: W, A, S, D', True, (255, 255, 255))
-                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 100))
+                # Displayer controls
+                tekst = Font.render('Movement: W, A, S, D', True, (255, 255, 255))
+                display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 100))
 
-                        tekst = Font.render('Shot Laser: ARROWS', True, (255, 255, 255))
-                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 200))
+                tekst = Font.render('Shot Laser: ARROWS', True, (255, 255, 255))
+                display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 200))
 
-                        tekst = Font.render('Place Mine: SPACE', True, (255, 255, 255))
-                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 300))
+                tekst = Font.render('Place Mine: SPACE', True, (255, 255, 255))
+                display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 300))
 
-                        tekst = Font.render('Show Hitboxes: H', True, (255, 255, 255))
-                        display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 400))
+                tekst = Font.render('Show Hitboxes: H', True, (255, 255, 255))
+                display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 400))
 
-                        pygame.display.flip()
-
-                # reset/start timer
-                startgametime = time.time()
+                pygame.display.flip()
 
         display.fill((0, 0, 0))
         baggrund.draw()
@@ -257,12 +261,6 @@ while gamerunning:
         display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 100))
         mainmenutext = Fontbig.render('Apocalypse', True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, 190))
-
-        # laver tekst under display
-        mainmenutext = Fontmainmenu_lowertekst.render('Press I to see controls and other information',
-                                                      True, (255, 255, 255))
-        display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, screenheight/2
-                                    + mainmenutext.get_height()))
 
         # displayer highscore
         mainmenutext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
@@ -274,7 +272,11 @@ while gamerunning:
             # Laver mousecursor usynlig
             pygame.mouse.set_visible(False)
 
+            # reset/start timer
+            startgametime = time.time()
 
+        if infospil_knap.draw(screenwith/2-200, screenheight/2) is True:
+            infoscreen = True
 
         pygame.display.flip()
 
