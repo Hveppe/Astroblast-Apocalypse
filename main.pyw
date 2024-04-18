@@ -4,7 +4,7 @@
 from Player import PlayerClass
 from shotting import ShotLaser, LayMine
 from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
-from objekts import AstroidClass, Picture
+from objekts import AstroidClass, Picture, Button
 from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
 
 # importer libaries
