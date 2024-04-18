@@ -41,9 +41,6 @@ mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
 enemydeadsound = pygame.mixer.Sound('sound/big explosion.wav')
 gameoversound = pygame.mixer.Sound('sound/game-over-160612.wav')
 
-# Laver mousecursor usynlig
-pygame.mouse.set_visible(False)
-
 # laver lister til classer der skal havde flere af gangen på skærmen
 # Våben
 Lasershot = []
@@ -124,6 +121,11 @@ for i in range(antalfjender):
         else:
             Fjender.append(enemy)
             fjende_spawn = False
+
+# laver knapper
+startspil_knap = Button(screen=display, tekst="START", size=(400, 100),
+                        image=pygame.image.load('Image/Buttons/Simpel_button.png'))
+
 
 # variabler for loop
 gamerunning = True
@@ -257,9 +259,6 @@ while gamerunning:
         display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, 190))
 
         # laver tekst under display
-        mainmenutext = Fontmainmenu_lowertekst.render('Press space to begin', True, (255, 255, 255))
-        display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, screenheight/2))
-
         mainmenutext = Fontmainmenu_lowertekst.render('Press I to see controls and other information',
                                                       True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, screenheight/2
@@ -268,6 +267,14 @@ while gamerunning:
         # displayer highscore
         mainmenutext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 20))
+
+        if startspil_knap.draw(screenwith/2-200, screenheight/2-100) is True:
+            mainmenu = False
+
+            # Laver mousecursor usynlig
+            pygame.mouse.set_visible(False)
+
+
 
         pygame.display.flip()
 

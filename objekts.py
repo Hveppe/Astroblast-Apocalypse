@@ -4,20 +4,23 @@ import pygame
 
 
 class Button:
-    def __init__(self, screen, image):
+    def __init__(self, screen, tekst, size, image):
+        self.tekst = tekst
+        self.size = size
         self.image = image
         self.screen = screen
         self.clicked = False
         self.action = True
 
+        self.image = pygame.transform.scale(self.image, size)
+
     def draw(self, x, y):
         self.action = False
 
-        # position af musen
-        mus_position = pygame.mouse.get_pos()
+        image_rect = self.image.get_rect(topleft=(x, y))
 
         # check om musen er over knappen og om der trykkes på den
-        if self.image.get_rect(topleft=(x, y)).collidepoint(mus_position):
+        if image_rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked is False:
                 self.clicked = True
                 self.action = True
@@ -27,6 +30,10 @@ class Button:
 
         # tegn knappen
         self.screen.blit(self.image, self.image.get_rect(topleft=(x, y)))
+        font = pygame.font.SysFont('Comic Sans MS', 40)
+        tekstdisplay = font.render(self.tekst, True, (255, 255, 255))
+        self.screen.blit(tekstdisplay, (image_rect.x + image_rect.width/2 - tekstdisplay.get_width()/2,
+                         image_rect.y + image_rect.height/2-tekstdisplay.get_height()/2))
 
         return self.action
 
