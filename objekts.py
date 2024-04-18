@@ -3,6 +3,36 @@
 import pygame
 
 
+class Button:
+    def __init__(self, screen, x, y, image):
+        self.image = image
+        self.screen = screen
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.clicked = False
+        self.action = True
+
+    def draw(self):
+        self.action = False
+
+        # position af musen
+        mus_position = pygame.mouse.get_pos()
+
+        # check om musen er over knappen og om der trykkes på den
+        if self.rect.collidepoint(mus_position):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked is False:
+                self.clicked = True
+                self.action = True
+
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
+
+        # tegn knappen
+        self.screen.blit(self.image, self.rect.topleft)
+
+        return self.action
+
+
 class Picture:
     def __init__(self, screen, x, y, image):
         self.image = image
