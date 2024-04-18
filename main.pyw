@@ -122,13 +122,15 @@ for i in range(antalfjender):
             Fjender.append(enemy)
             fjende_spawn = False
 
-# laver knapper
+# ----------------------------------------laver knapper----------------------------------------------------------------
 startspil_knap = Button(screen=display, tekst="START", size=(400, 100),
                         image=pygame.image.load('Image/Buttons/Simpel_button.png'))
 
 infospil_knap = Button(screen=display, tekst="INFORMATION", size=(400, 100),
                        image=pygame.image.load('Image/Buttons/Simpel_button.png'))
 
+return_knap = Button(screen=display, tekst="RETURN TO MENU", size=(450, 100),
+                     image=pygame.image.load('Image/Buttons/Simpel_button.png'))
 
 # variabler for loop
 gamerunning = True
@@ -139,7 +141,12 @@ while gamerunning:
     # starter main menu loop
     # -------------------------------------Main Menu-------------------------------------------------------------------
     while mainmenu:
+        # Laver mousecursor synlig
+        pygame.mouse.set_visible(True)
+
+        # sætter framerate til 60
         clock.tick(60)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gamerunning = False
@@ -159,7 +166,9 @@ while gamerunning:
             # starter loop for info skærm
             # -------------------------------------Info Screen--------------------------------------------------
             while infoscreen is True:
+                # sætter framerate til 60
                 clock.tick(60)
+
                 for eventinfo in pygame.event.get():
                     if eventinfo.type == pygame.QUIT:
                         pause = False
@@ -251,6 +260,13 @@ while gamerunning:
                 tekst = Font.render('Show Hitboxes: H', True, (255, 255, 255))
                 display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 400))
 
+                tekst = Font.render('Pause Game: P', True, (255, 255, 255))
+                display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 500))
+
+                # return button
+                if return_knap.draw(screenwith/2-225, screenheight-100) is True:
+                    infoscreen = False
+
                 pygame.display.flip()
 
         display.fill((0, 0, 0))
@@ -266,22 +282,24 @@ while gamerunning:
         mainmenutext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 20))
 
-        if startspil_knap.draw(screenwith/2-200, screenheight/2-100) is True:
+        if startspil_knap.draw(screenwith/2-200, screenheight/2-50) is True:
             mainmenu = False
-
-            # Laver mousecursor usynlig
-            pygame.mouse.set_visible(False)
 
             # reset/start timer
             startgametime = time.time()
 
-        if infospil_knap.draw(screenwith/2-200, screenheight/2) is True:
+        if infospil_knap.draw(screenwith/2-200, screenheight/2+60) is True:
             infoscreen = True
 
         pygame.display.flip()
 
     # -------------------------------------Main Game-------------------------------------------------------------------
+    # Laver mousecursor usynlig
+    pygame.mouse.set_visible(False)
+
+    # sætter framerate til 60
     clock.tick(60)
+
     current = time.time()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -721,6 +739,10 @@ while gamerunning:
                 file.write(str(highscore))
 
         while gameover:
+            # Laver mousecursor synlig
+            pygame.mouse.set_visible(True)
+
+            # sætter framerate til 60
             clock.tick(60)
 
             # Farver baggrund
@@ -781,5 +803,10 @@ while gamerunning:
 
             gameovertext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, 20))
+
+            # return button
+            if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
+                gameover = False
+                mainmenu = True
 
             pygame.display.flip()
