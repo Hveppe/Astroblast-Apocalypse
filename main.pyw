@@ -64,7 +64,6 @@ antalfjenderheavy = 0
 antalfjendermineswpper = 0
 antalfjenderhomming = 0
 debug = False
-shield_up = False
 
 wave = 1
 waveheavyspawn = 5
@@ -86,6 +85,11 @@ changeinrate = 10
 delaylaser = 0.3
 last_time_shot = 0
 shotting = False
+
+# shield varaibler
+shield_up = False
+shield_charge = 100
+drain_speed = 1
 
 # giving time of start
 startgametime = time.time()
@@ -686,9 +690,17 @@ while gamerunning:
                     HommingFjender.append(new_enemy)
                     hommingspawn = False
 
-    if shield_up is True:
+    if shield_up is True and shield_charge > 0:
         shield.update(player)
         shield.draw()
+
+        drain_time = time.time()
+
+        try:
+            if drain_time - last_draintime > drain_speed:
+                shield_charge -= 1
+        except NameError:
+            pass
 
         for enemy in Fjender:
             if collisionchecker_circle_square(shield, enemy):
@@ -725,6 +737,8 @@ while gamerunning:
                     HommingFjender.remove(enemy)
                 except ValueError:
                     pass
+
+        last_draintime = time.time()
 
     if minepoint > 50:
         ArsenalMines += 1
@@ -841,6 +855,8 @@ while gamerunning:
                         player.x = screenwith / 2 - 20
                         player.y = screenheight - 100
                         shotting = False
+                        shield_up = False
+                        shield_charge = 100
 
                         # reset af fjender
                         antalfjender = 0
@@ -887,6 +903,8 @@ while gamerunning:
                 player.x = screenwith / 2 - 20
                 player.y = screenheight - 100
                 shotting = False
+                shield_up = False
+                shield_charge = 100
 
                 # reset af fjender
                 antalfjender = 0
