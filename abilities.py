@@ -63,3 +63,21 @@ class LayMine:
 
     def draw(self):
         pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
+
+
+class Shield:
+    color = (0, 0, 255, 127)
+    radius = 50
+
+    def __init__(self, screen, xvalue, yvalue):
+        self.x = xvalue
+        self.y = yvalue
+
+        self.screen = screen
+
+    def update(self, player):
+        self.x = player.x
+        self.y = player.y
+
+    def draw(self):
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius, 2)
