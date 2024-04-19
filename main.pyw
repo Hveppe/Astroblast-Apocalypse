@@ -2,7 +2,7 @@
 
 # importer fra andre python filer
 from Player import PlayerClass
-from abilities import ShotLaser, LayMine
+from abilities import ShotLaser, LayMine, Shield
 from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
 from objekts import AstroidClass, Picture, Button
 from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
@@ -64,6 +64,7 @@ antalfjenderheavy = 0
 antalfjendermineswpper = 0
 antalfjenderhomming = 0
 debug = False
+shield_up = False
 
 wave = 1
 waveheavyspawn = 5
@@ -121,6 +122,9 @@ for i in range(antalfjender):
         else:
             Fjender.append(enemy)
             fjende_spawn = False
+
+# Laver shield
+shield = Shield(display, player.x, player.y)
 
 # ----------------------------------------laver knapper----------------------------------------------------------------
 startspil_knap = Button(screen=display, tekst="START", size=(400, 100),
@@ -331,12 +335,15 @@ while gamerunning:
                     shotting = True
 
             # controls til mine
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_m:
                 if ArsenalMines > 0:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width/2,
                                             yvalue=player.y + player.height/2))
                     mineplacesound.play()
+
+            if event.key == pygame.K_SPACE:
+                shield_up = True
 
             # Bevægelse af player
             if event.key == pygame.K_w:
@@ -371,6 +378,9 @@ while gamerunning:
                     shotting = True
                 else:
                     shotting = False
+
+            if event.key == pygame.K_SPACE:
+                shield_up = False
 
     # pause spil
         if event.type == pygame.KEYDOWN:
@@ -427,9 +437,12 @@ while gamerunning:
         enemy.update()
 
         if collisionchecker(player, enemy):
-            Fjender.remove(enemy)
-            enemydeadsound.play()
-            lives -= 1
+            if shield_up:
+                pass
+            else:
+                Fjender.remove(enemy)
+                enemydeadsound.play()
+                lives -= 1
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -457,9 +470,12 @@ while gamerunning:
         enemy.update()
 
         if collisionchecker(player, enemy):
-            HeavyFjender.remove(enemy)
-            enemydeadsound.play()
-            lives -= enemy.lives
+            if shield_up:
+                pass
+            else:
+                HeavyFjender.remove(enemy)
+                enemydeadsound.play()
+                lives -= enemy.lives
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -493,9 +509,12 @@ while gamerunning:
         enemy.update()
 
         if collisionchecker(player, enemy):
-            MineswepperFjender.remove(enemy)
-            enemydeadsound.play()
-            lives -= 1
+            if shield_up:
+                pass
+            else:
+                MineswepperFjender.remove(enemy)
+                enemydeadsound.play()
+                lives -= 1
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -517,9 +536,12 @@ while gamerunning:
         enemy.draw()
 
         if collisionchecker(enemy, player):
-            HommingFjender.remove(enemy)
-            lives -= 1
-            enemydeadsound.play()
+            if shield_up:
+                pass
+            else:
+                HommingFjender.remove(enemy)
+                lives -= 1
+                enemydeadsound.play()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -664,6 +686,46 @@ while gamerunning:
                     HommingFjender.append(new_enemy)
                     hommingspawn = False
 
+    if shield_up is True:
+        shield.update(player)
+        shield.draw()
+
+        for enemy in Fjender:
+            if collisionchecker_circle_square(shield, enemy):
+                enemydeadsound.play()
+
+                try:
+                    Fjender.remove(enemy)
+                except ValueError:
+                    pass
+
+        for enemy in HeavyFjender:
+            if collisionchecker_circle_square(shield, enemy):
+                enemydeadsound.play()
+
+                try:
+                    HeavyFjender.remove(enemy)
+                except ValueError:
+                    pass
+
+        for enemy in MineswepperFjender:
+            if collisionchecker_circle_square(shield, enemy):
+                enemydeadsound.play()
+
+                try:
+                    MineswepperFjender.remove(enemy)
+                except ValueError:
+                    pass
+
+        for enemy in HommingFjender:
+            if collisionchecker_circle_square(shield, enemy):
+                enemydeadsound.play()
+
+                try:
+                    HommingFjender.remove(enemy)
+                except ValueError:
+                    pass
+
     if minepoint > 50:
         ArsenalMines += 1
         minepoint = 0
@@ -805,5 +867,34 @@ while gamerunning:
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
                 gameover = False
                 mainmenu = True
+
+                # Clear lister
+                Lasershot.clear()
+                Mineshot.clear()
+                Fjender.clear()
+                HeavyFjender.clear()
+                MineswepperFjender.clear()
+                HommingFjender.clear()
+                Astroids.clear()
+
+                # Reset af player
+                player.xmove = 0
+                player.ymove = 0
+                ArsenalMines = 5
+                lives = 5
+                wavelives = 4
+                wave = 1
+                player.x = screenwith / 2 - 20
+                player.y = screenheight - 100
+                shotting = False
+
+                # reset af fjender
+                antalfjender = 0
+                waveheavyspawn = 5
+                wavemineswepperspawn = 6
+                wavehommingspawn = 7
+                antalfjenderheavy = 0
+                antalfjenderhomming = 0
+                antalfjendermineswpper = 0
 
             pygame.display.flip()
