@@ -89,7 +89,8 @@ shotting = False
 # shield varaibler
 shield_up = False
 shield_charge = 100
-drain_speed = 1
+drain_speed = 0.5
+last_draintime = None
 
 # giving time of start
 startgametime = time.time()
@@ -696,11 +697,12 @@ while gamerunning:
 
         drain_time = time.time()
 
-        try:
-            if drain_time - last_draintime > drain_speed:
-                shield_charge -= 1
-        except NameError:
-            pass
+        if last_draintime is None:
+            last_draintime = time.time()
+
+        if drain_time - last_draintime >= drain_speed:
+            shield_charge -= 1
+            last_draintime = time.time()
 
         for enemy in Fjender:
             if collisionchecker_circle_square(shield, enemy):
@@ -738,8 +740,6 @@ while gamerunning:
                 except ValueError:
                     pass
 
-        last_draintime = time.time()
-
     if minepoint > 50:
         ArsenalMines += 1
         minepoint = 0
@@ -769,8 +769,11 @@ while gamerunning:
     pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
     display.blit(pointstext, (10, 50))
 
+    shield_text = Font.render(f'Shield: {shield_charge}%', True, (255, 255, 255))
+    display.blit(shield_text, (screenwith - 260, 10))
+
     minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
-    display.blit(minetext, (screenwith-160, 10))
+    display.blit(minetext, (screenwith - 260, 50))
 
     if lives > 0:
         timer = time.time()-startgametime
