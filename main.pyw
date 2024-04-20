@@ -263,14 +263,17 @@ while gamerunning:
                 tekst = Font.render('Shot Laser: ARROWS', True, (255, 255, 255))
                 display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 200))
 
-                tekst = Font.render('Place Mine: SPACE', True, (255, 255, 255))
+                tekst = Font.render('Place Mine: M', True, (255, 255, 255))
                 display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 300))
 
+                tekst = Font.render('Shield: SPACE', True, (255, 255, 255))
+                display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 400))
+
                 tekst = Font.render('Show Hitboxes: H', True, (255, 255, 255))
-                display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 400))
+                display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 500))
 
                 tekst = Font.render('Pause Game: P', True, (255, 255, 255))
-                display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 500))
+                display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 600))
 
                 # return button
                 if return_knap.draw(screenwith/2-225, screenheight-100) is True:
