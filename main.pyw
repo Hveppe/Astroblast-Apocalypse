@@ -860,6 +860,7 @@ while gamerunning:
                         shotting = False
                         shield_up = False
                         shield_charge = 100
+                        last_draintime = None
 
                         # reset af fjender
                         antalfjender = 0
@@ -908,6 +909,7 @@ while gamerunning:
                 shotting = False
                 shield_up = False
                 shield_charge = 100
+                last_draintime = None
 
                 # reset af fjender
                 antalfjender = 0
