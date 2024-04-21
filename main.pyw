@@ -719,6 +719,7 @@ while gamerunning:
         for enemy in HeavyFjender:
             if collisionchecker_circle_square(shield, enemy):
                 enemydeadsound.play()
+                shield_charge -= 2
 
                 try:
                     HeavyFjender.remove(enemy)
