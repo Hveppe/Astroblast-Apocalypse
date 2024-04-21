@@ -275,6 +275,9 @@ while gamerunning:
                 tekst = Font.render('Pause Game: P', True, (255, 255, 255))
                 display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 600))
 
+                tekst = Font.render('Close Game: ESCAPE', True, (255, 255, 255))
+                display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 700))
+
                 # return button
                 if return_knap.draw(screenwith/2-225, screenheight-100) is True:
                     infoscreen = False
