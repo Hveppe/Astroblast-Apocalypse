@@ -816,8 +816,8 @@ while gamerunning:
         gameover = True
         gameoversound.play()
 
-        if highscore < wave-1:
-            highscore = wave-1
+        if highscore < wave:
+            highscore = wave
             with open('textfiler/highscore.txt', 'w') as file:
                 file.write(str(highscore))
 
