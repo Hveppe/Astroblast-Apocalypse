@@ -65,9 +65,6 @@ class LayMine:
         pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
 
 
-TODO: 'gør collision med shield bedre'
-
-
 class Shield:
     color = (0, 0, 255, 127)
     radius = 70
