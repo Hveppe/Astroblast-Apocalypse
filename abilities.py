@@ -65,7 +65,7 @@ class LayMine:
         pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
 
 
-TODO: 'gør collision med shield bedre og centrer player'
+TODO: 'gør collision med shield bedre'
 
 
 class Shield:
@@ -79,8 +79,8 @@ class Shield:
         self.screen = screen
 
     def update(self, player):
-        self.x = player.x
-        self.y = player.y
+        self.x = player.x + player.width/2
+        self.y = player.y + player.height/2
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x+self.radius/2, self.y+self.radius/2), self.radius, 2)
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius, 2)
