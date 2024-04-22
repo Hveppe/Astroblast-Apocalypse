@@ -881,7 +881,7 @@ while gamerunning:
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 200))
 
-            gameovertext = Font.render(f'WAVE: {wave-1}', True, (255, 255, 255))
+            gameovertext = Font.render(f'WAVE: {wave}', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 80))
 
             gameovertext = Font.render(f'TIME: {round(timer, 2)}', True, (255, 255, 255))
