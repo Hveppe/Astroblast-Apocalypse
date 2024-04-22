@@ -347,7 +347,7 @@ while gamerunning:
 
             # controls til mine
             if event.key == pygame.K_m:
-                if ArsenalMines > 0:
+                if ArsenalMines > 0 and shield_up is False:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width/2,
                                             yvalue=player.y + player.height/2))
@@ -418,7 +418,7 @@ while gamerunning:
 
                     pygame.display.flip()
 
-    if shotting is True:
+    if shotting is True and shield_up is False:
         if current - last_time_shot >= delaylaser:
             Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width/2,
                                        yvalue=player.y + player.height/2, last_move=lastmove))
