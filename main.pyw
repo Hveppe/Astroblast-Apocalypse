@@ -69,7 +69,7 @@ wave = 1
 waveheavyspawn = 5
 wavemineswepperspawn = 6
 wavehommingspawn = 7
-new_wave_delay = 0.2
+new_wave_delay = 0.1
 new_wave_begin = None
 
 lives = 5
