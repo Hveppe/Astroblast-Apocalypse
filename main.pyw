@@ -69,6 +69,8 @@ wave = 1
 waveheavyspawn = 5
 wavemineswepperspawn = 6
 wavehommingspawn = 7
+new_wave_delay = 1
+new_wave_begin = None
 
 lives = 5
 wavelives = 4
@@ -166,6 +168,7 @@ while gamerunning:
                     mainmenu = False
                 if event.key == pygame.K_SPACE:
                     mainmenu = False
+                    new_wave_begin = time.time()
 
                     # reset/start timer
                     startgametime = time.time()
@@ -299,6 +302,7 @@ while gamerunning:
 
         if startspil_knap.draw(screenwith/2-200, screenheight/2-50) is True:
             mainmenu = False
+            new_wave_begin = time.time()
 
             # reset/start timer
             startgametime = time.time()
@@ -357,27 +361,29 @@ while gamerunning:
                 shield_up = True
 
             # Bevægelse af player
-            if event.key == pygame.K_w:
-                player.ymove -= player.movespeed
-            if event.key == pygame.K_s:
-                player.ymove += player.movespeed
-            if event.key == pygame.K_d:
-                player.xmove += player.movespeed
-            if event.key == pygame.K_a:
-                player.xmove -= player.movespeed
+            if current - new_wave_begin >= new_wave_delay:
+                if event.key == pygame.K_w:
+                    player.ymove -= player.movespeed
+                if event.key == pygame.K_s:
+                    player.ymove += player.movespeed
+                if event.key == pygame.K_d:
+                    player.xmove += player.movespeed
+                if event.key == pygame.K_a:
+                    player.xmove -= player.movespeed
             if event.key == pygame.K_h:
                 debug = True
 
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_w:
-                player.ymove += player.movespeed
-            if event.key == pygame.K_s:
-                player.ymove -= player.movespeed
-            if event.key == pygame.K_d:
-                player.xmove -= player.movespeed
-            if event.key == pygame.K_a:
-                player.xmove += player.movespeed
+            if current - new_wave_begin >= new_wave_delay:
+                if event.key == pygame.K_w:
+                    player.ymove += player.movespeed
+                if event.key == pygame.K_s:
+                    player.ymove -= player.movespeed
+                if event.key == pygame.K_d:
+                    player.xmove -= player.movespeed
+                if event.key == pygame.K_a:
+                    player.xmove += player.movespeed
             if event.key == pygame.K_h:
                 debug = False
 
@@ -419,7 +425,7 @@ while gamerunning:
                     pygame.display.flip()
 
     if shotting is True and shield_up is False:
-        if current - last_time_shot >= delaylaser:
+        if current - last_time_shot >= delaylaser and current - new_wave_begin >= new_wave_delay:
             Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width/2,
                                        yvalue=player.y + player.height/2, last_move=lastmove))
             lasersound.play()
@@ -444,9 +450,10 @@ while gamerunning:
             Mineshot.remove(Mine)
 
     for enemy in Fjender:
-        enemy.draw()
-        enemy.update()
+        if current - new_wave_begin >= new_wave_delay:
+            enemy.update()
 
+        enemy.draw()
         if collisionchecker(player, enemy):
             if shield_up:
                 pass
@@ -477,9 +484,10 @@ while gamerunning:
                     pass
 
     for enemy in HeavyFjender:
-        enemy.draw()
-        enemy.update()
+        if current - new_wave_begin >= new_wave_delay:
+            enemy.update()
 
+        enemy.draw()
         if collisionchecker(player, enemy):
             if shield_up:
                 pass
@@ -516,8 +524,10 @@ while gamerunning:
                     enemy.lives -= 1
 
     for enemy in MineswepperFjender:
+        if current - new_wave_begin >= new_wave_delay:
+            enemy.update()
+
         enemy.draw()
-        enemy.update()
 
         if collisionchecker(player, enemy):
             if shield_up:
@@ -543,7 +553,9 @@ while gamerunning:
                 Mineshot.remove(Mine)
 
     for enemy in HommingFjender:
-        enemy.update(player=player)
+        if current-new_wave_begin >= new_wave_delay:
+            enemy.update(player=player)
+
         enemy.draw()
 
         if collisionchecker(enemy, player):
@@ -616,6 +628,7 @@ while gamerunning:
 
     if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0 and len(HommingFjender) == 0:
         wave += 1
+        new_wave_begin = time.time()
 
         if wave >= wavelives:
             lives += 1
@@ -697,7 +710,7 @@ while gamerunning:
                     HommingFjender.append(new_enemy)
                     hommingspawn = False
 
-    if shield_up is True and shield_charge > 0:
+    if shield_up is True and shield_charge > 0 and current - new_wave_begin >= new_wave_delay:
         shield.update(player)
         shield.draw()
 
@@ -770,23 +783,28 @@ while gamerunning:
         for enemy in HommingFjender:
             enemy.draw_debug()
 
-    livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
-    display.blit(livestext, (10, 90))
+    if current-new_wave_begin >= new_wave_delay:
+        livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
+        display.blit(livestext, (10, 90))
 
-    pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
-    display.blit(pointstext, (10, 50))
+        pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
+        display.blit(pointstext, (10, 50))
 
-    shield_text = Font.render(f'Shield: {shield_charge}%', True, (255, 255, 255))
-    display.blit(shield_text, (screenwith - 260, 10))
+        shield_text = Font.render(f'Shield: {shield_charge}%', True, (255, 255, 255))
+        display.blit(shield_text, (screenwith - 260, 10))
 
-    minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
-    display.blit(minetext, (screenwith - 260, 50))
+        minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
+        display.blit(minetext, (screenwith - 260, 50))
 
-    if lives > 0:
-        timer = time.time()-startgametime
+        if lives > 0:
+            timer = time.time()-startgametime
 
-    timerext = Font.render(f'Timer: {round(timer, 2)}', True, (255, 255, 255))
-    display.blit(timerext, (10, 10))
+        timerext = Font.render(f'Timer: {round(timer, 2)}', True, (255, 255, 255))
+        display.blit(timerext, (10, 10))
+
+    else:
+        pointstext = Fontbig.render(f'Wave: {wave}', True, (255, 255, 255))
+        display.blit(pointstext, (screenwith/2-pointstext.get_width()/2, screenheight/2-pointstext.get_height()/2))
 
     makeastroid = random.randint(1, 100000)
 
