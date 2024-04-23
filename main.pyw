@@ -69,6 +69,8 @@ wave = 1
 waveheavyspawn = 5
 wavemineswepperspawn = 6
 wavehommingspawn = 7
+new_wave_delay = 0.2
+new_wave_begin = None
 
 lives = 5
 wavelives = 4
@@ -166,6 +168,7 @@ while gamerunning:
                     mainmenu = False
                 if event.key == pygame.K_SPACE:
                     mainmenu = False
+                    new_wave_begin = time.time()
 
                     # reset/start timer
                     startgametime = time.time()
@@ -299,6 +302,7 @@ while gamerunning:
 
         if startspil_knap.draw(screenwith/2-200, screenheight/2-50) is True:
             mainmenu = False
+            new_wave_begin = time.time()
 
             # reset/start timer
             startgametime = time.time()
@@ -444,9 +448,10 @@ while gamerunning:
             Mineshot.remove(Mine)
 
     for enemy in Fjender:
-        enemy.draw()
-        enemy.update()
+        if current - new_wave_begin >= new_wave_delay:
+            enemy.update()
 
+        enemy.draw()
         if collisionchecker(player, enemy):
             if shield_up:
                 pass
@@ -477,9 +482,10 @@ while gamerunning:
                     pass
 
     for enemy in HeavyFjender:
-        enemy.draw()
-        enemy.update()
+        if current - new_wave_begin >= new_wave_delay:
+            enemy.update()
 
+        enemy.draw()
         if collisionchecker(player, enemy):
             if shield_up:
                 pass
@@ -516,8 +522,10 @@ while gamerunning:
                     enemy.lives -= 1
 
     for enemy in MineswepperFjender:
+        if current - new_wave_begin >= new_wave_delay:
+            enemy.update()
+
         enemy.draw()
-        enemy.update()
 
         if collisionchecker(player, enemy):
             if shield_up:
@@ -543,7 +551,9 @@ while gamerunning:
                 Mineshot.remove(Mine)
 
     for enemy in HommingFjender:
-        enemy.update(player=player)
+        if current-new_wave_begin >= new_wave_delay:
+            enemy.update(player=player)
+
         enemy.draw()
 
         if collisionchecker(enemy, player):
@@ -616,6 +626,7 @@ while gamerunning:
 
     if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0 and len(HommingFjender) == 0:
         wave += 1
+        new_wave_begin = time.time()
 
         if wave >= wavelives:
             lives += 1
