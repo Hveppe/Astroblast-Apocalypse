@@ -424,8 +424,8 @@ while gamerunning:
 
     if shotting is True and shield_up is False:
         if current - last_time_shot >= delaylaser:
-            Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width/2,
-                                       yvalue=player.y + player.height/2, last_move=lastmove))
+            Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width/2 - 5,
+                                       yvalue=player.y + player.height/2 - 5, last_move=lastmove))
             lasersound.play()
             last_time_shot = current
 
