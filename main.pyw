@@ -939,3 +939,5 @@ while gamerunning:
                 antalfjendermineswpper = 0
 
             pygame.display.flip()
+
+pygame.quit()
