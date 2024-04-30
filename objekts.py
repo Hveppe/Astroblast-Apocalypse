@@ -74,4 +74,4 @@ class AstroidClass:
             self.x -= self.speed
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
+        pygame.draw.circle(surface=self.screen, color=self.color, center=(self.x, self.y), radius=self.radius)
