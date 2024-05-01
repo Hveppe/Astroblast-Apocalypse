@@ -309,8 +309,18 @@ while gamerunning:
 
                 pygame.display.flip()
 
+        # ------------------------------------------Skin Menu-----------------------------------------------------------
         while skinmeny:
+
+            if collisionchecker(mousecursor, return_knap):
+                click = True
+            else:
+                click = False
+
             for eventskin in pygame.event.get():
+                if eventskin.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
                 if eventskin.type == pygame.KEYDOWN:
                     if eventskin.key == pygame.K_ESCAPE:
                         pygame.quit()
@@ -318,6 +328,13 @@ while gamerunning:
 
             display.fill((0, 0, 0))
             baggrund.draw()
+
+            # return button
+            if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
+                infoscreen = False
+
+            mousecursor.update()
+            mousecursor.draw(click=click)
 
             pygame.display.flip()
 
