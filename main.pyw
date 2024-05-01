@@ -365,13 +365,14 @@ while gamerunning:
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            pygame.quit()
-            sys.exit()
 
             if highscore < wave - 1:
                 highscore = wave - 1
                 with open('textfiler/highscore.txt', 'w') as file:
                     file.write(str(highscore))
+
+            pygame.quit()
+            sys.exit()
 
         # controls til PlayerClass
         if event.type == pygame.KEYDOWN:
