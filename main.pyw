@@ -57,7 +57,7 @@ Astroids = []
 
 # laver player
 player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
-                     picture=pygame.image.load('Image/Rumskibplayer.png'))
+                     picture=pygame.image.load('Image/Playerships/Rumskibplayer.png'))
 
 # ---------------------------------------Variabler----------------------------------------------------------------------
 lastmove = 'w'
