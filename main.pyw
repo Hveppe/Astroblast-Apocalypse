@@ -155,6 +155,13 @@ return_knap = Button(screen=display, tekst="RETURN TO MENU", size=(450, 100),
 skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
                    image=pygame.image.load("Image/Buttons/Simpel_button.png"))
 
+# skin buttons
+orange_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
+                                   image=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"))
+
+spaceship_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
+                                      image=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"))
+
 # variabler for loop
 gamerunning = True
 mainmenu = True
@@ -168,7 +175,8 @@ while gamerunning:
         # Laver mousecursor synlig
         pygame.mouse.set_visible(False)
 
-        if collisionchecker(mousecursor, startspil_knap) or collisionchecker(mousecursor, infospil_knap):
+        if (collisionchecker(mousecursor, startspil_knap) or collisionchecker(mousecursor, infospil_knap)
+                or collisionchecker(mousecursor, skin_knap)):
             click = True
         else:
             click = False
@@ -329,9 +337,27 @@ while gamerunning:
             display.fill((0, 0, 0))
             baggrund.draw()
 
+            # -----------------------------------------Mouse cursor skins-----------------------------------------------
+            tekst = Font.render('Mouse Cursor', True, (255, 165, 0))
+            display.blit(tekst, (screenwith/2-tekst.get_width()/2, 50))
+
+            if orange_cursor_skin_button.draw(100, 150):
+                mousecursor.picture = pygame.transform.scale(
+                    pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"), (25, 30))
+                mousecursor.picture_clik = pygame.transform.scale(
+                    pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"), (25, 30))
+                skinmeny = False
+
+            if spaceship_cursor_skin_button.draw(200, 150):
+                mousecursor.picture = pygame.transform.scale(
+                    pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"), (25, 30))
+                mousecursor.picture_clik = pygame.transform.scale(
+                    pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png"), (25, 30))
+                skinmeny = False
+
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
-                infoscreen = False
+                skinmeny = False
 
             mousecursor.update()
             mousecursor.draw(click=click)
