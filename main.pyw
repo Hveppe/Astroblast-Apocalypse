@@ -151,10 +151,14 @@ infospil_knap = Button(screen=display, tekst="INFORMATION", size=(400, 100),
 return_knap = Button(screen=display, tekst="RETURN TO MENU", size=(450, 100),
                      image=pygame.image.load('Image/Buttons/Simpel_button.png'))
 
+skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
+                   image=pygame.image.load("Image/Buttons/Simpel_button.png"))
+
 # variabler for loop
 gamerunning = True
 mainmenu = True
 infoscreen = False
+skinmeny = False
 
 while gamerunning:
     # starter main menu loop
@@ -321,15 +325,18 @@ while gamerunning:
         mainmenutext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
         display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 20))
 
-        if startspil_knap.draw(screenwith/2-200, screenheight/2-50) is True:
+        if startspil_knap.draw(screenwith/2-200, screenheight/2-60) is True:
             mainmenu = False
             new_wave_begin = time.time()
 
             # reset/start timer
             startgametime = time.time()
 
-        if infospil_knap.draw(screenwith/2-200, screenheight/2+60) is True:
+        if infospil_knap.draw(screenwith/2-200, screenheight/2+50) is True:
             infoscreen = True
+
+        if skin_knap.draw(screenwith/2-200, screenheight/2+160) is True:
+            skinmeny = True
 
         mousecursor.update()
         mousecursor.draw(click=click)
