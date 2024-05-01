@@ -12,6 +12,7 @@ from Mouse import MouseCursor
 import random
 import pygame
 import time
+import sys
 
 # starter pygame og pygame font
 pygame.init()
@@ -177,12 +178,12 @@ while gamerunning:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                gamerunning = False
-                mainmenu = False
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    gamerunning = False
-                    mainmenu = False
+                    pygame.quit()
+                    sys.exit()
                 if event.key == pygame.K_SPACE:
                     mainmenu = False
                     new_wave_begin = time.time()
@@ -205,16 +206,12 @@ while gamerunning:
 
                 for eventinfo in pygame.event.get():
                     if eventinfo.type == pygame.QUIT:
-                        pause = False
-                        gamerunning = False
-                        infoscreen = False
-                        mainmenu = False
+                        pygame.quit()
+                        sys.exit()
                     if eventinfo.type == pygame.KEYDOWN:
                         if eventinfo.key == pygame.K_ESCAPE:
-                            pause = False
-                            gamerunning = False
-                            infoscreen = False
-                            mainmenu = False
+                            pygame.quit()
+                            sys.exit()
                         if eventinfo.key == pygame.K_i:
                             infoscreen = False
 
@@ -312,6 +309,18 @@ while gamerunning:
 
                 pygame.display.flip()
 
+        while skinmeny:
+            for eventskin in pygame.event.get():
+                if eventskin.type == pygame.KEYDOWN:
+                    if eventskin.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+
+            display.fill((0, 0, 0))
+            baggrund.draw()
+
+            pygame.display.flip()
+
         display.fill((0, 0, 0))
         baggrund.draw()
 
@@ -353,9 +362,11 @@ while gamerunning:
     current = time.time()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            gamerunning = False
+            pygame.quit()
+            sys.exit()
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            gamerunning = False
+            pygame.quit()
+            sys.exit()
 
             if highscore < wave - 1:
                 highscore = wave - 1
@@ -436,12 +447,12 @@ while gamerunning:
 
                     for eventpause in pygame.event.get():
                         if event.type == pygame.QUIT:
-                            pause = False
-                            gamerunning = False
+                            pygame.quit()
+                            sys.exit()
                         if eventpause.type == pygame.KEYDOWN:
                             if eventpause.key == pygame.K_ESCAPE:
-                                pause = False
-                                gamerunning = False
+                                pygame.quit()
+                                sys.exit()
                             if eventpause.key == pygame.K_p:
                                 pause = False
                                 player.xmove = 0
@@ -883,12 +894,12 @@ while gamerunning:
             baggrund.draw()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    gamerunning = False
-                    gameover = False
+                    pygame.quit()
+                    sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
-                        gamerunning = False
-                        gameover = False
+                        pygame.quit()
+                        sys.exit()
                     if event.key == pygame.K_r:
                         gameover = False
                         mainmenu = True
