@@ -6,6 +6,7 @@ from abilities import ShotLaser, LayMine, Shield
 from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
 from objekts import AstroidClass, Picture, Button
 from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
+from Mouse import MouseCursor
 
 # importer libaries
 import random
@@ -116,6 +117,12 @@ Font = pygame.font.SysFont('Comic Sans MS', 36, bold=False, italic=False)
 Fontbig = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
 Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, italic=False)
 
+# laver mouse cursor
+click = False
+mousecursor = MouseCursor(screen=display, picture=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
+                          picture_clik=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png"))
+
+# laver fjender
 for i in range(antalfjender):
     fjende_spawn = True
     while fjende_spawn:
@@ -153,7 +160,7 @@ while gamerunning:
     # -------------------------------------Main Menu-------------------------------------------------------------------
     while mainmenu:
         # Laver mousecursor synlig
-        pygame.mouse.set_visible(True)
+        pygame.mouse.set_visible(False)
 
         # sætter framerate til 60
         clock.tick(60)
@@ -285,6 +292,9 @@ while gamerunning:
                 if return_knap.draw(screenwith/2-225, screenheight-100) is True:
                     infoscreen = False
 
+                mousecursor.update()
+                mousecursor.draw(click=click)
+
                 pygame.display.flip()
 
         display.fill((0, 0, 0))
@@ -309,6 +319,9 @@ while gamerunning:
 
         if infospil_knap.draw(screenwith/2-200, screenheight/2+60) is True:
             infoscreen = True
+
+        mousecursor.update()
+        mousecursor.draw(click=click)
 
         pygame.display.flip()
 
@@ -937,6 +950,9 @@ while gamerunning:
                 antalfjenderheavy = 0
                 antalfjenderhomming = 0
                 antalfjendermineswpper = 0
+
+            mousecursor.update()
+            mousecursor.draw(click=click)
 
             pygame.display.flip()
 
