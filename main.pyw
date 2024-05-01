@@ -119,8 +119,8 @@ Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, i
 
 # laver mouse cursor
 click = False
-mousecursor = MouseCursor(screen=display, picture=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
-                          picture_clik=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png"))
+mousecursor = MouseCursor(screen=display, picture=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
+                          picture_clik=pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"))
 
 # laver fjender
 for i in range(antalfjender):
