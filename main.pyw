@@ -162,6 +162,11 @@ while gamerunning:
         # Laver mousecursor synlig
         pygame.mouse.set_visible(False)
 
+        if collisionchecker(mousecursor, startspil_knap) or collisionchecker(mousecursor, infospil_knap):
+            click = True
+        else:
+            click = False
+
         # sætter framerate til 60
         clock.tick(60)
 

@@ -12,15 +12,22 @@ class Button:
         self.clicked = False
         self.action = True
 
+        self.width, self.height = size
+
         self.image = pygame.transform.scale(self.image, size)
+        self.image_rect = None
+
+        self.x, self.y = 0, 0
 
     def draw(self, x, y):
         self.action = False
+        self.x = x
+        self.y = y
 
-        image_rect = self.image.get_rect(topleft=(x, y))
+        self.image_rect = self.image.get_rect(topleft=(self.x, self.y))
 
         # check om musen er over knappen og om der trykkes på den
-        if image_rect.collidepoint(pygame.mouse.get_pos()):
+        if self.image_rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked is False:
                 self.clicked = True
                 self.action = True
@@ -29,11 +36,11 @@ class Button:
             self.clicked = False
 
         # tegn knappen
-        self.screen.blit(self.image, self.image.get_rect(topleft=(x, y)))
+        self.screen.blit(self.image, self.image.get_rect(topleft=(self.x, self.y)))
         font = pygame.font.SysFont('Comic Sans MS', 40)
         tekstdisplay = font.render(self.tekst, True, (255, 255, 255))
-        self.screen.blit(tekstdisplay, (image_rect.x + image_rect.width/2 - tekstdisplay.get_width()/2,
-                         image_rect.y + image_rect.height/2-tekstdisplay.get_height()/2))
+        self.screen.blit(tekstdisplay, (self.image_rect.x + self.image_rect.width/2 - tekstdisplay.get_width()/2,
+                         self.image_rect.y + self.image_rect.height/2-tekstdisplay.get_height()/2))
 
         return self.action
 
