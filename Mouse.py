@@ -2,8 +2,8 @@ import pygame
 
 
 class MouseCursor:
-    width = 20
-    height = 20
+    width = 30
+    height = 30
 
     def __init__(self, screen, picture, picture_clik):
         self.screen = screen
