@@ -58,7 +58,7 @@ Astroids = []
 player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
                      picture=pygame.image.load('Image/Rumskibplayer.png'))
 
-# variabler
+# ---------------------------------------Variabler----------------------------------------------------------------------
 lastmove = 'w'
 antalfjender = 2
 antalfjenderheavy = 0
@@ -117,12 +117,13 @@ Font = pygame.font.SysFont('Comic Sans MS', 36, bold=False, italic=False)
 Fontbig = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
 Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, italic=False)
 
+# ------------------------------------------------Mouse, Shield, Fjender------------------------------------------------
 # laver mouse cursor
 click = False
 mousecursor = MouseCursor(screen=display, picture=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
                           picture_clik=pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"))
 
-# laver fjender
+# laver Fjender
 for i in range(antalfjender):
     fjende_spawn = True
     while fjende_spawn:
@@ -137,7 +138,7 @@ for i in range(antalfjender):
             Fjender.append(enemy)
             fjende_spawn = False
 
-# Laver shield
+# laver shield
 shield = Shield(display, player.x, player.y)
 
 # ----------------------------------------laver knapper----------------------------------------------------------------
