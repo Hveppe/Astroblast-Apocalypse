@@ -193,6 +193,11 @@ while gamerunning:
                 # sætter framerate til 60
                 clock.tick(60)
 
+                if collisionchecker(mousecursor, return_knap):
+                    click = True
+                else:
+                    click = False
+
                 for eventinfo in pygame.event.get():
                     if eventinfo.type == pygame.QUIT:
                         pause = False
@@ -856,6 +861,11 @@ while gamerunning:
         while gameover:
             # Laver mousecursor synlig
             pygame.mouse.set_visible(True)
+
+            if collisionchecker(mousecursor, return_knap):
+                click = True
+            else:
+                click = False
 
             # sætter framerate til 60
             clock.tick(60)
