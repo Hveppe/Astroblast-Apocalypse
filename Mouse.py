@@ -18,6 +18,6 @@ class MouseCursor:
 
     def draw(self, click):
         if click is False:
-            self.screen.blit(self.picture, (self.x, self.y))
+            self.screen.blit(self.picture, (self.x-self.width/2, self.y-self.height/2))
         elif click is True:
-            self.screen.blit(self.picture_clik, (self.x, self.y))
+            self.screen.blit(self.picture_clik, (self.x-self.width/2, self.y-self.height/2))

@@ -197,12 +197,6 @@ while gamerunning:
         # Laver mousecursor synlig
         pygame.mouse.set_visible(False)
 
-        if (collisionchecker(mousecursor, startspil_knap) or collisionchecker(mousecursor, infospil_knap)
-                or collisionchecker(mousecursor, skin_knap)):
-            click = True
-        else:
-            click = False
-
         # sætter framerate til 60
         clock.tick(60)
 
@@ -228,11 +222,6 @@ while gamerunning:
             while infoscreen is True:
                 # sætter framerate til 60
                 clock.tick(60)
-
-                if collisionchecker(mousecursor, return_knap):
-                    click = True
-                else:
-                    click = False
 
                 for eventinfo in pygame.event.get():
                     if eventinfo.type == pygame.QUIT:
@@ -333,6 +322,12 @@ while gamerunning:
                 if return_knap.draw(screenwith/2-225, screenheight-100) is True:
                     infoscreen = False
 
+                mouse = pygame.mouse.get_pos()
+                if return_knap.image_rect.collidepoint(mouse):
+                    click = True
+                else:
+                    click = False
+
                 mousecursor.update()
                 mousecursor.draw(click=click)
 
@@ -340,11 +335,6 @@ while gamerunning:
 
         # ------------------------------------------Skin Menu-----------------------------------------------------------
         while skinmeny:
-
-            if collisionchecker(mousecursor, return_knap):
-                click = True
-            else:
-                click = False
 
             for eventskin in pygame.event.get():
                 if eventskin.type == pygame.QUIT:
@@ -392,6 +382,15 @@ while gamerunning:
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
                 skinmeny = False
 
+            mouse = pygame.mouse.get_pos()
+            if (return_knap.image_rect.collidepoint(mouse) or
+                    spaceship_cursor_skin_button.image_rect.collidepoint(mouse)
+                    or orange_cursor_skin_button.image_rect.collidepoint(mouse) or
+                    player_normalship_skin_button.image_rect.collidepoint(mouse)):
+                click = True
+            else:
+                click = False
+
             mousecursor.update()
             mousecursor.draw(click=click)
 
@@ -422,6 +421,13 @@ while gamerunning:
 
         if skin_knap.draw(screenwith/2-200, screenheight/2+160) is True:
             skinmeny = True
+
+        mouse = pygame.mouse.get_pos()
+        if (startspil_knap.image_rect.collidepoint(mouse) or infospil_knap.image_rect.collidepoint(mouse)
+                or skin_knap.image_rect.collidepoint(mouse)):
+            click = True
+        else:
+            click = False
 
         mousecursor.update()
         mousecursor.draw(click=click)
@@ -981,11 +987,6 @@ while gamerunning:
             # Laver mousecursor synlig
             pygame.mouse.set_visible(True)
 
-            if collisionchecker(mousecursor, return_knap):
-                click = True
-            else:
-                click = False
-
             # sætter framerate til 60
             clock.tick(60)
 
@@ -1084,6 +1085,12 @@ while gamerunning:
                 antalfjenderheavy = 0
                 antalfjenderhomming = 0
                 antalfjendermineswpper = 0
+
+            mouse = pygame.mouse.get_pos()
+            if return_knap.image_rect.collidepoint(mouse):
+                click = True
+            else:
+                click = False
 
             mousecursor.update()
             mousecursor.draw(click=click)
