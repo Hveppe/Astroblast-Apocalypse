@@ -11,7 +11,7 @@ class PlayerClass:
     ymove = 0
     movespeed = 10
 
-    def __init__(self, screen, xvalue, yvalue, picture):
+    def __init__(self, screen, xvalue, yvalue, picture, damage_picture):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
@@ -21,6 +21,8 @@ class PlayerClass:
 
         picture = pygame.transform.scale(picture, (int(self.width), int(self.height)))
         self.picture = picture
+        damage_picture = pygame.transform.scale(damage_picture, (int(self.width), int(self.height)))
+        self.damage_picture = damage_picture
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()

@@ -55,10 +55,6 @@ HommingFjender = []
 # objekter
 Astroids = []
 
-# laver player
-player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
-                     picture=pygame.image.load('Image/Playerships/Rumskibplayer.png'))
-
 
 def tint_image(image, tint_color):
     tinted_image = image.copy()
@@ -67,6 +63,11 @@ def tint_image(image, tint_color):
     tinted_image.blit(tint, (0, 0), special_flags=pygame.BLEND_MULT)
     return tinted_image
 
+
+# laver player
+player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
+                     picture=pygame.image.load('Image/Playerships/Rumskibplayer.png'),
+                     damage_picture=tint_image(pygame.image.load('Image/Playerships/Rumskibplayer.png'), (255, 0, 0)))
 
 # ---------------------------------------Variabler----------------------------------------------------------------------
 lastmove = 'w'
