@@ -27,7 +27,7 @@ gameimagepng = pygame.image.load('Image/Icon/gameimageversion2.png').convert()
 pygame.display.set_icon(gameimagepng)
 
 # baggrund
-baggrund = pygame.image.load('Image/baggrund.jpg')
+baggrund = pygame.image.load('Image/baggrund.jpg').convert()
 baggrund = pygame.transform.scale(baggrund, (screenwith, screenheight))
 baggrund = Picture(screen=display, x=0, y=0, image=baggrund)
 
@@ -66,8 +66,9 @@ def tint_image(image, tint_color):
 
 # laver player
 player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
-                     picture=pygame.image.load('Image/Playerships/Rumskibplayer.png'),
-                     damage_picture=tint_image(pygame.image.load('Image/Playerships/Rumskibplayer.png'), (255, 0, 0)))
+                     picture=pygame.image.load('Image/Playerships/Rumskibplayer.png').convert_alpha(),
+                     damage_picture=tint_image(pygame.image.load('Image/Playerships/Rumskibplayer.png').convert_alpha(),
+                                               (255, 0, 0)))
 
 # ---------------------------------------Variabler----------------------------------------------------------------------
 lastmove = 'w'
@@ -134,8 +135,10 @@ Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, i
 # ------------------------------------------------Mouse, Shield, Fjender------------------------------------------------
 # laver mouse cursor
 click = False
-mousecursor = MouseCursor(screen=display, picture=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
-                          picture_clik=pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"))
+mousecursor = MouseCursor(screen=display,
+                          picture=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").convert_alpha(),
+                          picture_clik=pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png")
+                          .convert_alpha())
 
 # laver Fjender
 for i in range(antalfjender):
@@ -144,7 +147,7 @@ for i in range(antalfjender):
         enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
                            yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 10),
                            speedy=random.randint(1, 10), colour=(255, 0, 0),
-                           picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png'))
+                           picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
         if collisionchecker(enemy, player):
             enemy.xvalue = random.randint(0, screenwith - 10)
             enemy.yvalue = random.randint(0, screenheight - 150)
@@ -157,33 +160,35 @@ shield = Shield(display, player.x, player.y)
 
 # ----------------------------------------laver knapper----------------------------------------------------------------
 startspil_knap = Button(screen=display, tekst="START", size=(400, 100),
-                        image=pygame.image.load('Image/Buttons/Simpel_button.png'))
+                        image=pygame.image.load('Image/Buttons/Simpel_button.png').convert_alpha())
 
 infospil_knap = Button(screen=display, tekst="INFORMATION", size=(400, 100),
-                       image=pygame.image.load('Image/Buttons/Simpel_button.png'))
+                       image=pygame.image.load('Image/Buttons/Simpel_button.png').convert_alpha())
 
 return_knap = Button(screen=display, tekst="RETURN TO MENU", size=(450, 100),
-                     image=pygame.image.load('Image/Buttons/Simpel_button.png'))
+                     image=pygame.image.load('Image/Buttons/Simpel_button.png').convert_alpha())
 
 skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
-                   image=pygame.image.load("Image/Buttons/Simpel_button.png"))
+                   image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
 # skin cursor buttons
 orange_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
-                                   image=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"))
+                                   image=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").
+                                   convert_alpha())
 
 spaceship_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
-                                      image=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"))
+                                      image=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png")
+                                      .convert_alpha())
 
 Nasa_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
-                                 image=pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"))
+                                 image=pygame.image.load("Image/mousecursor/Nasa_space_cursor.png").convert_alpha())
 
 # skin player buttons
 player_normalship_skin_button = Button(screen=display, tekst="", size=(70, 70),
-                                       image=pygame.image.load("Image/Playerships/Rumskibplayer.png"))
+                                       image=pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha())
 
 player_secoundship_skin_button = Button(screen=display, tekst="", size=(70, 70),
-                                        image=pygame.image.load("Image/Playerships/Rumskibplayer2.png"))
+                                        image=pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha())
 
 # variabler for loop
 gamerunning = True
@@ -258,8 +263,8 @@ while gamerunning:
                                      tekst.get_height()/2))
 
                 # Normal fjende
-                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png'),
-                                                 (70, 70))
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png').
+                                                 convert_alpha(), (70, 70))
                 picture_rect = picture.get_rect(topleft=(100, 200))
                 display.blit(picture, picture_rect.topleft)
 
@@ -268,8 +273,8 @@ while gamerunning:
                                      tekst.get_height()/2))
 
                 # Mineswepper fjende
-                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'),
-                                                 (70, 70))
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png')
+                                                 .convert_alpha(), (70, 70))
                 picture_rect = picture.get_rect(topleft=(100, 300))
                 display.blit(picture, picture_rect.topleft)
 
@@ -278,8 +283,8 @@ while gamerunning:
                                      tekst.get_height()/2))
 
                 # Homming fjender
-                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/HommingFjendeImage.png'),
-                                                 (70, 70))
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/HommingFjendeImage.png')
+                                                 .convert_alpha(), (70, 70))
                 picture_rect = picture.get_rect(topleft=(100, 400))
                 display.blit(picture, picture_rect.topleft)
 
@@ -288,8 +293,8 @@ while gamerunning:
                                      tekst.get_height()/2))
 
                 # Heavy fjender
-                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Heavyfjendeimage.png'),
-                                                 (70, 70))
+                picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Heavyfjendeimage.png')
+                                                 .convert_alpha(), (70, 70))
                 picture_rect = picture.get_rect(topleft=(100, 500))
                 display.blit(picture, picture_rect.topleft)
 
@@ -369,31 +374,33 @@ while gamerunning:
             display.blit(tekst, (screenwith/2-tekst.get_width()/2, 50))
 
             skin_button_display_cursor(orange_cursor_skin_button, 100, 150,
-                                       pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
+                                       pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").convert_alpha(),
                                        pygame.image.load("Image/mousecursor/"
-                                                         "orange-gradient_cusor - click.png"))
+                                                         "orange-gradient_cusor - click.png").convert_alpha())
 
             skin_button_display_cursor(spaceship_cursor_skin_button, 200, 150,
-                                       pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
+                                       pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png")
+                                       .convert_alpha(),
                                        pygame.image.load("Image/mousecursor/"
-                                                         "spacrecraft-custom-cursor -click.png"))
+                                                         "spacrecraft-custom-cursor -click.png").convert_alpha())
 
             skin_button_display_cursor(Nasa_cursor_skin_button, 300, 150,
-                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"),
-                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png"))
+                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor.png").convert_alpha(),
+                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png")
+                                       .convert_alpha())
             # ----------------------------------------------Player skins------------------------------------------------
             tekst = Font.render('Player Ship', True, (255, 165, 0))
             display.blit(tekst, (screenwith / 2 - tekst.get_width() / 2, 300))
 
             skin_button_display_player(player_normalship_skin_button, 100, 400,
-                                       pygame.image.load("Image/Playerships/Rumskibplayer.png"),
-                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer.png"),
-                                                  (255, 0, 0)))
+                                       pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
+                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer.png")
+                                                  .convert_alpha(), (255, 0, 0)))
 
             skin_button_display_player(player_secoundship_skin_button, 200, 400,
-                                       pygame.image.load("Image/Playerships/Rumskibplayer2.png"),
-                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer2.png"),
-                                                  (255, 0, 0)))
+                                       pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
+                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer2.png")
+                                                  .convert_alpha(), (255, 0, 0)))
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
@@ -822,7 +829,7 @@ while gamerunning:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
                                        yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 5),
                                        speedy=random.randint(1, 10), colour=(255, 0, 0),
-                                       picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png'))
+                                       picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
                     new_enemy.y = random.randint(0, screenheight - 150)
@@ -836,7 +843,8 @@ while gamerunning:
                 new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-60),
                                             yvalue=random.randint(0, screenheight-60), speedx=random.randint(1, 5),
                                             speedy=random.randint(1, 5),
-                                            picture=pygame.image.load('Image/Fjender/Heavyfjendeimage.png'))
+                                            picture=pygame.image.load('Image/Fjender/Heavyfjendeimage.png')
+                                            .convert_alpha())
                 if collisionchecker(new_heavy, player):
                     new_heavy.x = random.randint(0, screenwith-10)
                     new_heavy.y = random.randint(0, screenheight-10)
@@ -850,7 +858,8 @@ while gamerunning:
                 new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
                                        yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 10),
                                        speedy=random.randint(1, 10), colour=(0, 255, 0),
-                                       picture=pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png'))
+                                       picture=pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png')
+                                       .convert_alpha())
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith - 10)
                     new_enemy.y = random.randint(0, screenheight - 30)
@@ -864,7 +873,8 @@ while gamerunning:
                 new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith-50),
                                               yvalue=random.randint(0, screenheight-50), speedx=5,
                                               speedy=5, color=(255, 0, 0),
-                                              picture=pygame.image.load('Image/Fjender/HommingFjendeImage.png'))
+                                              picture=pygame.image.load('Image/Fjender/HommingFjendeImage.png')
+                                              .convert_alpha())
                 if collisionchecker(new_enemy, player):
                     new_enemy.x = random.randint(0, screenwith-10)
                     new_enemy.y = random.randint(0, screenheight-10)
