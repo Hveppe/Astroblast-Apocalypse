@@ -89,6 +89,8 @@ wavelives = 4
 minepoint = 0
 fjende_spawn = False
 taking_damage_player = False
+time_of_damage = time.time()
+time_being_red = 0.25
 
 waveheavyspawnadd = 5
 wavemineswepperspawnadd = 4
@@ -182,6 +184,11 @@ gamerunning = True
 mainmenu = True
 infoscreen = False
 skinmeny = False
+
+
+def taken_damage():
+    return True, time.time()
+
 
 while gamerunning:
     # starter main menu loop
@@ -568,9 +575,14 @@ while gamerunning:
             if shield_up:
                 pass
             else:
-                Fjender.remove(enemy)
-                enemydeadsound.play()
-                lives -= 1
+                try:
+                    Fjender.remove(enemy)
+                    enemydeadsound.play()
+                    lives -= 1
+
+                    taking_damage_player, time_of_damage = taken_damage()
+                except ValueError:
+                    pass
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -602,9 +614,14 @@ while gamerunning:
             if shield_up:
                 pass
             else:
-                HeavyFjender.remove(enemy)
-                enemydeadsound.play()
-                lives -= enemy.lives
+                try:
+                    HeavyFjender.remove(enemy)
+                    enemydeadsound.play()
+                    lives -= enemy.lives
+
+                    taking_damage_player, time_of_damage = taken_damage()
+                except ValueError:
+                    pass
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -643,9 +660,14 @@ while gamerunning:
             if shield_up:
                 pass
             else:
-                MineswepperFjender.remove(enemy)
-                enemydeadsound.play()
-                lives -= 1
+                try:
+                    MineswepperFjender.remove(enemy)
+                    enemydeadsound.play()
+                    lives -= 1
+
+                    taking_damage_player, time_of_damage = taken_damage()
+                except ValueError:
+                    pass
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -672,9 +694,14 @@ while gamerunning:
             if shield_up:
                 pass
             else:
-                HommingFjender.remove(enemy)
-                lives -= 1
-                enemydeadsound.play()
+                try:
+                    HommingFjender.remove(enemy)
+                    lives -= 1
+                    enemydeadsound.play()
+
+                    taking_damage_player, time_of_damage = taken_damage()
+                except ValueError:
+                    pass
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -877,6 +904,9 @@ while gamerunning:
     # Tegner player
     player.draw(taking_damage_player)
     player.update()
+
+    if current - time_of_damage >= time_being_red:
+        taking_damage_player = False
 
     if debug is True:
         player.draw_debug()
