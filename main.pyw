@@ -175,9 +175,15 @@ orange_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
 spaceship_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
                                       image=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"))
 
+Nasa_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
+                                 image=pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"))
+
 # skin player buttons
 player_normalship_skin_button = Button(screen=display, tekst="", size=(70, 70),
                                        image=pygame.image.load("Image/Playerships/Rumskibplayer.png"))
+
+player_secoundship_skin_button = Button(screen=display, tekst="", size=(70, 70),
+                                        image=pygame.image.load("Image/Playerships/Rumskibplayer2.png"))
 
 # variabler for loop
 gamerunning = True
@@ -350,12 +356,13 @@ while gamerunning:
 
             def skin_button_display_cursor(button, x, y, image, imageclick):
                 if button.draw(x, y):
-                    mousecursor.picture = pygame.transform.scale(image, (25, 30))
+                    mousecursor.picture = pygame.transform.scale(image, (30, 30))
                     mousecursor.picture_clik = pygame.transform.scale(imageclick, (25, 30))
 
-            def skin_button_display_player(button, x, y, image):
+            def skin_button_display_player(button, x, y, image, damage_image):
                 if button.draw(x, y):
                     player.picture = pygame.transform.scale(image, (60, 60))
+                    player.damage_picture = pygame.transform.scale(damage_image, (60, 60))
 
             # -----------------------------------------Mouse cursor skins-----------------------------------------------
             tekst = Font.render('Mouse Cursor', True, (255, 165, 0))
@@ -371,22 +378,34 @@ while gamerunning:
                                        pygame.image.load("Image/mousecursor/"
                                                          "spacrecraft-custom-cursor -click.png"))
 
+            skin_button_display_cursor(Nasa_cursor_skin_button, 300, 150,
+                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"),
+                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png"))
             # ----------------------------------------------Player skins------------------------------------------------
             tekst = Font.render('Player Ship', True, (255, 165, 0))
             display.blit(tekst, (screenwith / 2 - tekst.get_width() / 2, 300))
 
             skin_button_display_player(player_normalship_skin_button, 100, 400,
-                                       pygame.image.load("Image/Playerships/Rumskibplayer.png"))
+                                       pygame.image.load("Image/Playerships/Rumskibplayer.png"),
+                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer.png"),
+                                                  (255, 0, 0)))
+
+            skin_button_display_player(player_secoundship_skin_button, 200, 400,
+                                       pygame.image.load("Image/Playerships/Rumskibplayer2.png"),
+                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer2.png"),
+                                                  (255, 0, 0)))
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
                 skinmeny = False
 
             mouse = pygame.mouse.get_pos()
-            if (return_knap.image_rect.collidepoint(mouse) or
-                    spaceship_cursor_skin_button.image_rect.collidepoint(mouse)
-                    or orange_cursor_skin_button.image_rect.collidepoint(mouse) or
-                    player_normalship_skin_button.image_rect.collidepoint(mouse)):
+            if ((return_knap.image_rect.collidepoint(mouse) or
+                    spaceship_cursor_skin_button.image_rect.collidepoint(mouse) or
+                    orange_cursor_skin_button.image_rect.collidepoint(mouse) or
+                    Nasa_cursor_skin_button.image_rect.collidepoint(mouse) or
+                    player_normalship_skin_button.image_rect.collidepoint(mouse)) or
+                    player_secoundship_skin_button.image_rect.collidepoint(mouse)):
                 click = True
             else:
                 click = False
