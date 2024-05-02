@@ -88,6 +88,7 @@ lives = 5
 wavelives = 4
 minepoint = 0
 fjende_spawn = False
+taking_damage_player = False
 
 waveheavyspawnadd = 5
 wavemineswepperspawnadd = 4
@@ -874,7 +875,7 @@ while gamerunning:
         minepoint = 0
 
     # Tegner player
-    player.draw()
+    player.draw(taking_damage_player)
     player.update()
 
     if debug is True:

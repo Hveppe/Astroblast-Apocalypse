@@ -45,17 +45,29 @@ class PlayerClass:
         if self.y < 0:
             self.y = 0
 
-    def draw(self):
+    def draw(self, damage):
         if self.xmove == 0 and self.ymove == 0:
-            rotated_image = pygame.transform.rotate(self.picture, self.last_angle)
-            rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
-            self.screen.blit(rotated_image, rotated_rect.topleft)
+            if damage is False:
+                rotated_image = pygame.transform.rotate(self.picture, self.last_angle)
+                rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
+                self.screen.blit(rotated_image, rotated_rect.topleft)
+            elif damage is True:
+                rotated_image = pygame.transform.rotate(self.damage_picture, self.last_angle)
+                rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
+                self.screen.blit(rotated_image, rotated_rect.topleft)
         else:
-            angleofmovement = math.degrees(math.atan2(-(self.yold - self.y), self.xold - self.x)) + 90
-            rotated_image = pygame.transform.rotate(self.picture, angleofmovement)
-            rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
-            self.screen.blit(rotated_image, rotated_rect.topleft)
-            self.last_angle = angleofmovement
+            if damage is False:
+                angleofmovement = math.degrees(math.atan2(-(self.yold - self.y), self.xold - self.x)) + 90
+                rotated_image = pygame.transform.rotate(self.picture, angleofmovement)
+                rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
+                self.screen.blit(rotated_image, rotated_rect.topleft)
+                self.last_angle = angleofmovement
+            elif damage is True:
+                angleofmovement = math.degrees(math.atan2(-(self.yold - self.y), self.xold - self.x)) + 90
+                rotated_image = pygame.transform.rotate(self.damage_picture, angleofmovement)
+                rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
+                self.screen.blit(rotated_image, rotated_rect.topleft)
+                self.last_angle = angleofmovement
 
     def draw_debug(self):
         pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
