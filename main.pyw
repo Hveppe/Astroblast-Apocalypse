@@ -510,12 +510,13 @@ while gamerunning:
                     lastmove = 'right'
                     shotting = True
 
-            # controls til mine
+            # controls til minea
             if event.key == pygame.K_m:
                 if ArsenalMines > 0 and shield_up is False:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width/2,
-                                            yvalue=player.y + player.height/2))
+                                            yvalue=player.y + player.height/2,
+                                            picture=pygame.image.load("Image/Mines/mine.png").convert_alpha()))
                     mineplacesound.play()
 
             if event.key == pygame.K_SPACE:
@@ -967,6 +968,9 @@ while gamerunning:
 
         for enemy in HommingFjender:
             enemy.draw_debug()
+
+        for mine in Mineshot:
+            mine.draw_debug()
 
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (10, 90))

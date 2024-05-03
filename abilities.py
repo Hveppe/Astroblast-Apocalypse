@@ -44,17 +44,19 @@ class ShotLaser:
 
 
 class LayMine:
-    color = (100, 100, 100)
     speedx = 0
     speedy = 0
-    width = 10
-    height = 10
-    radius = 5
+    width = 12
+    height = 12
+    radius = 6
 
-    def __init__(self, screen, xvalue, yvalue):
+    def __init__(self, screen, xvalue, yvalue, picture):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
+
+        picture = pygame.transform.scale(picture, (self.width, self.height))
+        self.picture = picture
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()
@@ -62,7 +64,10 @@ class LayMine:
         self.hitwall = False
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.radius)
+        self.screen.blit(self.picture, (self.x-self.width/2, self.y-self.height/2))
+
+    def draw_debug(self):
+        pygame.draw.circle(self.screen, (255, 0, 0), (self.x, self.y), self.radius, 2)
 
 
 class Shield:
