@@ -66,7 +66,7 @@ class LayMine:
 
 
 class Shield:
-    color = (0, 0, 255, 127)
+    color = (0, 0, 255)
     radius = 70
 
     def __init__(self, screen, xvalue, yvalue):
