@@ -190,6 +190,9 @@ player_normalship_skin_button = Button(screen=display, tekst="", size=(70, 70),
 player_secoundship_skin_button = Button(screen=display, tekst="", size=(70, 70),
                                         image=pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha())
 
+player_thirdship_skin_button = Button(screen=display, tekst="", size=(70, 70),
+                                      image=pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
+
 # variabler for loop
 gamerunning = True
 mainmenu = True
@@ -402,17 +405,23 @@ while gamerunning:
                                        tint_image(pygame.image.load("Image/Playerships/Rumskibplayer2.png")
                                                   .convert_alpha(), (255, 0, 0)))
 
+            skin_button_display_player(player_thirdship_skin_button, 300, 400,
+                                       pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha(),
+                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer3.png")
+                                                  .convert_alpha(), (255, 0, 0)))
+
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
                 skinmeny = False
 
             mouse = pygame.mouse.get_pos()
-            if ((return_knap.image_rect.collidepoint(mouse) or
+            if (((return_knap.image_rect.collidepoint(mouse) or
                     spaceship_cursor_skin_button.image_rect.collidepoint(mouse) or
                     orange_cursor_skin_button.image_rect.collidepoint(mouse) or
                     Nasa_cursor_skin_button.image_rect.collidepoint(mouse) or
                     player_normalship_skin_button.image_rect.collidepoint(mouse)) or
-                    player_secoundship_skin_button.image_rect.collidepoint(mouse)):
+                    player_secoundship_skin_button.image_rect.collidepoint(mouse)) or
+                    player_thirdship_skin_button.image_rect.collidepoint(mouse)):
                 click = True
             else:
                 click = False
