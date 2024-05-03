@@ -205,13 +205,13 @@ def taken_damage():
     return True, time.time()
 
 
+# Laver mousecursor synlig
+pygame.mouse.set_visible(False)
+
 while gamerunning:
     # starter main menu loop
     # -------------------------------------Main Menu-------------------------------------------------------------------
     while mainmenu:
-        # Laver mousecursor synlig
-        pygame.mouse.set_visible(False)
-
         # sætter framerate til 60
         clock.tick(60)
 
@@ -1023,9 +1023,6 @@ while gamerunning:
                 file.write(str(highscore))
 
         while gameover:
-            # Laver mousecursor synlig
-            pygame.mouse.set_visible(True)
-
             # sætter framerate til 60
             clock.tick(60)
 
