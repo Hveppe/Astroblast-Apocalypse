@@ -4,16 +4,16 @@ import pygame
 
 
 class ShotLaser:
-    color = (0, 0, 255)
     width = 10
     height = 10
     speedx = 0
     speedy = 0
 
-    def __init__(self, screen, xvalue, yvalue, last_move):
+    def __init__(self, screen, xvalue, yvalue, last_move, color):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
+        self.color = color
 
         self.screenwidth = self.screen.get_width()
         self.screenheight = self.screen.get_height()

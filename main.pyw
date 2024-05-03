@@ -99,10 +99,11 @@ wavehommingspawnadd = 4
 
 changeinrate = 10
 
-# delay til laser
+# laser
 delaylaser = 0.3
 last_time_shot = 0
 shotting = False
+laser_color = (0, 0, 255)
 
 # shield varaibler
 shield_up = False
@@ -585,7 +586,7 @@ while gamerunning:
     if shotting is True and shield_up is False:
         if current - last_time_shot >= delaylaser:
             Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width/2 - 5,
-                                       yvalue=player.y + player.height/2 - 5, last_move=lastmove))
+                                       yvalue=player.y + player.height/2 - 5, last_move=lastmove, color=laser_color))
             lasersound.play()
             last_time_shot = current
 
