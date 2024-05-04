@@ -33,7 +33,7 @@ baggrund = Picture(screen=display, x=0, y=0, image=baggrund)
 
 # baggrunds music
 pygame.mixer.music.load('sound/backgroundmusic-200697.wav')
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
 
@@ -224,14 +224,6 @@ while gamerunning:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-                if event.key == pygame.K_SPACE:
-                    mainmenu = False
-                    new_wave_begin = time.time()
-
-                    # reset/start timer
-                    startgametime = time.time()
-                if event.key == pygame.K_i:
-                    infoscreen = True
 
             # starter loop for info skærm
             # -------------------------------------Info Screen--------------------------------------------------
@@ -247,8 +239,6 @@ while gamerunning:
                         if eventinfo.key == pygame.K_ESCAPE:
                             pygame.quit()
                             sys.exit()
-                        if eventinfo.key == pygame.K_i:
-                            infoscreen = False
 
                 display.fill((0, 0, 0))
                 baggrund.draw()
@@ -1050,41 +1040,6 @@ while gamerunning:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         sys.exit()
-                    if event.key == pygame.K_r:
-                        gameover = False
-                        mainmenu = True
-
-                        # Clear lister
-                        Lasershot.clear()
-                        Mineshot.clear()
-                        Fjender.clear()
-                        HeavyFjender.clear()
-                        MineswepperFjender.clear()
-                        HommingFjender.clear()
-                        Astroids.clear()
-
-                        # Reset af player
-                        player.xmove = 0
-                        player.ymove = 0
-                        ArsenalMines = 5
-                        lives = 5
-                        wavelives = 4
-                        wave = 1
-                        player.x = screenwith / 2 - 20
-                        player.y = screenheight - 100
-                        shotting = False
-                        shield_up = False
-                        shield_charge = 100
-                        last_draintime = None
-
-                        # reset af fjender
-                        antalfjender = 0
-                        waveheavyspawn = 5
-                        wavemineswepperspawn = 6
-                        wavehommingspawn = 7
-                        antalfjenderheavy = 0
-                        antalfjenderhomming = 0
-                        antalfjendermineswpper = 0
 
             gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
             display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 200))
