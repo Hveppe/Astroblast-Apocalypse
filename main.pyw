@@ -42,6 +42,7 @@ lasersound = pygame.mixer.Sound('sound/laser-gun-81720.wav')
 mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
 enemydeadsound = pygame.mixer.Sound('sound/big explosion.wav')
 gameoversound = pygame.mixer.Sound('sound/game-over-160612.wav')
+clickbuttonsound = pygame.mixer.Sound("sound/click-menu-app-147357.wav")
 
 # laver lister til classer der skal havde flere af gangen på skærmen
 # Våben
@@ -336,6 +337,7 @@ while gamerunning:
                 # return button
                 if return_knap.draw(screenwith/2-225, screenheight-100) is True:
                     infoscreen = False
+                    clickbuttonsound.play()
 
                 mouse = pygame.mouse.get_pos()
                 if return_knap.image_rect.collidepoint(mouse):
@@ -367,11 +369,13 @@ while gamerunning:
                 if button.draw(x, y):
                     mousecursor.picture = pygame.transform.scale(image, (30, 30))
                     mousecursor.picture_clik = pygame.transform.scale(imageclick, (25, 30))
+                    clickbuttonsound.play()
 
             def skin_button_display_player(button, x, y, image, damage_image):
                 if button.draw(x, y):
                     player.picture = pygame.transform.scale(image, (60, 60))
                     player.damage_picture = pygame.transform.scale(damage_image, (60, 60))
+                    clickbuttonsound.play()
 
             # -----------------------------------------Mouse cursor skins-----------------------------------------------
             tekst = Font.render('Mouse Cursor', True, (255, 165, 0))
@@ -414,6 +418,7 @@ while gamerunning:
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
                 skinmeny = False
+                clickbuttonsound.play()
 
             mouse = pygame.mouse.get_pos()
             if (((return_knap.image_rect.collidepoint(mouse) or
@@ -452,11 +457,15 @@ while gamerunning:
             # reset/start timer
             startgametime = time.time()
 
+            clickbuttonsound.play()
+
         if infospil_knap.draw(screenwith/2-200, screenheight/2+50) is True:
             infoscreen = True
+            clickbuttonsound.play()
 
         if skin_knap.draw(screenwith/2-200, screenheight/2+160) is True:
             skinmeny = True
+            clickbuttonsound.play()
 
         mouse = pygame.mouse.get_pos()
         if (startspil_knap.image_rect.collidepoint(mouse) or infospil_knap.image_rect.collidepoint(mouse)
@@ -1091,6 +1100,7 @@ while gamerunning:
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
+                clickbuttonsound.play()
                 gameover = False
                 mainmenu = True
 
