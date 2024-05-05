@@ -176,6 +176,9 @@ return_knap = Button(screen=display, tekst="RETURN TO MENU", size=(450, 100),
 skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
                    image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
+returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 100),
+                             image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
+
 # skin cursor buttons
 orange_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
                                    image=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").
@@ -565,6 +568,8 @@ while gamerunning:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
                 pause = True
+
+                # ------------------------------------Pause screen------------------------------------------------------
                 while pause is True:
 
                     for eventpause in pygame.event.get():
@@ -575,14 +580,64 @@ while gamerunning:
                             if eventpause.key == pygame.K_ESCAPE:
                                 pygame.quit()
                                 sys.exit()
-                            if eventpause.key == pygame.K_p:
-                                pause = False
-                                player.xmove = 0
-                                player.ymove = 0
+
+                    display.fill((0, 0, 0))
+                    baggrund.draw()
 
                     pausetext = Fontbig.render('PAUSED', True, (255, 255, 255))
-                    display.blit(pausetext, (screenwith/2-pausetext.get_width()/2, screenheight/2
-                                             - pausetext.get_height()/2))
+                    display.blit(pausetext, (screenwith/2-pausetext.get_width()/2, 10 + pausetext.get_height()/2))
+
+                    if returntogame_button.draw(screenwith/2-returntogame_button.width/2, screenheight/2-70):
+                        clickbuttonsound.play()
+                        pause = False
+                        player.xmove = 0
+                        player.ymove = 0
+
+                    if return_knap.draw(screenwith/2-return_knap.width/2, screenheight/2+70):
+                        clickbuttonsound.play()
+                        pause = False
+                        mainmenu = True
+
+                        # Clear lister
+                        Lasershot.clear()
+                        Mineshot.clear()
+                        Fjender.clear()
+                        HeavyFjender.clear()
+                        MineswepperFjender.clear()
+                        HommingFjender.clear()
+                        Astroids.clear()
+
+                        # Reset af player
+                        player.xmove = 0
+                        player.ymove = 0
+                        ArsenalMines = 5
+                        lives = 5
+                        wavelives = 4
+                        wave = 1
+                        player.x = screenwith / 2 - 20
+                        player.y = screenheight - 100
+                        shotting = False
+                        shield_up = False
+                        shield_charge = 100
+                        last_draintime = None
+
+                        # reset af fjender
+                        antalfjender = 0
+                        waveheavyspawn = 5
+                        wavemineswepperspawn = 6
+                        wavehommingspawn = 7
+                        antalfjenderheavy = 0
+                        antalfjenderhomming = 0
+                        antalfjendermineswpper = 0
+
+                    mousecursor.update()
+                    mousecursor.draw(click=click)
+
+                    mouse = pygame.mouse.get_pos()
+                    if return_knap.image_rect.collidepoint(mouse) or returntogame_button.image_rect.collidepoint(mouse):
+                        click = True
+                    else:
+                        click = False
 
                     pygame.display.flip()
 
