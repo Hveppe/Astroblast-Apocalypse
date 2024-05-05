@@ -1,9 +1,12 @@
 # Spillet er lavet af Hveppe
 
 import pygame
+pygame.mixer.init()
 
 
 class Button:
+    clickbuttonsound = pygame.mixer.Sound("sound/click-menu-app-147357.wav")
+
     def __init__(self, screen, tekst, size, image):
         self.tekst = tekst
         self.size = size
@@ -30,6 +33,7 @@ class Button:
         if self.image_rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked is False:
                 self.clicked = True
+                self.clickbuttonsound.play()
 
             if pygame.mouse.get_pressed()[0] == 0 and self.clicked is True:
                 self.clicked = False
