@@ -39,9 +39,6 @@ class Button:
                 self.clicked = False
                 self.action = True
 
-        if pygame.mouse.get_pressed()[0] == 0:
-            self.clicked = False
-
         # tegn knappen
         self.screen.blit(self.image, self.image.get_rect(topleft=(self.x, self.y)))
         font = pygame.font.SysFont('Comic Sans MS', 40)
