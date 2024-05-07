@@ -232,9 +232,8 @@ while gamerunning:
 
             # starter loop for info skærm
             # -------------------------------------Info Screen--------------------------------------------------
-            while infoscreen is True:
-                # sætter framerate til 60
-                clock.tick(60)
+            while infoscreen:
+                clock.tick(60)  # 60 FPS
 
                 for eventinfo in pygame.event.get():
                     if eventinfo.type == pygame.QUIT:
