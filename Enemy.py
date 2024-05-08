@@ -92,7 +92,7 @@ class HommingEnemyClass:
     height = 50
     dead = False
     timeofdeath = None
-    lastangleofmovement = None
+    lastangleofmovement = 90
 
     def __init__(self, screen, xvalue, yvalue, speedx, speedy, color, picture):
         self.screen = screen
