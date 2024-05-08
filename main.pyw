@@ -95,6 +95,7 @@ fjende_spawn = False
 taking_damage_player = False
 time_of_damage = time.time()
 time_being_red = 0.25
+explosion_time = 0.1
 
 waveheavyspawnadd = 5
 wavemineswepperspawnadd = 4
@@ -659,75 +660,55 @@ while gamerunning:
             enemy.update()
 
         enemy.draw()
-        if collisionchecker(player, enemy):
+        if collisionchecker(player, enemy) and enemy.dead is False:
             if shield_up:
                 pass
             else:
                 enemydeadsound.play()
                 lives -= 1
                 taking_damage_player, time_of_damage = taken_damage()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-                try:
-                    Fjender.remove(enemy)
-
-                except ValueError:
-                    pass
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 minepoint += 1
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-
-                try:
-                    Fjender.remove(enemy)
-                except ValueError:
-                    pass
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
         for Mine in Mineshot:
             if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-
-                try:
-                    Fjender.remove(enemy)
-                except ValueError:
-                    pass
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
     for enemy in HeavyFjender:
         if current - new_wave_begin >= new_wave_delay:
             enemy.update()
 
         enemy.draw()
-        if collisionchecker(player, enemy):
+        if collisionchecker(player, enemy) and enemy.dead is False:
             if shield_up:
                 pass
             else:
                 enemydeadsound.play()
                 lives -= enemy.lives
                 taking_damage_player, time_of_damage = taken_damage()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-                try:
-                    HeavyFjender.remove(enemy)
-
-                except ValueError:
-                    pass
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 enemydeadsound.play()
 
-                if enemy.dead:
+                if enemy.lives <= 0:
                     minepoint += 3
-                    display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)),
-                                 (enemy.x, enemy.y))
-                    try:
-                        HeavyFjender.remove(enemy)
-                    except ValueError:
-                        pass
+                    enemy.dead = True
+                    enemy.timeofdeath = time.time()
                 else:
                     enemy.lives -= 1
 
@@ -736,13 +717,9 @@ while gamerunning:
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
 
-                if enemy.dead:
-                    display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)),
-                                 (enemy.x, enemy.y))
-                    try:
-                        HeavyFjender.remove(enemy)
-                    except ValueError:
-                        pass
+                if enemy.lives <= 0:
+                    enemy.dead = True
+                    enemy.timeofdeath = time.time()
                 else:
                     enemy.lives -= 1
 
@@ -752,31 +729,23 @@ while gamerunning:
 
         enemy.draw()
 
-        if collisionchecker(player, enemy):
+        if collisionchecker(player, enemy) and enemy.dead is False:
             if shield_up:
                 pass
             else:
                 enemydeadsound.play()
                 lives -= 1
                 taking_damage_player, time_of_damage = taken_damage()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-                try:
-                    MineswepperFjender.remove(enemy)
-
-                except ValueError:
-                    pass
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-
-                try:
-                    MineswepperFjender.remove(enemy)
-                    minepoint += 1
-                except ValueError:
-                    pass
+                minepoint += 1
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
         for Mine in Mineshot:
             if collisionchecker_circle_square(Mine, enemy):
@@ -788,43 +757,30 @@ while gamerunning:
 
         enemy.draw()
 
-        if collisionchecker(enemy, player):
+        if collisionchecker(enemy, player) and enemy.dead is False:
             if shield_up:
                 pass
             else:
                 lives -= 1
                 enemydeadsound.play()
                 taking_damage_player, time_of_damage = taken_damage()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-
-                try:
-                    HommingFjender.remove(enemy)
-
-                except ValueError:
-                    pass
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-
-                try:
-                    HommingFjender.remove(enemy)
-                    minepoint += 1
-                except ValueError:
-                    pass
+                minepoint += 1
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
         for Mine in Mineshot:
             if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
-
-                try:
-                    HommingFjender.remove(enemy)
-                except ValueError:
-                    pass
+                enemy.dead = True
+                enemy.timeofdeath = time.time()
 
     for astriod in Astroids:
         astriod.draw()
@@ -1014,9 +970,26 @@ while gamerunning:
     player.draw(taking_damage_player)
     player.update()
 
+    # farver player rød når den tager skade
     if current - time_of_damage >= time_being_red:
         taking_damage_player = False
 
+    # laver laver explosion effekten
+    def explosion_effekt(type_enemy):
+        for enemytype in type_enemy:
+            if enemytype.dead is True:
+                if current - enemytype.timeofdeath >= explosion_time:
+                    type_enemy.remove(enemytype)
+                else:
+                    display.blit(pygame.transform.scale(explosion_effeckt, (enemytype.width, enemytype.height)),
+                                 (enemytype.x, enemytype.y))
+
+    explosion_effekt(Fjender)
+    explosion_effekt(MineswepperFjender)
+    explosion_effekt(HeavyFjender)
+    explosion_effekt(HommingFjender)
+
+    # tegner hitboxes
     if debug is True:
         player.draw_debug()
 
