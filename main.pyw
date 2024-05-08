@@ -793,25 +793,21 @@ while gamerunning:
             if collisionchecker_circle_square(astriod, enemy):
                 Fjender.remove(enemy)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
 
         for enemy in HeavyFjender:
             if collisionchecker_circle_square(astriod, enemy):
                 HeavyFjender.remove(enemy)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
 
         for enemy in MineswepperFjender:
             if collisionchecker_circle_square(astriod, enemy):
                 MineswepperFjender.remove(enemy)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
 
         for enemy in HommingFjender:
             if collisionchecker_circle_square(astriod, enemy):
                 HommingFjender.remove(enemy)
                 enemydeadsound.play()
-                display.blit(pygame.transform.scale(explosion_effeckt, (enemy.width, enemy.height)), (enemy.x, enemy.y))
 
         for lasershot in Lasershot:
             if collisionchecker_circle_square(astriod, lasershot):
@@ -981,8 +977,8 @@ while gamerunning:
                 if current - enemytype.timeofdeath >= explosion_time:
                     type_enemy.remove(enemytype)
                 else:
-                    display.blit(pygame.transform.scale(explosion_effeckt, (enemytype.width, enemytype.height)),
-                                 (enemytype.x, enemytype.y))
+                    display.blit(pygame.transform.scale(explosion_effeckt, (enemytype.width+15, enemytype.height+15)),
+                                 (enemytype.x-15/2, enemytype.y-15/2))
 
     # Kalder function til hver fjende type
     explosion_effekt(Fjender)
