@@ -126,7 +126,7 @@ class HommingEnemyClass:
             pass
 
     def draw(self):
-        if self.speedy != 0 and self.speedx != 0:
+        if self.speedy == 0 and self.speedx == 0:
             rotated_image = pygame.transform.rotate(self.picture, self.lastangleofmovement)
             rotated_rect = rotated_image.get_rect(center=(self.x + self.width / 2, self.y + self.height / 2))
             self.screen.blit(rotated_image, rotated_rect.topleft)
