@@ -1006,6 +1006,9 @@ while gamerunning:
         for mine in Mineshot:
             mine.draw_debug()
 
+        fpstekst = Font.render(f"FPS: {int(round(clock.get_fps(), 0))}", True, (255, 255, 255))
+        display.blit(fpstekst, (10, screenheight-100))
+
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (10, 90))
 
