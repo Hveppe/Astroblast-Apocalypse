@@ -977,8 +977,9 @@ while gamerunning:
                 if current - enemytype.timeofdeath >= explosion_time:
                     type_enemy.remove(enemytype)
                 else:
-                    display.blit(pygame.transform.scale(explosion_effeckt, (enemytype.width+15, enemytype.height+15)),
-                                 (enemytype.x-15/2, enemytype.y-15/2))
+                    display.blit(pygame.transform.scale(explosion_effeckt,
+                                 (enemytype.width+enemytype.width/2, enemytype.height+enemytype.width/2)),
+                                 (enemytype.x-enemytype.width/2/2, enemytype.y-enemytype.width/2/2))
 
     # Kalder function til hver fjende type
     explosion_effekt(Fjender)
