@@ -905,24 +905,11 @@ while gamerunning:
     if current - time_of_damage >= time_being_red:
         taking_damage_player = False
 
-    # laver function til explosion effekten
-    def explosion_effekt(type_enemy):
-        for enemytype in type_enemy:
-            if enemytype.dead is True:
-                if current - enemytype.timeofdeath >= explosion_time:
-                    type_enemy.remove(enemytype)
-                else:
-                    display.blit(pygame.transform.scale(explosion_effeckt,
-                                                        (enemytype.width + enemytype.width / 2,
-                                                         enemytype.height + enemytype.width / 2)),
-                                 (enemytype.x - enemytype.width / 2 / 2, enemytype.y - enemytype.width / 2 / 2))
-
-
     # Kalder function til hver fjende type
-    explosion_effekt(Fjender)
-    explosion_effekt(MineswepperFjender)
-    explosion_effekt(HeavyFjender)
-    explosion_effekt(HommingFjender)
+    explosion_effekt(Fjender, current, explosion_time, explosion_effeckt, display)
+    explosion_effekt(MineswepperFjender, current, explosion_time, explosion_effeckt, display)
+    explosion_effekt(HeavyFjender, current, explosion_time, explosion_effeckt, display)
+    explosion_effekt(HommingFjender, current, explosion_time, explosion_effeckt, display)
 
     # --------------------------------------------Debug menu------------------------------------------------------------
     if debug is True:
