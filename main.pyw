@@ -1000,21 +1000,16 @@ while gamerunning:
             mine.draw_debug()
 
         # Displayer FPS
-        fpstekst = Font.render(f"FPS: {int(round(clock.get_fps(), 0))}", True, (255, 255, 255))
-        display.blit(fpstekst, (10, screenheight-100))
+        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight-100), display, (255, 255, 255))
 
     # ---------------------------------------Main game igen-------------------------------------------------------------
-    livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
-    display.blit(livestext, (10, 90))
+    tekst_render(Font, f"Lives: {lives}", (10, 90), display, (255, 255, 255))
 
-    pointstext = Font.render(f'Wave: {wave}', True, (255, 255, 255))
-    display.blit(pointstext, (10, 50))
+    tekst_render(Font, f"Wave: {wave}", (10, 50), display, (255, 255, 255))
 
-    shield_text = Font.render(f'Shield: {shield_charge}%', True, (255, 255, 255))
-    display.blit(shield_text, (screenwith - 260, 10))
+    tekst_render(Font, f"Shield {shield_charge}%", (screenwith-260, 10), display, (255, 255, 255))
 
-    minetext = Font.render(f'Mine: {ArsenalMines}', True, (255, 255, 255))
-    display.blit(minetext, (screenwith - 260, 50))
+    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith-260, 50), display, (255, 255, 255))
 
     if lives > 0:
         timer = time.time()-startgametime

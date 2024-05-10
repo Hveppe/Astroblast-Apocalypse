@@ -3,6 +3,6 @@
 import pygame
 
 
-def tekst_render(font, tekst, x, y, screen):
-    tekst = font.render(tekst, True, (255, 255, 255))
-    screen.blit(tekst, (x, y))
+def tekst_render(font, tekst, destination, screen, color):
+    tekst = font.render(tekst, True, color)
+    screen.blit(tekst, destination)
