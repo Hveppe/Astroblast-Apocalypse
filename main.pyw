@@ -7,6 +7,7 @@ from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
 from objekts import AstroidClass, Picture, Button
 from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
 from Mouse import MouseCursor
+from Sidefunctions import *
 
 # importer libaries
 import random
@@ -515,7 +516,7 @@ while gamerunning:
                                             yvalue=player.y + player.height/2,
                                             picture=pygame.image.load("Image/Mines/mine.png").convert_alpha()))
                     mineplacesound.play()
-            
+
             # control til shield
             if event.key == pygame.K_SPACE:
                 shield_up = True
@@ -978,8 +979,9 @@ while gamerunning:
     explosion_effekt(HeavyFjender)
     explosion_effekt(HommingFjender)
 
-    # tegner hitboxes
+    # --------------------------------------------Debug menu------------------------------------------------------------
     if debug is True:
+        # viser hitboxes
         player.draw_debug()
 
         for enemy in Fjender:
@@ -997,9 +999,11 @@ while gamerunning:
         for mine in Mineshot:
             mine.draw_debug()
 
+        # Displayer FPS
         fpstekst = Font.render(f"FPS: {int(round(clock.get_fps(), 0))}", True, (255, 255, 255))
         display.blit(fpstekst, (10, screenheight-100))
 
+    # ---------------------------------------Main game igen-------------------------------------------------------------
     livestext = Font.render(f'Lives: {lives}', True, (255, 255, 255))
     display.blit(livestext, (10, 90))
 
