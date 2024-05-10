@@ -1127,3 +1127,4 @@ while gamerunning:
             pygame.display.flip()
 
 pygame.quit()
+sys.exit()
