@@ -1000,16 +1000,17 @@ while gamerunning:
             mine.draw_debug()
 
         # Displayer FPS
-        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight-100), display, (255, 255, 255))
+        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight-100), display, (255, 255, 255),
+                     False)
 
     # ---------------------------------------Main game igen-------------------------------------------------------------
-    tekst_render(Font, f"Lives: {lives}", (10, 90), display, (255, 255, 255))
+    tekst_render(Font, f"Lives: {lives}", (10, 90), display, (255, 255, 255), False)
 
-    tekst_render(Font, f"Wave: {wave}", (10, 50), display, (255, 255, 255))
+    tekst_render(Font, f"Wave: {wave}", (10, 50), display, (255, 255, 255), False)
 
-    tekst_render(Font, f"Shield {shield_charge}%", (screenwith-260, 10), display, (255, 255, 255))
+    tekst_render(Font, f"Shield {shield_charge}%", (screenwith-260, 10), display, (255, 255, 255), False)
 
-    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith-260, 50), display, (255, 255, 255))
+    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith-260, 50), display, (255, 255, 255), False)
 
     if lives > 0:
         timer = time.time()-startgametime
@@ -1069,17 +1070,14 @@ while gamerunning:
                         pygame.quit()
                         sys.exit()
 
-            gameovertext = Fontbig.render(f'GAME OVER', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 200))
+            tekst_render(Fontbig, 'GAME OVER', (screenwith/2, screenheight/2-200), display, (255, 255, 255), True)
 
-            gameovertext = Font.render(f'WAVE: {wave}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 80))
+            tekst_render(Font, f"WAVE: {wave}", (screenwith/2, screenheight/2-80), display, (255, 255, 255), True)
 
-            gameovertext = Font.render(f'TIME: {round(timer, 2)}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, screenheight / 2 - 30))
+            tekst_render(Font, f"TIME: {round(timer, 2)}", (screenwith/2, screenheight/2-30), display, (255, 255, 255),
+                         True)
 
-            gameovertext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
-            display.blit(gameovertext, (screenwith/2 - gameovertext.get_width()/2, 20))
+            tekst_render(Font, f"Highscore: wave {highscore}", (screenwith/2, 20), display, (255, 255, 255), True)
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
