@@ -492,7 +492,8 @@ while gamerunning:
         if event.type == pygame.KEYDOWN:
             # Kode til at kontroler våben
             if event.type == pygame.KEYDOWN:
-                # Kode til at kontroler våben
+
+                # Controls til laser
                 if event.key == pygame.K_UP:
                     lastmove = 'up'
                     shotting = True
@@ -506,7 +507,7 @@ while gamerunning:
                     lastmove = 'right'
                     shotting = True
 
-            # controls til minea
+            # controls til mine
             if event.key == pygame.K_m:
                 if ArsenalMines > 0 and shield_up is False:
                     ArsenalMines -= 1
@@ -514,7 +515,8 @@ while gamerunning:
                                             yvalue=player.y + player.height/2,
                                             picture=pygame.image.load("Image/Mines/mine.png").convert_alpha()))
                     mineplacesound.play()
-
+            
+            # control til shield
             if event.key == pygame.K_SPACE:
                 shield_up = True
 
@@ -532,6 +534,8 @@ while gamerunning:
 
         # Bruges til at modvirker controls
         if event.type == pygame.KEYUP:
+
+            # modvirker bevægelse
             if event.key == pygame.K_w:
                 player.ymove += player.movespeed
             if event.key == pygame.K_s:
@@ -555,7 +559,7 @@ while gamerunning:
             if event.key == pygame.K_SPACE:
                 shield_up = False
 
-    # pause spil
+        # pause spil
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
                 pause = True
