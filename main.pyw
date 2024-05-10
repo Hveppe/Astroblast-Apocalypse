@@ -215,8 +215,8 @@ while gamerunning:
             display.blit(picture, picture_rect.topleft)
 
             tekst = Font.render('Player Spaceship', True, White)
-            display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height/2 -
-                                 tekst.get_height()/2))
+            display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height / 2 -
+                                 tekst.get_height() / 2))
 
             # Normal fjende
             picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png').
@@ -264,16 +264,16 @@ while gamerunning:
             display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
 
             # Displayer controls
-            tekst_render(Font, "Movement: W, A, S, D", (screenwith-screenwith/4, 100), display, White, True)
+            tekst_render(Font, "Movement: W, A, S, D", (screenwith - screenwith / 4, 100), display, White, True)
             tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 200), display, White, True)
             tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 300), display, White, True)
             tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 400), display, White, True)
             tekst_render(Font, "Pause Game: P", (screenwith - screenwith / 4, 500), display, White, True)
             tekst_render(Font, "Close Game: ESCAPE", (screenwith - screenwith / 4, 600), display, White, True)
             tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 200), display, White, True)
-            
+
             # return button
-            if return_knap.draw(screenwith/2-225, screenheight-100) is True:
+            if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
                 infoscreen = False
 
             mouse = pygame.mouse.get_pos()
@@ -302,19 +302,22 @@ while gamerunning:
             display.fill((0, 0, 0))
             baggrund.draw()
 
+
             def skin_button_display_cursor(button, x, y, image, imageclick):
                 if button.draw(x, y):
                     mousecursor.picture = pygame.transform.scale(image, (30, 30))
                     mousecursor.picture_clik = pygame.transform.scale(imageclick, (25, 30))
+
 
             def skin_button_display_player(button, x, y, image, damage_image):
                 if button.draw(x, y):
                     player.picture = pygame.transform.scale(image, (60, 60))
                     player.damage_picture = pygame.transform.scale(damage_image, (60, 60))
 
+
             # -----------------------------------------Mouse cursor skins-----------------------------------------------
             tekst = Font.render('Mouse Cursor', True, Orange)
-            display.blit(tekst, (screenwith/2-tekst.get_width()/2, 50))
+            display.blit(tekst, (screenwith / 2 - tekst.get_width() / 2, 50))
 
             skin_button_display_cursor(orange_cursor_skin_button, 100, 150,
                                        pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").convert_alpha(),
@@ -356,11 +359,11 @@ while gamerunning:
 
             mouse = pygame.mouse.get_pos()
             if (((return_knap.image_rect.collidepoint(mouse) or
-                    spaceship_cursor_skin_button.image_rect.collidepoint(mouse) or
-                    orange_cursor_skin_button.image_rect.collidepoint(mouse) or
-                    Nasa_cursor_skin_button.image_rect.collidepoint(mouse) or
-                    player_normalship_skin_button.image_rect.collidepoint(mouse)) or
-                    player_secoundship_skin_button.image_rect.collidepoint(mouse)) or
+                  spaceship_cursor_skin_button.image_rect.collidepoint(mouse) or
+                  orange_cursor_skin_button.image_rect.collidepoint(mouse) or
+                  Nasa_cursor_skin_button.image_rect.collidepoint(mouse) or
+                  player_normalship_skin_button.image_rect.collidepoint(mouse)) or
+                 player_secoundship_skin_button.image_rect.collidepoint(mouse)) or
                     player_thirdship_skin_button.image_rect.collidepoint(mouse)):
                 click = True
             else:
@@ -375,23 +378,23 @@ while gamerunning:
         baggrund.draw()
 
         # displayer title
-        tekst_render(Fontbig, "AstroBlast", (screenwith/2, 100), display, White, True)
-        tekst_render(Fontbig, "Apocalypse", (screenwith/2, 190), display, White, True)
+        tekst_render(Fontbig, "AstroBlast", (screenwith / 2, 100), display, White, True)
+        tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 190), display, White, True)
 
         # displayer highscore
-        tekst_render(Font, f"Highscore: {highscore}", (screenwith/2, 20), display, White, True)
+        tekst_render(Font, f"Highscore: {highscore}", (screenwith / 2, 20), display, White, True)
 
-        if startspil_knap.draw(screenwith/2-200, screenheight/2-60) is True:
+        if startspil_knap.draw(screenwith / 2 - 200, screenheight / 2 - 60) is True:
             mainmenu = False
             new_wave_begin = time.time()
 
             # reset/start timer
             startgametime = time.time()
 
-        if infospil_knap.draw(screenwith/2-200, screenheight/2+50) is True:
+        if infospil_knap.draw(screenwith / 2 - 200, screenheight / 2 + 50) is True:
             infoscreen = True
 
-        if skin_knap.draw(screenwith/2-200, screenheight/2+160) is True:
+        if skin_knap.draw(screenwith / 2 - 200, screenheight / 2 + 160) is True:
             skinmeny = True
 
         mouse = pygame.mouse.get_pos()
@@ -451,8 +454,8 @@ while gamerunning:
             if event.key == pygame.K_m:
                 if ArsenalMines > 0 and shield_up is False:
                     ArsenalMines -= 1
-                    Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width/2,
-                                            yvalue=player.y + player.height/2,
+                    Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
+                                            yvalue=player.y + player.height / 2,
                                             picture=pygame.image.load("Image/Mines/mine.png").convert_alpha()))
                     mineplacesound.play()
 
@@ -520,14 +523,15 @@ while gamerunning:
                     baggrund.draw()
 
                     pausetext = Fontbig.render('PAUSED', True, White)
-                    display.blit(pausetext, (screenwith/2-pausetext.get_width()/2, 10 + pausetext.get_height()/2))
+                    display.blit(pausetext,
+                                 (screenwith / 2 - pausetext.get_width() / 2, 10 + pausetext.get_height() / 2))
 
-                    if returntogame_button.draw(screenwith/2-returntogame_button.width/2, screenheight/2-70):
+                    if returntogame_button.draw(screenwith / 2 - returntogame_button.width / 2, screenheight / 2 - 70):
                         pause = False
                         player.xmove = 0
                         player.ymove = 0
 
-                    if return_knap.draw(screenwith/2-return_knap.width/2, screenheight/2+70):
+                    if return_knap.draw(screenwith / 2 - return_knap.width / 2, screenheight / 2 + 70):
                         pause = False
                         mainmenu = True
 
@@ -576,8 +580,8 @@ while gamerunning:
 
     if shotting is True and shield_up is False:
         if current - last_time_shot >= delaylaser:
-            Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width/2 - 5,
-                                       yvalue=player.y + player.height/2 - 5, last_move=lastmove, color=laser_color))
+            Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2 - 5,
+                                       yvalue=player.y + player.height / 2 - 5, last_move=lastmove, color=laser_color))
             lasersound.play()
             last_time_shot = current
 
@@ -686,7 +690,7 @@ while gamerunning:
                 Mineshot.remove(Mine)
 
     for enemy in HommingFjender:
-        if current-new_wave_begin >= new_wave_delay:
+        if current - new_wave_begin >= new_wave_delay:
             enemy.update(player=player)
 
         enemy.draw()
@@ -797,14 +801,14 @@ while gamerunning:
         for n in range(antalfjenderheavy):
             heavyfjendespawn = True
             while heavyfjendespawn:
-                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith-60),
-                                            yvalue=random.randint(0, screenheight-60), speedx=random.randint(1, 5),
+                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith - 60),
+                                            yvalue=random.randint(0, screenheight - 60), speedx=random.randint(1, 5),
                                             speedy=random.randint(1, 5),
                                             picture=pygame.image.load('Image/Fjender/Heavyfjendeimage.png')
                                             .convert_alpha())
                 if collisionchecker(new_heavy, player):
-                    new_heavy.x = random.randint(0, screenwith-10)
-                    new_heavy.y = random.randint(0, screenheight-10)
+                    new_heavy.x = random.randint(0, screenwith - 10)
+                    new_heavy.y = random.randint(0, screenheight - 10)
                 else:
                     HeavyFjender.append(new_heavy)
                     heavyfjendespawn = False
@@ -827,14 +831,14 @@ while gamerunning:
         for h in range(antalfjenderhomming):
             hommingspawn = True
             while hommingspawn:
-                new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith-50),
-                                              yvalue=random.randint(0, screenheight-50), speedx=5,
+                new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith - 50),
+                                              yvalue=random.randint(0, screenheight - 50), speedx=5,
                                               speedy=5, color=(255, 0, 0),
                                               picture=pygame.image.load('Image/Fjender/HommingFjendeImage.png')
                                               .convert_alpha())
                 if collisionchecker(new_enemy, player):
-                    new_enemy.x = random.randint(0, screenwith-10)
-                    new_enemy.y = random.randint(0, screenheight-10)
+                    new_enemy.x = random.randint(0, screenwith - 10)
+                    new_enemy.y = random.randint(0, screenheight - 10)
                 else:
                     HommingFjender.append(new_enemy)
                     hommingspawn = False
@@ -909,8 +913,10 @@ while gamerunning:
                     type_enemy.remove(enemytype)
                 else:
                     display.blit(pygame.transform.scale(explosion_effeckt,
-                                 (enemytype.width+enemytype.width/2, enemytype.height+enemytype.width/2)),
-                                 (enemytype.x-enemytype.width/2/2, enemytype.y-enemytype.width/2/2))
+                                                        (enemytype.width + enemytype.width / 2,
+                                                         enemytype.height + enemytype.width / 2)),
+                                 (enemytype.x - enemytype.width / 2 / 2, enemytype.y - enemytype.width / 2 / 2))
+
 
     # Kalder function til hver fjende type
     explosion_effekt(Fjender)
@@ -939,7 +945,7 @@ while gamerunning:
             mine.draw_debug()
 
         # Displayer FPS
-        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight-100), display, White,
+        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight - 100), display, White,
                      False)
 
     # ---------------------------------------Main game igen-------------------------------------------------------------
@@ -947,12 +953,12 @@ while gamerunning:
 
     tekst_render(Font, f"Wave: {wave}", (10, 50), display, White, False)
 
-    tekst_render(Font, f"Shield {shield_charge}%", (screenwith-260, 10), display, White, False)
+    tekst_render(Font, f"Shield {shield_charge}%", (screenwith - 260, 10), display, White, False)
 
-    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith-260, 50), display, White, False)
+    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith - 260, 50), display, White, False)
 
     if lives > 0:
-        timer = time.time()-startgametime
+        timer = time.time() - startgametime
 
     timerext = Font.render(f'Timer: {round(timer, 2)}', True, White)
     display.blit(timerext, (10, 10))
@@ -969,9 +975,9 @@ while gamerunning:
             yastriond = random.randrange(1, screenheight)
         elif direction == 3:
             xastriond = random.randrange(1, screenwith)
-            yastriond = random.randrange(screenheight+100, screenheight+200)
+            yastriond = random.randrange(screenheight + 100, screenheight + 200)
         elif direction == 4:
-            xastriond = random.randrange(screenwith+100, screenwith+200)
+            xastriond = random.randrange(screenwith + 100, screenwith + 200)
             yastriond = random.randrange(1, screenheight)
         else:
             xastriond = 0
@@ -1009,14 +1015,14 @@ while gamerunning:
                         pygame.quit()
                         sys.exit()
 
-            tekst_render(Fontbig, 'GAME OVER', (screenwith/2, screenheight/2-200), display, White, True)
+            tekst_render(Fontbig, 'GAME OVER', (screenwith / 2, screenheight / 2 - 200), display, White, True)
 
-            tekst_render(Font, f"WAVE: {wave}", (screenwith/2, screenheight/2-80), display, White, True)
+            tekst_render(Font, f"WAVE: {wave}", (screenwith / 2, screenheight / 2 - 80), display, White, True)
 
-            tekst_render(Font, f"TIME: {round(timer, 2)}", (screenwith/2, screenheight/2-30), display, White,
+            tekst_render(Font, f"TIME: {round(timer, 2)}", (screenwith / 2, screenheight / 2 - 30), display, White,
                          True)
 
-            tekst_render(Font, f"Highscore: wave {highscore}", (screenwith/2, 20), display, White, True)
+            tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
