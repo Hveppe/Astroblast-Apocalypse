@@ -8,6 +8,7 @@ from objekts import AstroidClass, Picture, Button
 from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
 from Mouse import MouseCursor
 from Sidefunctions import *
+from Define import *
 
 # importer libaries
 import random
@@ -73,52 +74,6 @@ player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
                      picture=pygame.image.load('Image/Playerships/Rumskibplayer.png').convert_alpha(),
                      damage_picture=tint_image(pygame.image.load('Image/Playerships/Rumskibplayer.png').convert_alpha(),
                                                (255, 0, 0)))
-
-# ---------------------------------------Variabler----------------------------------------------------------------------
-lastmove = 'w'
-antalfjender = 2
-antalfjenderheavy = 0
-antalfjendermineswpper = 0
-antalfjenderhomming = 0
-debug = False
-
-wave = 1
-waveheavyspawn = 5
-wavemineswepperspawn = 6
-wavehommingspawn = 7
-new_wave_delay = 0.1
-new_wave_begin = None
-
-lives = 5
-wavelives = 4
-minepoint = 0
-fjende_spawn = False
-taking_damage_player = False
-time_of_damage = time.time()
-time_being_red = 0.25
-explosion_time = 0.1
-
-waveheavyspawnadd = 5
-wavemineswepperspawnadd = 4
-wavehommingspawnadd = 4
-
-changeinrate = 10
-
-# laser
-delaylaser = 0.3
-last_time_shot = 0
-shotting = False
-laser_color = (0, 0, 255)
-
-# shield varaibler
-shield_up = False
-shield_charge = 100
-drain_speed = 0.5
-last_draintime = None
-
-# giving time of start
-startgametime = time.time()
-timer = time.time()-startgametime
 
 # henter gemte highscore
 try:
@@ -251,7 +206,7 @@ while gamerunning:
 
             # ---------------------------------objects info------------------------------------------------
             # Overskrift til objekter
-            tekst = Font.render('Types of objects', True, (255, 255, 255))
+            tekst = Font.render('Types of objects', True, White)
             display.blit(tekst, (100, 20))
 
             # Player
@@ -259,7 +214,7 @@ while gamerunning:
             picture_rect = picture.get_rect(topleft=(100, 100))
             display.blit(picture, picture_rect.topleft)
 
-            tekst = Font.render('Player Spaceship', True, (255, 255, 255))
+            tekst = Font.render('Player Spaceship', True, White)
             display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
@@ -269,7 +224,7 @@ while gamerunning:
             picture_rect = picture.get_rect(topleft=(100, 200))
             display.blit(picture, picture_rect.topleft)
 
-            tekst = Font.render('Normal Enemy', True, (255, 255, 255))
+            tekst = Font.render('Normal Enemy', True, White)
             display.blit(tekst, (120 + picture_rect.width, 200 + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
@@ -279,7 +234,7 @@ while gamerunning:
             picture_rect = picture.get_rect(topleft=(100, 300))
             display.blit(picture, picture_rect.topleft)
 
-            tekst = Font.render('Mineswpper Enemy', True, (255, 255, 255))
+            tekst = Font.render('Mineswpper Enemy', True, White)
             display.blit(tekst, (120 + picture_rect.width, 300 + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
@@ -289,7 +244,7 @@ while gamerunning:
             picture_rect = picture.get_rect(topleft=(100, 400))
             display.blit(picture, picture_rect.topleft)
 
-            tekst = Font.render('Homing Enemy', True, (255, 255, 255))
+            tekst = Font.render('Homing Enemy', True, White)
             display.blit(tekst, (120 + picture_rect.width, 400 + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
@@ -299,37 +254,24 @@ while gamerunning:
             picture_rect = picture.get_rect(topleft=(100, 500))
             display.blit(picture, picture_rect.topleft)
 
-            tekst = Font.render('Heavy Enemy', True, (255, 255, 255))
+            tekst = Font.render('Heavy Enemy', True, White)
             display.blit(tekst, (120 + picture_rect.width, 500 + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
             # ----------------------------Info om Controls--------------------------------------------------
             # Overskrift
-            controltekst = Font.render('Controls', True, (255, 255, 255))
+            controltekst = Font.render('Controls', True, White)
             display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
 
             # Displayer controls
-            tekst = Font.render('Movement: W, A, S, D', True, (255, 255, 255))
-            display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 100))
-
-            tekst = Font.render('Shot Laser: ARROWS', True, (255, 255, 255))
-            display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 200))
-
-            tekst = Font.render('Place Mine: M', True, (255, 255, 255))
-            display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 300))
-
-            tekst = Font.render('Shield: SPACE', True, (255, 255, 255))
-            display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 400))
-
-            tekst = Font.render('Show Debug Menu: H', True, (255, 255, 255))
-            display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 500))
-
-            tekst = Font.render('Pause Game: P', True, (255, 255, 255))
-            display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 600))
-
-            tekst = Font.render('Close Game: ESCAPE', True, (255, 255, 255))
-            display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 700))
-
+            tekst_render(Font, "Movement: W, A, S, D", (screenwith-screenwith/4, 100), display, White, True)
+            tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 200), display, White, True)
+            tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 300), display, White, True)
+            tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 400), display, White, True)
+            tekst_render(Font, "Pause Game: P", (screenwith - screenwith / 4, 500), display, White, True)
+            tekst_render(Font, "Close Game: ESCAPE", (screenwith - screenwith / 4, 600), display, White, True)
+            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 200), display, White, True)
+            
             # return button
             if return_knap.draw(screenwith/2-225, screenheight-100) is True:
                 infoscreen = False
@@ -371,7 +313,7 @@ while gamerunning:
                     player.damage_picture = pygame.transform.scale(damage_image, (60, 60))
 
             # -----------------------------------------Mouse cursor skins-----------------------------------------------
-            tekst = Font.render('Mouse Cursor', True, (255, 165, 0))
+            tekst = Font.render('Mouse Cursor', True, Orange)
             display.blit(tekst, (screenwith/2-tekst.get_width()/2, 50))
 
             skin_button_display_cursor(orange_cursor_skin_button, 100, 150,
@@ -390,7 +332,7 @@ while gamerunning:
                                        pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png")
                                        .convert_alpha())
             # ----------------------------------------------Player skins------------------------------------------------
-            tekst = Font.render('Player Ship', True, (255, 165, 0))
+            tekst = Font.render('Player Ship', True, Orange)
             display.blit(tekst, (screenwith / 2 - tekst.get_width() / 2, 300))
 
             skin_button_display_player(player_normalship_skin_button, 100, 400,
@@ -433,14 +375,11 @@ while gamerunning:
         baggrund.draw()
 
         # displayer title
-        mainmenutext = Fontbig.render('Astroblast', True, (255, 255, 255))
-        display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 100))
-        mainmenutext = Fontbig.render('Apocalypse', True, (255, 255, 255))
-        display.blit(mainmenutext, (screenwith/2 - mainmenutext.get_width()/2, 190))
+        tekst_render(Fontbig, "AstroBlast", (screenwith/2, 100), display, White, True)
+        tekst_render(Fontbig, "Apocalypse", (screenwith/2, 190), display, White, True)
 
         # displayer highscore
-        mainmenutext = Font.render(f'Highscore: wave {highscore}', True, (255, 255, 255))
-        display.blit(mainmenutext, (screenwith/2-mainmenutext.get_width()/2, 20))
+        tekst_render(Font, f"Highscore: {highscore}", (screenwith/2, 20), display, White, True)
 
         if startspil_knap.draw(screenwith/2-200, screenheight/2-60) is True:
             mainmenu = False
@@ -580,7 +519,7 @@ while gamerunning:
                     display.fill((0, 0, 0))
                     baggrund.draw()
 
-                    pausetext = Fontbig.render('PAUSED', True, (255, 255, 255))
+                    pausetext = Fontbig.render('PAUSED', True, White)
                     display.blit(pausetext, (screenwith/2-pausetext.get_width()/2, 10 + pausetext.get_height()/2))
 
                     if returntogame_button.draw(screenwith/2-returntogame_button.width/2, screenheight/2-70):
@@ -1000,22 +939,22 @@ while gamerunning:
             mine.draw_debug()
 
         # Displayer FPS
-        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight-100), display, (255, 255, 255),
+        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight-100), display, White,
                      False)
 
     # ---------------------------------------Main game igen-------------------------------------------------------------
-    tekst_render(Font, f"Lives: {lives}", (10, 90), display, (255, 255, 255), False)
+    tekst_render(Font, f"Lives: {lives}", (10, 90), display, White, False)
 
-    tekst_render(Font, f"Wave: {wave}", (10, 50), display, (255, 255, 255), False)
+    tekst_render(Font, f"Wave: {wave}", (10, 50), display, White, False)
 
-    tekst_render(Font, f"Shield {shield_charge}%", (screenwith-260, 10), display, (255, 255, 255), False)
+    tekst_render(Font, f"Shield {shield_charge}%", (screenwith-260, 10), display, White, False)
 
-    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith-260, 50), display, (255, 255, 255), False)
+    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith-260, 50), display, White, False)
 
     if lives > 0:
         timer = time.time()-startgametime
 
-    timerext = Font.render(f'Timer: {round(timer, 2)}', True, (255, 255, 255))
+    timerext = Font.render(f'Timer: {round(timer, 2)}', True, White)
     display.blit(timerext, (10, 10))
 
     makeastroid = random.randint(1, 100000)
@@ -1070,14 +1009,14 @@ while gamerunning:
                         pygame.quit()
                         sys.exit()
 
-            tekst_render(Fontbig, 'GAME OVER', (screenwith/2, screenheight/2-200), display, (255, 255, 255), True)
+            tekst_render(Fontbig, 'GAME OVER', (screenwith/2, screenheight/2-200), display, White, True)
 
-            tekst_render(Font, f"WAVE: {wave}", (screenwith/2, screenheight/2-80), display, (255, 255, 255), True)
+            tekst_render(Font, f"WAVE: {wave}", (screenwith/2, screenheight/2-80), display, White, True)
 
-            tekst_render(Font, f"TIME: {round(timer, 2)}", (screenwith/2, screenheight/2-30), display, (255, 255, 255),
+            tekst_render(Font, f"TIME: {round(timer, 2)}", (screenwith/2, screenheight/2-30), display, White,
                          True)
 
-            tekst_render(Font, f"Highscore: wave {highscore}", (screenwith/2, 20), display, (255, 255, 255), True)
+            tekst_render(Font, f"Highscore: wave {highscore}", (screenwith/2, 20), display, White, True)
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
