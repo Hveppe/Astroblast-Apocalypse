@@ -320,7 +320,7 @@ while gamerunning:
             tekst = Font.render('Shield: SPACE', True, (255, 255, 255))
             display.blit(tekst, (screenwith - screenwith / 4 - tekst.get_width() / 2, 400))
 
-            tekst = Font.render('Show Hitboxes: H', True, (255, 255, 255))
+            tekst = Font.render('Show Debug Menu: H', True, (255, 255, 255))
             display.blit(tekst, (screenwith - screenwith/4 - tekst.get_width()/2, 500))
 
             tekst = Font.render('Pause Game: P', True, (255, 255, 255))
@@ -652,9 +652,6 @@ while gamerunning:
     for Mine in Mineshot:
         Mine.draw()
 
-        if Mine.hitwall is True:
-            Mineshot.remove(Mine)
-
     for enemy in Fjender:
         if current - new_wave_begin >= new_wave_delay:
             enemy.update()
@@ -675,15 +672,13 @@ while gamerunning:
                 Lasershot.remove(lasershot)
                 minepoint += 1
                 enemydeadsound.play()
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
         for Mine in Mineshot:
             if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
     for enemy in HeavyFjender:
         if current - new_wave_begin >= new_wave_delay:
@@ -697,8 +692,7 @@ while gamerunning:
                 enemydeadsound.play()
                 lives -= enemy.lives
                 taking_damage_player, time_of_damage = taken_damage()
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
@@ -707,8 +701,7 @@ while gamerunning:
 
                 if enemy.lives <= 0:
                     minepoint += 3
-                    enemy.dead = True
-                    enemy.timeofdeath = time.time()
+                    enemy.dead, enemy.timeofdeath = True, time.time()
                 else:
                     enemy.lives -= 1
 
@@ -718,8 +711,7 @@ while gamerunning:
                 enemydeadsound.play()
 
                 if enemy.lives <= 0:
-                    enemy.dead = True
-                    enemy.timeofdeath = time.time()
+                    enemy.dead, enemy.timeofdeath = True, time.time()
                 else:
                     enemy.lives -= 1
 
@@ -736,16 +728,14 @@ while gamerunning:
                 enemydeadsound.play()
                 lives -= 1
                 taking_damage_player, time_of_damage = taken_damage()
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 enemydeadsound.play()
                 minepoint += 1
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
         for Mine in Mineshot:
             if collisionchecker_circle_square(Mine, enemy):
@@ -764,23 +754,20 @@ while gamerunning:
                 lives -= 1
                 enemydeadsound.play()
                 taking_damage_player, time_of_damage = taken_damage()
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
         for lasershot in Lasershot:
             if collisionchecker(enemy, lasershot):
                 Lasershot.remove(lasershot)
                 enemydeadsound.play()
                 minepoint += 1
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
         for Mine in Mineshot:
             if collisionchecker_circle_square(Mine, enemy):
                 Mineshot.remove(Mine)
                 enemydeadsound.play()
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
+                enemy.dead, enemy.timeofdeath = True, time.time()
 
     for astriod in Astroids:
         astriod.draw()
