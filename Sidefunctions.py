@@ -23,3 +23,15 @@ def explosion_effekt(type_enemy, current, explosion_time, explosion_effeckt, dis
                                                     (enemytype.width + enemytype.width / 2,
                                                      enemytype.height + enemytype.width / 2)),
                              (enemytype.x - enemytype.width / 2 / 2, enemytype.y - enemytype.width / 2 / 2))
+
+
+def tint_image(image, tint_color):
+    tinted_image = image.copy()
+    tint = pygame.Surface(image.get_size())
+    tint.fill(tint_color)
+    tinted_image.blit(tint, (0, 0), special_flags=pygame.BLEND_MULT)
+    return tinted_image
+
+
+def taken_damage():
+    return True, time.time()
