@@ -38,16 +38,16 @@ def taken_damage():
     return True, time.time()
 
 
-def reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids, player, variabler,
+def reset(lasershot, mineshot, fjender, heavyfjender, mineswepperfjender, hommingfjender, astroids, player, variabler,
           screenwith, screenheight):
     # Clear lister
-    Lasershot.clear()
-    Mineshot.clear()
-    Fjender.clear()
-    HeavyFjender.clear()
-    MineswepperFjender.clear()
-    HommingFjender.clear()
-    Astroids.clear()
+    lasershot.clear()
+    mineshot.clear()
+    fjender.clear()
+    heavyfjender.clear()
+    mineswepperfjender.clear()
+    hommingfjender.clear()
+    astroids.clear()
 
     # Reset af player
     player.xmove = 0
