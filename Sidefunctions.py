@@ -1,6 +1,7 @@
 # spil lavet af Hveppe
 
 import pygame
+import time
 
 
 def tekst_render(font, tekst, destination, screen, color, center):
