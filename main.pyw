@@ -96,7 +96,7 @@ mousecursor = MouseCursor(screen=display,
                           .convert_alpha())
 
 # laver Fjender
-for i in range(antalfjender):
+for i in range(variabler.antalfjender):
     fjende_spawn = True
     while fjende_spawn:
         enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),

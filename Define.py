@@ -12,15 +12,9 @@ Blue = (0, 0, 255)
 Orange = (255, 165, 0)
 
 # -------------------------------------------Variabler------------------------------------------------------------------
-# Antal fjender
-antalfjender = 2
-antalfjenderheavy = 0
-antalfjendermineswpper = 0
-antalfjenderhomming = 0
 debug = False
 
 
-# wave variabler
 class Variabler:
     wave = 1
     waveheavyspawn = 5
