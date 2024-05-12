@@ -270,7 +270,7 @@ while gamerunning:
             tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 400), display, White, True)
             tekst_render(Font, "Pause Game: P", (screenwith - screenwith / 4, 500), display, White, True)
             tekst_render(Font, "Close Game: ESCAPE", (screenwith - screenwith / 4, 600), display, White, True)
-            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 200), display, White, True)
+            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 700), display, White, True)
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
