@@ -36,3 +36,38 @@ def tint_image(image, tint_color):
 
 def taken_damage():
     return True, time.time()
+
+
+def reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids, player, variabler,
+          screenwith, screenheight):
+    # Clear lister
+    Lasershot.clear()
+    Mineshot.clear()
+    Fjender.clear()
+    HeavyFjender.clear()
+    MineswepperFjender.clear()
+    HommingFjender.clear()
+    Astroids.clear()
+
+    # Reset af player
+    player.xmove = 0
+    player.ymove = 0
+    variabler.ArsenalMines = 5
+    variabler.lives = 5
+    variabler.wavelives = 4
+    variabler.wave = 1
+    player.x = screenwith / 2 - 20
+    player.y = screenheight - 100
+    variabler.shotting = False
+    variabler.shield_up = False
+    variabler.shield_charge = 100
+    variabler.last_draintime = None
+
+    # reset af fjender
+    variabler.antalfjender = 0
+    variabler.waveheavyspawn = 5
+    variabler.wavemineswepperspawn = 6
+    variabler.wavehommingspawn = 7
+    variabler.antalfjenderheavy = 0
+    variabler.antalfjenderhomming = 0
+    variabler.antalfjendermineswpper = 0
