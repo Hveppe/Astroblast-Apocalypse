@@ -153,7 +153,7 @@ player_thirdship_skin_button = Button(screen=display, tekst="", size=(70, 70),
                                       image=pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
 
 # ------------------------------------------Health Bar------------------------------------------------------------------
-health_bar = HealthBar(10, 10, 200, 40, 5)
+health_bar = HealthBar(10, 10, 300, 40, 5)
 
 # variabler for loop
 gamerunning = True
