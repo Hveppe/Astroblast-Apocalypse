@@ -892,7 +892,7 @@ while gamerunning:
     shied_bar.hp = variabler.shield_charge
     shied_bar.draw(display)
 
-    tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith - 260, 50), display, White, False)
+    tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, 50), display, White, None)
 
     if variabler.lives > 0:
         variabler.timer = time.time() - variabler.startgametime

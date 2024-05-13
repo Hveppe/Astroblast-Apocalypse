@@ -12,6 +12,9 @@ def tekst_render(font, tekst, destination, screen, color, center):
         screen.blit(tekst, (x-tekst.get_width()/2, y))
     elif center is False:
         screen.blit(tekst, destination)
+    elif center is None:
+        x, y = destination
+        screen.blit(tekst, (x-tekst.get_width(), y))
 
 
 def explosion_effekt(type_enemy, current, explosion_time, explosion_effeckt, display):
