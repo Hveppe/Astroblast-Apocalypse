@@ -152,8 +152,9 @@ player_secoundship_skin_button = Button(screen=display, tekst="", size=(70, 70),
 player_thirdship_skin_button = Button(screen=display, tekst="", size=(70, 70),
                                       image=pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
 
-# ------------------------------------------Health Bar------------------------------------------------------------------
-health_bar = HealthBar(10, 10, 300, 40, 5)
+# ------------------------------------------Health/Shield Bar-----------------------------------------------------------
+health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
+shied_bar = HealthBar(screenwith-300, 10, 300, 40, 100, DarkBlue, Grey)
 
 # variabler for loop
 gamerunning = True
@@ -891,7 +892,8 @@ while gamerunning:
 
     tekst_render(Font, f"Wave: {variabler.wave}", (10, 50), display, White, False)
 
-    tekst_render(Font, f"Shield {variabler.shield_charge}%", (screenwith - 260, 10), display, White, False)
+    shied_bar.hp = variabler.shield_charge
+    shied_bar.draw(display)
 
     tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith - 260, 50), display, White, False)
 
