@@ -9,6 +9,7 @@ from collisioncheck_functioner import collisionchecker, collisionchecker_circle,
 from Mouse import MouseCursor
 from Sidefunctions import *
 from Define import *
+from Healthbar import HealthBar
 
 # importer libaries
 import random
@@ -150,6 +151,9 @@ player_secoundship_skin_button = Button(screen=display, tekst="", size=(70, 70),
 
 player_thirdship_skin_button = Button(screen=display, tekst="", size=(70, 70),
                                       image=pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
+
+# ------------------------------------------Health Bar------------------------------------------------------------------
+health_bar = HealthBar(10, 10, 200, 40, 5)
 
 # variabler for loop
 gamerunning = True
@@ -370,7 +374,7 @@ while gamerunning:
         tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 190), display, White, True)
 
         # displayer highscore
-        tekst_render(Font, f"Highscore: {highscore}", (screenwith / 2, 20), display, White, True)
+        tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
 
         if startspil_knap.draw(screenwith / 2 - 200, screenheight / 2 - 60) is True:
             mainmenu = False
@@ -896,7 +900,8 @@ while gamerunning:
                      False)
 
     # ---------------------------------------Main game igen-------------------------------------------------------------
-    tekst_render(Font, f"Lives: {variabler.lives}", (10, 90), display, White, False)
+    health_bar.hp = variabler.lives
+    health_bar.draw(display)
 
     tekst_render(Font, f"Wave: {variabler.wave}", (10, 50), display, White, False)
 
@@ -908,7 +913,7 @@ while gamerunning:
         variabler.timer = time.time() - variabler.startgametime
 
     timerext = Font.render(f'Timer: {round(variabler.timer, 2)}', True, White)
-    display.blit(timerext, (10, 10))
+    display.blit(timerext, (10, 100))
 
     makeastroid = random.randint(1, 100000)
 
