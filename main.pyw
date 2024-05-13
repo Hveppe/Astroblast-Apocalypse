@@ -890,7 +890,7 @@ while gamerunning:
     health_bar.hp = variabler.lives
     health_bar.draw(display)
 
-    tekst_render(Font, f"Wave: {variabler.wave}", (10, 50), display, White, False)
+    tekst_render(Font, f"Wave: {variabler.wave}", (screenwith/2, 10), display, White, True)
 
     shied_bar.hp = variabler.shield_charge
     shied_bar.draw(display)
@@ -901,7 +901,7 @@ while gamerunning:
         variabler.timer = time.time() - variabler.startgametime
 
     timerext = Font.render(f'Timer: {round(variabler.timer, 2)}', True, White)
-    display.blit(timerext, (10, 100))
+    display.blit(timerext, (10, 50))
 
     makeastroid = random.randint(1, 100000)
 
