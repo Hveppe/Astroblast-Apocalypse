@@ -445,7 +445,7 @@ while gamerunning:
 
             # controls til mine
             if event.key == pygame.K_m:
-                if variabler.ArsenalMines > 0 and variabler.shield_up is False:
+                if ArsenalMines > 0 and variabler.shield_up is False:
                     ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
                                             yvalue=player.y + player.height / 2,
@@ -796,7 +796,7 @@ while gamerunning:
                     mineswpperspawn = False
 
         for h in range(variabler.antalfjenderhomming):
-            hommisngspawn = True
+            hommingspawn = True
             while hommingspawn:
                 new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith - 50),
                                               yvalue=random.randint(0, screenheight - 50), speedx=5,
@@ -824,7 +824,7 @@ while gamerunning:
             variabler.last_draintime = time.time()
 
         for enemy in Fjender:
-            if collisionchecker_circle_square(shield, enemy):
+            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
                 enemydeadsound.play()
                 enemy.dead, enemy.timeofdeath = taken_damage()
 
@@ -835,12 +835,12 @@ while gamerunning:
                 enemy.dead, enemy.timeofdeath = taken_damage()
 
         for enemy in MineswepperFjender:
-            if collisionchecker_circle_square(shield, enemy):
+            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
                 enemydeadsound.play()
                 enemy.dead, enemy.timeofdeath = taken_damage()
 
         for enemy in HommingFjender:
-            if collisionchecker_circle_square(shield, enemy):
+            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
                 enemydeadsound.play()
                 enemy.dead, enemy.timeofdeath = taken_damage()
 
