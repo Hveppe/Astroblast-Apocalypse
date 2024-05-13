@@ -34,6 +34,7 @@ class Variabler:
     time_of_damage = time.time()
     time_being_red = 0.25
     explosion_time = 0.1
+    ArsenalMines = 5
 
     # wave spawn ændringer
     waveheavyspawnadd = 5

@@ -77,9 +77,6 @@ try:
 except ValueError or TypeError:
     highscore = 0
 
-# Antal våben til rådighed
-ArsenalMines = 5
-
 # Opsætter clock
 clock = pygame.time.Clock()
 
@@ -445,8 +442,8 @@ while gamerunning:
 
             # controls til mine
             if event.key == pygame.K_m:
-                if ArsenalMines > 0 and variabler.shield_up is False:
-                    ArsenalMines -= 1
+                if variabler.ArsenalMines > 0 and variabler.shield_up is False:
+                    variabler.ArsenalMines -= 1
                     Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
                                             yvalue=player.y + player.height / 2,
                                             picture=pygame.image.load("Image/Mines/mine.png").convert_alpha()))
@@ -845,7 +842,7 @@ while gamerunning:
                 enemy.dead, enemy.timeofdeath = taken_damage()
 
     if variabler.minepoint > 50:
-        ArsenalMines += 1
+        variabler.ArsenalMines += 1
         variabler.minepoint -= 50
 
     # Tegner player
@@ -895,7 +892,7 @@ while gamerunning:
     shied_bar.hp = variabler.shield_charge
     shied_bar.draw(display)
 
-    tekst_render(Font, f"Mine: {ArsenalMines}", (screenwith - 260, 50), display, White, False)
+    tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith - 260, 50), display, White, False)
 
     if variabler.lives > 0:
         variabler.timer = time.time() - variabler.startgametime
