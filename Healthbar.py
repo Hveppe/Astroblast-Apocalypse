@@ -1,9 +1,11 @@
 import pygame
-from Define import White
+from Define import White, Red, Green
 
 
 class HealthBar:
-    color = White
+    white = White
+    red = Red
+    green = Green
 
     def __init__(self, x, y, width, height, max_hp):
         self.x = x
@@ -15,6 +17,6 @@ class HealthBar:
 
     def draw(self, surface):
         ratio = self.hp / self.max_hp
-        pygame.draw.rect(surface, "red", (self.x, self.y, self.width, self.height))
-        pygame.draw.rect(surface, "green", (self.x, self.y, self.width * ratio, self.height))
-        pygame.draw.rect(surface, self.color, (self.x, self.y, self.width, self.height), 2)
+        pygame.draw.rect(surface, self.red, (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(surface, self.green, (self.x, self.y, self.width * ratio, self.height))
+        pygame.draw.rect(surface, self.white, (self.x, self.y, self.width, self.height), 2)
