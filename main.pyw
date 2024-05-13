@@ -829,7 +829,7 @@ while gamerunning:
                 enemy.dead, enemy.timeofdeath = taken_damage()
 
         for enemy in HeavyFjender:
-            if collisionchecker_circle_square(shield, enemy):
+            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
                 enemydeadsound.play()
                 variabler.shield_charge -= 2
                 enemy.dead, enemy.timeofdeath = taken_damage()
