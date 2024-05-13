@@ -1,3 +1,5 @@
+# Lavet af Hveppe og lidt kode fra anton
+
 import pygame
 from Define import White, Red, Green
 
