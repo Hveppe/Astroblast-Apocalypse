@@ -825,39 +825,23 @@ while gamerunning:
         for enemy in Fjender:
             if collisionchecker_circle_square(shield, enemy):
                 enemydeadsound.play()
-
-                try:
-                    Fjender.remove(enemy)
-                except ValueError:
-                    pass
+                enemy.dead, enemy.timeofdeath = taken_damage()
 
         for enemy in HeavyFjender:
             if collisionchecker_circle_square(shield, enemy):
                 enemydeadsound.play()
                 variabler.shield_charge -= 2
-
-                try:
-                    HeavyFjender.remove(enemy)
-                except ValueError:
-                    pass
+                enemy.dead, enemy.timeofdeath = taken_damage()
 
         for enemy in MineswepperFjender:
             if collisionchecker_circle_square(shield, enemy):
                 enemydeadsound.play()
-
-                try:
-                    MineswepperFjender.remove(enemy)
-                except ValueError:
-                    pass
+                enemy.dead, enemy.timeofdeath = taken_damage()
 
         for enemy in HommingFjender:
             if collisionchecker_circle_square(shield, enemy):
                 enemydeadsound.play()
-
-                try:
-                    HommingFjender.remove(enemy)
-                except ValueError:
-                    pass
+                enemy.dead, enemy.timeofdeath = taken_damage()
 
     if variabler.minepoint > 50:
         variabler.ArsenalMines += 1
