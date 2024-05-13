@@ -1,10 +1,10 @@
-# Lavet af Hveppe og lidt kode fra anton
+# Lavet af Hveppe
 
 import pygame
 from Define import White, Red, Green
 
 
-class HealthBar:
+class HealthBar:  # skelet af kode var lavet af anton
     white = White
     red = Red
     green = Green
