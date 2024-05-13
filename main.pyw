@@ -725,7 +725,9 @@ while gamerunning:
         variabler.new_wave_begin = time.time()
 
         if variabler.wave >= variabler.wavelives:
-            variabler.lives += 1
+            if variabler.lives < 5:
+                variabler.lives += 1
+
             variabler.wavelives += 4
 
         if variabler.wave >= variabler.waveheavyspawn:
