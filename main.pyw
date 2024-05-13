@@ -845,7 +845,7 @@ while gamerunning:
                 enemy.dead, enemy.timeofdeath = taken_damage()
 
     if variabler.minepoint > 50:
-        variabler.ArsenalMines += 1
+        ArsenalMines += 1
         variabler.minepoint -= 50
 
     # Tegner player
