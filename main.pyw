@@ -199,7 +199,7 @@ while gamerunning:
 
             # ---------------------------------objects info------------------------------------------------
             # Overskrift til objekter
-            tekst = Font.render('Types of objects', True, White)
+            tekst = Font.render('Types of objects', True, Orange)
             display.blit(tekst, (100, 20))
 
             # Player
@@ -253,7 +253,7 @@ while gamerunning:
 
             # ----------------------------Info om Controls--------------------------------------------------
             # Overskrift
-            controltekst = Font.render('Controls', True, White)
+            controltekst = Font.render('Controls', True, Orange)
             display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
 
             # Displayer controls
