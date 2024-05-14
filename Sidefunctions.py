@@ -1,5 +1,6 @@
 # spil lavet af Hveppe
 
+from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
 import pygame
 import time
 
@@ -74,3 +75,15 @@ def reset(lasershot, mineshot, fjender, heavyfjender, mineswepperfjender, hommin
     variabler.antalfjenderheavy = 0
     variabler.antalfjenderhomming = 0
     variabler.antalfjendermineswpper = 0
+
+
+def spawn_enemy(enemylist, klasse, player, *args):
+    fjende_spawn = True
+    while fjende_spawn:
+        new_enemy = klasse(*args)
+        if collisionchecker(new_enemy, player):
+            new_enemy.x = random.randint(0, screenwith - 10)
+            new_enemy.y = random.randint(0, screenheight - 150)
+        else:
+            enemylist.append(new_enemy)
+            fjende_spawn = False

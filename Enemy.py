@@ -10,13 +10,12 @@ class EnemyClass:
     dead = False
     timeofdeath = None
 
-    def __init__(self, screen, xvalue, yvalue, speedx, speedy, colour, picture):
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, picture):
         self.x = xvalue
         self.y = yvalue
         self.speedx = speedx
         self.speedy = speedy
         self.screen = screen
-        self.colour = colour
 
         picture = pygame.transform.scale(picture, (self.width, self.height))
         self.picture = picture
@@ -51,7 +50,6 @@ class HeavyEnemyClass:
     lives = 3
     dead = False
     timeofdeath = None
-    colour = (139, 0, 0)
 
     def __init__(self, screen, xvalue, yvalue, speedx, speedy, picture):
         self.x = xvalue
@@ -94,7 +92,7 @@ class HommingEnemyClass:
     timeofdeath = None
     lastangleofmovement = 90
 
-    def __init__(self, screen, xvalue, yvalue, speedx, speedy, color, picture):
+    def __init__(self, screen, xvalue, yvalue, speedx, speedy, picture):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
@@ -102,7 +100,6 @@ class HommingEnemyClass:
         self.yold = yvalue
         self.speedx = speedx
         self.speedy = speedy
-        self.color = color
 
         picture = pygame.transform.scale(picture, (self.width, self.height))
         self.picture = picture

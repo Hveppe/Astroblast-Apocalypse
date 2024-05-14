@@ -95,18 +95,9 @@ mousecursor = MouseCursor(screen=display,
 
 # laver Fjender
 for i in range(variabler.antalfjender):
-    fjende_spawn = True
-    while fjende_spawn:
-        enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
-                           yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 10),
-                           speedy=random.randint(1, 10), colour=(255, 0, 0),
-                           picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
-        if collisionchecker(enemy, player):
-            enemy.xvalue = random.randint(0, screenwith - 10)
-            enemy.yvalue = random.randint(0, screenheight - 150)
-        else:
-            Fjender.append(enemy)
-            fjende_spawn = False
+    spawn_enemy(Fjender, EnemyClass, player, display, random.randint(0, screenwith - 40),
+                random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 10),
+                pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
 
 # laver shield
 shield = Shield(display, player.x, player.y)
@@ -749,63 +740,24 @@ while gamerunning:
             variabler.changeinrate += 10
 
         for i in range(variabler.antalfjender):
-            fjende_spawn = True
-            while fjende_spawn:
-                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
-                                       yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 5),
-                                       speedy=random.randint(1, 10), colour=(255, 0, 0),
-                                       picture=pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
-                if collisionchecker(new_enemy, player):
-                    new_enemy.x = random.randint(0, screenwith - 10)
-                    new_enemy.y = random.randint(0, screenheight - 150)
-                else:
-                    Fjender.append(new_enemy)
-                    fjende_spawn = False
+            spawn_enemy(Fjender, EnemyClass, player, display, random.randint(0, screenwith - 40),
+                        random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 10),
+                        pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
 
         for n in range(variabler.antalfjenderheavy):
-            heavyfjendespawn = True
-            while heavyfjendespawn:
-                new_heavy = HeavyEnemyClass(screen=display, xvalue=random.randint(0, screenwith - 60),
-                                            yvalue=random.randint(0, screenheight - 60), speedx=random.randint(1, 5),
-                                            speedy=random.randint(1, 5),
-                                            picture=pygame.image.load('Image/Fjender/Heavyfjendeimage.png')
-                                            .convert_alpha())
-                if collisionchecker(new_heavy, player):
-                    new_heavy.x = random.randint(0, screenwith - 10)
-                    new_heavy.y = random.randint(0, screenheight - 10)
-                else:
-                    HeavyFjender.append(new_heavy)
-                    heavyfjendespawn = False
+            spawn_enemy(HeavyFjender, HeavyEnemyClass, player, display, random.randint(0, screenwith - 60),
+                        random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 5),
+                        pygame.image.load('Image/Fjender/Heavyfjendeimage.png').convert_alpha())
 
         for m in range(variabler.antalfjendermineswpper):
-            mineswpperspawn = True
-            while mineswpperspawn:
-                new_enemy = EnemyClass(screen=display, xvalue=random.randint(0, screenwith - 40),
-                                       yvalue=random.randint(0, screenheight - 40), speedx=random.randint(1, 10),
-                                       speedy=random.randint(1, 10), colour=(0, 255, 0),
-                                       picture=pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png')
-                                       .convert_alpha())
-                if collisionchecker(new_enemy, player):
-                    new_enemy.x = random.randint(0, screenwith - 10)
-                    new_enemy.y = random.randint(0, screenheight - 30)
-                else:
-                    MineswepperFjender.append(new_enemy)
-                    mineswpperspawn = False
+            spawn_enemy(MineswepperFjender, EnemyClass, player, display, random.randint(0, screenwith - 40),
+                        random.randint(0, screenheight - 40), random.randint(1, 10), random.randint(1, 10),
+                        pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png').convert_alpha())
 
         for h in range(variabler.antalfjenderhomming):
-            hommingspawn = True
-            while hommingspawn:
-                new_enemy = HommingEnemyClass(screen=display, xvalue=random.randint(0, screenwith - 50),
-                                              yvalue=random.randint(0, screenheight - 50), speedx=5,
-                                              speedy=5, color=(255, 0, 0),
-                                              picture=pygame.image.load('Image/Fjender/HommingFjendeImage.png')
-                                              .convert_alpha())
-                if collisionchecker(new_enemy, player):
-                    new_enemy.x = random.randint(0, screenwith - 10)
-                    new_enemy.y = random.randint(0, screenheight - 10)
-                else:
-                    HommingFjender.append(new_enemy)
-                    hommingspawn = False
+            spawn_enemy(HommingFjender, HommingEnemyClass, player, display, random.randint(0, screenwith - 50),
+                        random.randint(0, screenheight - 50), 5, 5, pygame.image.load
+                        ('Image/Fjender/HommingFjendeImage.png').convert_alpha())
 
     if variabler.shield_up is True and variabler.shield_charge > 0:
         shield.update(player)
