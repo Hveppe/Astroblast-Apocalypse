@@ -1,7 +1,7 @@
 # Lavet af Hveppe
 
 import pygame
-from Define import White, Red, Green
+from Define import White
 
 
 class HealthBar:  # skelet af kode var lavet af anton
