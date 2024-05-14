@@ -95,7 +95,7 @@ mousecursor = MouseCursor(screen=display,
 
 # laver Fjender
 for i in range(variabler.antalfjender):
-    spawn_enemy(Fjender, EnemyClass, player, display, random.randint(0, screenwith - 40),
+    spawn_enemy(Fjender, EnemyClass, player, screenwith, screenheight, display, random.randint(0, screenwith - 40),
                 random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 10),
                 pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
 
@@ -709,6 +709,7 @@ while gamerunning:
         if astriod.x > 5000 or astriod.x < -5000 or astriod.y > 5000 or astriod.y < -5000:
             Astroids.remove(astriod)
 
+    # ----------------------------------------Nye fjender bliver spawned når alle er døde
     if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0 and len(HommingFjender) == 0:
         variabler.wave += 1
         variabler.new_wave_begin = time.time()

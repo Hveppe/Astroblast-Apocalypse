@@ -66,7 +66,7 @@ def reset(lasershot, mineshot, fjender, heavyfjender, mineswepperfjender, hommin
     variabler.antalfjender -= 2
 
 
-def spawn_enemy(enemylist, klasse, player, *args):
+def spawn_enemy(enemylist, klasse, player, screenwith, screenheight, *args):
     fjende_spawn = True
     while fjende_spawn:
         new_enemy = klasse(*args)
