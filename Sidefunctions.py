@@ -68,8 +68,8 @@ def reset(lasershot, mineshot, fjender, heavyfjender, mineswepperfjender, hommin
 
 def spawn_enemy(enemylist, klasse, player, screenwith, screenheight, *args):
     fjende_spawn = True
+    new_enemy = klasse(*args)
     while fjende_spawn:
-        new_enemy = klasse(*args)
         if collisionchecker(new_enemy, player):
             new_enemy.x = random.randint(0, screenwith - 10)
             new_enemy.y = random.randint(0, screenheight - 150)
