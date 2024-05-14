@@ -62,7 +62,7 @@ HommingFjender = []
 Astroids = []
 
 # variabler class
-variabler = Variabler
+variabler = Variabler()
 
 # laver player
 player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,

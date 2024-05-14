@@ -18,48 +18,52 @@ debug = False
 
 
 class Variabler:
-    wave = 1
-    waveheavyspawn = 5
-    wavemineswepperspawn = 6
-    wavehommingspawn = 7
-    new_wave_delay = 0.1
-    new_wave_begin = time.time()
+    def __init__(self):
+        self.wave = 1
+        self.waveheavyspawn = 5
+        self.wavemineswepperspawn = 6
+        self.wavehommingspawn = 7
+        self.new_wave_delay = 0.1
+        self.new_wave_begin = time.time()
 
-    # andre ting
-    lives = 5
-    wavelives = 4
-    minepoint = 0
-    fjende_spawn = False
-    taking_damage_player = False
-    time_of_damage = time.time()
-    time_being_red = 0.25
-    explosion_time = 0.1
-    ArsenalMines = 5
+        # andre ting
+        self.lives = 5
+        self.wavelives = 4
+        self.minepoint = 0
+        self.fjende_spawn = False
+        self.taking_damage_player = False
+        self.time_of_damage = time.time()
+        self.time_being_red = 0.25
+        self.explosion_time = 0.1
+        self.ArsenalMines = 5
 
-    # wave spawn ændringer
-    waveheavyspawnadd = 5
-    wavemineswepperspawnadd = 4
-    wavehommingspawnadd = 4
-    changeinrate = 10
+        # wave spawn ændringer
+        self.waveheavyspawnadd = 5
+        self.wavemineswepperspawnadd = 4
+        self.wavehommingspawnadd = 4
+        self.changeinrate = 10
 
-    # laser
-    delaylaser = 0.3
-    last_time_shot = 0
-    shotting = False
-    lastmove = 'w'
-    laser_color = Blue
+        # laser
+        self.delaylaser = 0.3
+        self.last_time_shot = 0
+        self.shotting = False
+        self.lastmove = 'w'
+        self.laser_color = Blue
 
-    # shield varaibler
-    shield_up = False
-    shield_charge = 100
-    drain_speed = 0.5
-    last_draintime = None
+        # shield varaibler
+        self.shield_up = False
+        self.shield_charge = 100
+        self.drain_speed = 0.5
+        self.last_draintime = None
 
-    # giving time of start
-    startgametime = time.time()
-    timer = time.time()-startgametime
+        # giving time of start
+        self.startgametime = time.time()
+        self.timer = time.time()-self.startgametime
 
-    antalfjender = 2
-    antalfjenderheavy = 0
-    antalfjendermineswpper = 0
-    antalfjenderhomming = 0
+        self.antalfjender = 2
+        self.antalfjenderheavy = 0
+        self.antalfjendermineswpper = 0
+        self.antalfjenderhomming = 0
+
+    def reset(self):
+        self.__init__()
