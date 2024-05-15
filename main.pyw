@@ -126,7 +126,7 @@ playerskinselecter = SkinSlecter(display, 10, 10, (300, 300), "player",
 
 cursorskinselecter = SkinSlecter(display, screenwith-310, 10, (300, 300), "cursor",
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
-                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
+                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"),
                                  pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
                                  pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png"),
                                  pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"),
@@ -280,12 +280,14 @@ while gamerunning:
                 player.picture, player.damage_picture = playerskinselecter.buttondraw()
             except TypeError:
                 pass
+            player.update_picture()
 
             cursorskinselecter.draw()
             try:
                 mousecursor.picture, mousecursor.picture_clik = cursorskinselecter.buttondraw()
             except TypeError:
                 pass
+            mousecursor.update_picture()
 
             if return_knap.draw(screenwith/2-returntogame_button.width/2,
                                 screenheight-returntogame_button.height-10) is True:
@@ -303,9 +305,6 @@ while gamerunning:
                 click = True
             else:
                 click = False
-
-            player.update_picture()
-            mousecursor.update_picture()
 
             pygame.display.flip()
 
