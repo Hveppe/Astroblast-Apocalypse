@@ -118,6 +118,8 @@ skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
 
 returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 100),
                              image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
+
+# ---------------------------------------------SKINS--------------------------------------------------------------------
 # player skin ting
 playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-150, (300, 150), "player",
                                  pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
@@ -132,6 +134,15 @@ cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (
                                  pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png"),
                                  pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"),
                                  pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png"))
+
+
+with open('textfiler/skin', 'r') as file:
+    playerskinselecter.chosenskin = int(file.readline().strip())
+    cursorskinselecter.chosenskin = int(file.readline().strip())
+    playerskinselecter.change_skin()
+    cursorskinselecter.change_skin()
+    player.update_picture()
+    mousecursor.update_picture()
 
 # ------------------------------------------Health/Shield Bar-----------------------------------------------------------
 health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)

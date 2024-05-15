@@ -55,3 +55,11 @@ class SkinSlecter:
 
         pygame.draw.rect(self.screen, Grey, (self.x, self.y, self.width, self.height))
         skinpicture.draw()
+
+    def change_skin(self):
+        while True:
+            if self.type == "player":
+                return self.skins[self.chosenskin], tint_image(self.skins[self.chosenskin], Red)
+            elif self.type == "cursor":
+                return self.skins[self.chosenskin], self.skinsclick[self.chosenskin]
+
