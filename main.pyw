@@ -304,6 +304,10 @@ while gamerunning:
             if return_knap.draw(screenwith/2-returntogame_button.width/2,
                                 screenheight-returntogame_button.height-10) is True:
                 skinmeny = False
+                
+                with open('textfiler/skin', 'w') as file:
+                    file.write(str(playerskinselecter.chosenskin) + '\n')
+                    file.write(str(cursorskinselecter.chosenskin))
 
             mousecursor.update()
             mousecursor.draw(click=click)
