@@ -16,6 +16,10 @@ class MouseCursor:
     def update(self):
         self.x, self.y = pygame.mouse.get_pos()
 
+    def update_picture(self):
+        self.picture = pygame.transform.scale(self.picture, (self.width, self.height))
+        self.picture_clik = pygame.transform.scale(self.picture_clik, (self.width, self.height))
+
     def draw(self, click):
         if click is False:
             self.screen.blit(self.picture, (self.x-self.width/2, self.y-self.height/2))
