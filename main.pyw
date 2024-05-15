@@ -119,12 +119,12 @@ skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
 returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 100),
                              image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
-playerskinselecter = SkinSlecter(display, 10, 10, (300, 300), "player",
+playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-150, (300, 300), "player",
                                  pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
 
-cursorskinselecter = SkinSlecter(display, screenwith-310, 10, (300, 300), "cursor",
+cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (300, 300), "cursor",
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"),
                                  pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
