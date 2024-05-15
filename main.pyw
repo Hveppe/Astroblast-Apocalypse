@@ -1,6 +1,6 @@
 # Spillet er lavet af Hveppe
 
-# importer fra andre python filer
+# importer fra andre python filer i mappen
 from Player import PlayerClass
 from abilities import ShotLaser, LayMine, Shield
 from Enemy import EnemyClass, HeavyEnemyClass, HommingEnemyClass
@@ -10,6 +10,7 @@ from Mouse import MouseCursor
 from Sidefunctions import *
 from Define import *
 from Healthbar import HealthBar
+from SkinMenu_class_function import SkinSlecter
 
 # importer libaries
 import random
@@ -118,27 +119,10 @@ skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
 returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 100),
                              image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
-# skin cursor buttons
-orange_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
-                                   image=pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").
-                                   convert_alpha())
-
-spaceship_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
-                                      image=pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png")
-                                      .convert_alpha())
-
-Nasa_cursor_skin_button = Button(screen=display, tekst="", size=(50, 50),
-                                 image=pygame.image.load("Image/mousecursor/Nasa_space_cursor.png").convert_alpha())
-
-# skin player buttons
-player_normalship_skin_button = Button(screen=display, tekst="", size=(70, 70),
-                                       image=pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha())
-
-player_secoundship_skin_button = Button(screen=display, tekst="", size=(70, 70),
-                                        image=pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha())
-
-player_thirdship_skin_button = Button(screen=display, tekst="", size=(70, 70),
-                                      image=pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
+playerskinselecter = SkinSlecter(display, 10, 10, (300, 300),
+                                 pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
+                                 pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
+                                 pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
 
 # ------------------------------------------Health/Shield Bar-----------------------------------------------------------
 health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
@@ -283,75 +267,19 @@ while gamerunning:
             display.fill((0, 0, 0))
             baggrund.draw()
 
+            playerskinselecter.draw()
+            try:
+                player.picture, player.damage_picture = playerskinselecter.buttondraw()
+            except TypeError:
+                pass
 
-            def skin_button_display_cursor(button, x, y, image, imageclick):
-                if button.draw(x, y):
-                    mousecursor.picture = pygame.transform.scale(image, (30, 30))
-                    mousecursor.picture_clik = pygame.transform.scale(imageclick, (25, 30))
-
-
-            def skin_button_display_player(button, x, y, image, damage_image):
-                if button.draw(x, y):
-                    player.picture = pygame.transform.scale(image, (60, 60))
-                    player.damage_picture = pygame.transform.scale(damage_image, (60, 60))
-
-
-            # -----------------------------------------Mouse cursor skins-----------------------------------------------
-            tekst = Font.render('Mouse Cursor', True, Orange)
-            display.blit(tekst, (screenwith / 2 - tekst.get_width() / 2, 50))
-
-            skin_button_display_cursor(orange_cursor_skin_button, 100, 150,
-                                       pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").convert_alpha(),
-                                       pygame.image.load("Image/mousecursor/"
-                                                         "orange-gradient_cusor - click.png").convert_alpha())
-
-            skin_button_display_cursor(spaceship_cursor_skin_button, 200, 150,
-                                       pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png")
-                                       .convert_alpha(),
-                                       pygame.image.load("Image/mousecursor/"
-                                                         "spacrecraft-custom-cursor -click.png").convert_alpha())
-
-            skin_button_display_cursor(Nasa_cursor_skin_button, 300, 150,
-                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor.png").convert_alpha(),
-                                       pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png")
-                                       .convert_alpha())
-            # ----------------------------------------------Player skins------------------------------------------------
-            tekst = Font.render('Player Ship', True, Orange)
-            display.blit(tekst, (screenwith / 2 - tekst.get_width() / 2, 300))
-
-            skin_button_display_player(player_normalship_skin_button, 100, 400,
-                                       pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
-                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer.png")
-                                                  .convert_alpha(), (255, 0, 0)))
-
-            skin_button_display_player(player_secoundship_skin_button, 200, 400,
-                                       pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
-                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer2.png")
-                                                  .convert_alpha(), (255, 0, 0)))
-
-            skin_button_display_player(player_thirdship_skin_button, 300, 400,
-                                       pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha(),
-                                       tint_image(pygame.image.load("Image/Playerships/Rumskibplayer3.png")
-                                                  .convert_alpha(), (255, 0, 0)))
-
-            # return button
-            if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
+            if returntogame_button.draw(screenwith/2-returntogame_button.width/2,
+                                        screenheight-returntogame_button.height-10) is True:
                 skinmeny = False
-
-            mouse = pygame.mouse.get_pos()
-            if (((return_knap.image_rect.collidepoint(mouse) or
-                  spaceship_cursor_skin_button.image_rect.collidepoint(mouse) or
-                  orange_cursor_skin_button.image_rect.collidepoint(mouse) or
-                  Nasa_cursor_skin_button.image_rect.collidepoint(mouse) or
-                  player_normalship_skin_button.image_rect.collidepoint(mouse)) or
-                 player_secoundship_skin_button.image_rect.collidepoint(mouse)) or
-                    player_thirdship_skin_button.image_rect.collidepoint(mouse)):
-                click = True
-            else:
-                click = False
 
             mousecursor.update()
             mousecursor.draw(click=click)
+            player.update_picture()
 
             pygame.display.flip()
 
