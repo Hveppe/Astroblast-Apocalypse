@@ -119,10 +119,18 @@ skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
 returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 100),
                              image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
-playerskinselecter = SkinSlecter(display, 10, 10, (300, 300),
+playerskinselecter = SkinSlecter(display, 10, 10, (300, 300), "player",
                                  pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
+
+cursorskinselecter = SkinSlecter(display, screenwith-310, 10, (300, 300), "cursor",
+                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
+                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
+                                 pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
+                                 pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png"),
+                                 pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"),
+                                 pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png"))
 
 # ------------------------------------------Health/Shield Bar-----------------------------------------------------------
 health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
@@ -273,13 +281,27 @@ while gamerunning:
             except TypeError:
                 pass
 
-            if returntogame_button.draw(screenwith/2-returntogame_button.width/2,
+            cursorskinselecter.draw()
+            try:
+                mousecursor.picture, mousecursor.picture_clik = cursorskinselecter.buttondraw()
+            except TypeError:
+                pass
+
+            if return_knap.draw(screenwith/2-returntogame_button.width/2,
                                         screenheight-returntogame_button.height-10) is True:
                 skinmeny = False
 
             mousecursor.update()
             mousecursor.draw(click=click)
+
+            mouse = pygame.mouse.get_pos()
+            if return_knap.image_rect.collidepoint(mouse):
+                click = True
+            else:
+                click = False
+
             player.update_picture()
+            mousecursor.update_picture()
 
             pygame.display.flip()
 
