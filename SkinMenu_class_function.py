@@ -34,6 +34,8 @@ class SkinSlecter:
                                  self.y+self.height/2-self.RightButton.height/2) is True:
             if self.chosenskin < len(self.skins)-1:
                 self.chosenskin += 1
+            else:
+                self.chosenskin = 0
 
             if self.type == "player":
                 return self.skins[self.chosenskin], tint_image(self.skins[self.chosenskin], Red)
@@ -43,6 +45,8 @@ class SkinSlecter:
         if self.LeftButton.draw(self.x+10, self.y+self.height/2-self.LeftButton.height/2) is True:
             if self.chosenskin > 0:
                 self.chosenskin -= 1
+            else:
+                self.chosenskin = len(self.skins)-1
 
             if self.type == "player":
                 return self.skins[self.chosenskin], tint_image(self.skins[self.chosenskin], Red)
