@@ -104,20 +104,23 @@ for i in range(variabler.antalfjender):
 shield = Shield(display, player.x, player.y)
 
 # ----------------------------------------laver knapper----------------------------------------------------------------
-startspil_knap = Button(screen=display, tekst="START", size=(400, 100),
+startspil_knap = Button(screen=display, tekst="START GAME", size=(450, 100),
                         image=pygame.image.load('Image/Buttons/Simpel_button.png').convert_alpha())
 
-infospil_knap = Button(screen=display, tekst="INFORMATION", size=(400, 100),
+infospil_knap = Button(screen=display, tekst="INFORMATION", size=(450, 100),
                        image=pygame.image.load('Image/Buttons/Simpel_button.png').convert_alpha())
 
 return_knap = Button(screen=display, tekst="RETURN TO MENU", size=(450, 100),
                      image=pygame.image.load('Image/Buttons/Simpel_button.png').convert_alpha())
 
-skin_knap = Button(screen=display, tekst="SKINS", size=(400, 100),
+skin_knap = Button(screen=display, tekst="SKINS", size=(450, 100),
                    image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
 returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 100),
                              image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
+
+quitgame_button = Button(screen=display, tekst="QUIT GAME", size=(450, 100),
+                         image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
 # ---------------------------------------------SKINS--------------------------------------------------------------------
 # player skin ting
@@ -168,10 +171,6 @@ while gamerunning:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
 
         # starter loop for info skærm
         # -------------------------------------Info Screen--------------------------------------------------
@@ -181,10 +180,6 @@ while gamerunning:
                 if eventinfo.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                if eventinfo.type == pygame.KEYDOWN:
-                    if eventinfo.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
 
             display.fill((0, 0, 0))
             baggrund.draw()
@@ -279,10 +274,6 @@ while gamerunning:
                 if eventskin.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                if eventskin.type == pygame.KEYDOWN:
-                    if eventskin.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
 
             display.fill((0, 0, 0))
             baggrund.draw()
@@ -334,22 +325,26 @@ while gamerunning:
         # displayer highscore
         tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
 
-        if startspil_knap.draw(screenwith / 2 - 200, screenheight / 2 - 60) is True:
+        if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-100) is True:
             mainmenu = False
             new_wave_begin = time.time()
 
             # reset/start timer
             startgametime = time.time()
 
-        if infospil_knap.draw(screenwith / 2 - 200, screenheight / 2 + 50) is True:
+        if infospil_knap.draw(screenwith/2-infospil_knap.width/2, screenheight/2-100+startspil_knap.height) is True:
             infoscreen = True
 
-        if skin_knap.draw(screenwith / 2 - 200, screenheight / 2 + 160) is True:
+        if skin_knap.draw(screenwith/2-skin_knap.width/2, screenheight/2-100+infospil_knap.height*2) is True:
             skinmeny = True
+
+        if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight/2-100+skin_knap.height*3) is True:
+            pygame.quit()
+            sys.exit()
 
         mouse = pygame.mouse.get_pos()
         if (startspil_knap.image_rect.collidepoint(mouse) or infospil_knap.image_rect.collidepoint(mouse)
-                or skin_knap.image_rect.collidepoint(mouse)):
+                or skin_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse)):
             click = True
         else:
             click = False
@@ -369,15 +364,6 @@ while gamerunning:
     current = time.time()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-
-            if highscore < variabler.wave:
-                highscore = variabler.wave
-                with open('textfiler/highscore.txt', 'w') as file:
-                    file.write(str(highscore))
-
             pygame.quit()
             sys.exit()
 
@@ -464,10 +450,6 @@ while gamerunning:
                         if event.type == pygame.QUIT:
                             pygame.quit()
                             sys.exit()
-                        if eventpause.type == pygame.KEYDOWN:
-                            if eventpause.key == pygame.K_ESCAPE:
-                                pygame.quit()
-                                sys.exit()
 
                     display.fill((0, 0, 0))
                     baggrund.draw()
@@ -476,23 +458,34 @@ while gamerunning:
                     display.blit(pausetext,
                                  (screenwith / 2 - pausetext.get_width() / 2, 10 + pausetext.get_height() / 2))
 
-                    if returntogame_button.draw(screenwith / 2 - returntogame_button.width / 2, screenheight / 2 - 70):
+                    if returntogame_button.draw(screenwith/2-returntogame_button.width/2, screenheight/2-70):
                         pause = False
                         player.xmove = 0
                         player.ymove = 0
 
-                    if return_knap.draw(screenwith / 2 - return_knap.width / 2, screenheight / 2 + 70):
+                    if return_knap.draw(screenwith/2-return_knap.width/2, screenheight/2-70+returntogame_button.height):
                         pause = False
                         mainmenu = True
 
                         reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids,
                               player, variabler, screenwith, screenheight)
 
+                    if quitgame_button.draw(screenwith/2-quitgame_button.width/2,
+                                            screenheight/2-70+returntogame_button.height*2):
+                        if highscore < variabler.wave:
+                            highscore = variabler.wave
+                            with open('textfiler/highscore.txt', 'w') as file:
+                                file.write(str(highscore))
+
+                        pygame.quit()
+                        sys.exit()
+
                     mousecursor.update()
                     mousecursor.draw(click=click)
 
                     mouse = pygame.mouse.get_pos()
-                    if return_knap.image_rect.collidepoint(mouse) or returntogame_button.image_rect.collidepoint(mouse):
+                    if return_knap.image_rect.collidepoint(mouse) or returntogame_button.image_rect.collidepoint(mouse)\
+                            or quitgame_button.image_rect.collidepoint(mouse):
                         click = True
                     else:
                         click = False
@@ -873,10 +866,6 @@ while gamerunning:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
 
             tekst_render(Fontbig, 'GAME OVER', (screenwith / 2, screenheight / 2 - 200), display, White, True)
 
@@ -889,15 +878,19 @@ while gamerunning:
             tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
 
             # return button
-            if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
+            if return_knap.draw(screenwith/2-return_knap.width/2, screenheight-100) is True:
                 gameover = False
                 mainmenu = True
 
                 reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids, player,
                       variabler, screenwith, screenheight)
 
+            if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight-100+return_knap.height):
+                pygame.quit()
+                sys.exit()
+
             mouse = pygame.mouse.get_pos()
-            if return_knap.image_rect.collidepoint(mouse):
+            if return_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse):
                 click = True
             else:
                 click = False
