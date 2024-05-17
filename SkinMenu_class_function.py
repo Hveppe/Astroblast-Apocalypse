@@ -2,7 +2,7 @@
 
 import pygame
 from objekts import Button, Picture
-from Define import Grey, Red, Orange
+from Define import Grey, Red, Orange, Green, Yellow, Blue, DarkBlue
 from Sidefunctions import tint_image
 from Sidefunctions import tekst_render
 
@@ -72,3 +72,40 @@ class SkinSlecter:
                 return self.skins[self.chosenskin], tint_image(self.skins[self.chosenskin], Red)
             elif self.type == "cursor":
                 return self.skins[self.chosenskin], self.skinsclick[self.chosenskin]
+
+
+TODO: "Lav så når man har musen over en farve så skifter den til sin click form"
+
+
+class LaserColorChange:
+    def __init__(self, screen, destination, size):
+        self.screen = screen
+        self.x, self.y = destination
+        self.width, self.height = size
+
+        self.margin = 5
+        self.square_size = 50
+        self.gridsize = 5
+        self.lastcolor = None
+
+        self.colors = [Red, Orange, Green, Yellow, Blue]
+
+    def draw_color_grid(self):
+        for index, color in enumerate(self.colors):
+            x = (index % self.gridsize) * (self.square_size + self.margin) + self.x
+            y = (index // self.gridsize) * (self.square_size + self.margin) + self.y
+            pygame.draw.rect(self.screen, color, (x, y, self.square_size, self.square_size))
+
+    def get_color_of_postion(self, pos, currentcolor):
+        x, y = pos
+        if (self.x <= x < self.x + self.gridsize * (self.square_size + self.margin) and
+                self.y <= y < self.y + ((len(self.colors) + self.gridsize - 1) // self.gridsize) *
+                (self.square_size + self.margin)):
+            col = x // (self.square_size + self.margin)
+            row = y // (self.square_size + self.margin)
+            index = row * self.gridsize + col
+
+            if 0 <= col < self.gridsize and 0 <= row < (
+                    len(self.colors) + self.gridsize - 1) // self.gridsize and index < len(self.colors):
+                return self.colors[index]
+        return currentcolor

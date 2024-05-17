@@ -10,7 +10,7 @@ from Mouse import MouseCursor
 from Sidefunctions import *
 from Define import *
 from Healthbar import HealthBar
-from SkinMenu_class_function import SkinSlecter
+from SkinMenu_class_function import SkinSlecter, LaserColorChange
 
 # importer libaries
 import random
@@ -143,6 +143,8 @@ cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (
                                  .convert_alpha(),
                                  pygame.image.load("Image/mousecursor/Nasa_space_cursor.png").convert_alpha(),
                                  pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png").convert_alpha())
+
+laserchangecolor = LaserColorChange(display, (10, 10), (100, 100))
 
 
 with open('textfiler/skin', 'r') as file:
@@ -280,6 +282,9 @@ while gamerunning:
                 if eventskin.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if eventskin.type == pygame.MOUSEBUTTONDOWN:
+                    variabler.laser_color = laserchangecolor.get_color_of_postion(pygame.mouse.get_pos(),
+                                                                                  variabler.laser_color)
 
             display.fill((0, 0, 0))
             baggrund.draw()
@@ -306,10 +311,13 @@ while gamerunning:
                     file.write(str(playerskinselecter.chosenskin) + '\n')
                     file.write(str(cursorskinselecter.chosenskin))
 
+            mouse = pygame.mouse.get_pos()
+
+            laserchangecolor.draw_color_grid()
+
             mousecursor.update()
             mousecursor.draw(click=click)
 
-            mouse = pygame.mouse.get_pos()
             if (return_knap.image_rect.collidepoint(mouse) or
                     playerskinselecter.RightButton.image_rect.collidepoint(mouse) or
                     playerskinselecter.LeftButton.image_rect.collidepoint(mouse) or
@@ -350,6 +358,7 @@ while gamerunning:
             sys.exit()
 
         mouse = pygame.mouse.get_pos()
+
         if (startspil_knap.image_rect.collidepoint(mouse) or infospil_knap.image_rect.collidepoint(mouse)
                 or skin_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse)):
             click = True
