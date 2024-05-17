@@ -156,6 +156,7 @@ gamerunning = True
 mainmenu = True
 infoscreen = False
 skinmeny = False
+maingame = False
 
 # Laver mousecursor synlig
 pygame.mouse.set_visible(False)
@@ -326,6 +327,7 @@ while gamerunning:
 
         if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-100) is True:
             mainmenu = False
+            maingame = True
             new_wave_begin = time.time()
 
             # reset/start timer
@@ -354,550 +356,555 @@ while gamerunning:
         pygame.display.flip()
 
     # -------------------------------------Main Game-------------------------------------------------------------------
-    # Laver mousecursor usynlig
-    pygame.mouse.set_visible(False)
-
-    # sætter framerate til 60
-    clock.tick(60)
-
-    current = time.time()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
-        # controls til PlayerClass
-        if event.type == pygame.KEYDOWN:
-            # Kode til at kontroler våben
-            if event.type == pygame.KEYDOWN:
-
-                # Controls til laser
-                if event.key == pygame.K_UP:
-                    variabler.lastmove = 'up'
-                    variabler.shotting = True
-                if event.key == pygame.K_DOWN:
-                    variabler.lastmove = 'down'
-                    variabler.shotting = True
-                if event.key == pygame.K_LEFT:
-                    variabler.lastmove = 'left'
-                    variabler.shotting = True
-                if event.key == pygame.K_RIGHT:
-                    variabler.lastmove = 'right'
-                    variabler.shotting = True
-
-            # controls til mine
-            if event.key == pygame.K_m:
-                if variabler.ArsenalMines > 0 and variabler.shield_up is False:
-                    variabler.ArsenalMines -= 1
-                    Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
-                                            yvalue=player.y + player.height / 2,
-                                            picture=pygame.image.load("Image/Mines/mine.png").convert_alpha()))
-                    mineplacesound.play()
-
-            # control til shield
-            if event.key == pygame.K_SPACE:
-                variabler.shield_up = True
-
-            # Bevægelse af player
-            if event.key == pygame.K_w:
-                player.ymove -= player.movespeed
-            if event.key == pygame.K_s:
-                player.ymove += player.movespeed
-            if event.key == pygame.K_d:
-                player.xmove += player.movespeed
-            if event.key == pygame.K_a:
-                player.xmove -= player.movespeed
-            if event.key == pygame.K_h:
-                debug = True
-
-        # Bruges til at modvirker controls
-        if event.type == pygame.KEYUP:
-
-            # modvirker bevægelse
-            if event.key == pygame.K_w:
-                player.ymove += player.movespeed
-            if event.key == pygame.K_s:
-                player.ymove -= player.movespeed
-            if event.key == pygame.K_d:
-                player.xmove -= player.movespeed
-            if event.key == pygame.K_a:
-                player.xmove += player.movespeed
-            if event.key == pygame.K_h:
-                debug = False
-
-            # modvirker våben
-            if (event.key == pygame.K_UP or event.key == pygame.K_DOWN or
-                    event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_UP] or keys[pygame.K_DOWN] or keys[pygame.K_LEFT] or keys[pygame.K_RIGHT]:
-                    variabler.shotting = True
-                else:
-                    variabler.shotting = False
-
-            if event.key == pygame.K_SPACE:
-                variabler.shield_up = False
-
-        # pause spil
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                pause = True
-
-                # ------------------------------------Pause screen------------------------------------------------------
-                while pause is True:
-
-                    for eventpause in pygame.event.get():
-                        if event.type == pygame.QUIT:
-                            pygame.quit()
-                            sys.exit()
-
-                    display.fill((0, 0, 0))
-                    baggrund.draw()
-
-                    pausetext = Fontbig.render('PAUSED', True, White)
-                    display.blit(pausetext,
-                                 (screenwith / 2 - pausetext.get_width() / 2, 10 + pausetext.get_height() / 2))
-
-                    if returntogame_button.draw(screenwith/2-returntogame_button.width/2, screenheight/2-70):
-                        pause = False
-                        player.xmove = 0
-                        player.ymove = 0
-
-                    if return_knap.draw(screenwith/2-return_knap.width/2, screenheight/2-70+returntogame_button.height):
-                        pause = False
-                        mainmenu = True
-
-                        reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids,
-                              player, variabler, screenwith, screenheight)
-
-                    if quitgame_button.draw(screenwith/2-quitgame_button.width/2,
-                                            screenheight/2-70+returntogame_button.height*2):
-                        if highscore < variabler.wave:
-                            highscore = variabler.wave
-                            with open('textfiler/highscore.txt', 'w') as file:
-                                file.write(str(highscore))
-
-                        pygame.quit()
-                        sys.exit()
-
-                    mousecursor.update()
-                    mousecursor.draw(click=click)
-
-                    mouse = pygame.mouse.get_pos()
-                    if return_knap.image_rect.collidepoint(mouse) or returntogame_button.image_rect.collidepoint(mouse)\
-                            or quitgame_button.image_rect.collidepoint(mouse):
-                        click = True
-                    else:
-                        click = False
-
-                    pygame.display.flip()
-
-    if variabler.shotting is True and variabler.shield_up is False:
-        if current - variabler.last_time_shot >= variabler.delaylaser:
-            Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2 - 5,
-                                       yvalue=player.y + player.height / 2 - 5, last_move=variabler.lastmove,
-                                       color=variabler.laser_color))
-            lasersound.play()
-            variabler.last_time_shot = current
-
-    # Farver baggrund
-    display.fill((0, 0, 0))
-    baggrund.draw()
-
-    for lasershot in Lasershot:
-        lasershot.draw()
-        lasershot.update()
-
-        # fjerner laserne når de rammer kanterne af skærmen
-        if lasershot.hitwall is True:
-            Lasershot.remove(lasershot)
-
-    for Mine in Mineshot:
-        Mine.draw()
-
-    for enemy in Fjender:
-        if current - variabler.new_wave_begin >= variabler.new_wave_delay:
-            enemy.update()
-
-        enemy.draw()
-        if collisionchecker(player, enemy) and enemy.dead is False:
-            if variabler.shield_up:
-                pass
-            else:
-                enemydeadsound.play()
-                variabler.lives -= 1
-                variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
-                enemy.dead = True
-                enemy.timeofdeath = time.time()
-
-        for lasershot in Lasershot:
-            if collisionchecker(enemy, lasershot):
-                Lasershot.remove(lasershot)
-                variabler.minepoint += 1
-                enemydeadsound.play()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for Mine in Mineshot:
-            if collisionchecker_circle_square(Mine, enemy):
-                Mineshot.remove(Mine)
-                enemydeadsound.play()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-    for enemy in HeavyFjender:
-        if current - variabler.new_wave_begin >= variabler.new_wave_delay:
-            enemy.update()
-
-        enemy.draw()
-        if collisionchecker(player, enemy) and enemy.dead is False:
-            if variabler.shield_up:
-                pass
-            else:
-                enemydeadsound.play()
-                variabler.lives -= enemy.lives
-                variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for lasershot in Lasershot:
-            if collisionchecker(enemy, lasershot):
-                Lasershot.remove(lasershot)
-                enemydeadsound.play()
-
-                if enemy.lives <= 0:
-                    variabler.minepoint += 3
-                    enemy.dead, enemy.timeofdeath = taken_damage()
-                else:
-                    enemy.lives -= 1
-
-        for Mine in Mineshot:
-            if collisionchecker_circle_square(Mine, enemy):
-                Mineshot.remove(Mine)
-                enemydeadsound.play()
-
-                if enemy.lives <= 0:
-                    enemy.dead, enemy.timeofdeath = taken_damage()
-                else:
-                    enemy.lives -= 1
-
-    for enemy in MineswepperFjender:
-        if current - variabler.new_wave_begin >= variabler.new_wave_delay:
-            enemy.update()
-
-        enemy.draw()
-
-        if collisionchecker(player, enemy) and enemy.dead is False:
-            if variabler.shield_up:
-                pass
-            else:
-                enemydeadsound.play()
-                variabler.lives -= 1
-                variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for lasershot in Lasershot:
-            if collisionchecker(enemy, lasershot):
-                Lasershot.remove(lasershot)
-                enemydeadsound.play()
-                variabler.minepoint += 1
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for Mine in Mineshot:
-            if collisionchecker_circle_square(Mine, enemy):
-                Mineshot.remove(Mine)
-
-    for enemy in HommingFjender:
-        if current - variabler.new_wave_begin >= variabler.new_wave_delay:
-            enemy.update(player=player)
-
-        enemy.draw()
-
-        if collisionchecker(enemy, player) and enemy.dead is False:
-            if variabler.shield_up:
-                pass
-            else:
-                variabler.lives -= 1
-                enemydeadsound.play()
-                variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for lasershot in Lasershot:
-            if collisionchecker(enemy, lasershot):
-                Lasershot.remove(lasershot)
-                enemydeadsound.play()
-                variabler.minepoint += 1
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for Mine in Mineshot:
-            if collisionchecker_circle_square(Mine, enemy):
-                Mineshot.remove(Mine)
-                enemydeadsound.play()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-    for astriod in Astroids:
-        astriod.draw()
-        astriod.move()
-
-        if collisionchecker(player, astriod):
-            variabler.lives = 0
-
-        for enemy in Fjender:
-            if collisionchecker_circle_square(astriod, enemy):
-                Fjender.remove(enemy)
-                enemydeadsound.play()
-
-        for enemy in HeavyFjender:
-            if collisionchecker_circle_square(astriod, enemy):
-                HeavyFjender.remove(enemy)
-                enemydeadsound.play()
-
-        for enemy in MineswepperFjender:
-            if collisionchecker_circle_square(astriod, enemy):
-                MineswepperFjender.remove(enemy)
-                enemydeadsound.play()
-
-        for enemy in HommingFjender:
-            if collisionchecker_circle_square(astriod, enemy):
-                HommingFjender.remove(enemy)
-                enemydeadsound.play()
-
-        for lasershot in Lasershot:
-            if collisionchecker_circle_square(astriod, lasershot):
-                Lasershot.remove(lasershot)
-
-        for Mine in Mineshot:
-            if collisionchecker_circle(Mine, astriod):
-                Mineshot.remove(Mine)
-                enemydeadsound.play()
-
-        if astriod.x > 5000 or astriod.x < -5000 or astriod.y > 5000 or astriod.y < -5000:
-            Astroids.remove(astriod)
-
-    # ----------------------------------------Nye fjender bliver spawned når alle er døde
-    if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0 and len(HommingFjender) == 0:
-        variabler.wave += 1
-        variabler.new_wave_begin = time.time()
-
-        if variabler.wave >= variabler.wavelives:
-            if variabler.lives < 5:
-                variabler.lives += 1
-
-            variabler.wavelives += 4
-
-        if variabler.wave >= variabler.waveheavyspawn:
-            variabler.antalfjenderheavy += 1
-            variabler.waveheavyspawn += variabler.waveheavyspawnadd
-            variabler.antalfjender -= 1
-        else:
-            variabler.antalfjender += 2
-
-        if variabler.wave >= variabler.wavemineswepperspawn:
-            variabler.antalfjendermineswpper += 1
-            variabler.wavemineswepperspawn += variabler.wavemineswepperspawnadd
-
-        if variabler.wave >= variabler.wavehommingspawn:
-            variabler.antalfjenderhomming += 2
-            variabler.antalfjender -= 2
-            variabler.wavehommingspawn += variabler.wavehommingspawnadd
-
-        if variabler.wave == variabler.changeinrate and variabler.waveheavyspawn > 1:
-            variabler.waveheavyspawnadd -= 1
-            variabler.changeinrate += 10
-
-        for i in range(variabler.antalfjender):
-            spawn_enemy(Fjender, EnemyClass, player, screenwith, screenheight, display,
-                        random.randint(0, screenwith - 40),
-                        random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 10),
-                        pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
-
-        for n in range(variabler.antalfjenderheavy):
-            spawn_enemy(HeavyFjender, HeavyEnemyClass, player, screenwith, screenheight, display,
-                        random.randint(0, screenwith - 60),
-                        random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 5),
-                        pygame.image.load('Image/Fjender/Heavyfjendeimage.png').convert_alpha())
-
-        for m in range(variabler.antalfjendermineswpper):
-            spawn_enemy(MineswepperFjender, EnemyClass, player, screenwith, screenheight, display,
-                        random.randint(0, screenwith - 40),
-                        random.randint(0, screenheight - 40), random.randint(1, 10), random.randint(1, 10),
-                        pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png').convert_alpha())
-
-        for h in range(variabler.antalfjenderhomming):
-            spawn_enemy(HommingFjender, HommingEnemyClass, player, screenwith, screenheight, display,
-                        random.randint(0, screenwith - 50),
-                        random.randint(0, screenheight - 50), 5, 5, pygame.image.load
-                        ('Image/Fjender/HommingFjendeImage.png').convert_alpha())
-
-    if variabler.shield_up is True and variabler.shield_charge > 0:
-        shield.update(player)
-        shield.draw()
-
-        variabler.drain_time = time.time()
-
-        if variabler.last_draintime is None:
-            variabler.last_draintime = time.time()
-
-        if variabler.drain_time - variabler.last_draintime >= variabler.drain_speed:
-            variabler.shield_charge -= 1
-            variabler.last_draintime = time.time()
-
-        for enemy in Fjender:
-            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
-                enemydeadsound.play()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for enemy in HeavyFjender:
-            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
-                enemydeadsound.play()
-                variabler.shield_charge -= 2
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for enemy in MineswepperFjender:
-            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
-                enemydeadsound.play()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-        for enemy in HommingFjender:
-            if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
-                enemydeadsound.play()
-                enemy.dead, enemy.timeofdeath = taken_damage()
-
-    if variabler.minepoint > 50:
-        variabler.ArsenalMines += 1
-        variabler.minepoint -= 50
-
-    # Tegner player
-    player.draw(variabler.taking_damage_player)
-    player.update()
-
-    # farver player rød når den tager skade
-    if current - variabler.time_of_damage >= variabler.time_being_red:
-        variabler.taking_damage_player = False
-
-    # Kalder function til hver fjende type
-    explosion_effekt(Fjender, current, variabler.explosion_time, explosion_effeckt, display)
-    explosion_effekt(MineswepperFjender, current, variabler.explosion_time, explosion_effeckt, display)
-    explosion_effekt(HeavyFjender, current, variabler.explosion_time, explosion_effeckt, display)
-    explosion_effekt(HommingFjender, current, variabler.explosion_time, explosion_effeckt, display)
-
-    # --------------------------------------------Debug menu------------------------------------------------------------
-    if debug is True:
-        # viser hitboxes
-        player.draw_debug()
-
-        for enemy in Fjender:
-            enemy.draw_debug()
-
-        for enemy in MineswepperFjender:
-            enemy.draw_debug()
-
-        for enemy in HeavyFjender:
-            enemy.draw_debug()
-
-        for enemy in HommingFjender:
-            enemy.draw_debug()
-
-        for mine in Mineshot:
-            mine.draw_debug()
-
-        # Displayer FPS
-        tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight - 100), display, White,
-                     False)
-
-    # ---------------------------------------Main game igen-------------------------------------------------------------
-    health_bar.hp = variabler.lives
-    health_bar.draw(display)
-
-    tekst_render(Font, f"Wave: {variabler.wave}", (screenwith/2, 10), display, White, True)
-
-    shied_bar.hp = variabler.shield_charge
-    shied_bar.draw(display)
-
-    tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, 50), display, White, None)
-
-    if variabler.lives > 0:
-        variabler.timer = time.time() - variabler.startgametime
-
-    timerext = Font.render(f'Timer: {round(variabler.timer, 2)}', True, White)
-    display.blit(timerext, (10, 50))
-
-    makeastroid = random.randint(1, 100000)
-
-    if makeastroid < 10:
-        direction = random.randint(1, 4)
-        if direction == 1:
-            xastriond = random.randrange(1, screenwith)
-            yastriond = -random.randrange(100, 200)
-        elif direction == 2:
-            xastriond = -random.randrange(100, 200)
-            yastriond = random.randrange(1, screenheight)
-        elif direction == 3:
-            xastriond = random.randrange(1, screenwith)
-            yastriond = random.randrange(screenheight + 100, screenheight + 200)
-        elif direction == 4:
-            xastriond = random.randrange(screenwith + 100, screenwith + 200)
-            yastriond = random.randrange(1, screenheight)
-        else:
-            xastriond = 0
-            yastriond = 0
-
-        Astroids.append(AstroidClass(screen=display, xvalue=xastriond, yvalue=yastriond, speed=5,
-                                     radius=50, direction=direction))
-
-    # Updater display
-    pygame.display.flip()
-
-    # -------------------------------------Game Over-------------------------------------------------------------------
-    if variabler.lives <= 0:
-        gameover = True
-        gameoversound.play()
-
-        if highscore < variabler.wave:
-            highscore = variabler.wave
-            with open('textfiler/highscore.txt', 'w') as file:
-                file.write(str(highscore))
-
-        while gameover:
-            # sætter framerate til 60
-            clock.tick(60)
-
-            # Farver baggrund
-            display.fill((0, 0, 0))
-            baggrund.draw()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-
-            tekst_render(Fontbig, 'GAME OVER', (screenwith / 2, screenheight / 2 - 200), display, White, True)
-
-            tekst_render(Font, f"WAVE: {variabler.wave}", (screenwith / 2, screenheight / 2 - 80), display, White, True)
-
-            tekst_render(Font, f"TIME: {round(variabler.timer, 2)}", (screenwith / 2, screenheight / 2 - 30),
-                         display, White,
-                         True)
-
-            tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
-
-            # return button
-            if return_knap.draw(screenwith/2-return_knap.width/2, screenheight-100) is True:
-                gameover = False
-                mainmenu = True
-
-                reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids, player,
-                      variabler, screenwith, screenheight)
-
-            if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight-100+return_knap.height):
+    while maingame:
+        # Laver mousecursor usynlig
+        pygame.mouse.set_visible(False)
+
+        # sætter framerate til 60
+        clock.tick(60)
+
+        current = time.time()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-            mouse = pygame.mouse.get_pos()
-            if return_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse):
-                click = True
+            # controls til PlayerClass
+            if event.type == pygame.KEYDOWN:
+                # Kode til at kontroler våben
+                if event.type == pygame.KEYDOWN:
+
+                    # Controls til laser
+                    if event.key == pygame.K_UP:
+                        variabler.lastmove = 'up'
+                        variabler.shotting = True
+                    if event.key == pygame.K_DOWN:
+                        variabler.lastmove = 'down'
+                        variabler.shotting = True
+                    if event.key == pygame.K_LEFT:
+                        variabler.lastmove = 'left'
+                        variabler.shotting = True
+                    if event.key == pygame.K_RIGHT:
+                        variabler.lastmove = 'right'
+                        variabler.shotting = True
+
+                # controls til mine
+                if event.key == pygame.K_m:
+                    if variabler.ArsenalMines > 0 and variabler.shield_up is False:
+                        variabler.ArsenalMines -= 1
+                        Mineshot.append(LayMine(screen=display, xvalue=player.x + player.width / 2,
+                                                yvalue=player.y + player.height / 2,
+                                                picture=pygame.image.load("Image/Mines/mine.png").convert_alpha()))
+                        mineplacesound.play()
+
+                # control til shield
+                if event.key == pygame.K_SPACE:
+                    variabler.shield_up = True
+
+                # Bevægelse af player
+                if event.key == pygame.K_w:
+                    player.ymove -= player.movespeed
+                if event.key == pygame.K_s:
+                    player.ymove += player.movespeed
+                if event.key == pygame.K_d:
+                    player.xmove += player.movespeed
+                if event.key == pygame.K_a:
+                    player.xmove -= player.movespeed
+                if event.key == pygame.K_h:
+                    debug = True
+
+            # Bruges til at modvirker controls
+            if event.type == pygame.KEYUP:
+
+                # modvirker bevægelse
+                if event.key == pygame.K_w:
+                    player.ymove += player.movespeed
+                if event.key == pygame.K_s:
+                    player.ymove -= player.movespeed
+                if event.key == pygame.K_d:
+                    player.xmove -= player.movespeed
+                if event.key == pygame.K_a:
+                    player.xmove += player.movespeed
+                if event.key == pygame.K_h:
+                    debug = False
+
+                # modvirker våben
+                if (event.key == pygame.K_UP or event.key == pygame.K_DOWN or
+                        event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+                    keys = pygame.key.get_pressed()
+                    if keys[pygame.K_UP] or keys[pygame.K_DOWN] or keys[pygame.K_LEFT] or keys[pygame.K_RIGHT]:
+                        variabler.shotting = True
+                    else:
+                        variabler.shotting = False
+
+                if event.key == pygame.K_SPACE:
+                    variabler.shield_up = False
+
+            # pause spil
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pause = True
+
+                    # ------------------------------------Pause screen--------------------------------------------------
+                    while pause is True:
+
+                        for eventpause in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                pygame.quit()
+                                sys.exit()
+
+                        display.fill((0, 0, 0))
+                        baggrund.draw()
+
+                        pausetext = Fontbig.render('PAUSED', True, White)
+                        display.blit(pausetext,
+                                     (screenwith / 2 - pausetext.get_width() / 2, 10 + pausetext.get_height() / 2))
+
+                        if returntogame_button.draw(screenwith/2-returntogame_button.width/2, screenheight/2-70):
+                            pause = False
+                            player.xmove = 0
+                            player.ymove = 0
+
+                        if return_knap.draw(screenwith/2-return_knap.width/2,
+                                            screenheight/2-70+returntogame_button.height):
+                            pause = False
+                            mainmenu = True
+                            maingame = False
+
+                            reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender,
+                                  Astroids, player, variabler, screenwith, screenheight)
+
+                        if quitgame_button.draw(screenwith/2-quitgame_button.width/2,
+                                                screenheight/2-70+returntogame_button.height*2):
+                            if highscore < variabler.wave:
+                                highscore = variabler.wave
+                                with open('textfiler/highscore.txt', 'w') as file:
+                                    file.write(str(highscore))
+
+                            pygame.quit()
+                            sys.exit()
+
+                        mousecursor.update()
+                        mousecursor.draw(click=click)
+
+                        mouse = pygame.mouse.get_pos()
+                        if (return_knap.image_rect.collidepoint(mouse) or
+                                returntogame_button.image_rect.collidepoint(mouse)
+                                or quitgame_button.image_rect.collidepoint(mouse)):
+                            click = True
+                        else:
+                            click = False
+
+                        pygame.display.flip()
+
+        if variabler.shotting is True and variabler.shield_up is False:
+            if current - variabler.last_time_shot >= variabler.delaylaser:
+                Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2 - 5,
+                                           yvalue=player.y + player.height / 2 - 5, last_move=variabler.lastmove,
+                                           color=variabler.laser_color))
+                lasersound.play()
+                variabler.last_time_shot = current
+
+        # Farver baggrund
+        display.fill((0, 0, 0))
+        baggrund.draw()
+
+        for lasershot in Lasershot:
+            lasershot.draw()
+            lasershot.update()
+
+            # fjerner laserne når de rammer kanterne af skærmen
+            if lasershot.hitwall is True:
+                Lasershot.remove(lasershot)
+
+        for Mine in Mineshot:
+            Mine.draw()
+
+        for enemy in Fjender:
+            if current - variabler.new_wave_begin >= variabler.new_wave_delay:
+                enemy.update()
+
+            enemy.draw()
+            if collisionchecker(player, enemy) and enemy.dead is False:
+                if variabler.shield_up:
+                    pass
+                else:
+                    enemydeadsound.play()
+                    variabler.lives -= 1
+                    variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
+                    enemy.dead = True
+                    enemy.timeofdeath = time.time()
+
+            for lasershot in Lasershot:
+                if collisionchecker(enemy, lasershot):
+                    Lasershot.remove(lasershot)
+                    variabler.minepoint += 1
+                    enemydeadsound.play()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for Mine in Mineshot:
+                if collisionchecker_circle_square(Mine, enemy):
+                    Mineshot.remove(Mine)
+                    enemydeadsound.play()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+        for enemy in HeavyFjender:
+            if current - variabler.new_wave_begin >= variabler.new_wave_delay:
+                enemy.update()
+
+            enemy.draw()
+            if collisionchecker(player, enemy) and enemy.dead is False:
+                if variabler.shield_up:
+                    pass
+                else:
+                    enemydeadsound.play()
+                    variabler.lives -= enemy.lives
+                    variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for lasershot in Lasershot:
+                if collisionchecker(enemy, lasershot):
+                    Lasershot.remove(lasershot)
+                    enemydeadsound.play()
+
+                    if enemy.lives <= 0:
+                        variabler.minepoint += 3
+                        enemy.dead, enemy.timeofdeath = taken_damage()
+                    else:
+                        enemy.lives -= 1
+
+            for Mine in Mineshot:
+                if collisionchecker_circle_square(Mine, enemy):
+                    Mineshot.remove(Mine)
+                    enemydeadsound.play()
+
+                    if enemy.lives <= 0:
+                        enemy.dead, enemy.timeofdeath = taken_damage()
+                    else:
+                        enemy.lives -= 1
+
+        for enemy in MineswepperFjender:
+            if current - variabler.new_wave_begin >= variabler.new_wave_delay:
+                enemy.update()
+
+            enemy.draw()
+
+            if collisionchecker(player, enemy) and enemy.dead is False:
+                if variabler.shield_up:
+                    pass
+                else:
+                    enemydeadsound.play()
+                    variabler.lives -= 1
+                    variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for lasershot in Lasershot:
+                if collisionchecker(enemy, lasershot):
+                    Lasershot.remove(lasershot)
+                    enemydeadsound.play()
+                    variabler.minepoint += 1
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for Mine in Mineshot:
+                if collisionchecker_circle_square(Mine, enemy):
+                    Mineshot.remove(Mine)
+
+        for enemy in HommingFjender:
+            if current - variabler.new_wave_begin >= variabler.new_wave_delay:
+                enemy.update(player=player)
+
+            enemy.draw()
+
+            if collisionchecker(enemy, player) and enemy.dead is False:
+                if variabler.shield_up:
+                    pass
+                else:
+                    variabler.lives -= 1
+                    enemydeadsound.play()
+                    variabler.taking_damage_player, variabler.time_of_damage = taken_damage()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for lasershot in Lasershot:
+                if collisionchecker(enemy, lasershot):
+                    Lasershot.remove(lasershot)
+                    enemydeadsound.play()
+                    variabler.minepoint += 1
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for Mine in Mineshot:
+                if collisionchecker_circle_square(Mine, enemy):
+                    Mineshot.remove(Mine)
+                    enemydeadsound.play()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+        for astriod in Astroids:
+            astriod.draw()
+            astriod.move()
+
+            if collisionchecker(player, astriod):
+                variabler.lives = 0
+
+            for enemy in Fjender:
+                if collisionchecker_circle_square(astriod, enemy):
+                    Fjender.remove(enemy)
+                    enemydeadsound.play()
+
+            for enemy in HeavyFjender:
+                if collisionchecker_circle_square(astriod, enemy):
+                    HeavyFjender.remove(enemy)
+                    enemydeadsound.play()
+
+            for enemy in MineswepperFjender:
+                if collisionchecker_circle_square(astriod, enemy):
+                    MineswepperFjender.remove(enemy)
+                    enemydeadsound.play()
+
+            for enemy in HommingFjender:
+                if collisionchecker_circle_square(astriod, enemy):
+                    HommingFjender.remove(enemy)
+                    enemydeadsound.play()
+
+            for lasershot in Lasershot:
+                if collisionchecker_circle_square(astriod, lasershot):
+                    Lasershot.remove(lasershot)
+
+            for Mine in Mineshot:
+                if collisionchecker_circle(Mine, astriod):
+                    Mineshot.remove(Mine)
+                    enemydeadsound.play()
+
+            if astriod.x > 5000 or astriod.x < -5000 or astriod.y > 5000 or astriod.y < -5000:
+                Astroids.remove(astriod)
+
+        # ----------------------------------------Nye fjender bliver spawned når alle er døde
+        if len(Fjender) == 0 and len(HeavyFjender) == 0 and len(MineswepperFjender) == 0 and len(HommingFjender) == 0:
+            variabler.wave += 1
+            variabler.new_wave_begin = time.time()
+
+            if variabler.wave >= variabler.wavelives:
+                if variabler.lives < 5:
+                    variabler.lives += 1
+
+                variabler.wavelives += 4
+
+            if variabler.wave >= variabler.waveheavyspawn:
+                variabler.antalfjenderheavy += 1
+                variabler.waveheavyspawn += variabler.waveheavyspawnadd
+                variabler.antalfjender -= 1
             else:
-                click = False
+                variabler.antalfjender += 2
 
-            mousecursor.update()
-            mousecursor.draw(click=click)
+            if variabler.wave >= variabler.wavemineswepperspawn:
+                variabler.antalfjendermineswpper += 1
+                variabler.wavemineswepperspawn += variabler.wavemineswepperspawnadd
 
-            pygame.display.flip()
+            if variabler.wave >= variabler.wavehommingspawn:
+                variabler.antalfjenderhomming += 2
+                variabler.antalfjender -= 2
+                variabler.wavehommingspawn += variabler.wavehommingspawnadd
+
+            if variabler.wave == variabler.changeinrate and variabler.waveheavyspawn > 1:
+                variabler.waveheavyspawnadd -= 1
+                variabler.changeinrate += 10
+
+            for i in range(variabler.antalfjender):
+                spawn_enemy(Fjender, EnemyClass, player, screenwith, screenheight, display,
+                            random.randint(0, screenwith - 40),
+                            random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 10),
+                            pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
+
+            for n in range(variabler.antalfjenderheavy):
+                spawn_enemy(HeavyFjender, HeavyEnemyClass, player, screenwith, screenheight, display,
+                            random.randint(0, screenwith - 60),
+                            random.randint(0, screenheight - 60), random.randint(1, 5), random.randint(1, 5),
+                            pygame.image.load('Image/Fjender/Heavyfjendeimage.png').convert_alpha())
+
+            for m in range(variabler.antalfjendermineswpper):
+                spawn_enemy(MineswepperFjender, EnemyClass, player, screenwith, screenheight, display,
+                            random.randint(0, screenwith - 40),
+                            random.randint(0, screenheight - 40), random.randint(1, 10), random.randint(1, 10),
+                            pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png').convert_alpha())
+
+            for h in range(variabler.antalfjenderhomming):
+                spawn_enemy(HommingFjender, HommingEnemyClass, player, screenwith, screenheight, display,
+                            random.randint(0, screenwith - 50),
+                            random.randint(0, screenheight - 50), 5, 5, pygame.image.load
+                            ('Image/Fjender/HommingFjendeImage.png').convert_alpha())
+
+        if variabler.shield_up is True and variabler.shield_charge > 0:
+            shield.update(player)
+            shield.draw()
+
+            variabler.drain_time = time.time()
+
+            if variabler.last_draintime is None:
+                variabler.last_draintime = time.time()
+
+            if variabler.drain_time - variabler.last_draintime >= variabler.drain_speed:
+                variabler.shield_charge -= 1
+                variabler.last_draintime = time.time()
+
+            for enemy in Fjender:
+                if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
+                    enemydeadsound.play()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for enemy in HeavyFjender:
+                if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
+                    enemydeadsound.play()
+                    variabler.shield_charge -= 2
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for enemy in MineswepperFjender:
+                if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
+                    enemydeadsound.play()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+            for enemy in HommingFjender:
+                if collisionchecker_circle_square(shield, enemy) and enemy.dead is False:
+                    enemydeadsound.play()
+                    enemy.dead, enemy.timeofdeath = taken_damage()
+
+        if variabler.minepoint > 50:
+            variabler.ArsenalMines += 1
+            variabler.minepoint -= 50
+
+        # Tegner player
+        player.draw(variabler.taking_damage_player)
+        player.update()
+
+        # farver player rød når den tager skade
+        if current - variabler.time_of_damage >= variabler.time_being_red:
+            variabler.taking_damage_player = False
+
+        # Kalder function til hver fjende type
+        explosion_effekt(Fjender, current, variabler.explosion_time, explosion_effeckt, display)
+        explosion_effekt(MineswepperFjender, current, variabler.explosion_time, explosion_effeckt, display)
+        explosion_effekt(HeavyFjender, current, variabler.explosion_time, explosion_effeckt, display)
+        explosion_effekt(HommingFjender, current, variabler.explosion_time, explosion_effeckt, display)
+
+        # --------------------------------------------Debug menu--------------------------------------------------------
+        if debug is True:
+            # viser hitboxes
+            player.draw_debug()
+
+            for enemy in Fjender:
+                enemy.draw_debug()
+
+            for enemy in MineswepperFjender:
+                enemy.draw_debug()
+
+            for enemy in HeavyFjender:
+                enemy.draw_debug()
+
+            for enemy in HommingFjender:
+                enemy.draw_debug()
+
+            for mine in Mineshot:
+                mine.draw_debug()
+
+            # Displayer FPS
+            tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight - 100), display, White,
+                         False)
+
+        # ---------------------------------------Main game igen---------------------------------------------------------
+        health_bar.hp = variabler.lives
+        health_bar.draw(display)
+
+        tekst_render(Font, f"Wave: {variabler.wave}", (screenwith/2, 10), display, White, True)
+
+        shied_bar.hp = variabler.shield_charge
+        shied_bar.draw(display)
+
+        tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, 50), display, White, None)
+
+        if variabler.lives > 0:
+            variabler.timer = time.time() - variabler.startgametime
+
+        timerext = Font.render(f'Timer: {round(variabler.timer, 2)}', True, White)
+        display.blit(timerext, (10, 50))
+
+        makeastroid = random.randint(1, 100000)
+
+        if makeastroid < 10:
+            direction = random.randint(1, 4)
+            if direction == 1:
+                xastriond = random.randrange(1, screenwith)
+                yastriond = -random.randrange(100, 200)
+            elif direction == 2:
+                xastriond = -random.randrange(100, 200)
+                yastriond = random.randrange(1, screenheight)
+            elif direction == 3:
+                xastriond = random.randrange(1, screenwith)
+                yastriond = random.randrange(screenheight + 100, screenheight + 200)
+            elif direction == 4:
+                xastriond = random.randrange(screenwith + 100, screenwith + 200)
+                yastriond = random.randrange(1, screenheight)
+            else:
+                xastriond = 0
+                yastriond = 0
+
+            Astroids.append(AstroidClass(screen=display, xvalue=xastriond, yvalue=yastriond, speed=5,
+                                         radius=50, direction=direction))
+
+        # Updater display
+        pygame.display.flip()
+
+        # -------------------------------------Game Over----------------------------------------------------------------
+        if variabler.lives <= 0:
+            gameover = True
+            gameoversound.play()
+
+            if highscore < variabler.wave:
+                highscore = variabler.wave
+                with open('textfiler/highscore.txt', 'w') as file:
+                    file.write(str(highscore))
+
+            while gameover:
+                # sætter framerate til 60
+                clock.tick(60)
+
+                # Farver baggrund
+                display.fill((0, 0, 0))
+                baggrund.draw()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+
+                tekst_render(Fontbig, 'GAME OVER', (screenwith / 2, screenheight / 2 - 200), display, White, True)
+
+                tekst_render(Font, f"WAVE: {variabler.wave}", (screenwith / 2, screenheight / 2 - 80), display, White, True)
+
+                tekst_render(Font, f"TIME: {round(variabler.timer, 2)}", (screenwith / 2, screenheight / 2 - 30),
+                             display, White,
+                             True)
+
+                tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
+
+                # return button
+                if return_knap.draw(screenwith/2-return_knap.width/2, screenheight-100) is True:
+                    gameover = False
+                    mainmenu = True
+                    maingame = False
+
+                    reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids, player,
+                          variabler, screenwith, screenheight)
+
+                if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight-100+return_knap.height):
+                    pygame.quit()
+                    sys.exit()
+
+                mouse = pygame.mouse.get_pos()
+                if return_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse):
+                    click = True
+                else:
+                    click = False
+
+                mousecursor.update()
+                mousecursor.draw(click=click)
+
+                pygame.display.flip()
 
 pygame.quit()
 sys.exit()
