@@ -130,16 +130,19 @@ playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-150, 
                                  pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer4.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer5.png").convert_alpha(),
-                                 pygame.image.load("Image/Playerships/Rumskibplayer6.png").convert_alpha())
+                                 pygame.image.load("Image/Playerships/Rumskibplayer6.png").convert_alpha(),
+                                 pygame.image.load("Image/Playerships/Rumskibplayer7.png").convert_alpha())
 
 # cursor skin ting | Hver anden *args er click billeder
 cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (300, 180), "cursor",
-                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
-                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"),
-                                 pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
-                                 pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png"),
-                                 pygame.image.load("Image/mousecursor/Nasa_space_cursor.png"),
-                                 pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png"))
+                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").convert_alpha(),
+                                 pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png")
+                                 .convert_alpha(),
+                                 pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png").convert_alpha(),
+                                 pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor -click.png")
+                                 .convert_alpha(),
+                                 pygame.image.load("Image/mousecursor/Nasa_space_cursor.png").convert_alpha(),
+                                 pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png").convert_alpha())
 
 
 with open('textfiler/skin', 'r') as file:
