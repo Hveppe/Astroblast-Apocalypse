@@ -51,7 +51,6 @@ class PlayerClass:
         damage_picture = pygame.transform.scale(self.damage_picture, (int(self.width), int(self.height)))
         self.damage_picture = damage_picture
 
-
     def draw(self, damage):
         if self.xmove == 0 and self.ymove == 0:
             if damage is False:
