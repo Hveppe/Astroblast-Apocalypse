@@ -884,7 +884,7 @@ while gamerunning:
                 tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
 
                 # return button
-                if return_knap.draw(screenwith/2-return_knap.width/2, screenheight-100) is True:
+                if return_knap.draw(screenwith/2-return_knap.width/2, screenheight-200) is True:
                     gameover = False
                     mainmenu = True
                     maingame = False
@@ -892,7 +892,7 @@ while gamerunning:
                     reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids,
                           player, variabler, screenwith, screenheight)
 
-                if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight-100+return_knap.height):
+                if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight-200+return_knap.height):
                     pygame.quit()
                     sys.exit()
 
