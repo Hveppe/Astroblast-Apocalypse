@@ -142,8 +142,8 @@ cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (
 with open('textfiler/skin', 'r') as file:
     playerskinselecter.chosenskin = int(file.readline().strip())
     cursorskinselecter.chosenskin = int(file.readline().strip())
-    playerskinselecter.change_skin()
-    cursorskinselecter.change_skin()
+    player.picture, player.damage_picture = playerskinselecter.change_skin()
+    mousecursor.picture, mousecursor.picture_clik = cursorskinselecter.change_skin()
     player.update_picture()
     mousecursor.update_picture()
 
@@ -248,9 +248,8 @@ while gamerunning:
             tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 200), display, White, True)
             tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 300), display, White, True)
             tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 400), display, White, True)
-            tekst_render(Font, "Pause Game: P", (screenwith - screenwith / 4, 500), display, White, True)
-            tekst_render(Font, "Close Game: ESCAPE", (screenwith - screenwith / 4, 600), display, White, True)
-            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 700), display, White, True)
+            tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 500), display, White, True)
+            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 600), display, White, True)
 
             # return button
             if return_knap.draw(screenwith / 2 - 225, screenheight - 100) is True:
@@ -440,7 +439,7 @@ while gamerunning:
 
         # pause spil
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_p:
+            if event.key == pygame.K_ESCAPE:
                 pause = True
 
                 # ------------------------------------Pause screen------------------------------------------------------
