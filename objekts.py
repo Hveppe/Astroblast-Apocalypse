@@ -64,15 +64,15 @@ class Picture:
 
 
 class AstroidClass:
-    color = (187, 188, 188)
 
-    def __init__(self, screen, xvalue, yvalue, speed, radius, direction):
+    def __init__(self, screen, xvalue, yvalue, speed, radius, direction, picture):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
         self.radius = radius
         self.speed = speed
         self.direction = direction
+        self.picture = picture
 
         self.width = radius * 2
         self.height = radius * 2
@@ -88,4 +88,8 @@ class AstroidClass:
             self.x -= self.speed
 
     def draw(self):
-        pygame.draw.circle(surface=self.screen, color=self.color, center=(self.x, self.y), radius=self.radius)
+        picture_rect = self.picture.get_rect(center=(self.x, self.y))
+        self.screen.blit(self.picture, picture_rect.topleft)
+
+    def draw_debug(self):
+        pygame.draw.circle(self.screen, (255, 0, 0), (self.x, self.y), self.radius, 2)

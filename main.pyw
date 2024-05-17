@@ -809,6 +809,9 @@ while gamerunning:
             for mine in Mineshot:
                 mine.draw_debug()
 
+            for astriod in Astroids:
+                astriod.draw_debug()
+
             # Displayer FPS
             tekst_render(Font, f"FPS: {int(round(clock.get_fps(), 0))}", (10, screenheight - 100), display, White,
                          False)
@@ -850,8 +853,9 @@ while gamerunning:
                 xastriond = 0
                 yastriond = 0
 
-            Astroids.append(AstroidClass(screen=display, xvalue=xastriond, yvalue=yastriond, speed=5,
-                                         radius=50, direction=direction))
+            Astroids.append(AstroidClass(screen=display, xvalue=xastriond, yvalue=yastriond, speed=1,
+                                         radius=50, direction=direction,
+                                         picture=pygame.image.load("Image/effects/Asteroid.png").convert_alpha()))
 
         # Updater display
         pygame.display.flip()
