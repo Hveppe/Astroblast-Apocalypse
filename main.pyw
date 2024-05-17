@@ -874,7 +874,8 @@ while gamerunning:
 
                 tekst_render(Fontbig, 'GAME OVER', (screenwith / 2, screenheight / 2 - 200), display, White, True)
 
-                tekst_render(Font, f"WAVE: {variabler.wave}", (screenwith / 2, screenheight / 2 - 80), display, White, True)
+                tekst_render(Font, f"WAVE: {variabler.wave}", (screenwith / 2, screenheight / 2 - 80), display, White,
+                             True)
 
                 tekst_render(Font, f"TIME: {round(variabler.timer, 2)}", (screenwith / 2, screenheight / 2 - 30),
                              display, White,
@@ -888,8 +889,8 @@ while gamerunning:
                     mainmenu = True
                     maingame = False
 
-                    reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids, player,
-                          variabler, screenwith, screenheight)
+                    reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids,
+                          player, variabler, screenwith, screenheight)
 
                 if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight-100+return_knap.height):
                     pygame.quit()
