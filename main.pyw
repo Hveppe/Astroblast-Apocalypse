@@ -124,13 +124,13 @@ quitgame_button = Button(screen=display, tekst="QUIT GAME", size=(450, 100),
 
 # ---------------------------------------------SKINS--------------------------------------------------------------------
 # player skin ting
-playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-150, (300, 150), "player",
+playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-150, (300, 180), "player",
                                  pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha())
 
 # cursor skin ting | Hver anden *args er click billeder
-cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (300, 150), "cursor",
+cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (300, 180), "cursor",
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor.png"),
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png"),
                                  pygame.image.load("Image/mousecursor/spacrecraft-custom-cursor.png"),
@@ -278,14 +278,14 @@ while gamerunning:
             display.fill((0, 0, 0))
             baggrund.draw()
 
-            playerskinselecter.draw()
+            playerskinselecter.draw("Player Skin")
             try:
                 player.picture, player.damage_picture = playerskinselecter.buttondraw()
             except TypeError:
                 pass
             player.update_picture()
 
-            cursorskinselecter.draw()
+            cursorskinselecter.draw("Cursor Skin")
             try:
                 mousecursor.picture, mousecursor.picture_clik = cursorskinselecter.buttondraw()
             except TypeError:

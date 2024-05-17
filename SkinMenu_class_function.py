@@ -2,8 +2,12 @@
 
 import pygame
 from objekts import Button, Picture
-from Define import Grey, Red
+from Define import Grey, Red, Orange
 from Sidefunctions import tint_image
+from Sidefunctions import tekst_render
+
+pygame.font.init()
+Font = pygame.font.SysFont('Comic Sans MS', 36, bold=False, italic=False)
 
 
 class SkinSlecter:
@@ -53,12 +57,14 @@ class SkinSlecter:
             elif self.type == "cursor":
                 return self.skins[self.chosenskin], self.skinsclick[self.chosenskin]
 
-    def draw(self):
+    def draw(self, tekst):
         skinpicture = Picture(self.screen, self.x+self.width/2-50, self.y+self.height/2-50,
                               pygame.transform.scale(self.skins[self.chosenskin], (100, 100)))
 
         pygame.draw.rect(self.screen, Grey, (self.x, self.y, self.width, self.height))
         skinpicture.draw()
+
+        tekst_render(Font, tekst, (self.x+self.width/2, self.y-5), self.screen, Orange, True)
 
     def change_skin(self):
         while True:
@@ -66,4 +72,3 @@ class SkinSlecter:
                 return self.skins[self.chosenskin], tint_image(self.skins[self.chosenskin], Red)
             elif self.type == "cursor":
                 return self.skins[self.chosenskin], self.skinsclick[self.chosenskin]
-
