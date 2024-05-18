@@ -2,7 +2,7 @@
 
 import pygame
 from objekts import Button, Picture
-from Define import Grey, Red, Orange, Green, Yellow, Blue, DarkBlue
+from Define import Grey, Red, Orange, Green, Yellow, Blue, DarkBlue, Purple, Pink, Cyan, Magenta
 from Sidefunctions import tint_image
 from Sidefunctions import tekst_render
 
@@ -87,7 +87,7 @@ class LaserColorChange:
         self.square_size = 50
         self.gridsize = 5
 
-        self.colors = [Red, Orange, Green, Yellow, Blue]
+        self.colors = [Red, Orange, Green, Yellow, Blue, Purple, Pink, Cyan, Orange, Magenta]
 
     def draw_color_grid(self):
         # udregner den totale størelse
