@@ -96,7 +96,8 @@ class LaserColorChange:
                     ((len(self.colors) + self.gridsize - 1) // self.gridsize - 1) * self.margin)
 
         # tegner baggrund
-        pygame.draw.rect(self.screen, Grey, (self.x-10, self.y-10, total_width+20, total_height+20))
+        pygame.draw.rect(self.screen, Grey, (self.x-10, self.y-40, total_width+20, total_height+50))
+        tekst_render(Font, "LASER COLOR", (self.x+total_width/2, self.y-50), self.screen, Orange, True)
 
         # tegner de andre color firekanter
         for index, color in enumerate(self.colors):
