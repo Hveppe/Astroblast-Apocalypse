@@ -83,6 +83,7 @@ clock = pygame.time.Clock()
 
 # Fonts til text
 Font = pygame.font.SysFont('Comic Sans MS', 36, bold=False, italic=False)
+Fontsmall = pygame.font.SysFont("Ariel", 35, bold=False, italic=False)
 Fontbig = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
 Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, italic=False)
 
@@ -342,6 +343,10 @@ while gamerunning:
 
         # displayer highscore
         tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
+
+        # displayer sjove ting i hjørnet
+        tekst_render(Fontsmall, 'Created by Mikkel "Hveppe" Lauth Hvelplund', (10, screenheight-50), display, White,
+                     False)
 
         if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-100) is True:
             mainmenu = False
