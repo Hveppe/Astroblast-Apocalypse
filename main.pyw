@@ -149,6 +149,8 @@ laserchangecolor = LaserColorChange(display, (screenwith/2-125, screenheight-400
 with open('textfiler/skin', 'r') as file:
     playerskinselecter.chosenskin = int(file.readline().strip())
     cursorskinselecter.chosenskin = int(file.readline().strip())
+    laser_color = file.readline().strip()
+    laser_color = tuple(map(int, laser_color.split(',')))
     player.picture, player.damage_picture = playerskinselecter.change_skin()
     mousecursor.picture, mousecursor.picture_clik = cursorskinselecter.change_skin()
     player.update_picture()
@@ -282,9 +284,8 @@ while gamerunning:
                     pygame.quit()
                     sys.exit()
                 if eventskin.type == pygame.MOUSEBUTTONDOWN:
-                    variabler.laser_color = laserchangecolor.get_color_of_postion(pygame.mouse.get_pos(),
-                                                                                  variabler.laser_color)
-                    print(variabler.laser_color)
+                    laser_color = laserchangecolor.get_color_of_postion(pygame.mouse.get_pos(),
+                                                                        laser_color)
 
             display.fill((0, 0, 0))
             baggrund.draw()
@@ -309,7 +310,8 @@ while gamerunning:
                 
                 with open('textfiler/skin', 'w') as file:
                     file.write(str(playerskinselecter.chosenskin) + '\n')
-                    file.write(str(cursorskinselecter.chosenskin))
+                    file.write(str(cursorskinselecter.chosenskin) + '\n')
+                    file.write(str(laser_color).replace('(', '').replace(')', ''))
 
             mouse = pygame.mouse.get_pos()
 
@@ -517,7 +519,7 @@ while gamerunning:
             if current - variabler.last_time_shot >= variabler.delaylaser:
                 Lasershot.append(ShotLaser(screen=display, xvalue=player.x + player.width / 2 - 5,
                                            yvalue=player.y + player.height / 2 - 5, last_move=variabler.lastmove,
-                                           color=variabler.laser_color))
+                                           color=laser_color))
                 lasersound.play()
                 variabler.last_time_shot = current
 

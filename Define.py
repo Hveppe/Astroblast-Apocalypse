@@ -53,7 +53,6 @@ class Variabler:
         self.last_time_shot = 0
         self.shotting = False
         self.lastmove = 'w'
-        self.laser_color = Blue
 
         # shield varaibler
         self.shield_up = False
