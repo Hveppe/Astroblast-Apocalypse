@@ -105,16 +105,13 @@ class LaserColorChange:
             pygame.draw.rect(self.screen, color, (x, y, self.square_size, self.square_size))
 
     def get_color_of_postion(self, pos, currentcolor):
-        x, y = pos
-        if (self.x <= x < self.x + self.gridsize * (self.square_size + self.margin) and
-                self.y <= y < self.y + ((len(self.colors) + self.gridsize - 1) // self.gridsize) *
-                (self.square_size + self.margin)):
-            col = x // (self.square_size + self.margin)
-            row = y // (self.square_size + self.margin)
+        if self.collidemouse(pos):
+            x, y = pos
+            col = int((x - self.x) // (self.square_size + self.margin))
+            row = int((y - self.y) // (self.square_size + self.margin))
             index = row * self.gridsize + col
 
-            if 0 <= col < self.gridsize and 0 <= row < (
-                    len(self.colors) + self.gridsize - 1) // self.gridsize and index < len(self.colors):
+            if 0 <= index < len(self.colors):
                 return self.colors[index]
         return currentcolor
 

@@ -146,7 +146,6 @@ cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-300, (
 
 laserchangecolor = LaserColorChange(display, (screenwith/2-125, screenheight-400), (100, 100))
 
-
 with open('textfiler/skin', 'r') as file:
     playerskinselecter.chosenskin = int(file.readline().strip())
     cursorskinselecter.chosenskin = int(file.readline().strip())
