@@ -90,6 +90,15 @@ class LaserColorChange:
         self.colors = [Red, Orange, Green, Yellow, Blue]
 
     def draw_color_grid(self):
+        # udregner den totale størelse
+        total_width = (self.gridsize * self.square_size) + ((self.gridsize - 1) * self.margin)
+        total_height = (((len(self.colors) + self.gridsize - 1) // self.gridsize) * self.square_size) + (
+                    ((len(self.colors) + self.gridsize - 1) // self.gridsize - 1) * self.margin)
+
+        # tegner baggrund
+        pygame.draw.rect(self.screen, Grey, (self.x-10, self.y-10, total_width+20, total_height+20))
+
+        # tegner de andre color firekanter
         for index, color in enumerate(self.colors):
             x = (index % self.gridsize) * (self.square_size + self.margin) + self.x
             y = (index // self.gridsize) * (self.square_size + self.margin) + self.y

@@ -122,9 +122,9 @@ returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 
 quitgame_button = Button(screen=display, tekst="QUIT GAME", size=(450, 100),
                          image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
-# ---------------------------------------------SKINS--------------------------------------------------------------------
+# ---------------------------------------------SKINS/LASERCOLOR---------------------------------------------------------
 # player skin ting
-playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-150, (300, 180), "player",
+playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-300, (300, 180), "player",
                                  pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha(),
@@ -134,7 +134,7 @@ playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-150, 
                                  pygame.image.load("Image/Playerships/Rumskibplayer7.png").convert_alpha())
 
 # cursor skin ting | Hver anden *args er click billeder
-cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (300, 180), "cursor",
+cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-300, (300, 180), "cursor",
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").convert_alpha(),
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png")
                                  .convert_alpha(),
@@ -144,7 +144,7 @@ cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-150, (
                                  pygame.image.load("Image/mousecursor/Nasa_space_cursor.png").convert_alpha(),
                                  pygame.image.load("Image/mousecursor/Nasa_space_cursor - click.png").convert_alpha())
 
-laserchangecolor = LaserColorChange(display, (10, 10), (100, 100))
+laserchangecolor = LaserColorChange(display, (screenwith/2-125, screenheight-400), (100, 100))
 
 
 with open('textfiler/skin', 'r') as file:
@@ -285,6 +285,7 @@ while gamerunning:
                 if eventskin.type == pygame.MOUSEBUTTONDOWN:
                     variabler.laser_color = laserchangecolor.get_color_of_postion(pygame.mouse.get_pos(),
                                                                                   variabler.laser_color)
+                    print(variabler.laser_color)
 
             display.fill((0, 0, 0))
             baggrund.draw()
