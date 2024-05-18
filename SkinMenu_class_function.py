@@ -78,6 +78,8 @@ TODO: "Lav så når man har musen over en farve så skifter den til sin click fo
 
 
 class LaserColorChange:
+    clicksound = pygame.mixer.Sound("sound/click-menu-app-147357.wav")
+
     def __init__(self, screen, destination, size):
         self.screen = screen
         self.x, self.y = destination
@@ -107,6 +109,7 @@ class LaserColorChange:
 
     def get_color_of_postion(self, pos, currentcolor):
         if self.collidemouse(pos):
+            self.clicksound.play()
             x, y = pos
             col = int((x - self.x) // (self.square_size + self.margin))
             row = int((y - self.y) // (self.square_size + self.margin))
