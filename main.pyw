@@ -318,11 +318,12 @@ while gamerunning:
             mousecursor.update()
             mousecursor.draw(click=click)
 
-            if (return_knap.image_rect.collidepoint(mouse) or
+            if ((return_knap.image_rect.collidepoint(mouse) or
                     playerskinselecter.RightButton.image_rect.collidepoint(mouse) or
                     playerskinselecter.LeftButton.image_rect.collidepoint(mouse) or
                     cursorskinselecter.RightButton.image_rect.collidepoint(mouse) or
-                    cursorskinselecter.LeftButton.image_rect.collidepoint(mouse)):
+                    cursorskinselecter.LeftButton.image_rect.collidepoint(mouse)) or
+                    laserchangecolor.collidemouse(mouse)):
                 click = True
             else:
                 click = False

@@ -86,7 +86,6 @@ class LaserColorChange:
         self.margin = 5
         self.square_size = 50
         self.gridsize = 5
-        self.lastcolor = None
 
         self.colors = [Red, Orange, Green, Yellow, Blue]
 
@@ -109,3 +108,12 @@ class LaserColorChange:
                     len(self.colors) + self.gridsize - 1) // self.gridsize and index < len(self.colors):
                 return self.colors[index]
         return currentcolor
+
+    def collidemouse(self, pos):
+        x, y = pos
+        if (self.x <= x < self.x + self.gridsize * (self.square_size + self.margin) and
+                self.y <= y < self.y + ((len(self.colors) + self.gridsize - 1) // self.gridsize) *
+                (self.square_size + self.margin)):
+            return True
+        else:
+            return False
