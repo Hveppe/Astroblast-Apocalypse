@@ -168,6 +168,7 @@ mainmenu = True
 infoscreen = False
 skinmeny = False
 maingame = False
+pause = False
 
 # Laver mousecursor synlig
 pygame.mouse.set_visible(False)
@@ -468,58 +469,6 @@ while gamerunning:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pause = True
-
-                    # ------------------------------------Pause screen--------------------------------------------------
-                    while pause is True:
-
-                        for eventpause in pygame.event.get():
-                            if event.type == pygame.QUIT:
-                                pygame.quit()
-                                sys.exit()
-
-                        display.fill((0, 0, 0))
-                        baggrund.draw()
-
-                        pausetext = Fontbig.render('PAUSED', True, White)
-                        display.blit(pausetext,
-                                     (screenwith / 2 - pausetext.get_width() / 2, 10 + pausetext.get_height() / 2))
-
-                        if returntogame_button.draw(screenwith/2-returntogame_button.width/2, screenheight/2-70):
-                            pause = False
-                            player.xmove = 0
-                            player.ymove = 0
-
-                        if return_knap.draw(screenwith/2-return_knap.width/2,
-                                            screenheight/2-70+returntogame_button.height):
-                            pause = False
-                            mainmenu = True
-                            maingame = False
-
-                            reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender,
-                                  Astroids, player, variabler, screenwith, screenheight)
-
-                        if quitgame_button.draw(screenwith/2-quitgame_button.width/2,
-                                                screenheight/2-70+returntogame_button.height*2):
-                            if highscore < variabler.wave:
-                                highscore = variabler.wave
-                                with open('textfiler/highscore.txt', 'w') as file:
-                                    file.write(str(highscore))
-
-                            pygame.quit()
-                            sys.exit()
-
-                        mousecursor.update()
-                        mousecursor.draw(click=click)
-
-                        mouse = pygame.mouse.get_pos()
-                        if (return_knap.image_rect.collidepoint(mouse) or
-                                returntogame_button.image_rect.collidepoint(mouse)
-                                or quitgame_button.image_rect.collidepoint(mouse)):
-                            click = True
-                        else:
-                            click = False
-
-                        pygame.display.flip()
 
         if variabler.shotting is True and variabler.shield_up is False:
             if current - variabler.last_time_shot >= variabler.delaylaser:
@@ -877,6 +826,58 @@ while gamerunning:
 
         # Updater display
         pygame.display.flip()
+
+        # ------------------------------------Pause screen--------------------------------------------------
+        while pause is True:
+
+            for eventpause in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            display.fill((0, 0, 0))
+            baggrund.draw()
+
+            pausetext = Fontbig.render('PAUSED', True, White)
+            display.blit(pausetext,
+                         (screenwith / 2 - pausetext.get_width() / 2, 10 + pausetext.get_height() / 2))
+
+            if returntogame_button.draw(screenwith / 2 - returntogame_button.width / 2, screenheight / 2 - 70):
+                pause = False
+                player.xmove = 0
+                player.ymove = 0
+
+            if return_knap.draw(screenwith / 2 - return_knap.width / 2,
+                                screenheight / 2 - 70 + returntogame_button.height):
+                pause = False
+                mainmenu = True
+                maingame = False
+
+                reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender,
+                      Astroids, player, variabler, screenwith, screenheight)
+
+            if quitgame_button.draw(screenwith / 2 - quitgame_button.width / 2,
+                                    screenheight / 2 - 70 + returntogame_button.height * 2):
+                if highscore < variabler.wave:
+                    highscore = variabler.wave
+                    with open('textfiler/highscore.txt', 'w') as file:
+                        file.write(str(highscore))
+
+                pygame.quit()
+                sys.exit()
+
+            mousecursor.update()
+            mousecursor.draw(click=click)
+
+            mouse = pygame.mouse.get_pos()
+            if (return_knap.image_rect.collidepoint(mouse) or
+                    returntogame_button.image_rect.collidepoint(mouse)
+                    or quitgame_button.image_rect.collidepoint(mouse)):
+                click = True
+            else:
+                click = False
+
+            pygame.display.flip()
 
         # -------------------------------------Game Over----------------------------------------------------------------
         if variabler.lives <= 0:
