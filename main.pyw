@@ -934,6 +934,3 @@ while gamerunning:
                 mousecursor.draw(click=click)
 
                 pygame.display.flip()
-
-pygame.quit()
-sys.exit()
