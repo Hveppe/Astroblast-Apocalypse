@@ -5,19 +5,20 @@ import math
 
 
 class PlayerClass:
-    width = 60
-    height = 60
     xmove = 0
     ymove = 0
     movespeed = 10
 
-    def __init__(self, screen, xvalue, yvalue, picture, damage_picture):
+    def __init__(self, screen, xvalue, yvalue, picture, damage_picture, scaler):
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
         self.xold = xvalue
         self.yold = yvalue
         self.last_angle = 0
+
+        self.width = 60 * scaler
+        self.height = 60 * scaler
 
         picture = pygame.transform.scale(picture, (int(self.width), int(self.height)))
         self.picture = picture
