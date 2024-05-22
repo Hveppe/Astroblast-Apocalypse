@@ -1,6 +1,7 @@
 # Spillet er lavet af Hveppe
 
 import pygame
+from Define import scalar
 pygame.mixer.init()
 
 
@@ -69,7 +70,7 @@ class AstroidClass:
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
-        self.radius = radius
+        self.radius = radius*scalar
         self.speed = speed
         self.direction = direction
         self.picture = picture

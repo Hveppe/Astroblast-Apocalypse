@@ -1,11 +1,12 @@
 # Spillet er lavet af Hveppe
 
 import pygame
+from Define import scalar
 
 
 class ShotLaser:
-    width = 10
-    height = 10
+    width = 10*scalar
+    height = 10*scalar
     speedx = 0
     speedy = 0
 
@@ -46,8 +47,8 @@ class ShotLaser:
 class LayMine:
     speedx = 0
     speedy = 0
-    width = 12
-    height = 12
+    width = 12*scalar
+    height = 12*scalar
     radius = 6
 
     def __init__(self, screen, xvalue, yvalue, picture):
@@ -72,7 +73,7 @@ class LayMine:
 
 class Shield:
     color = (0, 0, 255)
-    radius = 70
+    radius = 70*scalar
 
     def __init__(self, screen, xvalue, yvalue):
         self.x = xvalue
