@@ -832,9 +832,11 @@ while gamerunning:
         while pause is True:
 
             for eventpause in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if eventpause.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if eventpause.type == pygame.KEYDOWN and eventpause.key == pygame.K_ESCAPE:
+                    pause = False
 
             display.fill((0, 0, 0))
             baggrund.draw()
