@@ -17,6 +17,7 @@ class Button:
         self.action = True
 
         self.width, self.height = size
+        self.width, self.height = self.width*scalar, self.height*scalar
 
         self.image = pygame.transform.scale(self.image, size)
         self.image_rect = None

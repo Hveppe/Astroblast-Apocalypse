@@ -1,7 +1,7 @@
 # Lavet af Hveppe
 
 import pygame
-from Define import White
+from Define import White, scalar
 
 
 class HealthBar:  # skelet af kode var lavet af anton
@@ -10,8 +10,8 @@ class HealthBar:  # skelet af kode var lavet af anton
     def __init__(self, x, y, width, height, max_hp, color, emptycolor):
         self.x = x
         self.y = y
-        self.width = width
-        self.height = height
+        self.width = width*scalar
+        self.height = height*scalar
         self.hp = max_hp
         self.max_hp = max_hp
         self.color = color
