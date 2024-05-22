@@ -81,10 +81,10 @@ except ValueError or TypeError:
 clock = pygame.time.Clock()
 
 # Fonts til text
-Font = pygame.font.SysFont('Comic Sans MS', 36, bold=False, italic=False)
-Fontsmall = pygame.font.SysFont("Ariel", 35, bold=False, italic=False)
-Fontbig = pygame.font.SysFont('Comic Sans MS', 100, bold=True, italic=False)
-Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', 40, bold=False, italic=False)
+Font = pygame.font.SysFont('Comic Sans MS', int(round(36, 0)), bold=False, italic=False)
+Fontsmall = pygame.font.SysFont("Ariel", int(round(35, 0)), bold=False, italic=False)
+Fontbig = pygame.font.SysFont('Comic Sans MS', int(round(100, 0)), bold=True, italic=False)
+Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', int(round(40, 0)), bold=False, italic=False)
 
 # ------------------------------------------------Mouse, Shield, Fjender------------------------------------------------
 # laver mouse cursor
