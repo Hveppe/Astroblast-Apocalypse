@@ -19,6 +19,8 @@ class Button:
         width, height = size
         self.width, self.height = width*scalar, height*scalar
 
+        self.font = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar, 0)))
+
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
         self.image_rect = None
 
@@ -46,8 +48,7 @@ class Button:
 
         # tegn knappen
         self.screen.blit(self.image, self.image.get_rect(topleft=(self.x, self.y)))
-        font = pygame.font.SysFont('Comic Sans MS', 40)
-        tekstdisplay = font.render(self.tekst, True, (255, 255, 255))
+        tekstdisplay = self.font.render(self.tekst, True, (255, 255, 255))
         self.screen.blit(tekstdisplay, (self.image_rect.x + self.image_rect.width/2 - tekstdisplay.get_width()/2,
                          self.image_rect.y + self.image_rect.height/2-tekstdisplay.get_height()/2))
 
