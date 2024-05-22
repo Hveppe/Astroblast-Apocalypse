@@ -133,7 +133,8 @@ playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-300, 
                                  pygame.image.load("Image/Playerships/Rumskibplayer5.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer6.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer7.png").convert_alpha(),
-                                 pygame.image.load("Image/Playerships/Rumskibplayer8.png").convert_alpha())
+                                 pygame.image.load("Image/Playerships/Rumskibplayer8.png").convert_alpha(),
+                                 pygame.image.load("Image/Playerships/Rumskibplayer9.png").convert_alpha())
 
 # cursor skin ting | Hver anden *args er click billeder
 cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-300, (300, 180), "cursor",
