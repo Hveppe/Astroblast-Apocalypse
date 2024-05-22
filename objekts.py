@@ -16,10 +16,10 @@ class Button:
         self.clicked = False
         self.action = True
 
-        self.width, self.height = size
-        self.width, self.height = self.width*scalar, self.height*scalar
+        width, height = size
+        self.width, self.height = width*scalar, height*scalar
 
-        self.image = pygame.transform.scale(self.image, size)
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
         self.image_rect = None
 
         self.x, self.y = 0, 0
