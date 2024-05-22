@@ -792,13 +792,12 @@ while gamerunning:
         shied_bar.hp = variabler.shield_charge
         shied_bar.draw(display)
 
-        tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, 50), display, White, None)
+        tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, shied_bar.height+5), display, White, None)
 
         if variabler.lives > 0:
             variabler.timer = time.time() - variabler.startgametime
 
-        timerext = Font.render(f'Timer: {round(variabler.timer, 2)}', True, White)
-        display.blit(timerext, (10, 50))
+        tekst_render(Font, f'Timer: {round(variabler.timer, 2)}', (10, health_bar.height+5), display, White, False)
 
         makeastroid = random.randint(1, 100000)
 
