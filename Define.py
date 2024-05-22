@@ -1,6 +1,9 @@
 # Lavet af Hveppe
 
 import time
+import pygame
+
+pygame.init()
 
 # ---------------------------------------------Farver-------------------------------------------------------------------
 White = (255, 255, 255)
@@ -20,6 +23,9 @@ Silver = (192, 192, 192)
 
 # -------------------------------------------Variabler------------------------------------------------------------------
 debug = False
+
+# finder scalar til fjender og player
+scalar = pygame.display.Info().current_w/1500
 
 
 class Variabler:

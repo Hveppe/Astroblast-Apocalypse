@@ -43,10 +43,6 @@ pygame.mixer.music.load('sound/backgroundmusic-200697.wav')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
-# finder scalar til fjender og player
-scalar = screenwith/1500
-
-
 # lyde til spillet
 lasersound = pygame.mixer.Sound('sound/laser-gun-81720.wav')
 mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
@@ -72,7 +68,7 @@ variabler = Variabler()
 player = PlayerClass(screen=display, xvalue=screenwith/2, yvalue=screenheight/2,
                      picture=pygame.image.load('Image/Playerships/Rumskibplayer.png').convert_alpha(),
                      damage_picture=tint_image(pygame.image.load('Image/Playerships/Rumskibplayer.png').convert_alpha(),
-                                               (255, 0, 0)), scaler=scalar)
+                                               (255, 0, 0)))
 
 # henter gemte highscore
 try:

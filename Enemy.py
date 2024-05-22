@@ -2,11 +2,12 @@
 
 import pygame
 import math
+from Define import scalar
 
 
 class EnemyClass:
-    width = 40
-    height = 40
+    width = 40*scalar
+    height = 40*scalar
     dead = False
     timeofdeath = None
 
@@ -45,8 +46,8 @@ class EnemyClass:
 
 
 class HeavyEnemyClass:
-    width = 60
-    height = 60
+    width = 60*scalar
+    height = 60*scalar
     lives = 3
     dead = False
     timeofdeath = None
@@ -86,8 +87,8 @@ class HeavyEnemyClass:
 
 
 class HommingEnemyClass:
-    width = 50
-    height = 50
+    width = 50*scalar
+    height = 50*scalar
     dead = False
     timeofdeath = None
     lastangleofmovement = 90
