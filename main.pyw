@@ -682,26 +682,29 @@ while gamerunning:
 
             for i in range(variabler.antalfjender):
                 spawn_enemy(Fjender, EnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, screenwith - 40*scalar),
-                            random.randint(0, screenheight - 60*scalar), random.randint(1, 5), random.randint(1, 10),
+                            random.randint(0, int(round(screenwith - 40*scalar, 0))),
+                            random.randint(0, int(round(screenheight - 60*scalar, 0))), random.randint(1, 5),
+                            random.randint(1, 10),
                             pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
 
             for n in range(variabler.antalfjenderheavy):
                 spawn_enemy(HeavyFjender, HeavyEnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, screenwith - 60*scalar),
-                            random.randint(0, screenheight - 60*scalar), random.randint(1, 5), random.randint(1, 5),
+                            random.randint(0, int(round(screenwith - 60*scalar, 0))),
+                            random.randint(0, int(round(screenheight - 60*scalar, 0))),
+                            random.randint(1, 5), random.randint(1, 5),
                             pygame.image.load('Image/Fjender/Heavyfjendeimage.png').convert_alpha())
 
             for m in range(variabler.antalfjendermineswpper):
                 spawn_enemy(MineswepperFjender, EnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, screenwith - 40*scalar),
-                            random.randint(0, screenheight - 40*scalar), random.randint(1, 10), random.randint(1, 10),
+                            random.randint(0, int(round(screenwith - 40*scalar, 0))),
+                            random.randint(0, int(round(screenheight - 40*scalar, 0))),
+                            random.randint(1, 10), random.randint(1, 10),
                             pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png').convert_alpha())
 
             for h in range(variabler.antalfjenderhomming):
                 spawn_enemy(HommingFjender, HommingEnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, screenwith - 50*scalar),
-                            random.randint(0, screenheight - 50*scalar), 5, 5, pygame.image.load
+                            random.randint(0, int(round(screenwith - 50*scalar, 0))),
+                            random.randint(0, int(round(screenheight - 50*scalar, 0))), 5, 5, pygame.image.load
                             ('Image/Fjender/HommingFjendeImage.png').convert_alpha())
 
         if variabler.shield_up is True and variabler.shield_charge > 0:
