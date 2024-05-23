@@ -160,7 +160,7 @@ with open('textfiler/skin', 'r') as file:
 
 # ------------------------------------------Health/Shield Bar-----------------------------------------------------------
 health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
-shied_bar = HealthBar(screenwith-300, 10, 300, 40, 100, DarkBlue, Grey)
+shied_bar = HealthBar(screenwith-300*scalar, 10, 300, 40, 100, DarkBlue, Grey)
 
 # variabler for loop
 gamerunning = True
