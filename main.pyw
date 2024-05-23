@@ -339,8 +339,8 @@ while gamerunning:
         baggrund.draw()
 
         # displayer title
-        tekst_render(Fontbig, "AstroBlast", (screenwith / 2, 100), display, White, True)
-        tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 190), display, White, True)
+        tekst_render(Fontbig, "AstroBlast", (screenwith / 2, 100*scalar), display, White, True)
+        tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 190*scalar), display, White, True)
 
         # displayer highscore
         tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
@@ -918,8 +918,8 @@ while gamerunning:
                     pygame.quit()
                     sys.exit()
 
-
-                if return_knap.draw(screenwith/2-return_knap.width/2, screenheight-quitgame_button.height-10-return_knap.height) is True:
+                if return_knap.draw(screenwith/2-return_knap.width/2,
+                                    screenheight-quitgame_button.height-10-return_knap.height) is True:
                     gameover = False
                     mainmenu = True
                     maingame = False
