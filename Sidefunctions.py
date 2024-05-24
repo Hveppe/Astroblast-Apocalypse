@@ -71,8 +71,8 @@ def spawn_enemy(enemylist, klasse, player, screenwith, screenheight, *args):
     new_enemy = klasse(*args)
     while fjende_spawn:
         if collisionchecker(new_enemy, player):
-            new_enemy.x = random.randint(0, screenwith-new_enemy.width)
-            new_enemy.y = random.randint(0, screenheight-new_enemy.height)
+            new_enemy.x = random.randint(0, int(round(screenwith-new_enemy.width, 0)))
+            new_enemy.y = random.randint(0, int(round(screenheight-new_enemy.height, 0)))
         else:
             enemylist.append(new_enemy)
             fjende_spawn = False
