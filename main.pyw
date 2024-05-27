@@ -346,7 +346,7 @@ while gamerunning:
         tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
 
         # displayer sjove ting i hjørnet
-        tekst_render(Fontsmall, 'Created by Mikkel "Hveppe" Lauth Hvelplund', (10, screenheight-50), display, White,
+        tekst_render(Fontsmall, 'Created by Hveppe', (10, screenheight-50), display, White,
                      False)
 
         if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-100) is True:
