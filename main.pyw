@@ -357,6 +357,10 @@ while gamerunning:
             # reset/start timer
             startgametime = time.time()
 
+            # reset resten af tingene
+            reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids,
+                  player, variabler, screenwith, screenheight)
+
         if infospil_knap.draw(screenwith/2-infospil_knap.width/2, screenheight/2-100+startspil_knap.height) is True:
             infoscreen = True
 
@@ -857,9 +861,6 @@ while gamerunning:
                 mainmenu = True
                 maingame = False
 
-                reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender,
-                      Astroids, player, variabler, screenwith, screenheight)
-
             if quitgame_button.draw(screenwith / 2 - quitgame_button.width / 2,
                                     screenheight / 2 - 70 + returntogame_button.height * 2):
                 if highscore < variabler.wave:
@@ -926,9 +927,6 @@ while gamerunning:
                     gameover = False
                     mainmenu = True
                     maingame = False
-
-                    reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids,
-                          player, variabler, screenwith, screenheight)
 
                 mouse = pygame.mouse.get_pos()
                 if return_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse):
