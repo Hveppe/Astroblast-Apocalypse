@@ -360,6 +360,7 @@ while gamerunning:
             # reset resten af tingene
             reset(Lasershot, Mineshot, Fjender, HeavyFjender, MineswepperFjender, HommingFjender, Astroids,
                   player, variabler, screenwith, screenheight)
+            health_bar.max_hp = 5
 
         if infospil_knap.draw(screenwith/2-infospil_knap.width/2, screenheight/2-100+startspil_knap.height) is True:
             infoscreen = True
@@ -659,8 +660,10 @@ while gamerunning:
             variabler.new_wave_begin = time.time()
 
             if variabler.wave >= variabler.wavelives:
-                if variabler.lives < 5:
+                if variabler.lives < 10:
                     variabler.lives += 1
+                    if variabler.lives > health_bar.max_hp:
+                        health_bar.max_hp += 1
 
                 variabler.wavelives += 4
 
