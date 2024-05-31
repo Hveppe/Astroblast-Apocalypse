@@ -43,7 +43,7 @@ explosion_effeckt = pygame.image.load("Image/effects/explosion-with-pixel-art.pn
 
 # baggrunds music
 pygame.mixer.music.load('sound/backgroundmusic-200697.wav')
-pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.set_volume(1)
 pygame.mixer.music.play(-1)
 
 # lyde til spillet
@@ -175,6 +175,7 @@ teleport_bar = HealthBar(screenwith-300*scalar, 10+shied_bar.height, 300, 40, 30
 
 # slider
 lyd_slider = Slider(400, 50, display, 1, Grey, White, Red)
+music_slider = Slider(400, 50, display, 1, Grey, White, Red)
 
 # ------------------------------------------variabler for loop---------------------------------------------------------
 gamerunning = True
@@ -362,6 +363,9 @@ while gamerunning:
             # Tegner sliderne
             tekst_render(Font, "Sound Effects", (screenwith/2, 100-lyd_slider.height), display, Orange, True)
             lyd_volume = lyd_slider.draw(screenwith/2-lyd_slider.width/2, 100)
+
+            tekst_render(Font, "Music", (screenwith/2, 200-music_slider.height), display, Orange, True)
+            pygame.mixer.music.set_volume(music_slider.draw(screenwith/2-music_slider.width/2, 200))
 
             # ændre lyd niveauet af de forskellige effekter
             lasersound.set_volume(lyd_volume)

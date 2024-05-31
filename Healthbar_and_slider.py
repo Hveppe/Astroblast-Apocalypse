@@ -54,7 +54,7 @@ class Slider:  # slider til forskellige ting
             if pygame.mouse.get_pressed()[0]:
                 self.sliderrect_x, u = mouse_pos
 
-                self.return_data = (self.sliderrect_x / (self.width - 10 * scalar)) * self.max_number
+                self.return_data = (self.sliderrect_x / self.width) - self.max_number
 
         self.rect = pygame.draw.rect(self.screen, self.color_square, (x, y, self.width, self.height))
 
