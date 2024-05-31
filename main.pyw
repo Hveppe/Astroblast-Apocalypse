@@ -79,7 +79,7 @@ except ValueError or TypeError:
 
 # Opsætter clock
 clock = pygame.time.Clock()
-last_teleport = 0
+last_teleport = time.time()-30
 
 # Fonts til text
 Font = pygame.font.SysFont('Comic Sans MS', int(round(36, 0)), bold=False, italic=False)
@@ -162,6 +162,7 @@ with open('textfiler/skin', 'r') as file:
 # ------------------------------------------Health/Shield Bar-----------------------------------------------------------
 health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
 shied_bar = HealthBar(screenwith-300*scalar, 10, 300, 40, 100, DarkBlue, Grey)
+teleport_bar = HealthBar(screenwith-300*scalar, 10+shied_bar.height, 300, 40, 30, Yellow, Grey)
 
 # variabler for loop
 gamerunning = True
@@ -806,10 +807,14 @@ while gamerunning:
 
         tekst_render(Font, f"Wave: {variabler.wave}", (screenwith/2, 10), display, White, True)
 
+        # tegener shield og teleport charge barerne
         shied_bar.hp = variabler.shield_charge
         shied_bar.draw(display)
+        teleport_bar.hp = current-last_teleport
+        teleport_bar.draw(display)
 
-        tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, shied_bar.height+5), display, White, None)
+        tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, shied_bar.height*2+5), display, White,
+                     None)
 
         if variabler.lives > 0:
             variabler.timer = time.time() - variabler.startgametime
