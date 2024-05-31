@@ -359,7 +359,11 @@ while gamerunning:
             display.fill((0, 0, 0))
             baggrund.draw()
 
-            lyd_volume = lyd_slider.draw(10, 10)
+            # Tegner sliderne
+            tekst_render(Font, "Sound Effects", (screenwith/2, 100-lyd_slider.height), display, Orange, True)
+            lyd_volume = lyd_slider.draw(screenwith/2-lyd_slider.width/2, 100)
+
+            # ændre lyd niveauet af de forskellige effekter
             lasersound.set_volume(lyd_volume)
             mineplacesound.set_volume(lyd_volume)
             teleportsound.set_volume(lyd_volume)
