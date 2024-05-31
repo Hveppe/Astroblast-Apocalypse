@@ -810,7 +810,11 @@ while gamerunning:
         # tegener shield og teleport charge barerne
         shied_bar.hp = variabler.shield_charge
         shied_bar.draw(display)
-        teleport_bar.hp = current-last_teleport
+
+        if current-last_teleport > 30:
+            pass
+        else:
+            teleport_bar.hp = current-last_teleport
         teleport_bar.draw(display)
 
         tekst_render(Font, f"Mine: {variabler.ArsenalMines}", (screenwith-30, shied_bar.height*2+5), display, White,
