@@ -27,6 +27,9 @@ screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info(
 display = pygame.display.set_mode((screenwith, screenheight))
 pygame.display.set_caption("Astroblast Apocalypse")
 
+# Starter en loading screen
+display.fill(Black)
+
 gameimagepng = pygame.image.load('Image/Icon/gameimageversion2.png').convert()
 pygame.display.set_icon(gameimagepng)
 
@@ -124,6 +127,9 @@ returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 
 quitgame_button = Button(screen=display, tekst="QUIT GAME", size=(450, 100),
                          image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
+options_button = Button(screen=display, tekst="OPTIONS", size=(200, 100),
+                        image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
+
 # ---------------------------------------------SKINS/LASERCOLOR---------------------------------------------------------
 # player skin ting
 playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-300, (300, 180), "player",
@@ -150,6 +156,7 @@ cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-300, (
 
 laserchangecolor = LaserColorChange(display, (screenwith/2-125, screenheight-400), (100, 100))
 
+# Ændre skin og lasercolour til gemte valg fra skin tekstfilen
 with open('textfiler/skin', 'r') as file:
     playerskinselecter.chosenskin = int(file.readline().strip())
     cursorskinselecter.chosenskin = int(file.readline().strip())
