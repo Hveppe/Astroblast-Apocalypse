@@ -261,8 +261,9 @@ while gamerunning:
             tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 200), display, White, True)
             tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 300), display, White, True)
             tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 400), display, White, True)
-            tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 500), display, White, True)
-            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 600), display, White, True)
+            tekst_render(Font, "Speed Boost: LEFT SHIFT", (screenwith - screenwith / 4, 500), display, White, True)
+            tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 600), display, White, True)
+            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 700), display, White, True)
 
             # return button
             if return_knap.draw(screenwith / 2-return_knap.width/2, screenheight-return_knap.height-10) is True:
