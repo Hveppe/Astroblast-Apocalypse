@@ -440,6 +440,8 @@ while gamerunning:
                     player.xmove += player.movespeed
                 if event.key == pygame.K_a:
                     player.xmove -= player.movespeed
+                if event.key == pygame.K_LSHIFT:
+                    player.movespeed += 5
                 if event.key == pygame.K_h:
                     debug = True
 
@@ -448,13 +450,15 @@ while gamerunning:
 
                 # modvirker bevægelse
                 if event.key == pygame.K_w:
-                    player.ymove += player.movespeed
+                    player.ymove = 0
                 if event.key == pygame.K_s:
-                    player.ymove -= player.movespeed
+                    player.ymove = 0
                 if event.key == pygame.K_d:
-                    player.xmove -= player.movespeed
+                    player.xmove = 0
                 if event.key == pygame.K_a:
-                    player.xmove += player.movespeed
+                    player.xmove = 0
+                if event.key == pygame.K_LSHIFT:
+                    player.movespeed = 10
                 if event.key == pygame.K_h:
                     debug = False
 
