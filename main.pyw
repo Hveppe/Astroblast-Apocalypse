@@ -48,6 +48,7 @@ lasersound = pygame.mixer.Sound('sound/laser-gun-81720.wav')
 mineplacesound = pygame.mixer.Sound('sound/place-100513.wav')
 enemydeadsound = pygame.mixer.Sound('sound/big explosion.wav')
 gameoversound = pygame.mixer.Sound('sound/game-over-160612.wav')
+teleportsound = pygame.mixer.Sound('sound/game-teleport-90735.wav')
 
 # laver lister til classer der skal havde flere af gangen på skærmen
 # Våben
@@ -443,11 +444,12 @@ while gamerunning:
                     player.xmove += player.movespeed
                 if event.key == pygame.K_a:
                     player.xmove -= player.movespeed
-                if event.key == pygame.K_TAB:
+                if event.key == pygame.K_TAB:  # Teleporter player
                     if current - last_teleport >= 30:
                         player.x = random.randint(0, int(round(screenwith-player.width, 0)))
                         player.y = random.randint(0, int(round(screenwith-player.height, 0)))
                         last_teleport = time.time()
+                        teleportsound.play()
                 if event.key == pygame.K_h:
                     debug = True
 
