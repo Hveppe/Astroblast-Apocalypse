@@ -79,6 +79,7 @@ except ValueError or TypeError:
 
 # Opsætter clock
 clock = pygame.time.Clock()
+last_teleport = 0
 
 # Fonts til text
 Font = pygame.font.SysFont('Comic Sans MS', int(round(36, 0)), bold=False, italic=False)
@@ -442,8 +443,10 @@ while gamerunning:
                 if event.key == pygame.K_a:
                     player.xmove -= player.movespeed
                 if event.key == pygame.K_TAB:
-                    player.x = random.randint(0, int(round(screenwith-player.width, 0)))
-                    player.y = random.randint(0, int(round(screenwith-player.height, 0)))
+                    if current - last_teleport >= 30:
+                        player.x = random.randint(0, int(round(screenwith-player.width, 0)))
+                        player.y = random.randint(0, int(round(screenwith-player.height, 0)))
+                        last_teleport = time.time()
                 if event.key == pygame.K_h:
                     debug = True
 
