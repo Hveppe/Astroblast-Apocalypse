@@ -127,7 +127,7 @@ returntogame_button = Button(screen=display, tekst="RETURN TO GAME", size=(450, 
 quitgame_button = Button(screen=display, tekst="QUIT GAME", size=(450, 100),
                          image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
-options_button = Button(screen=display, tekst="OPTIONS", size=(200, 100),
+options_button = Button(screen=display, tekst="OPTIONS", size=(220, 100),
                         image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
 # ---------------------------------------------SKINS/LASERCOLOR---------------------------------------------------------
@@ -179,6 +179,7 @@ infoscreen = False
 skinmeny = False
 maingame = False
 pause = False
+option = False
 
 # Laver mousecursor synlig
 pygame.mouse.set_visible(False)
@@ -346,6 +347,24 @@ while gamerunning:
 
             pygame.display.flip()
 
+        # ----------------------------------------Option menu-----------------------------------------------------------
+        while option:
+            for event in pygame.event.get():
+                pass
+
+            display.fill((0, 0, 0))
+            baggrund.draw()
+
+            if return_knap.draw(screenwith/2-returntogame_button.width/2, screenheight-returntogame_button.height-10):
+                option = False
+
+            mousecursor.update()
+            mousecursor.draw(click=click)
+
+            pygame.display.flip()
+
+        # ----------------------------------------Tilbage i main menu---------------------------------------------------
+
         display.fill((0, 0, 0))
         baggrund.draw()
 
@@ -383,10 +402,14 @@ while gamerunning:
             pygame.quit()
             sys.exit()
 
+        if options_button.draw(10, 10) is True:
+            option = True
+
         mouse = pygame.mouse.get_pos()
 
         if (startspil_knap.image_rect.collidepoint(mouse) or infospil_knap.image_rect.collidepoint(mouse)
-                or skin_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse)):
+                or skin_knap.image_rect.collidepoint(mouse) or quitgame_button.image_rect.collidepoint(mouse))\
+                or options_button.image_rect.collidepoint(mouse):
             click = True
         else:
             click = False
