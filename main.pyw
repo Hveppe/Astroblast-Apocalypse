@@ -9,7 +9,7 @@ from collisioncheck_functioner import collisionchecker, collisionchecker_circle,
 from Mouse import MouseCursor
 from Sidefunctions import *
 from Define import *
-from Healthbar import HealthBar
+from Healthbar_and_slider import HealthBar, Slider
 from SkinMenu_class_function import SkinSlecter, LaserColorChange
 
 # importer libaries
@@ -167,12 +167,16 @@ with open('textfiler/skin', 'r') as file:
     player.update_picture()
     mousecursor.update_picture()
 
-# ------------------------------------------Health/Shield Bar-----------------------------------------------------------
+# ------------------------------------------Bars and sliders-----------------------------------------------------------
+# De forskellige bar
 health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
 shied_bar = HealthBar(screenwith-300*scalar, 10, 300, 40, 100, DarkBlue, Grey)
 teleport_bar = HealthBar(screenwith-300*scalar, 10+shied_bar.height, 300, 40, 30, Yellow, Grey)
 
-# variabler for loop
+# slider
+lyd_slider = Slider(400, 50, display, 1, Grey, White, Red)
+
+# ------------------------------------------variabler for loop---------------------------------------------------------
 gamerunning = True
 mainmenu = True
 infoscreen = False
@@ -355,11 +359,23 @@ while gamerunning:
             display.fill((0, 0, 0))
             baggrund.draw()
 
+            lyd_volume = lyd_slider.draw(10, 10)
+            lasersound.set_volume(lyd_volume)
+            mineplacesound.set_volume(lyd_volume)
+            teleportsound.set_volume(lyd_volume)
+            enemydeadsound.set_volume(lyd_volume)
+
             if return_knap.draw(screenwith/2-returntogame_button.width/2, screenheight-returntogame_button.height-10):
                 option = False
 
             mousecursor.update()
             mousecursor.draw(click=click)
+
+            mouse = pygame.mouse.get_pos()
+            if return_knap.image_rect.collidepoint(mouse) or lyd_slider.rect.collidepoint(mouse):
+                click = True
+            else:
+                click = False
 
             pygame.display.flip()
 
