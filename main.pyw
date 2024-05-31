@@ -261,7 +261,7 @@ while gamerunning:
             tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 200), display, White, True)
             tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 300), display, White, True)
             tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 400), display, White, True)
-            tekst_render(Font, "Speed Boost: LEFT SHIFT", (screenwith - screenwith / 4, 500), display, White, True)
+            tekst_render(Font, "Teleport: TAB", (screenwith - screenwith / 4, 500), display, White, True)
             tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 600), display, White, True)
             tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 700), display, White, True)
 
@@ -441,8 +441,9 @@ while gamerunning:
                     player.xmove += player.movespeed
                 if event.key == pygame.K_a:
                     player.xmove -= player.movespeed
-                if event.key == pygame.K_LSHIFT:
-                    player.movespeed += 5
+                if event.key == pygame.K_TAB:
+                    player.x = random.randint(0, int(round(screenwith-player.width, 0)))
+                    player.y = random.randint(0, int(round(screenwith-player.height, 0)))
                 if event.key == pygame.K_h:
                     debug = True
 
@@ -458,8 +459,6 @@ while gamerunning:
                     player.xmove = 0
                 if event.key == pygame.K_a:
                     player.xmove = 0
-                if event.key == pygame.K_LSHIFT:
-                    player.movespeed = 10
                 if event.key == pygame.K_h:
                     debug = False
 
