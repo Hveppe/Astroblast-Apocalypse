@@ -380,7 +380,8 @@ while gamerunning:
             mousecursor.draw(click=click)
 
             mouse = pygame.mouse.get_pos()
-            if return_knap.image_rect.collidepoint(mouse) or lyd_slider.rect.collidepoint(mouse):
+            if (return_knap.image_rect.collidepoint(mouse) or lyd_slider.rect.collidepoint(mouse) or
+                    music_slider.rect.collidepoint(mouse)):
                 click = True
             else:
                 click = False
