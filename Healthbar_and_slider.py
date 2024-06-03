@@ -60,5 +60,7 @@ class Slider:  # slider til forskellige ting
 
         pygame.draw.rect(self.screen, self.color_square, (x, y, self.width, self.height))
         pygame.draw.rect(self.screen, self.color_slider, (self.sliderrect_x, y, 10*scalar, self.height))
+        pygame.draw.rect(self.screen, (255, 255, 255), (x-2, y-2, self.width+2,
+                                                        self.height+2), 2)
 
         return self.return_data
