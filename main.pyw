@@ -319,6 +319,11 @@ while gamerunning:
                 if eventskin.type == pygame.MOUSEBUTTONDOWN:
                     laser_color = laserchangecolor.get_color_of_postion(pygame.mouse.get_pos(),
                                                                         laser_color)
+                if eventskin.type == pygame.KEYDOWN and eventskin.key == pygame.K_F11:
+                    pygame.display.toggle_fullscreen()
+                if eventskin.type == pygame.VIDEORESIZE:
+                    screenwith, screenheight = size_change(buttons)
+                    Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
             display.fill((0, 0, 0))
             baggrund.draw()
@@ -368,7 +373,14 @@ while gamerunning:
         # ----------------------------------------Option menu-----------------------------------------------------------
         while option:
             for event in pygame.event.get():
-                pass
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
+                    pygame.display.toggle_fullscreen()
+                if event.type == pygame.VIDEORESIZE:
+                    screenwith, screenheight = size_change(buttons)
+                    Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
             display.fill((0, 0, 0))
             baggrund.draw()
