@@ -23,8 +23,8 @@ pygame.init()
 pygame.font.init()
 
 # opsætting af skærm og angiver et navn til programet
-screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info().current_h
-display = pygame.display.set_mode((screenwith, screenheight-100), pygame.RESIZABLE)
+screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info().current_h-100
+display = pygame.display.set_mode((screenwith, screenheight), pygame.RESIZABLE)
 pygame.display.set_caption("Astroblast Apocalypse")
 
 # Starter en loading screen
@@ -89,7 +89,8 @@ last_teleport = time.time()-30
 Font = pygame.font.SysFont('Comic Sans MS', int(round(36*scalar.scalar, 0)), bold=False, italic=False)
 Fontsmall = pygame.font.SysFont("Ariel", int(round(35*scalar.scalar, 0)), bold=False, italic=False)
 Fontbig = pygame.font.SysFont('Comic Sans MS', int(round(100*scalar.scalar, 0)), bold=True, italic=False)
-Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar.scalar, 0)), bold=False, italic=False)
+Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar.scalar, 0)), bold=False,
+                                              italic=False)
 
 # ------------------------------------------------Mouse, Shield, Fjender------------------------------------------------
 # laver mouse cursor
@@ -216,6 +217,11 @@ while gamerunning:
                 if eventinfo.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if eventinfo.type == pygame.KEYDOWN and eventinfo.key == pygame.K_F11:
+                    pygame.display.toggle_fullscreen()
+                if eventinfo.type == pygame.VIDEORESIZE:
+                    screenwith, screenheight = size_change(buttons)
+                    Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
             display.fill((0, 0, 0))
             baggrund.draw()
@@ -226,52 +232,52 @@ while gamerunning:
             display.blit(tekst, (100, 20))
 
             # Player
-            picture = pygame.transform.scale(player.picture, (70, 70))
-            picture_rect = picture.get_rect(topleft=(100, 100))
+            picture = pygame.transform.scale(player.picture, (70*scalar.scalar, 70*scalar.scalar))
+            picture_rect = picture.get_rect(topleft=(100, 100*scalar.scalar))
             display.blit(picture, picture_rect.topleft)
 
             tekst = Font.render('Player Spaceship', True, White)
-            display.blit(tekst, (120 + picture_rect.width, 100 + picture_rect.height / 2 -
+            display.blit(tekst, (120 + picture_rect.width, 100*scalar.scalar + picture_rect.height / 2 -
                                  tekst.get_height() / 2))
 
             # Normal fjende
             picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Normalfjendeimage.png').
-                                             convert_alpha(), (70, 70))
-            picture_rect = picture.get_rect(topleft=(100, 200))
+                                             convert_alpha(), (70*scalar.scalar, 70*scalar.scalar))
+            picture_rect = picture.get_rect(topleft=(100, 200*scalar.scalar))
             display.blit(picture, picture_rect.topleft)
 
             tekst = Font.render('Normal Enemy', True, White)
-            display.blit(tekst, (120 + picture_rect.width, 200 + picture_rect.height/2 -
+            display.blit(tekst, (120 + picture_rect.width, 200*scalar.scalar + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
             # Mineswepper fjende
             picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png')
-                                             .convert_alpha(), (70, 70))
-            picture_rect = picture.get_rect(topleft=(100, 300))
+                                             .convert_alpha(), (70*scalar.scalar, 70*scalar.scalar))
+            picture_rect = picture.get_rect(topleft=(100, 300*scalar.scalar))
             display.blit(picture, picture_rect.topleft)
 
             tekst = Font.render('Mineswpper Enemy', True, White)
-            display.blit(tekst, (120 + picture_rect.width, 300 + picture_rect.height/2 -
+            display.blit(tekst, (120 + picture_rect.width, 300*scalar.scalar + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
             # Homming fjender
             picture = pygame.transform.scale(pygame.image.load('Image/Fjender/HommingFjendeImage.png')
-                                             .convert_alpha(), (70, 70))
-            picture_rect = picture.get_rect(topleft=(100, 400))
+                                             .convert_alpha(), (70*scalar.scalar, 70*scalar.scalar))
+            picture_rect = picture.get_rect(topleft=(100, 400*scalar.scalar))
             display.blit(picture, picture_rect.topleft)
 
             tekst = Font.render('Homing Enemy', True, White)
-            display.blit(tekst, (120 + picture_rect.width, 400 + picture_rect.height/2 -
+            display.blit(tekst, (120 + picture_rect.width, 400*scalar.scalar + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
             # Heavy fjender
             picture = pygame.transform.scale(pygame.image.load('Image/Fjender/Heavyfjendeimage.png')
-                                             .convert_alpha(), (70, 70))
-            picture_rect = picture.get_rect(topleft=(100, 500))
+                                             .convert_alpha(), (70*scalar.scalar, 70*scalar.scalar))
+            picture_rect = picture.get_rect(topleft=(100, 500*scalar.scalar))
             display.blit(picture, picture_rect.topleft)
 
             tekst = Font.render('Heavy Enemy', True, White)
-            display.blit(tekst, (120 + picture_rect.width, 500 + picture_rect.height/2 -
+            display.blit(tekst, (120 + picture_rect.width, 500*scalar.scalar + picture_rect.height/2 -
                                  tekst.get_height()/2))
 
             # ----------------------------Info om Controls--------------------------------------------------
@@ -280,16 +286,16 @@ while gamerunning:
             display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
 
             # Displayer controls
-            tekst_render(Font, "Movement: W, A, S, D", (screenwith - screenwith / 4, 100), display, White, True)
-            tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 200), display, White, True)
-            tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 300), display, White, True)
-            tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 400), display, White, True)
-            tekst_render(Font, "Teleport: TAB", (screenwith - screenwith / 4, 500), display, White, True)
-            tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 600), display, White, True)
-            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 700), display, White, True)
+            tekst_render(Font, "Movement: W, A, S, D", (screenwith - screenwith / 4, 75*scalar.scalar), display, White, True)
+            tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 75*2*scalar.scalar), display, White, True)
+            tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 75*3*scalar.scalar), display, White, True)
+            tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 75*4*scalar.scalar), display, White, True)
+            tekst_render(Font, "Teleport: TAB", (screenwith - screenwith / 4, 75*5*scalar.scalar), display, White, True)
+            tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 75*6*scalar.scalar), display, White, True)
+            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 75*7*scalar.scalar), display, White, True)
 
             # return button
-            if return_knap.draw(screenwith / 2-return_knap.width/2, screenheight-return_knap.height-10) is True:
+            if return_knap.draw(screenwith / 2-return_knap.width/2, screenheight-return_knap.height-10*scalar.scalar):
                 infoscreen = False
 
             mouse = pygame.mouse.get_pos()
@@ -331,8 +337,8 @@ while gamerunning:
                 pass
             mousecursor.update_picture()
 
-            if return_knap.draw(screenwith/2-returntogame_button.width/2,
-                                screenheight-returntogame_button.height-10) is True:
+            if return_knap.draw(screenwith/2-return_knap.width/2,
+                                screenheight-return_knap.height-10) is True:
                 skinmeny = False
                 
                 with open('textfiler/skin', 'w') as file:
@@ -380,7 +386,7 @@ while gamerunning:
             teleportsound.set_volume(lyd_volume)
             enemydeadsound.set_volume(lyd_volume)
 
-            if return_knap.draw(screenwith/2-returntogame_button.width/2, screenheight-returntogame_button.height-10):
+            if return_knap.draw(screenwith/2-return_knap.width/2, screenheight-return_knap.height-10):
                 option = False
 
             mousecursor.update()
@@ -401,8 +407,8 @@ while gamerunning:
         baggrund.draw()
 
         # displayer title
-        tekst_render(Fontbig, "AstroBlast", (screenwith / 2, 100*scalar.scalar), display, White, True)
-        tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 190*scalar.scalar), display, White, True)
+        tekst_render(Fontbig, "AstroBlast", (screenwith / 2, 90*scalar.scalar), display, White, True)
+        tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 180*scalar.scalar), display, White, True)
 
         # displayer highscore
         tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
@@ -411,7 +417,7 @@ while gamerunning:
         tekst_render(Fontsmall, 'Created by Hveppe', (10, screenheight-50), display, White,
                      False)
 
-        if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-100*scalar.scalar) is True:
+        if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-80*scalar.scalar) is True:
             mainmenu = False
             maingame = True
             new_wave_begin = time.time()
@@ -424,17 +430,19 @@ while gamerunning:
                   player, variabler, screenwith, screenheight)
             health_bar.max_hp = 5
 
-        if infospil_knap.draw(screenwith/2-infospil_knap.width/2, screenheight/2-100*scalar.scalar+startspil_knap.height) is True:
+        if infospil_knap.draw(screenwith/2-infospil_knap.width/2,
+                              screenheight/2-80*scalar.scalar+startspil_knap.height):
             infoscreen = True
 
-        if skin_knap.draw(screenwith/2-skin_knap.width/2, screenheight/2-100*scalar.scalar+infospil_knap.height*2) is True:
+        if skin_knap.draw(screenwith/2-skin_knap.width/2, screenheight/2-80*scalar.scalar+infospil_knap.height*2):
             skinmeny = True
 
-        if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight/2-100*scalar.scalar+skin_knap.height*3) is True:
+        if quitgame_button.draw(screenwith/2-quitgame_button.width/2,
+                                screenheight/2-80*scalar.scalar+skin_knap.height*3):
             pygame.quit()
             sys.exit()
 
-        if options_button.draw(10, 10) is True:
+        if options_button.draw(10, 10):
             option = True
 
         mouse = pygame.mouse.get_pos()
