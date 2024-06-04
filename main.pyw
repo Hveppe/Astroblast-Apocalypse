@@ -86,10 +86,10 @@ clock = pygame.time.Clock()
 last_teleport = time.time()-30
 
 # Fonts til text
-Font = pygame.font.SysFont('Comic Sans MS', int(round(36, 0)), bold=False, italic=False)
-Fontsmall = pygame.font.SysFont("Ariel", int(round(35, 0)), bold=False, italic=False)
-Fontbig = pygame.font.SysFont('Comic Sans MS', int(round(100, 0)), bold=True, italic=False)
-Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', int(round(40, 0)), bold=False, italic=False)
+Font = pygame.font.SysFont('Comic Sans MS', int(round(36*scalar.scalar, 0)), bold=False, italic=False)
+Fontsmall = pygame.font.SysFont("Ariel", int(round(35*scalar.scalar, 0)), bold=False, italic=False)
+Fontbig = pygame.font.SysFont('Comic Sans MS', int(round(100*scalar.scalar, 0)), bold=True, italic=False)
+Fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar.scalar, 0)), bold=False, italic=False)
 
 # ------------------------------------------------Mouse, Shield, Fjender------------------------------------------------
 # laver mouse cursor
@@ -206,6 +206,8 @@ while gamerunning:
                 fullscreen()
             if event.type == pygame.VIDEORESIZE:
                 screenwith, screenheight = size_change(buttons)
+                Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
+
 
         # starter loop for info skærm
         # -------------------------------------Info Screen--------------------------------------------------
@@ -410,7 +412,7 @@ while gamerunning:
         tekst_render(Fontsmall, 'Created by Hveppe', (10, screenheight-50), display, White,
                      False)
 
-        if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-100) is True:
+        if startspil_knap.draw(screenwith/2-startspil_knap.width/2, screenheight/2-100*scalar.scalar) is True:
             mainmenu = False
             maingame = True
             new_wave_begin = time.time()
@@ -423,13 +425,13 @@ while gamerunning:
                   player, variabler, screenwith, screenheight)
             health_bar.max_hp = 5
 
-        if infospil_knap.draw(screenwith/2-infospil_knap.width/2, screenheight/2-100+startspil_knap.height) is True:
+        if infospil_knap.draw(screenwith/2-infospil_knap.width/2, screenheight/2-100*scalar.scalar+startspil_knap.height) is True:
             infoscreen = True
 
-        if skin_knap.draw(screenwith/2-skin_knap.width/2, screenheight/2-100+infospil_knap.height*2) is True:
+        if skin_knap.draw(screenwith/2-skin_knap.width/2, screenheight/2-100*scalar.scalar+infospil_knap.height*2) is True:
             skinmeny = True
 
-        if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight/2-100+skin_knap.height*3) is True:
+        if quitgame_button.draw(screenwith/2-quitgame_button.width/2, screenheight/2-100*scalar.scalar+skin_knap.height*3) is True:
             pygame.quit()
             sys.exit()
 

@@ -87,3 +87,11 @@ def size_change(buttons):
         button.transform()
 
     return screenwith, screenheight
+
+
+def size_change_font():
+    font = pygame.font.SysFont('Comic Sans MS', int(round(36*scalar.scalar, 0)), bold=False, italic=False)
+    fontsmall = pygame.font.SysFont("Ariel", int(round(35*scalar.scalar, 0)), bold=False, italic=False)
+    fontbig = pygame.font.SysFont('Comic Sans MS', int(round(100*scalar.scalar, 0)), bold=True, italic=False)
+    fontmainmenu_lowertekst = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar.scalar, 0)), bold=False, italic=False)
+    return font, fontsmall, fontbig, fontmainmenu_lowertekst
