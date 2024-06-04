@@ -11,7 +11,7 @@ class Button:
     def __init__(self, screen, tekst, size, image):
         self.tekst = tekst
         self.size = size
-        self.image = image
+        self.orginal_image = image
         self.screen = screen
         self.clicked = False
         self.action = True
@@ -21,7 +21,7 @@ class Button:
 
         self.font = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar.scalar, 0)))
 
-        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.image = pygame.transform.scale(self.orginal_image, (self.width, self.height))
         self.image_rect = None
 
         self.x, self.y = 0, 0
@@ -57,7 +57,7 @@ class Button:
     def transform(self):
         self.width, self.height = self.width_start * scalar.scalar, self.height_start * scalar.scalar
         self.font = pygame.font.SysFont('Comic Sans MS', int(round(40 * scalar.scalar, 0)))
-        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.image = pygame.transform.scale(self.orginal_image, (self.width, self.height))
 
 
 class Picture:
