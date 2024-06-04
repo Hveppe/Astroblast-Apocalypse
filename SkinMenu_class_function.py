@@ -15,7 +15,7 @@ class SkinSlecter:
     def __init__(self, screen, x, y, size, type_skin,  *args):
         self.screen = screen
         self.orginal_x, self.orginal_y = x, y
-        self.x, self.y = x, y
+        self.x, self.y = x*scalar.scalar, y*scalar.scalar
         self.orginal_width, self.orginal_height = size
         self.width, self.height = self.orginal_width*scalar.scalar, self.orginal_height*scalar.scalar
         self.chosenskin = 0
