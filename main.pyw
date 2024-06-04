@@ -203,11 +203,10 @@ while gamerunning:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
-                fullscreen()
+                pygame.display.toggle_fullscreen()
             if event.type == pygame.VIDEORESIZE:
                 screenwith, screenheight = size_change(buttons)
                 Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
-
 
         # starter loop for info skærm
         # -------------------------------------Info Screen--------------------------------------------------
