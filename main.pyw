@@ -205,11 +205,7 @@ while gamerunning:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                 fullscreen()
             if event.type == pygame.VIDEORESIZE:
-                screenwith, screenheight = pygame.display.get_window_size()
-                scalar.update()
-
-                for button in buttons:
-                    button.transform()
+                screenwith, screenheight = size_change(buttons)
 
         # starter loop for info skærm
         # -------------------------------------Info Screen--------------------------------------------------

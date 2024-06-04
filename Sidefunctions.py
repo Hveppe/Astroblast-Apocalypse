@@ -1,5 +1,6 @@
 # spil lavet af Hveppe
 
+from Define import scalar
 from collisioncheck_functioner import collisionchecker, collisionchecker_circle, collisionchecker_circle_square
 import pygame
 import time
@@ -76,3 +77,13 @@ def spawn_enemy(enemylist, klasse, player, screenwith, screenheight, *args):
         else:
             enemylist.append(new_enemy)
             fjende_spawn = False
+
+
+def size_change(buttons):
+    screenwith, screenheight = pygame.display.get_window_size()
+    scalar.update()
+
+    for button in buttons:
+        button.transform()
+
+    return screenwith, screenheight
