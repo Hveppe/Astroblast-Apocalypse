@@ -27,20 +27,17 @@ class PlayerClass:
         damage_picture = pygame.transform.scale(damage_picture, (int(self.width), int(self.height)))
         self.damage_picture = damage_picture
 
-        self.screenwidth = self.screen.get_width()
-        self.screenheight = self.screen.get_height()
-
     def update(self):
         self.xold = self.x
         self.yold = self.y
         self.x += self.xmove
         self.y += self.ymove
 
-        if self.x+self.width > self.screenwidth:
-            self.x = self.screenwidth - self.width
+        if self.x+self.width > self.screen.get_width():
+            self.x = self.screen.get_width() - self.width
 
-        if self.y+self.height > self.screenheight:
-            self.y = self.screenheight - self.height
+        if self.y+self.height > self.screen.get_height():
+            self.y = self.screen.get_height() - self.height
 
         if self.x < 0:
             self.x = 0
