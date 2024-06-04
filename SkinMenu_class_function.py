@@ -2,23 +2,26 @@
 
 import pygame
 from objekts import Button, Picture
-from Define import Grey, Red, Orange, Green, Yellow, Blue, DarkBlue, Purple, Pink, Cyan, Magenta
+from Define import scalar, Grey, Red, Orange, Green, Yellow, Blue, DarkBlue, Purple, Pink, Cyan, Magenta
 from Sidefunctions import tint_image
 from Sidefunctions import tekst_render
 
 pygame.font.init()
-Font = pygame.font.SysFont('Comic Sans MS', 36, bold=False, italic=False)
 
 
 class SkinSlecter:
+    Font = pygame.font.SysFont('Comic Sans MS', int(round(36*scalar.scalar, 0)), bold=False, italic=False)
+
     def __init__(self, screen, x, y, size, type_skin,  *args):
         self.screen = screen
-        self.x = x
-        self.y = y
-        self.width, self.height = size
+        self.orginal_x, self.orginal_y = x, y
+        self.x, self.y = x, y
+        self.orginal_width, self.orginal_height = size
+        self.width, self.height = self.orginal_width*scalar.scalar, self.orginal_height*scalar.scalar
         self.chosenskin = 0
 
         self.type = type_skin
+        self.image = pygame.image.load("Image/Buttons/Arrow_button.png")
 
         if self.type == "player":
             self.skins = [*args]
@@ -27,11 +30,15 @@ class SkinSlecter:
             self.skins = rangeskin[0::2]
             self.skinsclick = rangeskin[1::2]
 
-        self.RightButton = Button(self.screen, "", (50, 100), pygame.transform.scale(pygame.image.load(
-            "Image/Buttons/Arrow_button.png"), (50, 100)))
+        self.skinpicture = Picture(self.screen, self.x + self.width / 2 - 50, self.y + self.height / 2 - 50,
+                                   pygame.transform.scale(self.skins[self.chosenskin], (100, 100)))
+
+        self.RightButton = Button(self.screen, "", (50, 100),
+                                  pygame.transform.scale(self.image, (50*scalar.scalar, 100*scalar.scalar)))
         self.LeftButton = Button(self.screen, "",
-                                 (50, 100), pygame.transform.rotate(pygame.transform.scale(
-                                      pygame.image.load("Image/Buttons/Arrow_button.png"), (50, 100)), 180))
+                                 (50, 100), pygame.transform.rotate(pygame.transform.scale(self.image,
+                                                                                           (50*scalar.scalar,
+                                                                                            100*scalar.scalar)), 180))
 
     def buttondraw(self):
         if self.RightButton.draw(self.x+self.width-(10+self.RightButton.width),
@@ -58,13 +65,13 @@ class SkinSlecter:
                 return self.skins[self.chosenskin], self.skinsclick[self.chosenskin]
 
     def draw(self, tekst):
-        skinpicture = Picture(self.screen, self.x+self.width/2-50, self.y+self.height/2-50,
-                              pygame.transform.scale(self.skins[self.chosenskin], (100, 100)))
+        self.skinpicture = Picture(self.screen, self.x+self.width/2-50*scalar.scalar, self.y+self.height/2-50*scalar.scalar,
+                                   pygame.transform.scale(self.skins[self.chosenskin], (100*scalar.scalar, 100*scalar.scalar)))
 
         pygame.draw.rect(self.screen, Grey, (self.x, self.y, self.width, self.height))
-        skinpicture.draw()
+        self.skinpicture.draw()
 
-        tekst_render(Font, tekst, (self.x+self.width/2, self.y-5), self.screen, Orange, True)
+        tekst_render(self.Font, tekst, (self.x+self.width/2, self.y-5), self.screen, Orange, True)
 
     def change_skin(self):
         while True:
@@ -73,12 +80,19 @@ class SkinSlecter:
             elif self.type == "cursor":
                 return self.skins[self.chosenskin], self.skinsclick[self.chosenskin]
 
+    def transform(self):  # Transformer størrelse så den passer med scalar
+        self.x, self.y = self.orginal_x*scalar.scalar, self.orginal_y*scalar.scalar
+        self.width, self.height = self.orginal_width*scalar.scalar, self.orginal_height*scalar.scalar
+        self.Font = pygame.font.SysFont('Comic Sans MS', int(round(36*scalar.scalar, 0)), bold=False, italic=False)
 
-TODO: "Lav så når man har musen over en farve så skifter den til sin click form"
+        self.RightButton.image = self.image
+        self.LeftButton.image = pygame.transform.rotate(self.image, 180)
+        self.RightButton.transform(), self.LeftButton.transform()
 
 
 class LaserColorChange:
     clicksound = pygame.mixer.Sound("sound/click-menu-app-147357.wav")
+    Font = pygame.font.SysFont('Comic Sans MS', int(round(36 * scalar.scalar, 0)), bold=False, italic=False)
 
     def __init__(self, screen, destination, size):
         self.screen = screen
@@ -99,7 +113,7 @@ class LaserColorChange:
 
         # tegner baggrund
         pygame.draw.rect(self.screen, Grey, (self.x-10, self.y-40, total_width+20, total_height+50))
-        tekst_render(Font, "LASER COLOR", (self.x+total_width/2, self.y-50), self.screen, Orange, True)
+        tekst_render(self.Font, "LASER COLOR", (self.x+total_width/2, self.y-50), self.screen, Orange, True)
 
         # tegner de andre color firekanter
         for index, color in enumerate(self.colors):
