@@ -96,11 +96,13 @@ class LaserColorChange:
 
     def __init__(self, screen, destination, size):
         self.screen = screen
-        self.x, self.y = destination
-        self.width, self.height = size
+        self.orginal_x, self.orginal_y = destination
+        self.x, self.y = self.orginal_x*scalar.scalar, self.orginal_y*scalar.scalar
+        self.orginal_width, self.orginal_height = size
+        self.width, self.height = self.orginal_width*scalar.scalar, self.orginal_height*scalar.scalar
 
         self.margin = 5
-        self.square_size = 50
+        self.square_size = 50*scalar.scalar
         self.gridsize = 5
 
         self.colors = [Red, Orange, Green, Yellow, Blue, Purple, Pink, Cyan, Orange, Magenta]
@@ -112,8 +114,8 @@ class LaserColorChange:
                     ((len(self.colors) + self.gridsize - 1) // self.gridsize - 1) * self.margin)
 
         # tegner baggrund
-        pygame.draw.rect(self.screen, Grey, (self.x-10, self.y-40, total_width+20, total_height+50))
-        tekst_render(self.Font, "LASER COLOR", (self.x+total_width/2, self.y-50), self.screen, Orange, True)
+        pygame.draw.rect(self.screen, Grey, (self.x-10*scalar.scalar, self.y-40*scalar.scalar, total_width+20*scalar.scalar, total_height+50*scalar.scalar))
+        tekst_render(self.Font, "LASER COLOR", (self.x+total_width/2, self.y-50*scalar.scalar), self.screen, Orange, True)
 
         # tegner de andre color firekanter
         for index, color in enumerate(self.colors):
@@ -141,3 +143,8 @@ class LaserColorChange:
             return True
         else:
             return False
+
+    def transform(self):
+        self.x, self.y = self.orginal_x*scalar.scalar, self.orginal_y*scalar.scalar
+        self.square_size = 50*scalar.scalar
+        self.Font = pygame.font.SysFont('Comic Sans MS', int(round(36 * scalar.scalar, 0)), bold=False, italic=False)
