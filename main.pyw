@@ -130,6 +130,8 @@ quitgame_button = Button(screen=display, tekst="QUIT GAME", size=(450, 100),
 options_button = Button(screen=display, tekst="OPTIONS", size=(220, 100),
                         image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
+buttons = [startspil_knap, infospil_knap, return_knap, skin_knap, returntogame_button, quitgame_button, options_button]
+
 # ---------------------------------------------SKINS/LASERCOLOR---------------------------------------------------------
 # player skin ting
 playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-300, (300, 180), "player",
@@ -204,6 +206,10 @@ while gamerunning:
                 fullscreen()
             if event.type == pygame.VIDEORESIZE:
                 screenwith, screenheight = pygame.display.get_window_size()
+                scalar.update()
+
+                for button in buttons:
+                    button.transform()
 
         # starter loop for info skærm
         # -------------------------------------Info Screen--------------------------------------------------

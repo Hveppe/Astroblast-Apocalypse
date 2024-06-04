@@ -30,7 +30,7 @@ class ScalarThing:
         self.scalar = (pygame.display.Info().current_w+pygame.display.Info().current_h)/(1440+900)
 
     def update(self):
-        self.scalar = pygame.display.Info().current_w/1440
+        self.scalar = (pygame.display.Info().current_w+pygame.display.Info().current_h)/(1440+900)
 
 
 scalar = ScalarThing()

@@ -16,8 +16,8 @@ class Button:
         self.clicked = False
         self.action = True
 
-        width, height = size
-        self.width, self.height = width*scalar.scalar, height*scalar.scalar
+        self.width_start, self.height_start = size
+        self.width, self.height = self.width_start*scalar.scalar, self.height_start*scalar.scalar
 
         self.font = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar.scalar, 0)))
 
@@ -54,6 +54,11 @@ class Button:
 
         return self.action
 
+    def transform(self):
+        self.width, self.height = self.width_start * scalar.scalar, self.height_start * scalar.scalar
+        self.font = pygame.font.SysFont('Comic Sans MS', int(round(40 * scalar.scalar, 0)))
+        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+
 
 class Picture:
     def __init__(self, screen, x, y, image):
@@ -64,6 +69,7 @@ class Picture:
 
     def draw(self):
         self.screen.blit(self.image, self.rect.center)
+        self.font = pygame.font.SysFont('Comic Sans MS', int(round(40 * scalar.scalar, 0)))
 
 
 class AstroidClass:
