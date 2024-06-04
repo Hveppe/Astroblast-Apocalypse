@@ -19,8 +19,8 @@ class PlayerClass:
         self.yold = yvalue
         self.last_angle = 0
 
-        self.width = 60 * scalar
-        self.height = 60 * scalar
+        self.width = 60 * scalar.scalar
+        self.height = 60 * scalar.scalar
 
         picture = pygame.transform.scale(picture, (int(self.width), int(self.height)))
         self.picture = picture

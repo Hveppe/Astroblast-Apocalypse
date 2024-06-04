@@ -24,8 +24,16 @@ Silver = (192, 192, 192)
 # -------------------------------------------Variabler------------------------------------------------------------------
 debug = False
 
-# finder scalar til fjender og player
-scalar = pygame.display.Info().current_w/1440
+
+class ScalarThing:
+    def __init__(self):
+        self.scalar = pygame.display.Info().current_w/1440
+
+    def update(self):
+        self.scalar = pygame.display.Info().current_w/1440
+
+
+scalar = ScalarThing()
 
 
 class Variabler:

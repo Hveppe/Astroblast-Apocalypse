@@ -24,7 +24,7 @@ pygame.font.init()
 
 # opsætting af skærm og angiver et navn til programet
 screenwith, screenheight = pygame.display.Info().current_w, pygame.display.Info().current_h
-display = pygame.display.set_mode((screenwith, screenheight))
+display = pygame.display.set_mode((screenwith, screenheight-100), pygame.RESIZABLE)
 pygame.display.set_caption("Astroblast Apocalypse")
 
 # Starter en loading screen
@@ -170,8 +170,8 @@ with open('textfiler/skin', 'r') as file:
 # ------------------------------------------Bars and sliders-----------------------------------------------------------
 # De forskellige bar
 health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
-shied_bar = HealthBar(screenwith-300*scalar, 10, 300, 40, 100, DarkBlue, Grey)
-teleport_bar = HealthBar(screenwith-300*scalar, 10+shied_bar.height, 300, 40, 30, Yellow, Grey)
+shied_bar = HealthBar(screenwith-300*scalar.scalar, 10, 300, 40, 100, DarkBlue, Grey)
+teleport_bar = HealthBar(screenwith-300*scalar.scalar, 10+shied_bar.height, 300, 40, 30, Yellow, Grey)
 
 # slider
 lyd_slider = Slider(400, 50, display, 1, Grey, White, Red)
@@ -200,6 +200,10 @@ while gamerunning:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
+                fullscreen()
+            if event.type == pygame.VIDEORESIZE:
+                screenwith, screenheight = pygame.display.get_window_size()
 
         # starter loop for info skærm
         # -------------------------------------Info Screen--------------------------------------------------
@@ -394,8 +398,8 @@ while gamerunning:
         baggrund.draw()
 
         # displayer title
-        tekst_render(Fontbig, "AstroBlast", (screenwith / 2, 100*scalar), display, White, True)
-        tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 190*scalar), display, White, True)
+        tekst_render(Fontbig, "AstroBlast", (screenwith / 2, 100*scalar.scalar), display, White, True)
+        tekst_render(Fontbig, "Apocalypse", (screenwith / 2, 190*scalar.scalar), display, White, True)
 
         # displayer highscore
         tekst_render(Font, f"Highscore: wave {highscore}", (screenwith / 2, 20), display, White, True)
@@ -754,29 +758,29 @@ while gamerunning:
 
             for i in range(variabler.antalfjender):
                 spawn_enemy(Fjender, EnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, int(round(screenwith - 40*scalar, 0))),
-                            random.randint(0, int(round(screenheight - 60*scalar, 0))), random.randint(1, 5),
+                            random.randint(0, int(round(screenwith - 40*scalar.scalar, 0))),
+                            random.randint(0, int(round(screenheight - 60*scalar.scalar, 0))), random.randint(1, 5),
                             random.randint(1, 10),
                             pygame.image.load('Image/Fjender/Normalfjendeimage.png').convert_alpha())
 
             for n in range(variabler.antalfjenderheavy):
                 spawn_enemy(HeavyFjender, HeavyEnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, int(round(screenwith - 60*scalar, 0))),
-                            random.randint(0, int(round(screenheight - 60*scalar, 0))),
+                            random.randint(0, int(round(screenwith - 60*scalar.scalar, 0))),
+                            random.randint(0, int(round(screenheight - 60*scalar.scalar, 0))),
                             random.randint(1, 5), random.randint(1, 5),
                             pygame.image.load('Image/Fjender/Heavyfjendeimage.png').convert_alpha())
 
             for m in range(variabler.antalfjendermineswpper):
                 spawn_enemy(MineswepperFjender, EnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, int(round(screenwith - 40*scalar, 0))),
-                            random.randint(0, int(round(screenheight - 40*scalar, 0))),
+                            random.randint(0, int(round(screenwith - 40*scalar.scalar, 0))),
+                            random.randint(0, int(round(screenheight - 40*scalar.scalar, 0))),
                             random.randint(1, 10), random.randint(1, 10),
                             pygame.image.load('Image/Fjender/Mineswepperfjendeimage.png').convert_alpha())
 
             for h in range(variabler.antalfjenderhomming):
                 spawn_enemy(HommingFjender, HommingEnemyClass, player, screenwith, screenheight, display,
-                            random.randint(0, int(round(screenwith - 50*scalar, 0))),
-                            random.randint(0, int(round(screenheight - 50*scalar, 0))), 5, 5, pygame.image.load
+                            random.randint(0, int(round(screenwith - 50*scalar.scalar, 0))),
+                            random.randint(0, int(round(screenheight - 50*scalar.scalar, 0))), 5, 5, pygame.image.load
                             ('Image/Fjender/HommingFjendeImage.png').convert_alpha())
 
         if variabler.shield_up is True and variabler.shield_charge > 0:

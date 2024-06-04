@@ -6,8 +6,8 @@ from Define import scalar
 
 
 class EnemyClass:
-    width = 40*scalar
-    height = 40*scalar
+    width = 40*scalar.scalar
+    height = 40*scalar.scalar
     dead = False
     timeofdeath = None
 
@@ -46,8 +46,8 @@ class EnemyClass:
 
 
 class HeavyEnemyClass:
-    width = 60*scalar
-    height = 60*scalar
+    width = 60*scalar.scalar
+    height = 60*scalar.scalar
     lives = 3
     dead = False
     timeofdeath = None
@@ -87,8 +87,8 @@ class HeavyEnemyClass:
 
 
 class HommingEnemyClass:
-    width = 50*scalar
-    height = 50*scalar
+    width = 50*scalar.scalar
+    height = 50*scalar.scalar
     dead = False
     timeofdeath = None
     lastangleofmovement = 90

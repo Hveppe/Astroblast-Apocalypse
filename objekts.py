@@ -17,9 +17,9 @@ class Button:
         self.action = True
 
         width, height = size
-        self.width, self.height = width*scalar, height*scalar
+        self.width, self.height = width*scalar.scalar, height*scalar.scalar
 
-        self.font = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar, 0)))
+        self.font = pygame.font.SysFont('Comic Sans MS', int(round(40*scalar.scalar, 0)))
 
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
         self.image_rect = None
@@ -72,7 +72,7 @@ class AstroidClass:
         self.screen = screen
         self.x = xvalue
         self.y = yvalue
-        self.radius = radius*scalar
+        self.radius = radius*scalar.scalar
         self.speed = speed
         self.direction = direction
         self.picture = picture

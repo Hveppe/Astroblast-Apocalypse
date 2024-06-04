@@ -5,8 +5,8 @@ from Define import scalar
 
 
 class ShotLaser:
-    width = 10*scalar
-    height = 10*scalar
+    width = 10*scalar.scalar
+    height = 10*scalar.scalar
     speedx = 0
     speedy = 0
 
@@ -47,8 +47,8 @@ class ShotLaser:
 class LayMine:
     speedx = 0
     speedy = 0
-    width = 12*scalar
-    height = 12*scalar
+    width = 12*scalar.scalar
+    height = 12*scalar.scalar
     radius = 6
 
     def __init__(self, screen, xvalue, yvalue, picture):
@@ -73,7 +73,7 @@ class LayMine:
 
 class Shield:
     color = (0, 0, 255)
-    radius = 70*scalar
+    radius = 70*scalar.scalar
 
     def __init__(self, screen, xvalue, yvalue):
         self.x = xvalue
