@@ -79,12 +79,15 @@ def spawn_enemy(enemylist, klasse, player, screenwith, screenheight, *args):
             fjende_spawn = False
 
 
-def size_change(buttons):
+def size_change(buttons, skin_selecter):
     screenwith, screenheight = pygame.display.get_window_size()
     scalar.update()
 
     for button in buttons:
         button.transform()
+
+    for skin in skin_selecter:
+        skin.transform()
 
     return screenwith, screenheight
 
