@@ -57,8 +57,8 @@ def reset(lasershot, mineshot, fjender, heavyfjender, mineswepperfjender, hommin
     # Reset af player
     player.xmove = 0
     player.ymove = 0
-    player.x = screenwith / 2 - 20
-    player.y = screenheight - 100
+    player.x = screenwith/2-player.width/2
+    player.y = screenheight/2-player.height/2
 
     # Reset af variabler
     variabler.reset()

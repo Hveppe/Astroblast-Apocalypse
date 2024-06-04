@@ -513,13 +513,13 @@ while gamerunning:
 
                 # modvirker bevægelse
                 if event.key == pygame.K_w:
-                    player.ymove = 0
+                    player.ymove += player.movespeed
                 if event.key == pygame.K_s:
-                    player.ymove = 0
+                    player.ymove -= player.movespeed
                 if event.key == pygame.K_d:
-                    player.xmove = 0
+                    player.xmove -= player.movespeed
                 if event.key == pygame.K_a:
-                    player.xmove = 0
+                    player.xmove += player.movespeed
                 if event.key == pygame.K_h:
                     debug = False
 
