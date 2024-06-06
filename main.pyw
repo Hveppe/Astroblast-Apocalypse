@@ -287,13 +287,20 @@ while gamerunning:
             display.blit(controltekst, (screenwith - screenwith/4 - controltekst.get_width()/2, 20))
 
             # Displayer controls
-            tekst_render(Font, "Movement: W, A, S, D", (screenwith - screenwith / 4, 75*scalar.scalar), display, White, True)
-            tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 75*2*scalar.scalar), display, White, True)
-            tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 75*3*scalar.scalar), display, White, True)
-            tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 75*4*scalar.scalar), display, White, True)
-            tekst_render(Font, "Teleport: TAB", (screenwith - screenwith / 4, 75*5*scalar.scalar), display, White, True)
-            tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 75*6*scalar.scalar), display, White, True)
-            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 75*7*scalar.scalar), display, White, True)
+            tekst_render(Font, "Movement: W, A, S, D", (screenwith - screenwith / 4, 75*scalar.scalar), display, White,
+                         True)
+            tekst_render(Font, "Shot Laser: ARROWS", (screenwith - screenwith / 4, 75*2*scalar.scalar), display, White,
+                         True)
+            tekst_render(Font, "Place Mine: M", (screenwith - screenwith / 4, 75*3*scalar.scalar), display, White,
+                         True)
+            tekst_render(Font, "Raise Shield: SPACE", (screenwith - screenwith / 4, 75*4*scalar.scalar), display, White,
+                         True)
+            tekst_render(Font, "Teleport: TAB", (screenwith - screenwith / 4, 75*5*scalar.scalar), display, White,
+                         True)
+            tekst_render(Font, "Pause Game: ESCAPE", (screenwith - screenwith / 4, 75*6*scalar.scalar), display, White,
+                         True)
+            tekst_render(Font, "Show Debug Menu: H", (screenwith - screenwith / 4, 75*7*scalar.scalar), display, White,
+                         True)
 
             # return button
             if return_knap.draw(screenwith / 2-return_knap.width/2, screenheight-return_knap.height-10*scalar.scalar):
