@@ -208,6 +208,7 @@ while gamerunning:
                 sys.exit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                 pygame.display.toggle_fullscreen()
+                pygame.display.set_icon(gameimagepng)
             if event.type == pygame.VIDEORESIZE:
                 screenwith, screenheight = size_change(scalarliste)
                 Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
@@ -222,6 +223,7 @@ while gamerunning:
                     sys.exit()
                 if eventinfo.type == pygame.KEYDOWN and eventinfo.key == pygame.K_F11:
                     pygame.display.toggle_fullscreen()
+                    pygame.display.set_icon(gameimagepng)
                 if eventinfo.type == pygame.VIDEORESIZE:
                     screenwith, screenheight = size_change(scalarliste)
                     Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
@@ -331,6 +333,7 @@ while gamerunning:
                                                                         laser_color)
                 if eventskin.type == pygame.KEYDOWN and eventskin.key == pygame.K_F11:
                     pygame.display.toggle_fullscreen()
+                    pygame.display.set_icon(gameimagepng)
                 if eventskin.type == pygame.VIDEORESIZE:
                     screenwith, screenheight = size_change(scalarliste)
                     Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
@@ -388,6 +391,7 @@ while gamerunning:
                     sys.exit()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                     pygame.display.toggle_fullscreen()
+                    pygame.display.set_icon(gameimagepng)
                 if event.type == pygame.VIDEORESIZE:
                     screenwith, screenheight = size_change(scalarliste)
                     Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
