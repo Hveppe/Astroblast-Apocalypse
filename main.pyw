@@ -1041,7 +1041,6 @@ while gamerunning:
                         screenwith, screenheight = size_change(scalarliste)
                         Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
-
                 tekst_render(Fontbig, 'GAME OVER', (screenwith / 2, screenheight / 2 - 200), display, White, True)
 
                 tekst_render(Font, f"WAVE: {variabler.wave}", (screenwith / 2, screenheight / 2 - 80), display, White,
