@@ -134,7 +134,7 @@ options_button = Button(screen=display, tekst="OPTIONS", size=(220, 100),
 
 # ---------------------------------------------SKINS/LASERCOLOR---------------------------------------------------------
 # player skin ting
-playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-300, (300, 180), "player",
+playerskinselecter = SkinSlecter(display, screenwith/2-340*scalar.scalar, screenheight/2-300, (300, 180), "player",
                                  pygame.image.load("Image/Playerships/Rumskibplayer.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer2.png").convert_alpha(),
                                  pygame.image.load("Image/Playerships/Rumskibplayer3.png").convert_alpha(),
@@ -146,7 +146,7 @@ playerskinselecter = SkinSlecter(display, screenwith/2-340, screenheight/2-300, 
                                  pygame.image.load("Image/Playerships/Rumskibplayer9.png").convert_alpha())
 
 # cursor skin ting | Hver anden *args er click billeder
-cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-300, (300, 180), "cursor",
+cursorskinselecter = SkinSlecter(display, screenwith/2+40*scalar.scalar, screenheight/2-300, (300, 180), "cursor",
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor.png").convert_alpha(),
                                  pygame.image.load("Image/mousecursor/orange-gradient_cusor - click.png")
                                  .convert_alpha(),
