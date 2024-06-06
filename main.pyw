@@ -131,7 +131,6 @@ quitgame_button = Button(screen=display, tekst="QUIT GAME", size=(450, 100),
 options_button = Button(screen=display, tekst="OPTIONS", size=(220, 100),
                         image=pygame.image.load("Image/Buttons/Simpel_button.png").convert_alpha())
 
-buttons = [startspil_knap, infospil_knap, return_knap, skin_knap, returntogame_button, quitgame_button, options_button]
 
 # ---------------------------------------------SKINS/LASERCOLOR---------------------------------------------------------
 # player skin ting
@@ -159,7 +158,6 @@ cursorskinselecter = SkinSlecter(display, screenwith/2+40, screenheight/2-300, (
 
 laserchangecolor = LaserColorChange(display, (screenwith/2-125, screenheight-400), (100, 100))
 
-skin_selecters = [playerskinselecter, cursorskinselecter, laserchangecolor]
 # Ændre skin og lasercolour til gemte valg fra skin tekstfilen
 with open('textfiler/skin', 'r') as file:
     playerskinselecter.chosenskin = int(file.readline().strip())
@@ -193,6 +191,10 @@ option = False
 # Laver mousecursor synlig
 pygame.mouse.set_visible(False)
 
+# laver liste til ting som skaler
+scalarliste = [startspil_knap, infospil_knap, return_knap, skin_knap, returntogame_button, quitgame_button,
+               options_button, playerskinselecter, cursorskinselecter, laserchangecolor]
+
 while gamerunning:
     # starter main menu loop
     # -------------------------------------Main Menu-------------------------------------------------------------------
@@ -207,7 +209,7 @@ while gamerunning:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                 pygame.display.toggle_fullscreen()
             if event.type == pygame.VIDEORESIZE:
-                screenwith, screenheight = size_change(buttons, skin_selecters)
+                screenwith, screenheight = size_change(scalarliste)
                 Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
         # starter loop for info skærm
@@ -221,7 +223,7 @@ while gamerunning:
                 if eventinfo.type == pygame.KEYDOWN and eventinfo.key == pygame.K_F11:
                     pygame.display.toggle_fullscreen()
                 if eventinfo.type == pygame.VIDEORESIZE:
-                    screenwith, screenheight = size_change(buttons, skin_selecters)
+                    screenwith, screenheight = size_change(scalarliste)
                     Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
             display.fill((0, 0, 0))
@@ -330,7 +332,7 @@ while gamerunning:
                 if eventskin.type == pygame.KEYDOWN and eventskin.key == pygame.K_F11:
                     pygame.display.toggle_fullscreen()
                 if eventskin.type == pygame.VIDEORESIZE:
-                    screenwith, screenheight = size_change(buttons, skin_selecters)
+                    screenwith, screenheight = size_change(scalarliste)
                     Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
             display.fill((0, 0, 0))
@@ -387,7 +389,7 @@ while gamerunning:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
                     pygame.display.toggle_fullscreen()
                 if event.type == pygame.VIDEORESIZE:
-                    screenwith, screenheight = size_change(buttons, skin_selecters)
+                    screenwith, screenheight = size_change(scalarliste)
                     Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
             display.fill((0, 0, 0))
