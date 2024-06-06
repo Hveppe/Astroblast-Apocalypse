@@ -193,7 +193,7 @@ pygame.mouse.set_visible(False)
 
 # laver liste til ting som skaler
 scalarliste = [startspil_knap, infospil_knap, return_knap, skin_knap, returntogame_button, quitgame_button,
-               options_button, playerskinselecter, cursorskinselecter, laserchangecolor]
+               options_button, playerskinselecter, cursorskinselecter, laserchangecolor, lyd_slider, music_slider]
 
 while gamerunning:
     # starter main menu loop
@@ -498,6 +498,12 @@ while gamerunning:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
+                pygame.display.toggle_fullscreen()
+                pygame.display.set_icon(gameimagepng)
+            if event.type == pygame.VIDEORESIZE:
+                screenwith, screenheight = size_change(scalarliste)
+                Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
 
             # controls til PlayerClass
             if event.type == pygame.KEYDOWN:
@@ -957,6 +963,12 @@ while gamerunning:
                 if eventpause.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if eventpause.type == pygame.KEYDOWN and eventpause.key == pygame.K_F11:
+                    pygame.display.toggle_fullscreen()
+                    pygame.display.set_icon(gameimagepng)
+                if eventpause.type == pygame.VIDEORESIZE:
+                    screenwith, screenheight = size_change(scalarliste)
+                    Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
                 if eventpause.type == pygame.KEYDOWN and eventpause.key == pygame.K_ESCAPE:
                     pause = False
 
@@ -1022,6 +1034,13 @@ while gamerunning:
                     if event.type == pygame.QUIT:
                         pygame.quit()
                         sys.exit()
+                    if event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
+                        pygame.display.toggle_fullscreen()
+                        pygame.display.set_icon(gameimagepng)
+                    if event.type == pygame.VIDEORESIZE:
+                        screenwith, screenheight = size_change(scalarliste)
+                        Font, Fontsmall, Fontbig, Fontmainmenu_lowertekst = size_change_font()
+
 
                 tekst_render(Fontbig, 'GAME OVER', (screenwith / 2, screenheight / 2 - 200), display, White, True)
 
