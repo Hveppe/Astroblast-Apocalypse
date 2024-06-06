@@ -171,9 +171,9 @@ with open('textfiler/skin', 'r') as file:
 
 # ------------------------------------------Bars and sliders-----------------------------------------------------------
 # De forskellige bar
-health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red)
-shied_bar = HealthBar(screenwith-300*scalar.scalar, 10, 300, 40, 100, DarkBlue, Grey)
-teleport_bar = HealthBar(screenwith-300*scalar.scalar, 10+shied_bar.height, 300, 40, 30, Yellow, Grey)
+health_bar = HealthBar(10, 10, 300, 40, 5, Green, Red, None)
+shied_bar = HealthBar(screenwith-health_bar.width, 10, 300, 40, 100, DarkBlue, Grey, "left")
+teleport_bar = HealthBar(screenwith-health_bar.width, 10+shied_bar.height, 300, 40, 30, Yellow, Grey, "left")
 
 # slider
 lyd_slider = Slider(400, 50, display, 1, Grey, White, Red)
@@ -193,7 +193,8 @@ pygame.mouse.set_visible(False)
 
 # laver liste til ting som skaler
 scalarliste = [startspil_knap, infospil_knap, return_knap, skin_knap, returntogame_button, quitgame_button,
-               options_button, playerskinselecter, cursorskinselecter, laserchangecolor, lyd_slider, music_slider]
+               options_button, playerskinselecter, cursorskinselecter, laserchangecolor, lyd_slider, music_slider,
+               health_bar, shied_bar, teleport_bar]
 
 while gamerunning:
     # starter main menu loop
