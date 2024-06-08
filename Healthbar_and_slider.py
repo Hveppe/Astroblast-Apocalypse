@@ -36,12 +36,8 @@ class HealthBar:  # skelet af kode var lavet af anton
         self.width = self.orginalwidth*scalar.scalar
         self.height = self.orginalheight * scalar.scalar
 
-        self.y *= scalar.scalar
-
-        if self.type == "left":
-            self.x = pygame.display.Info().current_w-self.width
-        else:
-            pass
+        self.y = self.orginaly * scalar.scalar
+        self.x = self.orginalx * scalar.scalar
 
 
 class Slider:  # slider til forskellige ting
