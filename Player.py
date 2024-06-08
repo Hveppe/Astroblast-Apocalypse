@@ -77,3 +77,16 @@ class PlayerClass:
 
     def draw_debug(self):
         pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
+
+    def transform(self):
+        # ændrer størrelse og koordinater
+        self.x = self.x * scalar.scalar
+        self.y = self.y * scalar.scalar
+        self.width = 60 * scalar.scalar
+        self.height = 60 * scalar.scalar
+
+        # ændrer størrelsen af billede
+        picture = pygame.transform.scale(self.picture, (int(self.width), int(self.height)))
+        self.picture = picture
+        damage_picture = pygame.transform.scale(self.damage_picture, (int(self.width), int(self.height)))
+        self.damage_picture = damage_picture
