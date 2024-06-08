@@ -194,7 +194,7 @@ pygame.mouse.set_visible(False)
 # laver liste til ting som skaler
 scalarliste = [startspil_knap, infospil_knap, return_knap, skin_knap, returntogame_button, quitgame_button,
                options_button, playerskinselecter, cursorskinselecter, laserchangecolor, lyd_slider, music_slider,
-               health_bar, shied_bar, teleport_bar, player]
+               health_bar, shied_bar, teleport_bar, player, Fjender, HeavyFjender, MineswepperFjender, HommingFjender]
 
 while gamerunning:
     # starter main menu loop

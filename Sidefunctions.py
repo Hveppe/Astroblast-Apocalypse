@@ -84,7 +84,11 @@ def size_change(liste):
     scalar.update()
 
     for scale in liste:
-        scale.transform()
+        if isinstance(scale, list):
+            for element in scale:
+                element.transform()
+        else:
+            scale.transform()
 
     return screenwith, screenheight
 

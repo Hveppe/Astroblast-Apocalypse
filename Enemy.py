@@ -44,6 +44,21 @@ class EnemyClass:
     def draw_debug(self):
         pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
 
+    def transform(self):
+        # ændrer størrelse og koordinater
+        self.x = self.x * scalar.scalar
+        self.y = self.y * scalar.scalar
+        self.width = 40 * scalar.scalar
+        self.height = 40 * scalar.scalar
+
+        # ændrer størrelse af billede
+        picture = pygame.transform.scale(self.picture, (self.width, self.height))
+        self.picture = picture
+
+        # ændrer område fjenden bevæger sig i
+        self.screenwidth = self.screen.get_width()
+        self.screenheight = self.screen.get_height()
+
 
 class HeavyEnemyClass:
     width = 60*scalar.scalar
@@ -84,6 +99,21 @@ class HeavyEnemyClass:
 
     def draw_debug(self):
         pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
+
+    def transform(self):
+        # ændrer størrelse og koordinater
+        self.x = self.x * scalar.scalar
+        self.y = self.y * scalar.scalar
+        self.width = 60 * scalar.scalar
+        self.height = 60 * scalar.scalar
+
+        # ændrer størrelse af billede
+        picture = pygame.transform.scale(self.picture, (self.width, self.height))
+        self.picture = picture
+
+        # ændrer område fjenden bevæger sig i
+        self.screenwidth = self.screen.get_width()
+        self.screenheight = self.screen.get_height()
 
 
 class HommingEnemyClass:
@@ -137,3 +167,14 @@ class HommingEnemyClass:
 
     def draw_debug(self):
         pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y, self.width, self.height), 2)
+
+    def transform(self):
+        # ændrer størrelse og koordinater
+        self.x = self.x * scalar.scalar
+        self.y = self.y * scalar.scalar
+        self.width = 50 * scalar.scalar
+        self.height = 50 * scalar.scalar
+
+        # ændrer størrelse af billede
+        picture = pygame.transform.scale(self.picture, (self.width, self.height))
+        self.picture = picture
